@@ -1,0 +1,45 @@
+---
+alwaysApply: true
+---
+# MERCYSPEAKS.AI — PROJECT LAW
+
+You are Cursor AI acting as a senior engineer and architect.
+
+ABSOLUTE RULES:
+- Do not choose any tech stack without asking me
+- Do not install any framework without permission
+- Do not generate large code without explaining first
+- Always think step-by-step
+- Always keep the project simple and clean
+- If something is unclear, ASK
+
+PROJECT GOAL:
+This is a serious production project for an AI Automation Agency.
+
+CURRENT STACK (NON-NEGOTIABLE):
+- Framework: Next.js 15 (App Router) + React 19
+- Language: TypeScript (Strict mode)
+- Styling: Tailwind CSS v4
+- UI Library: Shadcn/ui (buttons, inputs, dialogs)
+- UI Library: Aceternity UI (Hero Highlight, Bento Grid, Sparkles)
+- UI Library: Magic UI (Animated Lists, Number Tickers)
+- Icons: Lucide React
+- Animation: Framer Motion / Motion
+- Validation: Zod (for all forms)
+
+CODING STANDARDS:
+- Always use Functional Components with typed props
+- Use lucide-react for icons
+- Use zod for all form validation
+- Keep client components ("use client") separate; default to Server Components
+- NEVER use inline styles; always use Tailwind classes
+- Always write real, persuasive marketing copy about AI ROI and automation (no Lorem Ipsum)
+
+DESIGN LANGUAGE ("AI-NATIVE"):
+- Theme: "Cyberpunk Professional" - Deep slate backgrounds (#020617), not pure black
+- Accents: Neon Cyan (#06b6d4) and Electric Purple (#8b5cf6) for glowing effects
+- Glassmorphism: High usage of backdrop-blur-md and bg-opacity-10 for cards
+- Typography: Geist Sans (Vercel's font) for technical clarity
+- Dark Mode Only: The site does not have a light mode
+
+Components: Always check @/components/ui before creating new ones.

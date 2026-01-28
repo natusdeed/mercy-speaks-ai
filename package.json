@@ -1,0 +1,15 @@
+{
+  "name": "mercyspeaks-ai",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "cd my-app && npm run dev",
+    "build": "cd my-app && npm run build",
+    "start": "cd my-app && npm run start",
+    "lint": "cd my-app && npm run lint",
+    "install-deps": "node scripts/install.js"
+  },
+  "workspaces": [
+    "my-app"
+  ]
+}
