@@ -1,4 +1,4 @@
-# Deployment Guide - Mercy Speaks Digital
+# Deployment Guide - Mercy Speaks AI
 
 ## ✅ PART 1 COMPLETE: Git Repository Initialized
 
@@ -10,8 +10,8 @@ Your local git repository has been initialized and all files have been committed
 
 1. Go to [github.com](https://github.com) and sign in
 2. Click the **"+"** icon in the top right → **"New repository"**
-3. Repository name: `mercy-speaks-digital`
-4. Description: "Mercy Speaks Digital - AI Automation Agency Website"
+3. Repository name: `mercy-speaks-ai`
+4. Description: "Mercy Speaks AI - AI Automation Agency Website"
 5. **DO NOT** check "Initialize with README" (we already have code)
 6. Choose **Public** or **Private** (your choice)
 7. Click **"Create repository"**
@@ -21,7 +21,7 @@ Your local git repository has been initialized and all files have been committed
 After creating the repository, GitHub will show you commands. **Replace `[YOUR-USERNAME]`** with your actual GitHub username in the command below:
 
 ```bash
-git remote add origin https://github.com/[YOUR-USERNAME]/mercy-speaks-digital.git
+git remote add origin https://github.com/[YOUR-USERNAME]/mercy-speaks-ai.git
 ```
 
 ### Step 3: Push to GitHub
@@ -46,7 +46,7 @@ You'll be prompted for your GitHub credentials. If you have 2FA enabled, use a P
 
 1. Click **"Add New Project"** or **"Import Project"**
 2. You'll see a list of your GitHub repositories
-3. Find and select **"mercy-speaks-digital"**
+3. Find and select **"mercy-speaks-ai"**
 4. Click **"Import"**
 
 ### Step 3: Configure Project Settings
@@ -65,18 +65,18 @@ You'll be prompted for your GitHub credentials. If you have 2FA enabled, use a P
 
 1. Click **"Environment Variables"** section
 2. Click **"Add"**
-3. Name: `NEXT_PUBLIC_ANTHROPIC_API_KEY` ⚠️ **Must be exactly this name**
+3. Name: `ANTHROPIC_API_KEY` ⚠️ **Must be exactly this name**
 4. Value: [Paste your API key from `.env.local` file - it starts with `sk-ant-api03-...`]
 5. Check all three: **Production**, **Preview**, and **Development**
 6. Click **"Save"**
 
-**Note:** Your `.env.local` file currently has `ANTHROPIC_API_KEY`, but the client-side component needs `NEXT_PUBLIC_ANTHROPIC_API_KEY`. Make sure to use the `NEXT_PUBLIC_` prefix in Vercel!
+**Note:** The chatbot calls the server route (`/api/chat`), so your Anthropic key stays server-side (no `NEXT_PUBLIC_*` key needed).
 
 ### Step 5: Deploy
 
 1. Click **"Deploy"**
 2. Wait 2-3 minutes for deployment to complete
-3. You'll see a success message with your live URL (e.g., `mercy-speaks-digital.vercel.app`)
+3. You'll see a success message with your live URL (e.g., `mercy-speaks-ai.vercel.app`)
 
 ### Step 6: Test Your Deployment
 
@@ -110,6 +110,6 @@ You'll be prompted for your GitHub credentials. If you have 2FA enabled, use a P
 
 ## 🎉 Success!
 
-Once deployed, your site will be live at: `https://mercy-speaks-digital.vercel.app`
+Once deployed, your site will be live at: `https://mercy-speaks-ai.vercel.app`
 
 Every time you push to GitHub, Vercel will automatically redeploy your site!
