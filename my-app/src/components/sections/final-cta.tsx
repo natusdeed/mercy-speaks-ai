@@ -1,9 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Phone } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 
 export function FinalCTA() {
   return (
@@ -41,7 +41,7 @@ export function FinalCTA() {
               asChild
               className="px-8 py-4 text-lg font-bold group/btn"
             >
-              <Link href="/book-demo">
+              <Link to="/book-demo" className="flex items-center gap-2">
                 Get Your Website
                 <ArrowRight className="w-5 h-5 ml-2 group-hover/btn:translate-x-1 transition-transform" />
               </Link>
@@ -52,7 +52,7 @@ export function FinalCTA() {
               asChild
               className="px-8 py-4 text-lg font-bold group/btn"
             >
-              <Link href="/book-demo">
+              <Link to="/book-demo">
                 Book a Free Strategy Call
               </Link>
             </Button>

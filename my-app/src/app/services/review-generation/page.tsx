@@ -12,7 +12,7 @@ import {
   BarChart3,
   Mail,
 } from "lucide-react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 
 export default function ReviewGenerationPage() {
   const features = [
@@ -108,10 +108,10 @@ export default function ReviewGenerationPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button variant="glow" size="lg" asChild>
-                  <Link href="/book-demo">Schedule a Demo</Link>
+                  <Link to="/book-demo">Schedule a Demo</Link>
                 </Button>
                 <Button variant="outline" size="lg" asChild>
-                  <Link href="/pricing">View Pricing</Link>
+                  <Link to="/pricing">View Pricing</Link>
                 </Button>
               </div>
             </motion.div>
@@ -231,7 +231,7 @@ export default function ReviewGenerationPage() {
                   Start automatically collecting reviews from satisfied customers today.
                 </p>
                 <Button variant="glow" size="lg" asChild>
-                  <Link href="/book-demo">Schedule a Demo</Link>
+                  <Link to="/book-demo">Schedule a Demo</Link>
                 </Button>
               </div>
             </motion.div>

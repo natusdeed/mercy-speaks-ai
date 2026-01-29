@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Globe, Zap, CheckCircle2, TrendingUp, ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 
 export function WebsiteOfferTile() {
   const benefits = [
@@ -119,7 +119,7 @@ export function WebsiteOfferTile() {
                 className="w-full group/btn" 
                 asChild
               >
-                <Link href="/services/website-design" className="flex items-center justify-center gap-2">
+                <Link to="/services/website-design" className="flex items-center justify-center gap-2">
                   Get Your Website
                   <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
                 </Link>

@@ -1,10 +1,6 @@
 'use client';
 
-// #region agent log
-if (typeof window !== 'undefined') { fetch('http://127.0.0.1:7243/ingest/e6485d11-3b9f-4fe8-abde-87df7488e504',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ClaudeChatbot.tsx:2',message:'ClaudeChatbot module loaded',data:{moduleType:'tsx',hasReact:typeof React!=='undefined'},timestamp:Date.now(),sessionId:'debug-session',runId:'run2',hypothesisId:'H'})}).catch(()=>{}); }
-// #endregion
 import React, { useState, useRef, useEffect } from 'react';
-import Image from 'next/image';
 import { MessageSquare, X, Send, Minimize2, Maximize2 } from 'lucide-react';
 
 // =============================================================================
@@ -188,15 +184,15 @@ export default function ClaudeChatbot() {
 {!isOpen && (
   <button
     onClick={() => setIsOpen(true)}
-className="fixed bottom-6 right-6 z-50 bg-gradient-to-r from-purple-600 to-pink-600 p-2 rounded-full hover:scale-110 transition-transform duration-300 border-4 border-white animate-slow-glow"
+    className="fixed bottom-6 right-6 z-50 bg-gradient-to-r from-purple-600 to-pink-600 p-2 rounded-full hover:scale-110 transition-transform duration-300 border-4 border-white animate-slow-glow"
     aria-label="Open chat"
   >
-    <Image
-      src="/images/mercy-avatar.png"
+    <img
+      src="/images/Mercy-avatar.png"
       alt="Mercy AI Assistant"
       width={60}
       height={60}
-      className="rounded-full object-cover"
+      className="rounded-full object-cover w-[60px] h-[60px]"
     />
   </button>
 )}

@@ -4,7 +4,7 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useState, useRef } from "react";
 import { ArrowRight, Star, CheckCircle2, Clock, Shield, Phone, Calculator } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 
 export function HeroTile() {
   const scrollToCalculator = () => {
@@ -89,7 +89,7 @@ export function HeroTile() {
               Starting at $197/month
             </span>
             <Link
-              href="/pricing"
+              to="/pricing"
               className="text-sm md:text-base text-neon-cyan hover:text-electric-purple font-medium flex items-center gap-1 transition-colors group-hover/badge:gap-2"
             >
               See all plans
@@ -144,7 +144,7 @@ export function HeroTile() {
                 asChild
                 className="w-full sm:w-auto text-lg md:text-xl px-8 py-4 rounded-xl group/btn hover:shadow-xl transition-shadow min-h-[48px]"
               >
-                <Link href="/book-demo" className="flex items-center justify-center gap-3">
+                <Link to="/book-demo" className="flex items-center justify-center gap-3">
                   <Phone className="w-5 h-5 md:w-6 md:h-6" />
                   Book a Demo
                   <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover/btn:translate-x-2 transition-transform" />
@@ -162,7 +162,7 @@ export function HeroTile() {
                 asChild
                 className="w-full sm:w-auto text-lg md:text-xl px-8 py-4 rounded-xl border-2 border-slate-700 hover:border-electric-purple/50 hover:bg-slate-900/50 transition-all min-h-[48px]"
               >
-                <Link href="/book-demo">
+                <Link to="/book-demo">
                   Get Started
                 </Link>
               </Button>

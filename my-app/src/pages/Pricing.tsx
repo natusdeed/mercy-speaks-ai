@@ -1,18 +1,8 @@
-"use client";
-
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
   CheckCircle2,
-  X,
-  Users,
-  Phone,
-  Calendar,
-  Mail,
-  Zap,
-  Shield,
-  Clock,
   TrendingUp,
   DollarSign,
   ArrowRight,
@@ -99,45 +89,36 @@ const PRICING_TIERS: PricingTier[] = [
   },
 ];
 
-// Calculate employee cost comparison
 const calculateEmployeeCost = (price: number, employeeCosts: { monthly: number; hourly: number }): { monthly: number; hourly: number } => {
-  // Calculate how many hours the AI price equals
   const equivalentHours = price / employeeCosts.hourly;
-  
   return {
     monthly: employeeCosts.monthly,
     hourly: equivalentHours,
   };
 };
 
-export default function PricingPage() {
+export default function Pricing() {
   const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">("monthly");
 
-  // Calculate employee costs
   const employeeCosts = {
-    salary: 35000,  // Annual salary
-    benefits: 8750,  // Annual benefits
-    totalAnnual: 43750,  // Total annual cost
-    monthly: 3646,  // Monthly cost ($43,750 / 12)
-    hourly: 21,  // Hourly rate ($43,750 / 2080 hours)
+    salary: 35000,
+    benefits: 8750,
+    totalAnnual: 43750,
+    monthly: 3646,
+    hourly: 21,
   };
 
-  // Calculate prices based on billing cycle
   const getPrice = (basePrice: number) => {
     if (billingCycle === 'monthly') {
       return basePrice;
     }
-    // Yearly pricing with 17% discount
-    // $197/month = $1970/year (exact as specified)
     if (basePrice === 197) return 1970;
-    // Apply 17% discount to other tiers
     return Math.round(basePrice * 12 * 0.83);
   };
 
   return (
     <div className="min-h-screen bg-slate-950">
       <main className="pb-16">
-        {/* Hero Section */}
         <section className="py-16 md:py-24 px-6 lg:px-12">
           <div className="max-w-7xl mx-auto">
           <motion.div
@@ -163,7 +144,6 @@ export default function PricingPage() {
               — Less than 1 hour of employee wages
             </p>
 
-            {/* Billing Cycle Toggle */}
             <div className="flex items-center justify-center gap-4 mb-8">
               <button
                 onClick={() => setBillingCycle("monthly")}
@@ -207,21 +187,16 @@ export default function PricingPage() {
             </div>
           </motion.div>
 
-          {/* Website Design - One-Time Service */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0 }}
             className="max-w-2xl mx-auto mb-28 md:mb-36"
           >
-            <div
-              className="glass rounded-2xl p-8 flex flex-col relative overflow-hidden group border-2 border-neon-cyan/30 shadow-lg shadow-neon-cyan/20"
-            >
-              {/* Background Glow */}
+            <div className="glass rounded-2xl p-8 flex flex-col relative overflow-hidden group border-2 border-neon-cyan/30 shadow-lg shadow-neon-cyan/20">
               <div className="absolute inset-0 bg-gradient-to-br from-neon-cyan/20 via-electric-purple/20 to-neon-cyan/20 opacity-50 group-hover:opacity-75 transition-opacity" />
               
               <div className="relative z-10 flex flex-col">
-                {/* Service Badge */}
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-cyan/20 border border-neon-cyan/40 w-fit mb-4">
                   <Globe className="w-4 h-4 text-neon-cyan" />
                   <span className="text-sm text-neon-cyan font-semibold">
@@ -229,24 +204,21 @@ export default function PricingPage() {
                   </span>
                 </div>
 
-                {/* Service Name */}
                 <h3 className="text-2xl md:text-3xl font-bold text-slate-50 mb-2">AI-Powered Website Design</h3>
                 <p className="text-slate-400 mb-6">
                   Modern websites for small businesses, local businesses, and churches
                 </p>
 
-                    {/* Price */}
-                    <div className="mb-6">
-                      <div className="flex items-baseline gap-2">
-                        <span className="text-6xl md:text-7xl font-bold text-slate-50">$997</span>
-                        <span className="text-slate-300 text-lg md:text-xl">one-time</span>
-                      </div>
+                <div className="mb-6">
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-6xl md:text-7xl font-bold text-slate-50">$997</span>
+                    <span className="text-slate-300 text-lg md:text-xl">one-time</span>
+                  </div>
                   <p className="text-sm text-slate-500 mt-2">
                     Starting price • Custom pricing available for larger projects
                   </p>
                 </div>
 
-                {/* Key Features */}
                 <div className="mb-6 p-4 rounded-xl bg-slate-900/50 border border-slate-800/50">
                   <div className="text-sm font-semibold text-slate-300 mb-3">
                     What's Included:
@@ -268,14 +240,8 @@ export default function PricingPage() {
                   </div>
                 </div>
 
-                {/* CTA Button */}
-                <Button
-                  variant="glow"
-                  size="lg"
-                  className="w-full"
-                  asChild
-                >
-                  <Link to="/services/website-design" className="flex items-center gap-2">
+                <Button variant="glow" size="lg" className="w-full" asChild>
+                  <Link to="/services/website-design">
                     Get Your Website
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>
@@ -284,13 +250,9 @@ export default function PricingPage() {
             </div>
           </motion.div>
 
-          {/* Guaranteed spacing between Website Design card and Pricing Cards */}
           <div className="h-16 md:h-24" aria-hidden="true" />
 
-          {/* Pricing Cards */}
-          <div 
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 max-w-7xl mx-auto mb-16"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 max-w-7xl mx-auto mb-16">
             {PRICING_TIERS.map((tier, index) => {
               const price = getPrice(tier.price);
               const employeeCost = calculateEmployeeCost(price, {
@@ -312,32 +274,23 @@ export default function PricingPage() {
                       : "border border-slate-800/50"
                   }`}
                 >
-                  {/* Popular Badge */}
                   {tier.popular && (
-                    <div 
-                      className="absolute top-2 right-2 z-20 bg-gradient-to-r from-electric-purple to-neon-cyan text-slate-950 text-xs font-bold px-4 py-1.5 rounded-bl-lg rounded-tr-2xl"
-                    >
+                    <div className="absolute top-2 right-2 z-20 bg-gradient-to-r from-electric-purple to-neon-cyan text-slate-950 text-xs font-bold px-4 py-1.5 rounded-bl-lg rounded-tr-2xl">
                       MOST POPULAR
                     </div>
                   )}
 
-                  {/* Background Glow */}
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-br ${
-                      tier.popular
-                        ? "from-electric-purple/20 via-neon-cyan/20 to-electric-purple/20"
-                        : "from-slate-900/50 to-slate-900/30"
-                    } opacity-50 group-hover:opacity-75 transition-opacity`}
-                  />
+                  <div className={`absolute inset-0 bg-gradient-to-br ${
+                    tier.popular
+                      ? "from-electric-purple/20 via-neon-cyan/20 to-electric-purple/20"
+                      : "from-slate-900/50 to-slate-900/30"
+                  } opacity-50 group-hover:opacity-75 transition-opacity`} />
 
                   <div className="relative z-10 flex flex-col h-full">
-                    {/* Spacer for badge - ensures gap between badge and tier name */}
                     {tier.popular && <div className="h-14 flex-shrink-0" />}
-                    {/* Tier Name */}
                     <h3 className="text-2xl md:text-3xl font-bold text-slate-50 mb-2">{tier.name}</h3>
                     <p className="text-slate-400 text-sm mb-6">{tier.description}</p>
 
-                    {/* Price */}
                     <div className="mb-6">
                       <div className="flex items-baseline gap-2">
                         <span className="text-6xl md:text-7xl font-bold text-slate-50">${price}</span>
@@ -355,7 +308,6 @@ export default function PricingPage() {
                       )}
                     </div>
 
-                    {/* Employee Cost Comparison */}
                     <div className="mb-6 p-4 rounded-xl bg-slate-900/50 border border-slate-800/50">
                       <div className="flex items-center gap-2 mb-2">
                         <TrendingUp className="w-4 h-4 text-neon-cyan" />
@@ -392,20 +344,18 @@ export default function PricingPage() {
                       </div>
                     </div>
 
-                    {/* CTA Button */}
                     <Button
                       variant={tier.popular ? "glow" : "outline"}
                       size="lg"
                       className="w-full mb-6"
                       asChild
                     >
-                      <Link to={tier.ctaHref} className="flex items-center gap-2">
+                      <Link to={tier.ctaHref}>
                         {tier.ctaText}
                         <ArrowRight className="w-4 h-4 ml-2" />
                       </Link>
                     </Button>
 
-                    {/* Features List */}
                     <div className="flex-1 space-y-3">
                       <div className="text-sm font-semibold text-slate-300 mb-4">
                         Everything included:
@@ -423,7 +373,6 @@ export default function PricingPage() {
             })}
           </div>
 
-          {/* Comparison Table */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -511,7 +460,6 @@ export default function PricingPage() {
             </div>
           </motion.div>
 
-          {/* FAQ Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -558,7 +506,6 @@ export default function PricingPage() {
             </div>
           </motion.div>
 
-          {/* Final CTA */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -573,7 +520,7 @@ export default function PricingPage() {
                 Start your free trial today. No credit card required.
               </p>
               <Button variant="glow" size="lg" asChild className="px-8 py-4 text-lg font-bold">
-                <Link to="/contact" className="flex items-center gap-2">
+                <Link to="/contact">
                   Get Started Now
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Link>

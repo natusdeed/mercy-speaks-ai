@@ -4,7 +4,7 @@ import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Calculator, ArrowRight, TrendingDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 
 export function RoiCalculator() {
   const [supportStaff, setSupportStaff] = useState(5);
@@ -136,7 +136,7 @@ export function RoiCalculator() {
             asChild
             className="w-full group/btn"
           >
-            <Link href="/book-demo" className="flex items-center justify-center gap-2">
+            <Link to="/book-demo" className="flex items-center justify-center gap-2">
               Get Started
               <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
             </Link>

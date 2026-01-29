@@ -13,7 +13,7 @@ import {
   Phone,
   Mail,
 } from "lucide-react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 
 export default function AboutPage() {
   const values = [
@@ -251,13 +251,13 @@ export default function AboutPage() {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button variant="glow" size="lg" asChild className="px-8 py-4 text-lg font-bold">
-                    <Link href="/book-demo">
+                    <Link to="/book-demo" className="flex items-center gap-2">
                       Get Your Website
                       <ArrowRight className="w-5 h-5 ml-2" />
                     </Link>
                   </Button>
                   <Button variant="outline" size="lg" asChild className="px-8 py-4 text-lg font-bold">
-                    <Link href="/book-demo">Book a Free Strategy Call</Link>
+                    <Link to="/book-demo">Book a Free Strategy Call</Link>
                   </Button>
                 </div>
               </div>

@@ -4,7 +4,7 @@ import { Phone, Zap, Database, CheckCircle2, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 
 interface Service {
   name: string;
@@ -135,7 +135,7 @@ export function TheSolution() {
                 className="w-full px-8 py-4 text-lg font-bold"
                 asChild
               >
-                <Link href={service.name === "AI-Powered Website Design" ? "/services/website-design" : "/book-demo"}>
+                <Link to={service.name === "AI-Powered Website Design" ? "/services/website-design" : "/book-demo"}>
                   {service.name === "AI-Powered Website Design" ? "Get Your Website" : "Get Started"}
                 </Link>
               </Button>

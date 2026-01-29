@@ -12,7 +12,6 @@ import {
   MessageSquare,
   CheckCircle2,
 } from "lucide-react";
-import Link from "next/link";
 import { z } from "zod";
 
 const contactSchema = z.object({

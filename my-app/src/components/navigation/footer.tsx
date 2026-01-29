@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { 
   Facebook, 
@@ -112,7 +112,7 @@ export function Footer() {
             transition={{ duration: 0.6 }}
             className="lg:col-span-1"
           >
-            <Link href="/" className="flex items-center gap-3 mb-6 group">
+            <Link to="/" className="flex items-center gap-3 mb-6 group">
               <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
                 <span className="text-2xl font-bold text-white">M</span>
               </div>
@@ -140,7 +140,7 @@ export function Footer() {
               {navigationLinks.map((link) => (
                 <li key={link.href}>
                   <Link
-                    href={link.href}
+                    to={link.href}
                     className="text-slate-300 hover:text-electric-purple transition-colors text-base md:text-lg flex items-center gap-2 group"
                   >
                     <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
@@ -164,7 +164,7 @@ export function Footer() {
               {serviceLinks.map((link) => (
                 <li key={link.href}>
                   <Link
-                    href={link.href}
+                    to={link.href}
                     className="text-slate-300 hover:text-neon-cyan transition-colors text-base md:text-lg flex items-center gap-2 group"
                   >
                     <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
@@ -213,7 +213,7 @@ export function Footer() {
               {policyLinks.map((link) => (
                 <li key={link.href}>
                   <Link
-                    href={link.href}
+                    to={link.href}
                     className="text-slate-300 hover:text-slate-200 transition-colors text-base md:text-lg flex items-center gap-2 group"
                   >
                     <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
@@ -277,7 +277,7 @@ export function Footer() {
             </p>
             <div className="flex items-center gap-6 text-sm">
               <Link
-                href="/book-demo"
+                to="/book-demo"
                 className="text-slate-300 hover:text-electric-purple transition-colors text-base md:text-lg flex items-center gap-2 group"
               >
                 <span>Book a Demo</span>

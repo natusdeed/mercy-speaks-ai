@@ -1,5 +1,3 @@
-"use client";
-
 import { motion } from "framer-motion";
 import { Check, Star, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -14,7 +12,7 @@ interface CaseStudy {
   testimonial: string;
 }
 
-export default function PortfolioPage() {
+export default function Portfolio() {
   const caseStudies: CaseStudy[] = [
     {
       logo: "🔧",

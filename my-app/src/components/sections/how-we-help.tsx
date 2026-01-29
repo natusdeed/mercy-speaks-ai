@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Globe, Phone, Zap, Database, MessageSquare, Calendar, Star, Workflow, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 
 export function HowWeHelp() {
   const services = [
@@ -101,7 +101,7 @@ export function HowWeHelp() {
                 <h3 className="text-2xl md:text-3xl font-bold text-slate-50 mb-2">{service.title}</h3>
                 <p className="text-sm text-slate-400 mb-4">{service.description}</p>
                 <Link
-                  href={service.href}
+                  to={service.href}
                   className={`text-sm font-medium flex items-center gap-1 group/link ${
                     service.color === "electric-purple"
                       ? "text-electric-purple hover:text-electric-purple/80"
@@ -124,7 +124,7 @@ export function HowWeHelp() {
           className="text-center"
         >
           <Button variant="outline" size="lg" asChild className="px-8 py-4 text-lg font-bold">
-            <Link href="/services">
+            <Link to="/services">
               View All Services
               <ArrowRight className="w-5 h-5 ml-2" />
             </Link>

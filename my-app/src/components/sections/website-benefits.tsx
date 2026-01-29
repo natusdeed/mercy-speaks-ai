@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Zap, DollarSign, Clock, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
 export function WebsiteBenefits() {
@@ -81,7 +81,7 @@ export function WebsiteBenefits() {
           className="text-center"
         >
           <Button variant="glow" size="lg" asChild className="text-lg px-8 py-6 group/btn">
-            <Link href="/book-demo" className="flex items-center gap-3">
+            <Link to="/book-demo" className="flex items-center gap-3">
               Get Your Website Today
               <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
             </Link>

@@ -13,7 +13,7 @@ import {
   Calendar,
   Users,
 } from "lucide-react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 
 export default function AIPhoneReceptionistPage() {
   const features = [
@@ -112,10 +112,10 @@ export default function AIPhoneReceptionistPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button variant="glow" size="lg" asChild>
-                  <Link href="/book-demo">Schedule a Demo</Link>
+                  <Link to="/book-demo">Schedule a Demo</Link>
                 </Button>
                 <Button variant="outline" size="lg" asChild>
-                  <Link href="/pricing">View Pricing</Link>
+                  <Link to="/pricing">View Pricing</Link>
                 </Button>
               </div>
             </motion.div>
@@ -242,7 +242,7 @@ export default function AIPhoneReceptionistPage() {
                   Get started in 48 hours. No setup fees. Cancel anytime.
                 </p>
                 <Button variant="glow" size="lg" asChild>
-                  <Link href="/book-demo">
+                  <Link to="/book-demo">
                     Schedule a Demo
                   </Link>
                 </Button>

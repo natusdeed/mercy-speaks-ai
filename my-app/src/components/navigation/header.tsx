@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
@@ -10,7 +9,7 @@ import { useState, useEffect } from "react";
 export function Header() {
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const pathname = usePathname();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     setMounted(true);
@@ -33,7 +32,7 @@ export function Header() {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <Link
-              href="/"
+              to="/"
               className="shrink-0 ml-8 lg:ml-16 text-2xl font-bold text-electric-purple hover:text-purple-400 transition-colors"
             >
               Mercy Speaks Digital
@@ -52,7 +51,6 @@ export function Header() {
                   }`}
                   aria-expanded={servicesOpen}
                   aria-haspopup="true"
-                  suppressHydrationWarning
                 >
                   Services
                   <ChevronDown
@@ -76,7 +74,7 @@ export function Header() {
                         return (
                           <Link
                             key={item.href}
-                            href={item.href}
+                            to={item.href}
                             onClick={() => setServicesOpen(false)}
                             className={`block px-4 py-3 text-sm transition-colors border-b border-slate-800/50 last:border-b-0 ${
                               isActive
@@ -86,7 +84,6 @@ export function Header() {
                             style={{
                               animationDelay: `${index * 0.05}s`,
                             }}
-                            suppressHydrationWarning
                           >
                             {item.name}
                           </Link>
@@ -99,7 +96,7 @@ export function Header() {
 
               {/* Pricing Link */}
               <Link
-                href="/pricing"
+                to="/pricing"
                 className={`text-lg font-medium transition-colors ${
                   mounted && pathname === "/pricing"
                     ? "text-electric-purple font-semibold"
@@ -111,7 +108,7 @@ export function Header() {
 
               {/* Portfolio Link */}
               <Link
-                href="/portfolio"
+                to="/portfolio"
                 className={`text-lg font-medium transition-colors ${
                   mounted && pathname === "/portfolio"
                     ? "text-electric-purple font-semibold"
@@ -123,7 +120,7 @@ export function Header() {
 
               {/* Contact Link */}
               <Link
-                href="/contact"
+                to="/contact"
                 className={`text-lg font-medium transition-colors ${
                   mounted && pathname === "/contact"
                     ? "text-electric-purple font-semibold"
@@ -135,19 +132,17 @@ export function Header() {
 
               {/* Book Demo Button */}
               <Button variant="ghost" size="sm" asChild>
-                <Link href="/book-demo">Book Demo</Link>
+                <Link to="/book-demo">Book Demo</Link>
               </Button>
             </div>
 
             {/* CTA Button (right) */}
             <div className="hidden lg:block shrink-0">
-              <Link href="/book-demo">
-                <button
-                  className="relative px-8 py-4 rounded-md text-lg font-bold text-white bg-linear-to-r from-electric-purple via-purple-500 to-neon-cyan hover:shadow-xl hover:scale-105 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 disabled:pointer-events-none disabled:opacity-50"
-                  suppressHydrationWarning
-                >
-                  Get Started
-                </button>
+              <Link
+                to="/book-demo"
+                className="relative inline-block px-8 py-4 rounded-md text-lg font-bold text-white bg-linear-to-r from-electric-purple via-purple-500 to-neon-cyan hover:shadow-xl hover:scale-105 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 disabled:pointer-events-none disabled:opacity-50"
+              >
+                Get Started
               </Link>
             </div>
           </div>
