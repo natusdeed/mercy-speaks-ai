@@ -1,13 +1,11 @@
-'use client';
-
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageSquare, X, Send, Minimize2, Maximize2 } from 'lucide-react';
 
 // =============================================================================
-// CLAUDE CHATBOT WIDGET - NEXT.JS VERSION
+// CLAUDE CHATBOT WIDGET - VITE/REACT VERSION
 // =============================================================================
 // Built for: Mercy Speaks Digital
-// Framework: Next.js
+// Framework: Vite + React
 // Purpose: Lead capture, service demo, client conversations
 // Cost: ~$5-10/month (Claude API)
 // =============================================================================

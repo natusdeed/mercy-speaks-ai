@@ -1,5 +1,3 @@
-"use client";
-
 import { motion } from "framer-motion";
 import { MapPin, Star, ShieldCheck, CheckCircle2, Clock, X } from "lucide-react";
 

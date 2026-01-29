@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Terminal, CheckCircle2, Activity, ScanLine, Calendar, Phone, Star, Mail, DollarSign } from "lucide-react";

@@ -1,5 +1,3 @@
-"use client";
-
 import { motion } from "framer-motion";
 import { HeroTile } from "./hero-tile";
 import { LiveStatusTile } from "./live-status-tile";

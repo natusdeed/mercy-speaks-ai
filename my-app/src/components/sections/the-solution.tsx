@@ -1,5 +1,3 @@
-"use client";
-
 import { Phone, Zap, Database, CheckCircle2, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";

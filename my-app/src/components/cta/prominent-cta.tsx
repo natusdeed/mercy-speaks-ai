@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { Phone, Play, Pause, MessageSquare, Volume2 } from "lucide-react";

@@ -1,5 +1,3 @@
-"use client";
-
 import { motion } from "framer-motion";
 import { TrendingUp, Users, Calendar, Star, Phone } from "lucide-react";
 import { useCountUp } from "@/hooks/use-count-up";

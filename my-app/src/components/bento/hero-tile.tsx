@@ -1,5 +1,3 @@
-"use client";
-
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useState, useRef } from "react";
 import { ArrowRight, Star, CheckCircle2, Clock, Shield, Phone, Calculator } from "lucide-react";

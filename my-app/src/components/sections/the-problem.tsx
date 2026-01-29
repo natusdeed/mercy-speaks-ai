@@ -1,5 +1,3 @@
-"use client";
-
 import { motion } from "framer-motion";
 import { PhoneOff, Clock, CalendarX, UserX, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";

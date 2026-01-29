@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Calculator, ArrowRight, TrendingDown } from "lucide-react";

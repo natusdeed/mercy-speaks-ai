@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mic, Phone, Volume2, CheckCircle2, PhoneCall } from "lucide-react";

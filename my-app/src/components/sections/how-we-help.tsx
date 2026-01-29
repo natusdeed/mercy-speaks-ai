@@ -1,5 +1,3 @@
-"use client";
-
 import { motion } from "framer-motion";
 import { Globe, Phone, Zap, Database, MessageSquare, Calendar, Star, Workflow, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";

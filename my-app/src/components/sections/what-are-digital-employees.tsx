@@ -1,5 +1,3 @@
-"use client";
-
 import { motion } from "framer-motion";
 import { Bot, Zap, Clock, Database, Workflow, MessageSquare } from "lucide-react";
 import { CheckCircle2 } from "lucide-react";

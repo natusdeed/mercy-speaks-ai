@@ -1,5 +1,3 @@
-"use client";
-
 import { motion } from "framer-motion";
 import { Users, Building2 } from "lucide-react";
 

@@ -1,5 +1,3 @@
-"use client";
-
 import { motion } from "framer-motion";
 import { Code2, Zap, Brain, Mic, Network } from "lucide-react";
 import { cn } from "@/lib/utils";
