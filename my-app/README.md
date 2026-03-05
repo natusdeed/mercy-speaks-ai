@@ -10,7 +10,7 @@ The chatbot requires an Anthropic Claude API key to function. Follow these steps
 2. **Create a `.env.local` file** in the `my-app` directory (same level as `package.json`)
 3. **Add your API key** to the file:
    ```
-   NEXT_PUBLIC_ANTHROPIC_API_KEY=your-actual-api-key-here
+   ANTHROPIC_API_KEY=your-actual-api-key-here
    ```
 4. **Restart your dev server** after adding the key
 
