@@ -1,152 +1,116 @@
 import { Link, useLocation } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ChevronDown } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { Menu, X, Phone } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+const navLinks = [
+  { name: "Home", href: "/" },
+  { name: "Solutions", href: "/solutions" },
+  { name: "Pricing", href: "/pricing" },
+  { name: "Results", href: "/results" },
+  { name: "About", href: "/about" },
+] as const;
+
+function isActivePath(href: string, pathname: string): boolean {
+  if (href === "/") return pathname === "/";
+  if (href === "/solutions") return pathname === "/solutions" || pathname.startsWith("/solutions/");
+  return pathname === href;
+}
 
 export function Header() {
-  const [servicesOpen, setServicesOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const servicesItems = [
-    { name: "AI-Powered Website Design", href: "/services/website-design" },
-    { name: "AI Phone Receptionist", href: "/services/ai-phone-receptionist" },
-    { name: "Website Chatbot", href: "/services/website-chatbot" },
-    { name: "Appointment Automation", href: "/services/appointment-automation" },
-    { name: "Review Generation", href: "/services/review-generation" },
-  ];
-
-  const isServicesActive = mounted && (pathname?.startsWith("/services") ?? false);
+  const pathname = useLocation().pathname;
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-xl border-b border-slate-800">
-      <nav>
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-4">
-          <div className="flex items-center justify-between">
-            {/* Logo */}
-            <Link
-              to="/"
-              className="shrink-0 ml-8 lg:ml-16 text-2xl font-bold text-electric-purple hover:text-purple-400 transition-colors"
-            >
-              Mercy Speaks Digital
-            </Link>
+    <header className="fixed top-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-xl border-b border-slate-800/25">
+      <nav className="section-inner py-4">
+        <div className="flex items-center justify-between">
+          <Link
+            to="/"
+            className="shrink-0 text-xl md:text-2xl font-bold text-slate-50 hover:text-electric-purple transition-colors"
+          >
+            Mercy Speaks Digital
+          </Link>
 
-            {/* Desktop Navigation (centered) */}
-            <div className="hidden md:flex flex-1 items-center justify-center gap-8">
-              {/* Services Dropdown */}
-              <div className="relative">
-                <button
-                  onClick={() => setServicesOpen(!servicesOpen)}
-                  className={`text-lg font-medium transition-colors flex items-center gap-1 ${
-                    isServicesActive
-                      ? "text-electric-purple font-semibold"
-                      : "text-slate-300 hover:text-slate-50"
-                  }`}
-                  aria-expanded={servicesOpen}
-                  aria-haspopup="true"
-                >
-                  Services
-                  <ChevronDown
-                    className={`h-4 w-4 transition-transform ${
-                      servicesOpen ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
-
-                <AnimatePresence>
-                  {servicesOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      transition={{ duration: 0.2 }}
-                      className="absolute top-full left-0 mt-2 w-56 bg-slate-900/95 backdrop-blur-xl border border-slate-800 rounded-lg shadow-xl overflow-hidden"
-                    >
-                      {servicesItems.map((item, index) => {
-                        const isActive = mounted && pathname === item.href;
-                        return (
-                          <Link
-                            key={item.href}
-                            to={item.href}
-                            onClick={() => setServicesOpen(false)}
-                            className={`block px-4 py-3 text-sm transition-colors border-b border-slate-800/50 last:border-b-0 ${
-                              isActive
-                                ? "text-electric-purple font-semibold bg-slate-800/70"
-                                : "text-slate-300 hover:text-slate-50 hover:bg-slate-800/50"
-                            }`}
-                            style={{
-                              animationDelay: `${index * 0.05}s`,
-                            }}
-                          >
-                            {item.name}
-                          </Link>
-                        );
-                      })}
-                    </motion.div>
+          {/* Desktop nav */}
+          <div className="hidden md:flex flex-1 items-center justify-center gap-8">
+            {navLinks.map((link) => {
+              const active = isActivePath(link.href, pathname);
+              return (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  className={cn(
+                    "text-sm font-medium transition-colors",
+                    active ? "text-electric-purple" : "text-slate-300 hover:text-slate-50"
                   )}
-                </AnimatePresence>
-              </div>
-
-              {/* Pricing Link */}
-              <Link
-                to="/pricing"
-                className={`text-lg font-medium transition-colors ${
-                  mounted && pathname === "/pricing"
-                    ? "text-electric-purple font-semibold"
-                    : "text-slate-300 hover:text-slate-50"
-                }`}
-              >
-                Pricing
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
+            <Button variant="primary" size="default" asChild className="shrink-0 ml-2">
+              <Link to="/book-demo" className="flex items-center gap-2">
+                <Phone className="w-4 h-4" />
+                Book Demo
               </Link>
+            </Button>
+          </div>
 
-              {/* Portfolio Link */}
-              <Link
-                to="/portfolio"
-                className={`text-lg font-medium transition-colors ${
-                  mounted && pathname === "/portfolio"
-                    ? "text-electric-purple font-semibold"
-                    : "text-slate-300 hover:text-slate-50"
-                }`}
-              >
-                Portfolio
+          {/* Mobile: hamburger + Book Demo */}
+          <div className="flex md:hidden items-center gap-2">
+            <Button variant="primary" size="default" asChild>
+              <Link to="/book-demo" className="flex items-center gap-1.5">
+                <Phone className="w-4 h-4" />
+                Book Demo
               </Link>
-
-              {/* Contact Link */}
-              <Link
-                to="/contact"
-                className={`text-lg font-medium transition-colors ${
-                  mounted && pathname === "/contact"
-                    ? "text-electric-purple font-semibold"
-                    : "text-slate-300 hover:text-slate-50"
-                }`}
-              >
-                Contact
-              </Link>
-
-              {/* Book Demo Button */}
-              <Button variant="ghost" size="sm" asChild>
-                <Link to="/book-demo">Book Demo</Link>
-              </Button>
-            </div>
-
-            {/* CTA Button (right) */}
-            <div className="hidden lg:block shrink-0">
-              <Link
-                to="/book-demo"
-                className="relative inline-block px-8 py-4 rounded-md text-lg font-bold text-white bg-linear-to-r from-electric-purple via-purple-500 to-neon-cyan hover:shadow-xl hover:scale-105 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 disabled:pointer-events-none disabled:opacity-50"
-              >
-                Get Started
-              </Link>
-            </div>
+            </Button>
+            <button
+              type="button"
+              onClick={() => setMobileOpen((o) => !o)}
+              className="p-2 rounded-lg text-slate-400 hover:text-slate-50 hover:bg-slate-800 transition-colors"
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            >
+              {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
           </div>
         </div>
+
+        {/* Mobile menu — premium layout */}
+        {mobileOpen && (
+          <div className="md:hidden mt-4 pt-4 pb-2 border-t border-slate-800/50 bg-slate-900/50 -mx-4 px-4 rounded-b-xl backdrop-blur-md">
+            <div className="flex flex-col gap-0.5">
+              {navLinks.map((link) => {
+                const active = isActivePath(link.href, pathname);
+                return (
+                  <Link
+                    key={link.href}
+                    to={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className={cn(
+                      "px-4 py-3.5 rounded-lg text-base font-medium transition-colors",
+                      active
+                        ? "text-electric-purple bg-electric-purple/15 border border-electric-purple/30"
+                        : "text-slate-300 hover:bg-slate-800/80 hover:text-slate-50"
+                    )}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
+            </div>
+            <div className="pt-4 mt-2 border-t border-slate-800/50">
+              <Button variant="primary" size="default" asChild className="w-full">
+                <Link to="/book-demo" onClick={() => setMobileOpen(false)} className="flex items-center justify-center gap-2">
+                  <Phone className="w-4 h-4" />
+                  Book Demo
+                </Link>
+              </Button>
+            </div>
+          </div>
+        )}
       </nav>
     </header>
   );
 }
-

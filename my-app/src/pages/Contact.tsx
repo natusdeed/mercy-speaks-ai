@@ -300,7 +300,7 @@ export default function ContactPage() {
 
                         <Button
                           type="submit"
-                          variant="glow"
+                          variant="primary"
                           size="lg"
                           disabled={isSubmitting}
                           className="w-full"

@@ -82,15 +82,15 @@ export default function AppointmentAutomationPage() {
     <div className="min-h-screen bg-slate-950">
       <main>
         {/* Hero Section */}
-        <section className="pt-20 md:pt-24 pb-16 md:pb-24 px-6 sm:px-8 lg:px-12">
-          <div className="max-w-7xl mx-auto">
+        <section className="section">
+          <div className="section-inner">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               className="text-center mb-16"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-electric-purple/20 border border-electric-purple/30 mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-electric-purple/20 mb-6">
                 <Calendar className="w-4 h-4 text-electric-purple" />
                 <span className="text-sm text-electric-purple font-medium">
                   Appointment Automation
@@ -98,9 +98,7 @@ export default function AppointmentAutomationPage() {
               </div>
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-slate-50 mb-6 title-3d">
                 Automated{" "}
-                <span className="bg-gradient-to-r from-electric-purple to-neon-cyan bg-clip-text text-transparent">
-                  Appointment Scheduling
-                </span>
+                <span className="text-neon-cyan">Appointment Scheduling</span>
               </h1>
               <p className="text-lg md:text-xl leading-relaxed text-slate-300 max-w-3xl mx-auto mb-8">
                 Stop playing phone tag. Automate your entire booking process with intelligent
@@ -108,7 +106,7 @@ export default function AppointmentAutomationPage() {
                 every week.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button variant="glow" size="lg" asChild>
+                <Button variant="primary" size="lg" asChild>
                   <Link to="/book-demo">Schedule a Demo</Link>
                 </Button>
                 <Button variant="outline" size="lg" asChild>
@@ -125,9 +123,9 @@ export default function AppointmentAutomationPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 + idx * 0.1 }}
-                  className="glass rounded-xl p-8 md:p-10 text-center hover:scale-105 transition-transform"
+                  className="card text-center transition-colors"
                 >
-                  <div className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-electric-purple to-neon-cyan bg-clip-text text-transparent mb-2">
+                  <div className="text-5xl md:text-6xl font-bold text-neon-cyan mb-2">
                     {benefit.stat}
                   </div>
                   <div className="text-base md:text-lg text-slate-300">{benefit.description}</div>
@@ -143,7 +141,7 @@ export default function AppointmentAutomationPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 + idx * 0.1 }}
-                  className="glass rounded-xl p-8 md:p-10 hover:border-electric-purple/50 hover:scale-105 transition-all"
+                  className="card hover:shadow-md transition-shadow"
                 >
                   <feature.icon className="w-8 h-8 text-electric-purple mb-4" />
                   <h3 className="text-lg font-semibold text-slate-50 mb-2">{feature.title}</h3>
@@ -157,7 +155,7 @@ export default function AppointmentAutomationPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="glass rounded-2xl p-8 md:p-12 mb-16"
+              className="card mb-16"
             >
               <h2 className="text-4xl md:text-5xl font-bold text-slate-50 mb-8">
                 Complete Booking Automation
@@ -183,7 +181,7 @@ export default function AppointmentAutomationPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.7 }}
-              className="glass rounded-2xl p-8 md:p-12 mb-16 border border-electric-purple/30"
+              className="card mb-16"
             >
               <h2 className="text-4xl md:text-5xl font-bold text-slate-50 mb-8 text-center">
                 How It Works
@@ -218,7 +216,7 @@ export default function AppointmentAutomationPage() {
                     transition={{ duration: 0.4, delay: 0.8 + idx * 0.1 }}
                     className="text-center"
                   >
-                    <div className="w-16 h-16 rounded-full bg-gradient-to-r from-electric-purple to-neon-cyan flex items-center justify-center text-2xl font-bold text-slate-950 mx-auto mb-4">
+                    <div className="w-16 h-16 rounded-full bg-neon-cyan/80 flex items-center justify-center text-2xl font-bold text-slate-950 mx-auto mb-4">
                       {step.step}
                     </div>
                     <h3 className="text-lg font-semibold text-slate-50 mb-2">{step.title}</h3>
@@ -235,14 +233,14 @@ export default function AppointmentAutomationPage() {
               transition={{ duration: 0.6, delay: 0.9 }}
               className="text-center"
             >
-              <div className="glass rounded-2xl p-12 border border-electric-purple/30 max-w-3xl mx-auto">
+              <div className="card max-w-3xl mx-auto">
                 <h2 className="text-4xl md:text-5xl font-bold text-slate-50 mb-4">
                   Ready to Automate Your Scheduling?
                 </h2>
                 <p className="text-lg md:text-xl leading-relaxed text-slate-300 mb-8">
                   Save hours every week and never miss another booking opportunity.
                 </p>
-                <Button variant="glow" size="lg" asChild>
+                <Button variant="primary" size="lg" asChild>
                   <Link to="/book-demo">Schedule a Demo</Link>
                 </Button>
               </div>

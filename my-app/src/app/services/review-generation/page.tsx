@@ -82,30 +82,28 @@ export default function ReviewGenerationPage() {
     <div className="min-h-screen bg-slate-950">
       <main>
         {/* Hero Section */}
-        <section className="pt-20 md:pt-24 pb-16 md:pb-24 px-6 sm:px-8 lg:px-12">
-          <div className="max-w-7xl mx-auto">
+        <section className="section">
+          <div className="section-inner">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               className="text-center mb-16"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-cyan/20 border border-neon-cyan/30 mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-cyan/20 mb-6">
                 <Star className="w-4 h-4 text-neon-cyan" />
                 <span className="text-sm text-neon-cyan font-medium">Review Generation</span>
               </div>
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-slate-50 mb-6 title-3d">
                 Automated{" "}
-                <span className="bg-gradient-to-r from-neon-cyan to-electric-purple bg-clip-text text-transparent">
-                  Review Generation
-                </span>
+                <span className="text-neon-cyan">Review Generation</span>
               </h1>
               <p className="text-lg md:text-xl leading-relaxed text-slate-300 max-w-3xl mx-auto mb-8">
                 Turn satisfied customers into valuable reviews automatically. Generate 5x more
                 reviews while staying 100% compliant with platform policies.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button variant="glow" size="lg" asChild>
+                <Button variant="primary" size="lg" asChild>
                   <Link to="/book-demo">Schedule a Demo</Link>
                 </Button>
                 <Button variant="outline" size="lg" asChild>
@@ -122,9 +120,9 @@ export default function ReviewGenerationPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 + idx * 0.1 }}
-                  className="glass rounded-xl p-8 md:p-10 text-center hover:scale-105 transition-transform"
+                  className="card text-center transition-colors"
                 >
-                  <div className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-neon-cyan to-electric-purple bg-clip-text text-transparent mb-2">
+                  <div className="text-5xl md:text-6xl font-bold text-neon-cyan mb-2">
                     {benefit.stat}
                   </div>
                   <div className="text-base md:text-lg text-slate-300">{benefit.description}</div>
@@ -140,7 +138,7 @@ export default function ReviewGenerationPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 + idx * 0.1 }}
-                  className="glass rounded-xl p-8 md:p-10 hover:border-neon-cyan/50 hover:scale-105 transition-all"
+                  className="card hover:shadow-md transition-shadow"
                 >
                   <feature.icon className="w-8 h-8 text-neon-cyan mb-4" />
                   <h3 className="text-lg font-semibold text-slate-50 mb-2">{feature.title}</h3>
@@ -154,7 +152,7 @@ export default function ReviewGenerationPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="glass rounded-2xl p-8 md:p-12 mb-16"
+              className="card mb-16"
             >
               <h2 className="text-4xl md:text-5xl font-bold text-slate-50 mb-8">
                 Complete Review Management
@@ -180,7 +178,7 @@ export default function ReviewGenerationPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.7 }}
-              className="glass rounded-2xl p-8 md:p-12 mb-16 border border-neon-cyan/30"
+              className="card mb-16"
             >
               <h2 className="text-4xl md:text-5xl font-bold text-slate-50 mb-8 text-center">
                 Why Reviews Matter
@@ -205,7 +203,7 @@ export default function ReviewGenerationPage() {
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.4, delay: 0.8 + idx * 0.1 }}
-                    className="p-6 rounded-xl bg-slate-900/50 border border-slate-800/50 text-center"
+                    className="p-6 rounded-xl bg-slate-900/50 shadow-sm text-center"
                   >
                     <h3 className="text-lg font-semibold text-slate-50 mb-2">{point.title}</h3>
                     <p className="text-sm text-slate-400">{point.description}</p>
@@ -221,14 +219,14 @@ export default function ReviewGenerationPage() {
               transition={{ duration: 0.6, delay: 0.9 }}
               className="text-center"
             >
-              <div className="glass rounded-2xl p-12 border border-neon-cyan/30 max-w-3xl mx-auto">
+              <div className="card max-w-3xl mx-auto">
                 <h2 className="text-4xl md:text-5xl font-bold text-slate-50 mb-4">
                   Ready to Generate More Reviews?
                 </h2>
                 <p className="text-lg md:text-xl leading-relaxed text-slate-300 mb-8">
                   Start automatically collecting reviews from satisfied customers today.
                 </p>
-                <Button variant="glow" size="lg" asChild>
+                <Button variant="primary" size="lg" asChild>
                   <Link to="/book-demo">Schedule a Demo</Link>
                 </Button>
               </div>

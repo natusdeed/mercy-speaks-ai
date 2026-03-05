@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { PageShell } from "@/components/ui/page-shell";
 import {
   Target,
   Zap,
@@ -58,28 +59,26 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-950">
+    <PageShell className="min-h-screen bg-slate-950">
       <main className="pb-16">
-        {/* Hero Section */}
-        <section className="py-16 md:py-24 px-6 lg:px-12">
-          <div className="max-w-7xl mx-auto">
+        {/* Hero Section — extra top padding so H1 clears the fixed header */}
+        <section className="section pt-36 md:pt-44">
+          <div className="section-inner">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               className="text-center mb-16"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-cyan/20 border border-neon-cyan/30 mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-cyan/20 mb-6">
                 <Users className="w-4 h-4 text-neon-cyan" />
                 <span className="text-sm text-neon-cyan font-medium">About Us</span>
               </div>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-slate-50 mb-6 title-3d">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-50 mb-6 title-3d">
                 Modern Websites &{" "}
-                <span className="bg-gradient-to-r from-electric-purple to-neon-cyan bg-clip-text text-transparent">
-                  Digital Solutions
-                </span>
+                <span className="text-neon-cyan">Digital Solutions</span>
               </h1>
-              <p className="text-lg md:text-xl leading-relaxed text-slate-300 max-w-3xl mx-auto mb-8">
+              <p className="text-lg text-slate-300 leading-relaxed max-w-3xl mx-auto mb-8">
                 We're Mercy Speaks Digital—your partner for modern websites and AI-powered tools. 
                 Based in Richmond, Texas, we help small businesses, local businesses, and churches 
                 build their online presence using smart, modern technology.
@@ -91,10 +90,10 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="glass rounded-2xl p-8 md:p-12 mb-16 max-w-4xl mx-auto"
+              className="card mb-16 max-w-4xl mx-auto"
             >
-              <h2 className="text-4xl md:text-5xl font-bold text-slate-50 mb-6">Our Story</h2>
-              <div className="space-y-6 text-lg md:text-xl text-slate-300 leading-relaxed">
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-50 mb-6">Our Story</h2>
+              <div className="space-y-6 text-base md:text-lg text-slate-300 leading-relaxed">
                 <p>
                   Founded in the heart of the Houston metro area, Mercy Speaks Digital was born from
                   a simple realization: small businesses, local businesses, and churches deserve 
@@ -129,10 +128,10 @@ export default function AboutPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 + idx * 0.1 }}
-                  className="glass rounded-xl p-8 md:p-10 hover:border-electric-purple/50 hover:scale-105 transition-all"
+                  className="card hover:shadow-md transition-shadow"
                 >
-                  <value.icon className="w-8 h-8 text-electric-purple mb-4" />
-                  <h3 className="text-2xl md:text-3xl font-semibold text-slate-50 mb-2">{value.title}</h3>
+                  <value.icon className="w-6 h-6 text-electric-purple mb-4" />
+                  <h3 className="text-xl md:text-2xl font-semibold text-slate-50 mb-2">{value.title}</h3>
                   <p className="text-sm text-slate-400">{value.description}</p>
                 </motion.div>
               ))}
@@ -143,9 +142,9 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="glass rounded-2xl p-8 md:p-12 mb-16"
+              className="card mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-bold text-slate-50 mb-8 text-center">By The Numbers</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-50 mb-8 text-center">By The Numbers</h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                 {teamStats.map((stat, idx) => (
                   <motion.div
@@ -155,10 +154,10 @@ export default function AboutPage() {
                     transition={{ duration: 0.4, delay: 0.7 + idx * 0.1 }}
                     className="text-center"
                   >
-                    <div className="text-6xl md:text-7xl font-bold bg-gradient-to-r from-electric-purple to-neon-cyan bg-clip-text text-transparent mb-2">
+                    <div className="text-4xl md:text-5xl font-bold text-neon-cyan mb-2">
                       {stat.number}
                     </div>
-                    <div className="text-base md:text-lg text-slate-300">{stat.label}</div>
+                    <div className="text-sm md:text-base text-slate-300">{stat.label}</div>
                   </motion.div>
                 ))}
               </div>
@@ -169,9 +168,9 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
-              className="glass rounded-2xl p-8 md:p-12 mb-16"
+              className="card mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-bold text-slate-50 mb-8">
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-50 mb-8">
                 What Makes Us Different
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -183,8 +182,8 @@ export default function AboutPage() {
                     transition={{ duration: 0.4, delay: 0.9 + idx * 0.05 }}
                     className="flex items-start gap-3"
                   >
-                    <CheckCircle2 className="w-5 h-5 text-neon-cyan mt-0.5 flex-shrink-0" />
-                    <span className="text-lg md:text-xl text-slate-300">{item}</span>
+                    <CheckCircle2 className="w-4 h-4 text-neon-cyan mt-0.5 shrink-0" />
+                    <span className="text-base md:text-lg text-slate-300">{item}</span>
                   </motion.div>
                 ))}
               </div>
@@ -195,37 +194,37 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1 }}
-              className="glass rounded-2xl p-8 md:p-12 mb-16 border border-electric-purple/30"
+              className="card mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-bold text-slate-50 mb-8 text-center">
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-50 mb-8 text-center">
                 Located in the Heart of Houston Metro
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div className="flex flex-col items-center text-center">
-                  <MapPin className="w-10 h-10 text-electric-purple mb-4" />
-                  <h3 className="text-2xl md:text-3xl font-semibold text-slate-50 mb-2">Location</h3>
-                  <p className="text-lg md:text-xl text-slate-300">
+                  <MapPin className="w-8 h-8 text-electric-purple mb-4" />
+                  <h3 className="text-lg md:text-xl font-semibold text-slate-50 mb-2">Location</h3>
+                  <p className="text-base md:text-lg text-slate-300">
                     Richmond, Texas 77407
                     <br />
                     Houston Metro Area
                   </p>
                 </div>
                 <div className="flex flex-col items-center text-center">
-                  <Phone className="w-10 h-10 text-neon-cyan mb-4" />
-                  <h3 className="text-2xl md:text-3xl font-semibold text-slate-50 mb-2">Phone</h3>
+                  <Phone className="w-8 h-8 text-neon-cyan mb-4" />
+                  <h3 className="text-lg md:text-xl font-semibold text-slate-50 mb-2">Phone</h3>
                   <a
                     href="tel:7033325956"
-                    className="text-xl md:text-2xl text-slate-300 hover:text-neon-cyan transition-colors"
+                    className="text-base md:text-lg text-slate-300 hover:text-neon-cyan transition-colors"
                   >
                     (703) 332-5956
                   </a>
                 </div>
                 <div className="flex flex-col items-center text-center">
-                  <Mail className="w-10 h-10 text-electric-purple mb-4" />
-                  <h3 className="text-2xl md:text-3xl font-semibold text-slate-50 mb-2">Email</h3>
+                  <Mail className="w-8 h-8 text-electric-purple mb-4" />
+                  <h3 className="text-lg md:text-xl font-semibold text-slate-50 mb-2">Email</h3>
                   <a
                     href="mailto:don@mercyspeaksdigital.com"
-                    className="text-xl md:text-2xl text-slate-300 hover:text-neon-cyan transition-colors break-all"
+                    className="text-base md:text-lg text-slate-300 hover:text-neon-cyan transition-colors break-all"
                   >
                     don@mercyspeaksdigital.com
                   </a>
@@ -240,21 +239,21 @@ export default function AboutPage() {
               transition={{ duration: 0.6, delay: 1.1 }}
               className="text-center"
             >
-              <div className="glass rounded-2xl p-12 border border-electric-purple/30 max-w-3xl mx-auto">
-                <h2 className="text-4xl md:text-5xl font-bold text-slate-50 mb-4">
+              <div className="card max-w-3xl mx-auto">
+                <h2 className="text-3xl md:text-4xl font-bold text-slate-50 mb-4">
                   Ready to Get Your Website?
                 </h2>
-                <p className="text-lg md:text-xl leading-relaxed text-slate-300 mb-8">
+                <p className="text-base md:text-lg leading-relaxed text-slate-300 mb-8">
                   Let's discuss how we can help you build a modern website that grows your business.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button variant="glow" size="lg" asChild className="px-8 py-4 text-lg font-bold">
+                  <Button variant="primary" size="lg" asChild>
                     <Link to="/book-demo" className="flex items-center gap-2">
                       Get Your Website
                       <ArrowRight className="w-5 h-5 ml-2" />
                     </Link>
                   </Button>
-                  <Button variant="outline" size="lg" asChild className="px-8 py-4 text-lg font-bold">
+                  <Button variant="outline" size="lg" asChild>
                     <Link to="/book-demo">Book a Free Strategy Call</Link>
                   </Button>
                 </div>
@@ -263,6 +262,6 @@ export default function AboutPage() {
           </div>
         </section>
       </main>
-    </div>
+    </PageShell>
   );
 }

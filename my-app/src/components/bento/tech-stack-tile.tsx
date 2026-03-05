@@ -43,22 +43,17 @@ const TECH_STACK: TechItem[] = [
 
 export function TechStackTile() {
   return (
-    <div className="glass rounded-2xl p-6 h-full flex flex-col relative overflow-hidden group">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-electric-purple/1 via-transparent to-neon-cyan/1 opacity-5" />
-
+    <div className="card h-full flex flex-col relative overflow-hidden group">
       <div className="relative z-10 flex flex-col h-full">
-        {/* Header */}
-        <div className="flex items-center gap-2 mb-6">
-          <div className="p-2 rounded-lg bg-electric-purple/20 backdrop-blur-sm">
+        <div className="flex items-center gap-2 mb-5">
+          <div className="p-2 rounded-lg bg-electric-purple/20">
             <Code2 className="w-5 h-5 text-electric-purple" />
           </div>
-          <h3 className="text-lg font-semibold text-slate-50">
+          <h3 className="card-title text-slate-50">
             Powered By Industry Leaders
           </h3>
         </div>
 
-        {/* Tech Stack List */}
         <div className="flex-1 flex flex-col gap-3">
           {TECH_STACK.map((tech, index) => (
             <motion.div
@@ -66,7 +61,7 @@ export function TechStackTile() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="flex items-start gap-3 p-3 rounded-lg bg-slate-900/50 border border-slate-800/50 hover:border-electric-purple/50 transition-all group/item"
+              className="flex items-start gap-3 p-3 rounded-lg bg-slate-800/40 shadow-sm hover:bg-slate-800/60 transition-colors group/item"
               whileHover={{ scale: 1.02, x: 4 }}
             >
               <motion.div
@@ -91,14 +86,13 @@ export function TechStackTile() {
           ))}
         </div>
 
-        {/* Tagline */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.5 }}
-          className="mt-4 pt-4 border-t border-slate-800/50"
+          className="mt-4 pt-4"
         >
-          <p className="text-xs text-center text-slate-400">
+          <p className="card-body text-center text-slate-400">
             <span className="text-slate-300 font-medium">Enterprise-grade technology</span>{" "}
             at <span className="text-neon-cyan font-semibold">small business prices</span>
           </p>

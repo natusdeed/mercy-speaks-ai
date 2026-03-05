@@ -95,7 +95,7 @@ export function VoiceDemoTile() {
             className={cn(
               "w-1.5 rounded-full",
               isRecording 
-                ? "bg-gradient-to-t from-electric-purple via-neon-cyan to-electric-purple" 
+                ? "bg-neon-cyan" 
                 : "bg-slate-700"
             )}
             animate={{
@@ -117,38 +117,13 @@ export function VoiceDemoTile() {
   };
 
   return (
-    <div className="glass rounded-2xl p-6 h-full flex flex-col relative overflow-hidden group">
-      {/* Background gradient glow - intensifies during call */}
-      <motion.div 
-        className="absolute inset-0 bg-gradient-to-br from-electric-purple/1 via-transparent to-neon-cyan/1"
-        animate={{
-          opacity: isActive ? 0.075 : 0.05,
-        }}
-        transition={{ duration: 0.3 }}
-      />
-      
-      {/* Pulsing glow effect when active */}
-      {isActive && (
-        <motion.div
-          className="absolute inset-0 bg-electric-purple/2 rounded-2xl"
-          animate={{
-            opacity: [0.03, 0.05, 0.03],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      )}
-      
+    <div className="card h-full flex flex-col relative overflow-hidden group">
       <div className="relative z-10 flex flex-col h-full">
-        {/* Header */}
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
-            <motion.div 
+            <motion.div
               className={cn(
-                "p-2 rounded-lg bg-electric-purple/20 backdrop-blur-sm",
+                "p-2 rounded-lg bg-electric-purple/20",
                 isActive && "glow-purple"
               )}
               animate={{
@@ -162,7 +137,7 @@ export function VoiceDemoTile() {
             >
               <PhoneCall className="w-5 h-5 text-electric-purple" />
             </motion.div>
-            <h3 className="text-lg font-semibold text-slate-50">
+            <h3 className="card-title text-slate-50">
               Voice AI Demo
             </h3>
           </div>
@@ -229,7 +204,7 @@ export function VoiceDemoTile() {
                   />
                   
                   {/* Microphone container */}
-                  <div className="relative p-10 rounded-full bg-gradient-to-br from-electric-purple/3 via-electric-purple/2 to-neon-cyan/2 border-2 border-electric-purple/4 backdrop-blur-sm">
+                  <div className="relative p-10 rounded-full bg-electric-purple/10 border border-electric-purple/20 backdrop-blur-sm">
                     <Mic className="w-16 h-16 text-electric-purple drop-shadow-lg" />
                   </div>
                 </motion.div>
@@ -240,7 +215,7 @@ export function VoiceDemoTile() {
 
                 <Button
                   onClick={startDemo}
-                  variant="glow"
+                  variant="primary"
                   size="lg"
                   className="mt-2 group/btn"
                 >
@@ -282,7 +257,7 @@ export function VoiceDemoTile() {
                         ease: "easeInOut",
                       }}
                     />
-                    <div className="relative p-4 rounded-full bg-gradient-to-br from-electric-purple/4 to-neon-cyan/3 border-2 border-electric-purple/5">
+                    <div className="relative p-4 rounded-full bg-electric-purple/10 border border-electric-purple/20">
                       <Mic className="w-8 h-8 text-electric-purple" />
                     </div>
                   </motion.div>

@@ -20,7 +20,7 @@ export default function ServiceAIPhoneReceptionist() {
             <p className="text-xl text-slate-400 mb-8">
               24/7 AI receptionist that never misses a call
             </p>
-            <Button variant="glow" size="lg" asChild>
+            <Button variant="primary" size="lg" asChild>
               <Link to="/book-demo">Book a Demo</Link>
             </Button>
           </motion.div>

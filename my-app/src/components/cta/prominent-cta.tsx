@@ -52,49 +52,42 @@ export function ProminentCTA() {
   };
 
   return (
-    <section className="w-full py-40 px-6 relative overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-electric-purple/20 via-transparent to-neon-cyan/20" />
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-electric-purple/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-neon-cyan/10 rounded-full blur-3xl" />
-
-      <div className="max-w-7xl mx-auto relative z-10 pt-16">
+    <section className="section w-full relative overflow-hidden bg-slate-950">
+      <div className="section-inner relative z-10 pt-6">
         <div className="max-w-5xl mx-auto">
           {/* Main CTA Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
             {/* Phone Number CTA - Large, Prominent */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="glass rounded-2xl p-8 md:p-12 relative overflow-hidden group"
+              className="card relative overflow-hidden group"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-neon-cyan/2 via-transparent to-electric-purple/2 opacity-5 group-hover:opacity-[7.5%] transition-opacity" />
-              
               <div className="relative z-10 flex flex-col items-center justify-center text-center h-full min-h-[280px]">
                 <motion.div
                   animate={{ scale: [1, 1.1, 1] }}
                   transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                   className="mb-6"
                 >
-                  <div className="p-4 rounded-full bg-neon-cyan/20 backdrop-blur-sm border-2 border-neon-cyan/40">
+                  <div className="p-4 rounded-full bg-neon-cyan/20 backdrop-blur-sm">
                     <Phone className="w-12 h-12 text-neon-cyan" />
                   </div>
                 </motion.div>
                 
-                <h3 className="text-2xl md:text-3xl font-bold text-slate-50 mb-4">
+                <h3 className="text-2xl md:text-3xl font-bold text-slate-50 mb-3">
                   Call Our AI Right Now
                 </h3>
-                <p className="text-slate-400 mb-8 max-w-sm">
+                <p className="text-slate-400 mb-6 max-w-sm">
                   Experience our AI receptionist in real-time. The same technology we'll install for your business.
                 </p>
                 
                 <Button
                   asChild
-                  variant="cyan"
+                  variant="primary"
                   size="lg"
-                  className="text-lg px-8 py-6 group/btn"
+                  className="group/btn"
                 >
                   <a href={phoneLink} className="flex items-center gap-3">
                     <Phone className="w-5 h-5 group-hover/btn:scale-110 transition-transform" />
@@ -110,12 +103,10 @@ export function ProminentCTA() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="glass rounded-2xl p-8 md:p-12 relative overflow-hidden group"
+              className="card relative overflow-hidden group"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-electric-purple/2 via-transparent to-neon-cyan/2 opacity-5 group-hover:opacity-[7.5%] transition-opacity" />
-              
               <div className="relative z-10 flex flex-col h-full min-h-[280px]">
-                <div className="flex items-center gap-3 mb-6">
+                <div className="flex items-center gap-3 mb-4">
                   <div className="p-2 rounded-lg bg-electric-purple/20 backdrop-blur-sm">
                     <Volume2 className="w-6 h-6 text-electric-purple" />
                   </div>
@@ -134,7 +125,7 @@ export function ProminentCTA() {
                   <div className="flex items-center justify-center mb-4">
                     <Button
                       onClick={handlePlayPause}
-                      variant="glow"
+                      variant="primary"
                       size="lg"
                       className="rounded-full w-16 h-16 p-0"
                     >
@@ -153,7 +144,7 @@ export function ProminentCTA() {
                       className="w-full h-2 bg-slate-800 rounded-full cursor-pointer group/progress"
                     >
                       <motion.div
-                        className="h-full bg-gradient-to-r from-electric-purple to-neon-cyan rounded-full"
+                        className="h-full bg-neon-cyan/80 rounded-full"
                         style={{
                           width: duration ? `${(currentTime / duration) * 100}%` : "0%",
                         }}
@@ -185,10 +176,8 @@ export function ProminentCTA() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="glass rounded-2xl p-8 md:p-12 relative overflow-hidden group"
+            className="card relative overflow-hidden group"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-electric-purple/1 via-transparent to-neon-cyan/1 opacity-5 group-hover:opacity-[7.5%] transition-opacity" />
-            
             <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
               <div className="flex items-center gap-4">
                 <div className="p-3 rounded-lg bg-electric-purple/20 backdrop-blur-sm">
@@ -205,7 +194,7 @@ export function ProminentCTA() {
               </div>
               
               <Button
-                variant="glow"
+                variant="primary"
                 size="lg"
                 className="group/btn"
                 onClick={() => {

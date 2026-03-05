@@ -4,9 +4,9 @@ import { MapPin, Star, ShieldCheck, CheckCircle2, Clock, X } from "lucide-react"
 export function TrustSignals() {
   return (
     <section className="w-full border-b border-slate-800/50 bg-slate-950/50 backdrop-blur-sm px-6 pt-4">
-      <div className="max-w-7xl mx-auto py-6">
+      <div className="max-w-7xl mx-auto py-5">
         {/* Main Trust Signals - Above the Fold */}
-        <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8 mb-6">
+        <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 mb-4">
           {/* Location */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -55,7 +55,7 @@ export function TrustSignals() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex flex-wrap items-center justify-center gap-4 md:gap-6 mb-6"
+          className="flex flex-wrap items-center justify-center gap-4 md:gap-6 mb-4"
         >
           <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-900/50 border border-slate-800/50">
             <CheckCircle2 className="w-4 h-4 text-neon-cyan" />
@@ -78,7 +78,7 @@ export function TrustSignals() {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="text-center"
         >
-          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-electric-purple/20 via-neon-cyan/20 to-electric-purple/20 border border-electric-purple/30 backdrop-blur-sm">
+          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-800/40 border border-slate-700/20 backdrop-blur-sm">
             <span className="text-lg md:text-xl font-bold text-slate-50">
               Starting at <span className="text-neon-cyan">$197/month</span>
             </span>

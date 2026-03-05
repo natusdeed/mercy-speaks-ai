@@ -33,18 +33,16 @@ const PAIN_POINTS: PainPoint[] = [
 
 export function TheProblem() {
   return (
-    <section className="py-16 md:py-24 px-6 lg:px-12 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900" />
-      
-      <div className="max-w-7xl mx-auto relative z-10 pt-16">
+    <section className="section relative overflow-hidden">
+      <div className="section-inner relative z-10 pt-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-8"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-50 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-50 mb-3">
             Are You Losing Money From...
           </h2>
         </motion.div>
@@ -59,7 +57,7 @@ export function TheProblem() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="glass rounded-xl p-6 flex items-center gap-4 hover:border-electric-purple/50 transition-all group"
+                className="card flex items-center gap-4 hover:shadow-md transition-shadow group"
               >
                 <div className={cn(
                   "p-3 rounded-lg",

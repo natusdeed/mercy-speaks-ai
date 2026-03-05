@@ -37,23 +37,21 @@ const CASE_STUDIES = [
 
 export function Proof() {
   return (
-    <section className="py-16 md:py-24 px-6 lg:px-12 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900" />
-      
-      <div className="max-w-7xl mx-auto relative z-10 pt-16">
+    <section className="section relative overflow-hidden">
+      <div className="section-inner relative z-10 pt-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-8"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-50 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-50 mb-3">
             Real Results from Real Businesses
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto mb-8">
           {CASE_STUDIES.map((study, index) => {
             const Icon = study.icon;
             const { count, ref } = useCountUp({
@@ -75,7 +73,7 @@ export function Proof() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="glass rounded-2xl p-6 text-center"
+                className="card text-center"
               >
                 <div className={`p-3 rounded-lg w-fit mx-auto mb-4 ${
                   study.color === "electric-purple" 
@@ -100,7 +98,7 @@ export function Proof() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="max-w-3xl mx-auto glass rounded-2xl p-8"
+          className="max-w-3xl mx-auto card"
         >
           <div className="flex items-center gap-1 mb-4">
             {Array.from({ length: 5 }).map((_, i) => (
@@ -112,7 +110,7 @@ export function Proof() {
             and we've captured 23 new leads in the first month alone. Best investment we've made."
           </p>
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-electric-purple to-neon-cyan" />
+            <div className="w-12 h-12 rounded-full bg-slate-700" />
             <div>
               <p className="font-semibold text-slate-50">Carlos Martinez</p>
               <p className="text-sm text-slate-400">Owner, Martinez HVAC</p>

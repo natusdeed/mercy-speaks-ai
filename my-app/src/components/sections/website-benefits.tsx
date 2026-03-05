@@ -24,32 +24,28 @@ export function WebsiteBenefits() {
   ];
 
   return (
-    <section className="py-16 md:py-24 px-6 sm:px-8 lg:px-12 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-electric-purple/1 via-transparent to-neon-cyan/1" />
-      
-      <div className="max-w-7xl mx-auto relative z-10">
+    <section className="section relative overflow-hidden">
+      <div className="section-inner relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-8"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-50 mb-6">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-50 mb-4">
             We Build Your Website{" "}
-            <span className="bg-gradient-to-r from-electric-purple to-neon-cyan bg-clip-text text-transparent">
-              Faster, Smarter, and More Affordably
-            </span>{" "}
+            <span className="text-neon-cyan">Faster, Smarter, and More Affordably</span>{" "}
             Using AI
           </h2>
-          <p className="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto mb-8">
+          <p className="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto mb-6">
             So you can focus on your business—not building websites. We use modern AI tools to deliver 
             professional websites that help small businesses, local businesses, and churches grow their 
             online presence without breaking the bank.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto mb-8">
           {benefits.map((benefit, index) => {
             const Icon = benefit.icon;
             return (
@@ -59,7 +55,7 @@ export function WebsiteBenefits() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="glass rounded-xl p-6 hover:border-electric-purple/50 transition-all group"
+                className="card hover:shadow-md transition-shadow group"
               >
                 <div className="p-3 rounded-lg bg-electric-purple/20 w-fit mb-4">
                   <Icon className="w-6 h-6 text-electric-purple" />
@@ -78,9 +74,9 @@ export function WebsiteBenefits() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="text-center"
         >
-          <Button variant="glow" size="lg" asChild className="text-lg px-8 py-6 group/btn">
+          <Button variant="primary" size="lg" asChild className="group/btn">
             <Link to="/book-demo" className="flex items-center gap-3">
-              Get Your Website Today
+              Book Demo
               <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
             </Link>
           </Button>

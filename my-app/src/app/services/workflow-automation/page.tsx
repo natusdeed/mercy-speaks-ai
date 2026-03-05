@@ -116,15 +116,15 @@ export default function WorkflowAutomationPage() {
     <div className="min-h-screen bg-slate-950">
       <main>
         {/* Hero Section */}
-        <section className="py-16 md:py-24 px-6 lg:px-12">
-          <div className="max-w-7xl mx-auto">
+        <section className="section">
+          <div className="section-inner">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-cyan/20 border border-neon-cyan/30 mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-cyan/20 mb-6">
               <Workflow className="w-4 h-4 text-neon-cyan" />
               <span className="text-sm text-neon-cyan font-medium">
                 Workflow Automation
@@ -132,7 +132,7 @@ export default function WorkflowAutomationPage() {
             </div>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-slate-50 mb-6 title-3d">
               Automate Your{" "}
-              <span className="bg-gradient-to-r from-neon-cyan to-electric-purple bg-clip-text text-transparent">
+              <span className="text-neon-cyan">
                 Business Processes
               </span>
             </h1>
@@ -140,7 +140,7 @@ export default function WorkflowAutomationPage() {
               Connect your tools, eliminate manual work, and let AI handle repetitive tasks
               so your team can focus on what matters most.
             </p>
-            <Button variant="glow" size="lg" onClick={startDemo} className="px-8 py-4 text-lg font-bold">
+            <Button variant="primary" size="lg" onClick={startDemo}>
               See It in Action
             </Button>
           </motion.div>
@@ -150,9 +150,8 @@ export default function WorkflowAutomationPage() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="glass rounded-2xl p-8 md:p-12 mb-16 relative overflow-hidden"
+            className="card mb-16 relative overflow-hidden"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-neon-cyan/1 to-electric-purple/1 opacity-5" />
             <div className="relative z-10">
               <h2 className="text-2xl font-semibold text-slate-50 mb-8">
                 Automated Lead Processing
@@ -243,7 +242,7 @@ export default function WorkflowAutomationPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 + idx * 0.1 }}
-                className="glass rounded-xl p-6 text-center"
+                className="card text-center"
               >
                 <benefit.icon
                   className={`w-12 h-12 ${benefit.colorClass} mx-auto mb-4`}

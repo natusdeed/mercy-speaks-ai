@@ -1,5 +1,8 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { PageShell } from "@/components/ui/page-shell";
 import {
   Target,
   Zap,
@@ -58,10 +61,10 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-950">
+    <PageShell className="min-h-screen bg-slate-950">
       <main className="pb-16">
-        {/* Hero Section */}
-        <section className="py-16 md:py-24 px-6 lg:px-12">
+        {/* Hero Section — extra top padding so H1 clears the fixed header (class for explicit CSS; Tailwind pt-* not applied at runtime) */}
+        <section className="about-hero pb-16 md:pb-24 px-6 lg:px-12">
           <div className="max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -73,7 +76,7 @@ export default function AboutPage() {
                 <Users className="w-4 h-4 text-neon-cyan" />
                 <span className="text-sm text-neon-cyan font-medium">About Us</span>
               </div>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-slate-50 mb-6 title-3d">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-slate-50 mb-6 title-3d">
                 Modern Websites &{" "}
                 <span className="bg-gradient-to-r from-electric-purple to-neon-cyan bg-clip-text text-transparent">
                   Digital Solutions
@@ -155,7 +158,7 @@ export default function AboutPage() {
                     transition={{ duration: 0.4, delay: 0.7 + idx * 0.1 }}
                     className="text-center"
                   >
-                    <div className="text-6xl md:text-7xl font-bold bg-gradient-to-r from-electric-purple to-neon-cyan bg-clip-text text-transparent mb-2">
+                    <div className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-electric-purple to-neon-cyan bg-clip-text text-transparent mb-2">
                       {stat.number}
                     </div>
                     <div className="text-base md:text-lg text-slate-300">{stat.label}</div>
@@ -248,7 +251,7 @@ export default function AboutPage() {
                   Let's discuss how we can help you build a modern website that grows your business.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button variant="glow" size="lg" asChild className="px-8 py-4 text-lg font-bold">
+                  <Button variant="primary" size="lg" asChild className="px-8 py-4 text-lg font-bold">
                     <Link to="/book-demo">
                       Get Your Website
                       <ArrowRight className="w-5 h-5 ml-2" />
@@ -263,6 +266,6 @@ export default function AboutPage() {
           </div>
         </section>
       </main>
-    </div>
+    </PageShell>
   );
 }

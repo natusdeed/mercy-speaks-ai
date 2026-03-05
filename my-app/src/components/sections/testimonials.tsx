@@ -45,15 +45,13 @@ export function Testimonials() {
   useScrollAnimation({ threshold: 0.1, rootMargin: "-50px", once: true });
 
   return (
-    <section className="py-16 md:py-24 px-6 lg:px-12 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-electric-purple/5 via-transparent to-neon-cyan/5" />
-      
-      <div className="max-w-7xl mx-auto relative z-10">
+    <section className="section relative overflow-hidden">
+      <div className="section-inner relative z-10">
         <div
           data-animate
-          className="text-center mb-12 opacity-0"
+          className="text-center mb-8 opacity-0"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/50 border border-slate-800/50 mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/50 mb-4">
             <Quote className="w-4 h-4 text-neon-cyan" />
             <span className="text-sm text-slate-300 font-medium">
               Real Results from Real Businesses
@@ -67,20 +65,17 @@ export function Testimonials() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {TESTIMONIALS.map((testimonial, index) => (
             <div
               key={testimonial.id}
               data-animate
-              className="glass rounded-2xl p-8 md:p-10 flex flex-col relative overflow-hidden group hover:border-electric-purple/50 hover:scale-105 transition-all opacity-0"
+              className="card flex flex-col relative overflow-hidden group opacity-0"
               style={{
                 '--delay': `${index * 100}ms`,
                 willChange: 'opacity, transform',
               } as React.CSSProperties}
             >
-              {/* Background glow effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-electric-purple/10 via-transparent to-neon-cyan/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-              
               <div className="relative z-10 flex flex-col h-full">
                 {/* Rating Stars */}
                 <div className="flex items-center gap-1 mb-4">
@@ -93,15 +88,15 @@ export function Testimonials() {
                 </div>
 
                 {/* Quote */}
-                <div className="flex-1 mb-6">
+                <div className="flex-1 mb-4">
                   <p className="text-slate-300 leading-relaxed text-lg md:text-xl italic">
                     "{testimonial.quote}"
                   </p>
                 </div>
 
                 {/* Result Badge */}
-                <div className="mb-6">
-                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-neon-cyan/10 border border-neon-cyan/30">
+                <div className="mb-4">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-neon-cyan/10">
                     <span className="text-sm font-semibold text-neon-cyan">
                       {testimonial.result}
                     </span>
@@ -109,7 +104,7 @@ export function Testimonials() {
                 </div>
 
                 {/* Author Info */}
-                <div className="border-t border-slate-800/50 pt-4">
+                <div className="pt-4">
                   <p className="text-slate-50 font-semibold text-base">
                     {testimonial.name}
                   </p>

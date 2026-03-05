@@ -49,20 +49,18 @@ export function WhatAreDigitalEmployees() {
   ];
 
   return (
-    <section className="py-16 md:py-24 px-6 lg:px-12 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-electric-purple/1 via-transparent to-neon-cyan/1" />
-      
-      <div className="max-w-7xl mx-auto relative z-10">
+    <section className="section relative overflow-hidden">
+      <div className="section-inner relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-8"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-50 mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-50 mb-4">
             What Are{" "}
-            <span className="bg-gradient-to-r from-electric-purple to-neon-cyan bg-clip-text text-transparent">
+            <span className="text-neon-cyan">
               Digital Employees?
             </span>
           </h2>
@@ -72,7 +70,7 @@ export function WhatAreDigitalEmployees() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           {digitalEmployees.map((employee, index) => {
             const Icon = employee.icon;
             return (
@@ -82,9 +80,9 @@ export function WhatAreDigitalEmployees() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="glass rounded-2xl p-8 hover:border-electric-purple/50 transition-all group"
+                className="card group"
               >
-                <div className={`p-4 rounded-xl w-fit mb-6 ${
+                <div className={`p-4 rounded-xl w-fit mb-4 ${
                   employee.color === "electric-purple" 
                     ? "bg-electric-purple/20" 
                     : "bg-neon-cyan/20"
@@ -95,8 +93,8 @@ export function WhatAreDigitalEmployees() {
                       : "text-neon-cyan"
                   }`} />
                 </div>
-                <h3 className="text-2xl md:text-3xl font-bold text-slate-50 mb-3">{employee.title}</h3>
-                <p className="text-slate-300 mb-6">{employee.description}</p>
+                <h3 className="card-title text-slate-50 mb-2">{employee.title}</h3>
+                <p className="card-body text-slate-300 mb-4">{employee.description}</p>
                 <div className="space-y-2">
                   {employee.examples.map((example, idx) => (
                     <div key={idx} className="flex items-start gap-2">
@@ -120,9 +118,9 @@ export function WhatAreDigitalEmployees() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="glass rounded-2xl p-8 md:p-12 border border-electric-purple/30"
+          className="card"
         >
-          <h3 className="text-2xl md:text-3xl font-bold text-slate-50 mb-6 text-center">
+          <h3 className="text-2xl md:text-3xl font-bold text-slate-50 mb-4 text-center">
             Why Digital Employees?
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

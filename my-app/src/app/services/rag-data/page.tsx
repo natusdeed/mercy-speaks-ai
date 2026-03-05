@@ -51,15 +51,15 @@ export default function RAGDataPage() {
     <div className="min-h-screen bg-slate-950">
       <main>
         {/* Hero Section */}
-        <section className="py-16 md:py-24 px-6 lg:px-12">
-          <div className="max-w-7xl mx-auto">
+        <section className="section">
+          <div className="section-inner">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-electric-purple/20 border border-electric-purple/30 mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-electric-purple/20 mb-6">
               <Database className="w-4 h-4 text-electric-purple" />
               <span className="text-sm text-electric-purple font-medium">
                 RAG / Data Intelligence
@@ -67,7 +67,7 @@ export default function RAGDataPage() {
             </div>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-slate-50 mb-6 title-3d">
               Chat with Your{" "}
-              <span className="bg-gradient-to-r from-electric-purple to-neon-cyan bg-clip-text text-transparent">
+              <span className="text-neon-cyan">
                 Business Data
               </span>
             </h1>
@@ -75,7 +75,7 @@ export default function RAGDataPage() {
               Transform your documents, databases, and knowledge bases into an intelligent
               AI assistant that understands your business and provides instant answers.
             </p>
-            <Button variant="glow" size="lg" className="px-8 py-4 text-lg font-bold">
+            <Button variant="primary" size="lg">
               Get Started
             </Button>
           </motion.div>
@@ -85,9 +85,8 @@ export default function RAGDataPage() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="glass rounded-2xl p-8 md:p-12 mb-16 relative overflow-hidden max-w-4xl mx-auto"
+            className="card mb-16 relative overflow-hidden max-w-4xl mx-auto"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-electric-purple/1 to-neon-cyan/1 opacity-5" />
             <div className="relative z-10">
               <div className="flex items-center gap-2 mb-6">
                 <MessageSquare className="w-6 h-6 text-electric-purple" />
@@ -140,7 +139,7 @@ export default function RAGDataPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: idx * 0.1 }}
-                className="glass rounded-xl p-6 hover:border-electric-purple/50 transition-colors"
+                className="card hover:shadow-md transition-shadow"
               >
                 <feature.icon className="w-8 h-8 text-electric-purple mb-4" />
                 <h3 className="text-lg font-semibold text-slate-50 mb-2">
@@ -156,7 +155,7 @@ export default function RAGDataPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="glass rounded-2xl p-8 md:p-12 max-w-4xl mx-auto"
+            className="card max-w-4xl mx-auto"
           >
             <h2 className="text-3xl font-bold text-slate-50 mb-8">
               Perfect For Your Business

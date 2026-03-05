@@ -13,10 +13,30 @@
   /* Accent Colors */
   --neon-cyan: #06b6d4;
   --electric-purple: #8b5cf6;
+  /* Primary CTA: Executive Violet */
+  --executive-violet: #6D28D9;
+  --executive-violet-hover: #5B21B6;
 
   /* Glassmorphism */
   --glass-bg: rgba(15, 23, 42, 0.1);
-  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.06);
+
+  /* Spacing tokens — ~40–50% reduction, premium minimums (desktop ≥ py-10, cards p-6/p-7) */
+  --section-padding-y-mobile: 2.5rem;   /* py-10 */
+  --section-padding-y-desktop: 3rem;     /* py-12 */
+  --section-padding-y-hero-desktop: 3.5rem; /* py-14 hero only */
+  --section-gap: 2rem;                  /* gap-8 between sections feel */
+  --headline-mb: 1.5rem;                /* mb-6 */
+  --headline-mb-lg: 2rem;               /* mb-8 */
+  --block-gap: 1.5rem;                  /* gap-6 */
+  --block-gap-lg: 2rem;                 /* gap-8 */
+
+  /* Card design system: rounded-2xl, subtle shadow, minimal border (rely on spacing + shadow) */
+  --card-radius: 1rem;
+  --card-padding: 1.75rem; /* p-7 */
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.04);
+  --card-bg: rgba(15, 23, 42, 0.4);
+  --card-border: rgba(30, 41, 59, 0.1);
 
   /* Slate Scale */
   --slate-50: #f8fafc;
@@ -69,6 +89,8 @@
   --color-foreground: var(--foreground);
   --color-neon-cyan: #06b6d4;
   --color-electric-purple: #8b5cf6;
+  --color-executive-violet: #6D28D9;
+  --color-executive-violet-hover: #5B21B6;
   --color-slate-50: #f8fafc;
   --color-slate-100: #f1f5f9;
   --color-slate-200: #e2e8f0;
@@ -94,6 +116,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 96px;
   width: 100%;
   margin: 0;
   padding: 0;
@@ -111,24 +134,32 @@ body {
   text-align: left; /* Reset text alignment, containers handle their own centering */
 }
 
+/* Layout main: ensure content sits below fixed header (runtime logs showed Tailwind pt-* not applied) */
+body > div > main {
+  padding-top: 6rem;   /* 96px — below ~64px header */
+}
+@media (min-width: 768px) {
+  body > div > main {
+    padding-top: 7rem;  /* 112px — below ~72px header */
+  }
+}
+
+/* About hero: explicit top padding so H1 clears nav (reduced by 30% from 9rem/11rem) */
+.about-hero {
+  padding-top: 6.3rem;   /* 70% of 9rem */
+}
+@media (min-width: 768px) {
+  .about-hero {
+    padding-top: 7.7rem; /* 70% of 11rem */
+  }
+}
+
 /* Ensure all direct children of body are full width */
 body > * {
   width: 100%;
   max-width: 100%;
   margin-left: auto;
   margin-right: auto;
-}
-
-/* Layout content wrapper - ensure padding-top is applied above universal reset */
-/* Using higher specificity to override universal padding reset */
-html body > div.pt-40 {
-  padding-top: 6rem !important; /* 96px mobile - reduced by 40% from 160px */
-}
-
-@media (min-width: 768px) {
-  html body > div.pt-40 {
-    padding-top: 7.2rem !important; /* 115.2px desktop - reduced by 40% from 192px */
-  }
 }
 
 /* Ensure all sections with max-w containers are properly centered */
@@ -139,6 +170,41 @@ section {
 
 /* Ensure max-w containers are centered */
 [class*="max-w"] {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Premium design system: standardized vertical spacing (~40–50% reduced), fewer borders. */
+.section {
+  padding-top: var(--section-padding-y-mobile);
+  padding-bottom: var(--section-padding-y-mobile);
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+@media (min-width: 768px) {
+  .section {
+    padding-top: var(--section-padding-y-desktop);
+    padding-bottom: var(--section-padding-y-desktop);
+  }
+}
+@media (min-width: 1024px) {
+  .section {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+.section-hero {
+  padding-top: var(--section-padding-y-mobile);
+  padding-bottom: var(--section-padding-y-mobile);
+}
+@media (min-width: 768px) {
+  .section-hero {
+    padding-top: var(--section-padding-y-hero-desktop);
+    padding-bottom: var(--section-padding-y-hero-desktop);
+  }
+}
+.section-inner {
+  max-width: 80rem; /* max-w-7xl */
   margin-left: auto;
   margin-right: auto;
 }
@@ -299,34 +365,41 @@ section {
     0 0 80px rgba(139, 92, 246, 0.03);
 }
 
-/* Glassmorphism utility */
+/* Glassmorphism utility – soft shadow, minimal border (reduced border ~50%) */
 .glass {
   background: var(--glass-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  box-shadow: var(--card-shadow);
 }
 
-/* Gradient text utility */
+/* Card design system – p-7, rounded-2xl, shadow only (no borders to reduce noise) */
+.card,
+.card-premium {
+  padding: 1.75rem; /* p-7 */
+  border-radius: 1rem; /* rounded-2xl */
+  box-shadow: var(--card-shadow);
+  background: var(--card-bg);
+  border: 0;
+}
+.card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.card-body {
+  font-size: 0.875rem;
+  line-height: 1.625;
+}
+
+/* Gradient: hero background + primary CTA only. Text gradient for hero/CTA accent when needed. */
 .gradient {
   background: linear-gradient(to right, var(--electric-purple), var(--neon-cyan));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-}
-
-/* Gradient background utilities */
-.gradient-purple-pink {
-  background: linear-gradient(to right, rgb(168, 85, 247), rgb(236, 72, 153));
-}
-
-.gradient-blue-cyan {
-  background: linear-gradient(to right, rgb(59, 130, 246), rgb(6, 182, 212));
-}
-
-.gradient-green-emerald {
-  background: linear-gradient(to right, rgb(34, 197, 94), rgb(16, 185, 129));
 }
 
 /* Fade in up animation */
@@ -442,7 +515,7 @@ section {
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply outline-ring/50;
   }
   body {
     @apply bg-slate-950 text-foreground;

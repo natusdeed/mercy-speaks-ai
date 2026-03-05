@@ -50,22 +50,17 @@ export function HowWeHelp() {
   ];
 
   return (
-    <section className="py-16 md:py-24 px-6 lg:px-12 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900" />
-      
-      <div className="max-w-7xl mx-auto relative z-10 pt-16">
+    <section className="section relative overflow-hidden">
+      <div className="section-inner relative z-10 pt-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-8"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-50 mb-6">
-            How We Help{" "}
-            <span className="bg-gradient-to-r from-electric-purple to-neon-cyan bg-clip-text text-transparent">
-              Your Business
-            </span>
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-50 mb-4">
+            How We Help <span className="text-neon-cyan">Your Business</span>
           </h2>
           <p className="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto">
             We install digital employees and smart business systems that automate your operations, 
@@ -73,7 +68,7 @@ export function HowWeHelp() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
@@ -83,7 +78,7 @@ export function HowWeHelp() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="glass rounded-xl p-6 hover:border-electric-purple/50 transition-all group"
+                className="card hover:shadow-md transition-shadow group"
               >
                 <div className={`p-3 rounded-lg w-fit mb-4 ${
                   service.color === "electric-purple" 
@@ -96,8 +91,8 @@ export function HowWeHelp() {
                       : "text-neon-cyan"
                   }`} />
                 </div>
-                <h3 className="text-2xl md:text-3xl font-bold text-slate-50 mb-2">{service.title}</h3>
-                <p className="text-sm text-slate-400 mb-4">{service.description}</p>
+                <h3 className="card-title text-slate-50 mb-2">{service.title}</h3>
+                <p className="card-body text-slate-400 mb-4">{service.description}</p>
                 <Link
                   to={service.href}
                   className={`text-sm font-medium flex items-center gap-1 group/link ${
@@ -121,7 +116,7 @@ export function HowWeHelp() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="text-center"
         >
-          <Button variant="outline" size="lg" asChild className="px-8 py-4 text-lg font-bold">
+          <Button variant="outline" size="lg" asChild>
             <Link to="/services">
               View All Services
               <ArrowRight className="w-5 h-5 ml-2" />

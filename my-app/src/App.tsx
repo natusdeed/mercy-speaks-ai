@@ -4,14 +4,16 @@ import { Footer } from '@/components/navigation/footer';
 import { ClaudeChatbotWrapper } from '@/components/ClaudeChatbotWrapper';
 import { ClientErrorHandler } from '@/components/debug/ClientErrorHandler';
 
-// Pages
-import Home from './pages/Home';
+// Pages (homepage from app/page.tsx)
+import Home from './app/page';
 import About from './pages/About';
-import Contact from './pages/Contact';
-import Portfolio from './pages/Portfolio';
-import Pricing from './pages/Pricing';
-import BookDemo from './pages/BookDemo';
+import Contact from './app/contact/page';
+import Portfolio from './app/portfolio/page';
+import Pricing from './app/pricing/page';
+import BookDemo from './app/book-demo/page';
 import Services from './pages/Services';
+import Solutions from './app/solutions/page';
+import Results from './app/results/page';
 import ServiceAIPhoneReceptionist from './pages/services/AIPhoneReceptionist';
 import ServiceAppointmentAutomation from './pages/services/AppointmentAutomation';
 import ServiceRAGData from './pages/services/RAGData';
@@ -26,8 +28,8 @@ function App() {
     <>
       <ClientErrorHandler />
       <Header />
-      <div className="pt-40 md:pt-48 min-h-screen flex flex-col">
-        <main className="flex-1">
+      <div className="min-h-screen flex flex-col">
+        <main className="flex-1 pt-24 md:pt-28">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
@@ -36,6 +38,8 @@ function App() {
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/book-demo" element={<BookDemo />} />
             <Route path="/services" element={<Services />} />
+            <Route path="/solutions" element={<Solutions />} />
+            <Route path="/results" element={<Results />} />
             <Route path="/services/ai-phone-receptionist" element={<ServiceAIPhoneReceptionist />} />
             <Route path="/services/appointment-automation" element={<ServiceAppointmentAutomation />} />
             <Route path="/services/rag-data" element={<ServiceRAGData />} />

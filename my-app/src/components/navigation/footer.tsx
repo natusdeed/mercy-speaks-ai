@@ -16,30 +16,13 @@ import {
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
+  // Matches header nav: Solutions, Pricing, Results, About + Book Demo. v1 proof page is /results.
   const navigationLinks = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Services", href: "/services" },
+    { name: "Solutions", href: "/solutions" },
     { name: "Pricing", href: "/pricing" },
-    { name: "Portfolio", href: "/portfolio" },
-    { name: "Contact", href: "/contact" },
-  ];
-
-  const serviceLinks = [
-    { name: "AI-Powered Website Design", href: "/services/website-design" },
-    { name: "AI Phone Receptionist", href: "/services/ai-phone-receptionist" },
-    { name: "Website Chatbot", href: "/services/website-chatbot" },
-    { name: "Appointment Automation", href: "/services/appointment-automation" },
-    { name: "Review Generation", href: "/services/review-generation" },
-    { name: "Workflow Automation", href: "/services/workflow-automation" },
-  ];
-
-  const policyLinks = [
-    { name: "Privacy Policy", href: "/privacy-policy" },
-    { name: "Terms of Service", href: "/terms-of-service" },
-    { name: "Refund Policy", href: "/refund-policy" },
-    { name: "Cookie Policy", href: "/cookie-policy" },
-    { name: "Disclaimer", href: "/disclaimer" },
+    { name: "Results", href: "/results" },
+    { name: "About", href: "/about" },
+    { name: "Book Demo", href: "/book-demo" },
   ];
 
   const socialLinks = [
@@ -97,12 +80,9 @@ export function Footer() {
   ];
 
   return (
-    <footer className="relative border-t border-slate-800/50 bg-slate-950/95 backdrop-blur-xl">
-      {/* Background gradient effect */}
-      <div className="absolute inset-0 bg-gradient-to-br from-electric-purple/1 via-transparent to-neon-cyan/1 opacity-5" />
-      
+    <footer className="relative bg-slate-950/95 backdrop-blur-xl">
       <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16 md:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 mb-12">
           {/* Company Info */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -112,7 +92,7 @@ export function Footer() {
             className="lg:col-span-1"
           >
             <Link to="/" className="flex items-center gap-3 mb-6 group">
-              <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+              <div className="w-12 h-12 bg-electric-purple rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
                 <span className="text-2xl font-bold text-white">M</span>
               </div>
               <div className="flex flex-col leading-tight">
@@ -126,7 +106,7 @@ export function Footer() {
             </p>
           </motion.div>
 
-          {/* Navigation Links */}
+          {/* Nav links – matches header: Solutions, Pricing, Results, About, Book Demo */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -134,7 +114,7 @@ export function Footer() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="lg:col-span-1"
           >
-            <h3 className="text-lg font-semibold text-slate-50 mb-4">Navigation</h3>
+            <h3 className="text-lg font-semibold text-slate-50 mb-4">Explore</h3>
             <ul className="space-y-3">
               {navigationLinks.map((link) => (
                 <li key={link.href}>
@@ -150,7 +130,7 @@ export function Footer() {
             </ul>
           </motion.div>
 
-          {/* Services Links */}
+          {/* Contact */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -158,32 +138,8 @@ export function Footer() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="lg:col-span-1"
           >
-            <h3 className="text-lg font-semibold text-slate-50 mb-4">Services</h3>
-            <ul className="space-y-3">
-              {serviceLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    to={link.href}
-                    className="text-slate-300 hover:text-neon-cyan transition-colors text-base md:text-lg flex items-center gap-2 group"
-                  >
-                    <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-                    <span>{link.name}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Contact & Policies */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="lg:col-span-1"
-          >
             <h3 className="text-lg font-semibold text-slate-50 mb-4">Contact</h3>
-            <ul className="space-y-3 mb-6">
+            <ul className="space-y-3">
               {contactInfo.map((contact) => {
                 const Icon = contact.icon;
                 return (
@@ -206,21 +162,6 @@ export function Footer() {
                 );
               })}
             </ul>
-
-            <h3 className="text-lg font-semibold text-slate-50 mb-4 mt-8">Policies</h3>
-            <ul className="space-y-3">
-              {policyLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    to={link.href}
-                    className="text-slate-300 hover:text-slate-200 transition-colors text-base md:text-lg flex items-center gap-2 group"
-                  >
-                    <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-                    <span>{link.name}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
           </motion.div>
         </div>
 
@@ -230,7 +171,7 @@ export function Footer() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.35 }}
-          className="border-t border-slate-800/50 pt-8 mt-8"
+          className="border-t border-slate-800/30 pt-8 mt-8"
         >
           <div className="flex flex-col items-center gap-4 mb-8">
             <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider">
@@ -268,21 +209,12 @@ export function Footer() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="border-t border-slate-800/50 pt-8 mt-8"
+          className="pt-8 mt-8"
         >
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-slate-400 text-base md:text-lg text-center md:text-left">
               © {currentYear} Mercy Speaks Digital. All rights reserved.
             </p>
-            <div className="flex items-center gap-6 text-sm">
-              <Link
-                to="/book-demo"
-                className="text-slate-300 hover:text-electric-purple transition-colors text-base md:text-lg flex items-center gap-2 group"
-              >
-                <span>Book a Demo</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
           </div>
         </motion.div>
       </div>

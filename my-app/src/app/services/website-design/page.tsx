@@ -81,15 +81,15 @@ export default function WebsiteDesignPage() {
     <div className="min-h-screen bg-slate-950">
       <main>
         {/* Hero Section */}
-        <section className="py-16 md:py-24 px-6 lg:px-12">
-          <div className="max-w-7xl mx-auto">
+        <section className="section">
+          <div className="section-inner">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               className="text-center mb-16"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-electric-purple/20 border border-electric-purple/30 mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-electric-purple/20 mb-6">
                 <Globe className="w-4 h-4 text-electric-purple" />
                 <span className="text-sm text-electric-purple font-medium">
                   AI-Powered Website Design
@@ -97,7 +97,7 @@ export default function WebsiteDesignPage() {
               </div>
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-slate-50 mb-6 title-3d">
                 Modern Websites for{" "}
-                <span className="bg-gradient-to-r from-electric-purple to-neon-cyan bg-clip-text text-transparent">
+                <span className="text-neon-cyan">
                   Small Businesses & Churches
                 </span>
               </h1>
@@ -107,13 +107,13 @@ export default function WebsiteDesignPage() {
                 businesses, churches, and organizations.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button variant="glow" size="lg" asChild className="px-8 py-4 text-lg font-bold">
+                <Button variant="primary" size="lg" asChild>
                   <Link to="/book-demo" className="flex items-center gap-2">
                     Get Your Website
                     <ArrowRight className="w-5 h-5" />
                   </Link>
                 </Button>
-                <Button variant="outline" size="lg" asChild className="px-8 py-4 text-lg font-bold">
+                <Button variant="outline" size="lg" asChild>
                   <Link to="/book-demo">Book a Free Strategy Call</Link>
                 </Button>
               </div>
@@ -127,7 +127,7 @@ export default function WebsiteDesignPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: idx * 0.1 }}
-                  className="glass rounded-xl p-6 hover:border-electric-purple/50 transition-colors"
+                  className="card hover:shadow-md transition-shadow"
                 >
                   <feature.icon className="w-8 h-8 text-electric-purple mb-4" />
                   <h3 className="text-lg font-semibold text-slate-50 mb-2">{feature.title}</h3>
@@ -141,7 +141,7 @@ export default function WebsiteDesignPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="glass rounded-2xl p-8 md:p-12 mb-16"
+              className="card mb-16"
             >
               <h2 className="text-3xl font-bold text-slate-50 mb-8 text-center">
                 What We Build For You
@@ -155,7 +155,7 @@ export default function WebsiteDesignPage() {
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.4, delay: 0.5 + idx * 0.05 }}
-                      className="glass rounded-xl p-6 border border-slate-800 hover:border-electric-purple/50 transition-colors"
+                      className="card hover:shadow-md transition-shadow"
                     >
                       <Icon className="w-8 h-8 text-neon-cyan mb-4" />
                       <h3 className="text-lg font-semibold text-slate-50 mb-2">{service.name}</h3>
@@ -171,7 +171,7 @@ export default function WebsiteDesignPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="glass rounded-2xl p-8 md:p-12 mb-16"
+              className="card mb-16"
             >
               <h2 className="text-3xl font-bold text-slate-50 mb-8 text-center">
                 Why Your Business Needs a Modern Website
@@ -197,7 +197,7 @@ export default function WebsiteDesignPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
-              className="glass rounded-2xl p-8 md:p-12 mb-16"
+              className="card mb-16"
             >
               <h2 className="text-3xl font-bold text-slate-50 mb-8 text-center">
                 How We Build Your Website
@@ -243,7 +243,7 @@ export default function WebsiteDesignPage() {
               transition={{ duration: 0.6, delay: 1 }}
               className="text-center"
             >
-              <div className="glass rounded-2xl p-12 border border-electric-purple/30 max-w-3xl mx-auto">
+              <div className="card max-w-3xl mx-auto">
                 <h2 className="text-3xl font-bold text-slate-50 mb-4">
                   Ready to Get Your Website?
                 </h2>
@@ -251,14 +251,14 @@ export default function WebsiteDesignPage() {
                   Let's talk about how we can help you build a modern website that grows your business.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button variant="glow" size="lg" asChild className="px-8 py-4 text-lg font-bold">
+                  <Button variant="primary" size="lg" asChild >
                     <Link to="/book-demo" className="flex items-center gap-2">
                       Get Your Website
                       <ArrowRight className="w-5 h-5" />
                     </Link>
                   </Button>
-                  <Button variant="outline" size="lg" asChild className="px-8 py-4 text-lg font-bold">
-                    <Link to="/book-demo">Book a Free Strategy Call</Link>
+<Button variant="outline" size="lg" asChild>
+                  <Link to="/book-demo">Book a Free Strategy Call</Link>
                   </Button>
                 </div>
               </div>

@@ -30,22 +30,16 @@ export function WebsiteOfferTile() {
   ];
 
   return (
-    <div className="glass rounded-2xl p-6 md:p-8 h-full flex flex-col relative overflow-hidden group">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-electric-purple/1 via-transparent to-neon-cyan/1 opacity-5" />
-      <div className="absolute top-0 right-0 w-48 h-48 bg-electric-purple/1 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-      <div className="absolute bottom-0 left-0 w-48 h-48 bg-neon-cyan/1 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
-
+    <div className="card h-full flex flex-col relative overflow-hidden group">
       <div className="relative z-10 flex flex-col h-full">
-        {/* Header */}
-        <div className="mb-6">
+        <div className="mb-5">
           <div className="flex items-center gap-3 mb-4">
-            <div className="p-3 rounded-lg bg-electric-purple/20 backdrop-blur-sm">
+            <div className="p-3 rounded-lg bg-electric-purple/20">
               <Globe className="w-6 h-6 text-electric-purple" />
             </div>
             <div className="flex-1">
-              <h3 className="text-xl md:text-2xl font-bold text-slate-50">AI-Powered Business Website</h3>
-              <p className="text-sm text-slate-400 mt-1">Your Digital Foundation</p>
+              <h3 className="card-title text-slate-50">AI-Powered Business Website</h3>
+              <p className="card-body text-slate-400 mt-1">Your Digital Foundation</p>
             </div>
           </div>
         </div>
@@ -112,7 +106,7 @@ export function WebsiteOfferTile() {
             {/* CTA */}
             <div className="mt-6 lg:mt-0">
               <Button 
-                variant="glow" 
+                variant="primary" 
                 size="lg" 
                 className="w-full group/btn" 
                 asChild

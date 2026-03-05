@@ -57,7 +57,7 @@ export function InfiniteMovingCards({
         {duplicatedItems.map((item, idx) => (
           <motion.div
             key={`${item.name}-${idx}`}
-            className="flex items-center justify-between px-4 py-3 rounded-lg bg-slate-900/50 border border-slate-800/50 hover:border-electric-purple/50 transition-colors group/item"
+            className="flex items-center justify-between p-4 rounded-xl bg-slate-800/40 shadow-sm hover:bg-slate-800/60 transition-colors group/item"
             whileHover={{ scale: 1.02 }}
           >
             <span className={cn("font-semibold", item.color, "group-hover/item:scale-105 transition-transform")}>

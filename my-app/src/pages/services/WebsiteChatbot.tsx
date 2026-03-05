@@ -20,7 +20,7 @@ export default function ServiceWebsiteChatbot() {
             <p className="text-xl text-slate-400 mb-8">
               AI chatbot that answers questions and captures leads
             </p>
-            <Button variant="glow" size="lg" asChild>
+            <Button variant="primary" size="lg" asChild>
               <Link to="/book-demo">Book a Demo</Link>
             </Button>
           </motion.div>
