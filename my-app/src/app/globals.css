@@ -24,7 +24,8 @@
   /* Spacing tokens — ~40–50% reduction, premium minimums (desktop ≥ py-10, cards p-6/p-7) */
   --section-padding-y-mobile: 2.5rem;   /* py-10 */
   --section-padding-y-desktop: 3rem;     /* py-12 */
-  --section-padding-y-hero-desktop: 3.5rem; /* py-14 hero only */
+  --section-padding-y-hero-mobile: 3.6rem;   /* hero: extra space below header */
+  --section-padding-y-hero-desktop: 5rem;    /* hero: extra space below header */
   --section-gap: 2rem;                  /* gap-8 between sections feel */
   --headline-mb: 1.5rem;                /* mb-6 */
   --headline-mb-lg: 2rem;               /* mb-8 */
@@ -194,7 +195,7 @@ section {
   }
 }
 .section-hero {
-  padding-top: var(--section-padding-y-mobile);
+  padding-top: var(--section-padding-y-hero-mobile);
   padding-bottom: var(--section-padding-y-mobile);
 }
 @media (min-width: 768px) {

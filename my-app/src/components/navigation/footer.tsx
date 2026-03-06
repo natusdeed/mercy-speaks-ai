@@ -62,8 +62,8 @@ export function Footer() {
     { 
       icon: Mail, 
       label: "Email", 
-      value: "hello@mercyspeaks.ai", 
-      href: "mailto:hello@mercyspeaks.ai" 
+      value: "hello@mercyspeaks.com", 
+      href: "mailto:hello@mercyspeaks.com" 
     },
     { 
       icon: Phone, 

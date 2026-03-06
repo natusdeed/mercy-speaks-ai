@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { CheckCircle2, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PageShell } from "@/components/ui/page-shell";
+import { PortfolioGallery, type PortfolioItem } from "@/components/sections/portfolio-gallery";
 import { Link } from "react-router-dom";
 
 const fadeUp = {
@@ -52,6 +53,67 @@ const CASE_STUDIES = [
       "ROI visible in first month; missed-call value now captured.",
     ],
     quote: "We never miss a hot lead now. The ROI was immediate.",
+  },
+];
+
+const PORTFOLIO_ITEMS: PortfolioItem[] = [
+  {
+    id: "1",
+    title: "Rodriguez Law Firm",
+    url: "https://example.com",
+    category: "AI Receptionist",
+    description: "24/7 AI receptionist for a Houston law firm. Captures after-hours calls, qualifies leads, and books consultations.",
+    stack: ["Vapi", "Twilio", "Cal.com"],
+    metric: "+8 clients/mo",
+    thumbnail: "https://picsum.photos/seed/law1/400/240",
+  },
+  {
+    id: "2",
+    title: "Chen's Auto Repair",
+    url: "https://example.com",
+    category: "Automation",
+    description: "Automated scheduling, reminders, and follow-up. No-shows dropped; front desk freed for in-shop customers.",
+    stack: ["Cal.com", "Resend", "Postgres"],
+    metric: "40% fewer no-shows",
+    thumbnail: "https://picsum.photos/seed/auto1/400/240",
+  },
+  {
+    id: "3",
+    title: "Martinez HVAC Solutions",
+    url: "https://example.com",
+    category: "AI Receptionist",
+    description: "Emergency call qualification and same-day booking. 2 AM voicemails now answered and scheduled.",
+    stack: ["Vapi", "Twilio", "Slack"],
+    metric: "+60% emergency bookings",
+    thumbnail: "https://picsum.photos/seed/hvac1/400/240",
+  },
+  {
+    id: "4",
+    title: "Houston Dental Group",
+    url: "https://example.com",
+    category: "Websites",
+    description: "Modern practice website with online booking, service pages, and contact forms.",
+    stack: ["React", "Tailwind", "Cal.com"],
+    thumbnail: "https://picsum.photos/seed/dental1/400/240",
+  },
+  {
+    id: "5",
+    title: "Local Plumbing Co.",
+    url: "https://example.com",
+    category: "Websites",
+    description: "Lead-focused site with clear CTAs, service areas, and 24/7 contact options.",
+    stack: ["Next.js", "Tailwind", "Vercel"],
+    thumbnail: "https://picsum.photos/seed/plumb1/400/240",
+  },
+  {
+    id: "6",
+    title: "Boutique Home Goods",
+    url: "https://example.com",
+    category: "E-commerce",
+    description: "Shopify store with custom theme, product collections, and checkout optimization.",
+    stack: ["Shopify", "Liquid", "Klaviyo"],
+    metric: "2x conversion",
+    thumbnail: "https://picsum.photos/seed/shop1/400/240",
   },
 ];
 
@@ -127,6 +189,9 @@ export default function ResultsPage() {
             </div>
           </div>
         </section>
+
+        {/* Portfolio Gallery */}
+        <PortfolioGallery items={PORTFOLIO_ITEMS} />
 
         {/* Bottom CTA */}
         <section className="section" aria-label="Book a demo">
