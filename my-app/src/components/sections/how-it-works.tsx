@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Phone, Bot, BarChart3 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { BookingLink } from "@/components/cta/booking-link";
 
 const STEPS = [
   {
@@ -10,21 +10,18 @@ const STEPS = [
     icon: Phone,
     title: "Connect number",
     description: "We connect your existing business number. No new lines or hardware—you keep your number.",
-    href: "/book-demo",
   },
   {
     number: "2",
     icon: Bot,
     title: "Train AI",
     description: "We configure your AI to match your business: services, hours, booking rules, and follow-up flow.",
-    href: "/book-demo",
   },
   {
     number: "3",
     icon: BarChart3,
     title: "Start booking + reporting",
     description: "Your AI answers calls and books appointments 24/7. You get a dashboard for calls, leads, and missed revenue.",
-    href: "/book-demo",
   },
 ];
 
@@ -77,12 +74,11 @@ export function HowItWorks() {
                 <p className="text-slate-400 leading-relaxed mb-4">
                   {step.description}
                 </p>
-                <Link
-                  to={step.href}
+                <BookingLink
                   className="text-sm font-medium text-neon-cyan hover:text-neon-cyan/80 transition-colors"
                 >
                   Book Demo →
-                </Link>
+                </BookingLink>
               </motion.article>
             );
           })}

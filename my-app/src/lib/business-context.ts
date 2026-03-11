@@ -3,7 +3,8 @@
  * so the assistant never invents facts. If something is not here, the assistant
  * should suggest booking a demo.
  */
-const BOOKING_URL = process.env.BOOKING_URL ?? "/book-demo";
+const DEFAULT_CAL_COM_URL = "https://cal.com/natusdeed/free-ai-receptionist-demo";
+const BOOKING_URL = process.env.BOOKING_URL ?? process.env.VITE_BOOKING_URL ?? DEFAULT_CAL_COM_URL;
 
 export const BUSINESS_CONTEXT = {
   companyName: "Mercy Speaks Digital",

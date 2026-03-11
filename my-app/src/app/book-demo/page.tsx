@@ -18,7 +18,6 @@ import { BookingLink } from "@/components/cta/booking-link";
 import { getBookingUrl, isExternalBookingUrl } from "@/lib/booking-url";
 
 const API_LEAD = "/api/book-demo";
-const CAL_COM_BOOKING_URL = "https://cal.com/natusdeed/free-ai-receptionist-demo";
 
 export default function BookDemoPage() {
   const bookingUrl = getBookingUrl();
@@ -141,7 +140,11 @@ export default function BookDemoPage() {
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-50 mb-4">Callback requested</h2>
                 <p className="text-slate-400 mb-6">
                   We&apos;ve received your callback request and will contact you within 2 business hours.
-                  To pick a specific time slot, use the &quot;Book Instantly with Cal.com&quot; link—those bookings appear in your Cal.com dashboard.
+                  To pick a specific time now,{" "}
+                  <a href={bookingUrl} target="_blank" rel="noopener noreferrer" className="text-neon-cyan hover:underline">
+                    book a slot on Cal.com
+                  </a>
+                  —those bookings appear in your Cal.com dashboard.
                 </p>
                 <p className="text-slate-400 mb-8">
                   In the meantime, feel free to explore our{" "}
@@ -204,32 +207,23 @@ export default function BookDemoPage() {
                 >
                   <div className="card">
                     <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-50 mb-4 sm:mb-6">
-                      Schedule Your Demo
+                      Request a Callback
                     </h2>
-
+                    <p className="text-slate-400 text-sm mb-4">
+                      Prefer to pick a time now? Use the calendar link below for instant booking.
+                    </p>
                     <div className="space-y-3 mb-6">
                       <a
-                        href={CAL_COM_BOOKING_URL}
+                        href={bookingUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-neon-cyan px-6 py-3 text-base sm:text-lg font-semibold text-slate-950 shadow-lg hover:bg-neon-cyan/90 transition-colors"
                       >
-                        Schedule Demo
+                        Schedule Demo on Cal.com
                         <Calendar className="w-5 h-5" />
                       </a>
-                      <p className="text-center text-xs sm:text-sm text-slate-400">
-                        Prefer instant booking? Use our live calendar to choose a time.
-                      </p>
-                      <a
-                        href={CAL_COM_BOOKING_URL}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-cyan-500/60 bg-slate-900/60 px-6 py-2.5 text-sm sm:text-base font-medium text-cyan-300 hover:border-cyan-300 hover:text-cyan-100 transition-colors"
-                      >
-                        Book Instantly with Cal.com
-                      </a>
                       <p className="text-center text-xs text-slate-500">
-                        Bookings you make on Cal.com will appear in your Cal.com Bookings page.
+                        Bookings you make on Cal.com appear in your Cal.com dashboard.
                       </p>
                     </div>
 

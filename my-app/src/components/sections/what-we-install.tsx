@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Phone, MessageCircle, BarChart3 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { BookingLink } from "@/components/cta/booking-link";
 
 const INSTALLS = [
   {
@@ -11,6 +12,7 @@ const INSTALLS = [
     description: "24/7 phone answering: qualify leads, book appointments, take messages. Never miss a call.",
     href: "/services/ai-phone-receptionist",
     color: "neon-cyan",
+    useBookingLink: false,
   },
   {
     icon: MessageCircle,
@@ -18,6 +20,7 @@ const INSTALLS = [
     description: "Automatically text callers who don't reach you. Re-engage leads before they go to a competitor.",
     href: "/book-demo",
     color: "electric-purple",
+    useBookingLink: true,
   },
   {
     icon: BarChart3,
@@ -25,6 +28,7 @@ const INSTALLS = [
     description: "See every missed call, dropped lead, and dollar left on the table—so you can fix it.",
     href: "/book-demo",
     color: "neon-cyan",
+    useBookingLink: true,
   },
 ];
 
@@ -80,16 +84,28 @@ export function WhatWeInstall() {
                 <p className="text-slate-400 text-sm leading-relaxed mb-6 flex-1">
                   {item.description}
                 </p>
-                <Link
-                  to={item.href}
-                  className={`text-sm font-medium ${
-                    item.color === "electric-purple"
-                      ? "text-electric-purple hover:text-electric-purple/80"
-                      : "text-neon-cyan hover:text-neon-cyan/80"
-                  } transition-colors`}
-                >
-                  Learn more →
-                </Link>
+                {item.useBookingLink ? (
+                  <BookingLink
+                    className={`text-sm font-medium ${
+                      item.color === "electric-purple"
+                        ? "text-electric-purple hover:text-electric-purple/80"
+                        : "text-neon-cyan hover:text-neon-cyan/80"
+                    } transition-colors`}
+                  >
+                    Book Demo →
+                  </BookingLink>
+                ) : (
+                  <Link
+                    to={item.href}
+                    className={`text-sm font-medium ${
+                      item.color === "electric-purple"
+                        ? "text-electric-purple hover:text-electric-purple/80"
+                        : "text-neon-cyan hover:text-neon-cyan/80"
+                    } transition-colors`}
+                  >
+                    Learn more →
+                  </Link>
+                )}
               </motion.div>
             );
           })}

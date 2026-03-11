@@ -1,4 +1,5 @@
-const DEFAULT_BOOKING_PATH = "/book-demo";
+/** Primary booking: Cal.com. Override with VITE_BOOKING_URL (client) or BOOKING_URL (build). */
+const DEFAULT_CAL_COM_URL = "https://cal.com/natusdeed/free-ai-receptionist-demo";
 
 function normalizeEnvValue(value: unknown): string | null {
   if (typeof value !== "string") return null;
@@ -13,7 +14,7 @@ export function getBookingUrl(): string {
     normalizeEnvValue((import.meta as any).env?.VITE_BOOKING_LINK) ??
     normalizeEnvValue((import.meta as any).env?.BOOKING_LINK);
 
-  return candidate ?? DEFAULT_BOOKING_PATH;
+  return candidate ?? DEFAULT_CAL_COM_URL;
 }
 
 export function isExternalBookingUrl(url: string = getBookingUrl()): boolean {
