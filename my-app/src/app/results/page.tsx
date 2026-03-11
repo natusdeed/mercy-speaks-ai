@@ -115,6 +115,20 @@ const PORTFOLIO_ITEMS: PortfolioItem[] = [
     metric: "2x conversion",
     thumbnail: "https://picsum.photos/seed/shop1/400/240",
   },
+  {
+    id: "7",
+    title: "PRIME Global Logistics",
+    url: "https://primeglobal-logistics-dzls.vercel.app/",
+    category: "Websites",
+    industryTag: "Logistics / Solar Supply",
+    description:
+      "Premium marketing site for solar supply + Africa logistics with product categories, gallery, FAQs, and a quote flow.",
+    stack: ["Next.js", "Tailwind", "Vercel"],
+    thumbnail: "/portfolio/primeglobal-logistics.png",
+    liveUrl: "https://primeglobal-logistics-dzls.vercel.app/",
+    ctaLabel: "View Live Site",
+    featured: true,
+  },
 ];
 
 export default function ResultsPage() {

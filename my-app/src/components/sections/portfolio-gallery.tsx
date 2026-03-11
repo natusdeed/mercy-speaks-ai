@@ -22,6 +22,14 @@ export interface PortfolioItem {
   metric?: string;
   thumbnail?: string;
   detailsUrl?: string;
+  /** Optional industry/niche tag shown on the card */
+  industryTag?: string;
+  /** Override for live link (else `url` is used) */
+  liveUrl?: string;
+  /** CTA button label; default "Live Site" */
+  ctaLabel?: string;
+  /** When true, can be used to sort or highlight */
+  featured?: boolean;
 }
 
 const FILTERS: { value: PortfolioCategory | "All"; label: string }[] = [
@@ -41,7 +49,7 @@ export function PortfolioGallery({ items }: PortfolioGalleryProps) {
 
   const filtered =
     activeFilter === "All"
-      ? items
+      ? [...items].sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0)) // featured first
       : items.filter((item) => item.category === activeFilter);
 
   return (
@@ -86,14 +94,26 @@ export function PortfolioGallery({ items }: PortfolioGalleryProps) {
                 transition={{ duration: 0.3 }}
                 className="card-premium flex flex-col overflow-hidden group"
               >
-                {/* Thumbnail */}
-                <div className="relative -mx-7 -mt-7 mb-4 aspect-video overflow-hidden rounded-t-xl bg-slate-800/60">
+                {/* Thumbnail — 16:10, rounded-2xl, hover overlay; clickable when item has a URL */}
+                <div className="relative -mx-7 -mt-7 mb-4 aspect-16/10 overflow-hidden rounded-2xl bg-slate-800/60">
                   {item.thumbnail ? (
-                    <img
-                      src={item.thumbnail}
-                      alt=""
-                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-                    />
+                    <a
+                      href={item.liveUrl ?? item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block h-full w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 rounded-2xl"
+                    >
+                      <img
+                        src={item.thumbnail}
+                        alt=""
+                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                        loading="lazy"
+                      />
+                      <div
+                        className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none"
+                        aria-hidden
+                      />
+                    </a>
                   ) : (
                     <div
                       className="h-full w-full bg-linear-to-br from-slate-800 via-slate-800/90 to-electric-purple/10"
@@ -107,10 +127,17 @@ export function PortfolioGallery({ items }: PortfolioGalleryProps) {
                   )}
                 </div>
 
-                {/* Category tag */}
-                <span className="text-xs font-semibold text-neon-cyan uppercase tracking-wider mb-2">
-                  {item.category}
-                </span>
+                {/* Category + optional industry tag */}
+                <div className="flex flex-wrap items-center gap-2 mb-2">
+                  <span className="text-xs font-semibold text-neon-cyan uppercase tracking-wider">
+                    {item.category}
+                  </span>
+                  {item.industryTag && (
+                    <span className="text-xs text-slate-500 font-medium">
+                      {item.industryTag}
+                    </span>
+                  )}
+                </div>
 
                 {/* Title */}
                 <h3 className="text-lg font-bold text-slate-50 mb-2 line-clamp-1">
@@ -138,13 +165,13 @@ export function PortfolioGallery({ items }: PortfolioGalleryProps) {
                 <div className="flex flex-wrap gap-2">
                   <Button variant="primary" size="sm" asChild>
                     <a
-                      href={item.url}
+                      href={item.liveUrl ?? item.url}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-2"
                     >
                       <ExternalLink className="w-3.5 h-3.5" />
-                      Live Site
+                      {item.ctaLabel ?? "Live Site"}
                     </a>
                   </Button>
                   {item.detailsUrl && (

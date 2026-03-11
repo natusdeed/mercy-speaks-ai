@@ -1,12 +1,17 @@
 /**
  * POST /api/contact — receives contact form payload.
- * Use in Next.js App Router as app/api/contact/route.ts (this file).
- * For Vite, proxy /api to a backend or replace fetch URL with your API.
+ * Stores via saveLead (Resend if configured, else console log).
  */
+import { saveLead } from "../../../lib/save-lead";
+
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
-    const { name, email, phone, businessType, message } = body as Record<string, unknown>;
+    const body = (await request.json()) as Record<string, unknown>;
+    const name = typeof body.name === "string" ? body.name.trim() : "";
+    const email = typeof body.email === "string" ? body.email.trim() : "";
+    const phone = typeof body.phone === "string" ? body.phone.trim() : "";
+    const businessType = typeof body.businessType === "string" ? body.businessType.trim() : "";
+    const message = typeof body.message === "string" ? body.message.trim() : undefined;
 
     if (!name || !email || !phone || !businessType) {
       return Response.json(
@@ -15,8 +20,21 @@ export async function POST(request: Request) {
       );
     }
 
-    // TODO: persist to DB, send to CRM, or send email notification
-    // e.g. await saveLead({ source: "contact", name, email, phone, businessType, message });
+    const result = await saveLead({
+      source: "contact",
+      name,
+      email,
+      phone,
+      businessType,
+      message,
+    });
+
+    if (!result.ok) {
+      return Response.json(
+        { message: result.error ?? "Submission failed. Please try again." },
+        { status: 500 }
+      );
+    }
 
     return Response.json({ success: true });
   } catch {
