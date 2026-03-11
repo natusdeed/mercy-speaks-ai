@@ -138,10 +138,10 @@ export default function BookDemoPage() {
                 className="card text-center max-w-2xl mx-auto"
               >
                 <CheckCircle2 className="w-14 h-14 sm:w-16 sm:h-16 text-neon-cyan mx-auto mb-4" />
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-50 mb-4">Demo Scheduled!</h2>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-50 mb-4">Callback requested</h2>
                 <p className="text-slate-400 mb-6">
-                  We&apos;ve received your request and will confirm your demo time via email within 24
-                  hours.
+                  We&apos;ve received your callback request and will contact you within 2 business hours.
+                  To pick a specific time slot, use the &quot;Book Instantly with Cal.com&quot; link—those bookings appear in your Cal.com dashboard.
                 </p>
                 <p className="text-slate-400 mb-8">
                   In the meantime, feel free to explore our{" "}
@@ -228,6 +228,9 @@ export default function BookDemoPage() {
                       >
                         Book Instantly with Cal.com
                       </a>
+                      <p className="text-center text-xs text-slate-500">
+                        Bookings you make on Cal.com will appear in your Cal.com Bookings page.
+                      </p>
                     </div>
 
                     {submitError && (

@@ -65,7 +65,7 @@ export default defineConfig({
                 response.headers.forEach((v, k) => res.setHeader(k, v));
                 if (response.body) {
                   const reader = response.body.getReader();
-                  const pump = () => reader.read().then(({ done, value }) => {
+                  const pump = (): Promise<void> => reader.read().then(({ done, value }) => {
                     if (done) { res.end(); return; }
                     res.write(Buffer.from(value));
                     return pump();
@@ -91,13 +91,20 @@ export default defineConfig({
                   return;
                 }
                 if (isBookDemo) {
-                  const { POST } = await import('./src/app/api/book-demo/route');
-                  const fakeReq = new Request(`http://localhost${req.url}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: bodyStr });
-                  const response = await POST(fakeReq);
-                  res.statusCode = response.status;
-                  const data = await response.json();
-                  res.setHeader('Content-Type', 'application/json');
-                  res.end(JSON.stringify(data));
+                  try {
+                    const { POST } = await import('./src/app/api/book-demo/route');
+                    const fakeReq = new Request(`http://localhost${req.url}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: bodyStr });
+                    const response = await POST(fakeReq);
+                    res.statusCode = response.status;
+                    const data = await response.json();
+                    res.setHeader('Content-Type', 'application/json');
+                    res.end(JSON.stringify(data));
+                  } catch (e) {
+                    console.error('Book-demo API error:', e);
+                    res.statusCode = 500;
+                    res.setHeader('Content-Type', 'application/json');
+                    res.end(JSON.stringify({ error: 'Internal server error', message: e instanceof Error ? e.message : 'Submission failed. Please try again.' }));
+                  }
                 } else {
                   const { POST } = await import('./src/app/api/contact/route');
                   const fakeReq = new Request(`http://localhost${req.url}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: bodyStr });

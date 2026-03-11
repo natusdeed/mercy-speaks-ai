@@ -37,10 +37,17 @@ export async function POST(request: Request) {
     }
 
     return Response.json({ success: true });
-  } catch {
+  } catch (e) {
+    const isBodyError =
+      e instanceof SyntaxError ||
+      (e instanceof Error && (e.message?.includes("JSON") ?? false));
     return Response.json(
-      { message: "Invalid request body." },
-      { status: 400 }
+      {
+        message: isBodyError
+          ? "Invalid request body."
+          : "A server error occurred. Please try again.",
+      },
+      { status: isBodyError ? 400 : 500 }
     );
   }
 }
