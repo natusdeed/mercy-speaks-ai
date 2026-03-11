@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Globe } from "lucide-react";
 import { Link } from "react-router-dom";
+import { BookingLink } from "@/components/cta/booking-link";
 
 export default function ServiceWebsiteDesign() {
   return (
@@ -21,7 +22,7 @@ export default function ServiceWebsiteDesign() {
               Modern, mobile-friendly websites built fast using AI
             </p>
             <Button variant="primary" size="lg" asChild>
-              <Link to="/book-demo">Book a Demo</Link>
+              <BookingLink>Book a Demo</BookingLink>
             </Button>
           </motion.div>
         </div>

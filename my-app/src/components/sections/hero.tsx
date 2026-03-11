@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Phone, Headphones, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { BookingLink } from "@/components/cta/booking-link";
 
 /**
  * Minimal hero: exact H1, subheadline, primary + secondary CTA, trust strip (3), one credibility line.
@@ -47,11 +48,11 @@ export function Hero() {
           className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8"
         >
           <Button variant="primary" size="lg" asChild className="w-full sm:w-auto">
-            <Link to="/book-demo" className="flex items-center justify-center gap-2">
+            <BookingLink className="flex items-center justify-center gap-2">
               <Phone className="w-5 h-5" />
               Book a Demo
               <ArrowRight className="w-5 h-5" />
-            </Link>
+            </BookingLink>
           </Button>
           <Button variant="outline" size="lg" asChild className="w-full sm:w-auto">
             <a href="#live-demo" className="flex items-center justify-center gap-2">

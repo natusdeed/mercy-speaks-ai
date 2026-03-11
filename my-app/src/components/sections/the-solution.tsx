@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 import { Link } from "react-router-dom";
+import { BookingLink } from "@/components/cta/booking-link";
 
 interface Service {
   name: string;
@@ -131,9 +132,15 @@ export function TheSolution() {
                 className="w-full px-8 py-4 text-lg font-bold"
                 asChild
               >
-                <Link to={service.name === "AI-Powered Website Design" ? "/services/website-design" : "/book-demo"}>
-                  {service.name === "AI-Powered Website Design" ? "Get Your Website" : "Get Started"}
-                </Link>
+                {service.name === "AI-Powered Website Design" ? (
+                  <Link to="/services/website-design">
+                    Get Your Website
+                  </Link>
+                ) : (
+                  <BookingLink>
+                    Get Started
+                  </BookingLink>
+                )}
               </Button>
             </div>
           ))}

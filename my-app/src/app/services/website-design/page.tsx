@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { BookingLink } from "@/components/cta/booking-link";
 
 export default function WebsiteDesignPage() {
   const features = [
@@ -108,13 +109,13 @@ export default function WebsiteDesignPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button variant="primary" size="lg" asChild>
-                  <Link to="/book-demo" className="flex items-center gap-2">
+                  <BookingLink className="flex items-center gap-2">
                     Get Your Website
                     <ArrowRight className="w-5 h-5" />
-                  </Link>
+                  </BookingLink>
                 </Button>
                 <Button variant="outline" size="lg" asChild>
-                  <Link to="/book-demo">Book a Free Strategy Call</Link>
+                  <BookingLink>Book a Free Strategy Call</BookingLink>
                 </Button>
               </div>
             </motion.div>
@@ -252,13 +253,13 @@ export default function WebsiteDesignPage() {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button variant="primary" size="lg" asChild >
-                    <Link to="/book-demo" className="flex items-center gap-2">
+                    <BookingLink className="flex items-center gap-2">
                       Get Your Website
                       <ArrowRight className="w-5 h-5" />
-                    </Link>
+                    </BookingLink>
                   </Button>
-<Button variant="outline" size="lg" asChild>
-                  <Link to="/book-demo">Book a Free Strategy Call</Link>
+                  <Button variant="outline" size="lg" asChild>
+                    <BookingLink>Book a Free Strategy Call</BookingLink>
                   </Button>
                 </div>
               </div>

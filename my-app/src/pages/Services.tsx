@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Phone, BarChart3, Globe, MessageSquare, Star, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { BookingLink } from "@/components/cta/booking-link";
 
 const fadeUp = {
   initial: { opacity: 0, y: 16 },
@@ -74,10 +75,10 @@ export default function ServicesPage() {
                 </li>
               </ul>
               <Button variant="primary" size="lg" asChild>
-                <Link to="/book-demo" className="flex items-center gap-2">
+                <BookingLink className="flex items-center gap-2">
                   Book Demo
                   <ArrowRight className="w-5 h-5" />
-                </Link>
+                </BookingLink>
               </Button>
             </motion.article>
           </div>
@@ -100,10 +101,10 @@ export default function ServicesPage() {
                 A site built to convert: clear offers, social proof, and booking that syncs with your AI receptionist and calendar. Visitors become appointments.
               </p>
               <Button variant="primary" size="lg" asChild>
-                <Link to="/book-demo" className="flex items-center gap-2">
+                <BookingLink className="flex items-center gap-2">
                   Book Demo
                   <ArrowRight className="w-5 h-5" />
-                </Link>
+                </BookingLink>
               </Button>
             </motion.article>
           </div>
@@ -126,10 +127,10 @@ export default function ServicesPage() {
                 Chat on your site that answers questions and books appointments. Captures leads 24/7 and hands them to your team or calendar—no forms left unanswered.
               </p>
               <Button variant="primary" size="lg" asChild>
-                <Link to="/book-demo" className="flex items-center gap-2">
+                <BookingLink className="flex items-center gap-2">
                   Book Demo
                   <ArrowRight className="w-5 h-5" />
-                </Link>
+                </BookingLink>
               </Button>
             </motion.article>
           </div>
@@ -152,10 +153,10 @@ export default function ServicesPage() {
                 Turn completed work into reviews and repeat business. Automated follow-ups ask for reviews at the right time, then nurture leads so they come back.
               </p>
               <Button variant="primary" size="lg" asChild>
-                <Link to="/book-demo" className="flex items-center gap-2">
+                <BookingLink className="flex items-center gap-2">
                   Book Demo
                   <ArrowRight className="w-5 h-5" />
-                </Link>
+                </BookingLink>
               </Button>
             </motion.article>
           </div>

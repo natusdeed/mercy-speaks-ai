@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, ArrowRight, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
+import { BookingLink } from "@/components/cta/booking-link";
 
 interface Tier {
   name: string;
@@ -153,11 +154,11 @@ export default function Pricing() {
                     className="w-full"
                     asChild
                   >
-                    <Link to="/book-demo" className="flex items-center justify-center gap-2">
+                    <BookingLink className="flex items-center justify-center gap-2">
                       <Phone className="w-4 h-4" />
                       Book Demo
                       <ArrowRight className="w-4 h-4" />
-                    </Link>
+                    </BookingLink>
                   </Button>
                 </motion.article>
               ))}
@@ -205,11 +206,11 @@ export default function Pricing() {
               Not sure which plan fits? We’ll recommend one during your demo.
             </motion.p>
             <Button variant="primary" size="lg" asChild>
-              <Link to="/book-demo" className="flex items-center gap-2">
+              <BookingLink className="flex items-center gap-2">
                 <Phone className="w-5 h-5" />
                 Book Demo
                 <ArrowRight className="w-5 h-5" />
-              </Link>
+              </BookingLink>
             </Button>
           </div>
         </section>

@@ -12,6 +12,8 @@ interface CaseStudy {
   testimonial: string;
 }
 
+import { BookingLink } from "@/components/cta/booking-link";
+
 const CASE_STUDIES: CaseStudy[] = [
   {
     id: "martinez-hvac",
@@ -92,10 +94,10 @@ function CaseStudyCard({ study, index }: { study: CaseStudy; index: number }) {
       </blockquote>
 
       <Button variant="outline" size="default" asChild className="w-fit mt-auto">
-        <Link to="/book-demo" className="flex items-center gap-2">
+        <BookingLink className="flex items-center gap-2">
           Book Demo
           <ArrowRight className="w-4 h-4" />
-        </Link>
+        </BookingLink>
       </Button>
     </motion.article>
   );
@@ -160,11 +162,11 @@ export default function Portfolio() {
               Want results like these? Book a demo and we’ll show you what’s possible for your business.
             </motion.p>
             <Button variant="primary" size="lg" asChild>
-              <Link to="/book-demo" className="flex items-center gap-2">
+              <BookingLink className="flex items-center gap-2">
                 <Phone className="w-5 h-5" />
                 Book Demo
                 <ArrowRight className="w-5 h-5" />
-              </Link>
+              </BookingLink>
             </Button>
           </div>
         </section>

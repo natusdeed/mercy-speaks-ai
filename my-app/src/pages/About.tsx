@@ -15,6 +15,7 @@ import {
   Mail,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { BookingLink } from "@/components/cta/booking-link";
 
 export default function AboutPage() {
   const values = [
@@ -252,13 +253,13 @@ export default function AboutPage() {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button variant="primary" size="lg" asChild className="px-8 py-4 text-lg font-bold">
-                    <Link to="/book-demo">
+                    <BookingLink>
                       Get Your Website
                       <ArrowRight className="w-5 h-5 ml-2" />
-                    </Link>
+                    </BookingLink>
                   </Button>
                   <Button variant="outline" size="lg" asChild className="px-8 py-4 text-lg font-bold">
-                    <Link to="/book-demo">Book a Free Strategy Call</Link>
+                    <BookingLink>Book a Free Strategy Call</BookingLink>
                   </Button>
                 </div>
               </div>

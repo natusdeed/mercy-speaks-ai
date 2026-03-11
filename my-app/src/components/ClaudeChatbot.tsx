@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { X, Send, Minimize2, Maximize2, RefreshCw, Calendar, Mail } from 'lucide-react';
+import { BookingLink } from '@/components/cta/booking-link';
 
 // =============================================================================
 // WEBSITE CHATBOT — OpenAI, conversion-focused: quick replies, lead capture, guardrails
@@ -358,13 +359,10 @@ export default function ClaudeChatbot() {
                     <p className="text-sm text-slate-200 font-medium">
                       Thanks! We&apos;ve received your info and will reach out soon.
                     </p>
-                    <Link
-                      to="/book-demo"
-                      className="inline-flex items-center gap-1.5 text-sm font-medium text-neon-cyan hover:text-cyan-300"
-                    >
+                    <BookingLink className="inline-flex items-center gap-1.5 text-sm font-medium text-neon-cyan hover:text-cyan-300">
                       <Calendar className="w-4 h-4" />
                       Schedule a demo
-                    </Link>
+                    </BookingLink>
                   </div>
                 )}
 
@@ -384,13 +382,10 @@ export default function ClaudeChatbot() {
                         <RefreshCw className="w-3.5 h-3.5" />
                         Try again
                       </button>
-                      <Link
-                        to="/book-demo"
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-purple-600 text-white hover:bg-purple-500"
-                      >
+                      <BookingLink className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-purple-600 text-white hover:bg-purple-500">
                         <Calendar className="w-3.5 h-3.5" />
                         Book a demo
-                      </Link>
+                      </BookingLink>
                       <Link
                         to="/contact"
                         className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-600 text-slate-200 border border-slate-500 hover:bg-slate-500"

@@ -11,6 +11,7 @@ import {
   RotateCcw,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { BookingLink } from "@/components/cta/booking-link";
 
 const fadeUp = {
   initial: { opacity: 0, y: 16 },
@@ -182,13 +183,10 @@ export default function PricingPage() {
                       className="w-full"
                       asChild
                     >
-                      <Link
-                        to="/book-demo"
-                        className="flex items-center justify-center gap-2"
-                      >
+                      <BookingLink className="flex items-center justify-center gap-2">
                         Book Demo
                         <ArrowRight className="w-4 h-4" />
-                      </Link>
+                      </BookingLink>
                     </Button>
                   </div>
                 </motion.div>
@@ -234,13 +232,10 @@ export default function PricingPage() {
                 Not sure which plan? We’ll recommend one during your demo.
               </p>
               <Button variant="primary" size="lg" asChild>
-                <Link
-                  to="/book-demo"
-                  className="flex items-center justify-center gap-2"
-                >
+                <BookingLink className="flex items-center justify-center gap-2">
                   Book Demo
                   <ArrowRight className="w-5 h-5" />
-                </Link>
+                </BookingLink>
               </Button>
             </motion.div>
           </div>

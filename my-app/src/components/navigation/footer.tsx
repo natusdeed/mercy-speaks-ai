@@ -12,6 +12,7 @@ import {
   MapPin,
   ArrowRight
 } from "lucide-react";
+import { BookingLink } from "@/components/cta/booking-link";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -22,7 +23,7 @@ export function Footer() {
     { name: "Pricing", href: "/pricing" },
     { name: "Results", href: "/results" },
     { name: "About", href: "/about" },
-    { name: "Book Demo", href: "/book-demo" },
+    { name: "Book Demo", href: "BOOKING" },
   ];
 
   const socialLinks = [
@@ -117,14 +118,21 @@ export function Footer() {
             <h3 className="text-lg font-semibold text-slate-50 mb-4">Explore</h3>
             <ul className="space-y-3">
               {navigationLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    to={link.href}
-                    className="text-slate-300 hover:text-electric-purple transition-colors text-base md:text-lg flex items-center gap-2 group"
-                  >
-                    <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-                    <span>{link.name}</span>
-                  </Link>
+                <li key={link.name}>
+                  {link.href === "BOOKING" ? (
+                    <BookingLink className="text-slate-300 hover:text-electric-purple transition-colors text-base md:text-lg flex items-center gap-2 group">
+                      <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                      <span>{link.name}</span>
+                    </BookingLink>
+                  ) : (
+                    <Link
+                      to={link.href}
+                      className="text-slate-300 hover:text-electric-purple transition-colors text-base md:text-lg flex items-center gap-2 group"
+                    >
+                      <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                      <span>{link.name}</span>
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

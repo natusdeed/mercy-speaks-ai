@@ -11,6 +11,7 @@ import {
   BarChart3,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { BookingLink } from "@/components/cta/booking-link";
 
 export default function AppointmentAutomationPage() {
   const features = [
@@ -107,7 +108,7 @@ export default function AppointmentAutomationPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button variant="primary" size="lg" asChild>
-                  <Link to="/book-demo">Schedule a Demo</Link>
+                  <BookingLink>Schedule a Demo</BookingLink>
                 </Button>
                 <Button variant="outline" size="lg" asChild>
                   <Link to="/pricing">View Pricing</Link>
@@ -241,7 +242,7 @@ export default function AppointmentAutomationPage() {
                   Save hours every week and never miss another booking opportunity.
                 </p>
                 <Button variant="primary" size="lg" asChild>
-                  <Link to="/book-demo">Schedule a Demo</Link>
+                  <BookingLink>Schedule a Demo</BookingLink>
                 </Button>
               </div>
             </motion.div>

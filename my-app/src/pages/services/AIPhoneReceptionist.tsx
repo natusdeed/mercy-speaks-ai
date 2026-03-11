@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Phone } from "lucide-react";
 import { Link } from "react-router-dom";
+import { BookingLink } from "@/components/cta/booking-link";
 
 export default function ServiceAIPhoneReceptionist() {
   return (
@@ -21,7 +22,7 @@ export default function ServiceAIPhoneReceptionist() {
               24/7 AI receptionist that never misses a call
             </p>
             <Button variant="primary" size="lg" asChild>
-              <Link to="/book-demo">Book a Demo</Link>
+              <BookingLink>Book a Demo</BookingLink>
             </Button>
           </motion.div>
         </div>

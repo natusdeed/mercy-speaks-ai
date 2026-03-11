@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { MessageSquare } from "lucide-react";
 import { Link } from "react-router-dom";
+import { BookingLink } from "@/components/cta/booking-link";
 
 export default function ServiceWebsiteChatbot() {
   return (
@@ -21,7 +22,7 @@ export default function ServiceWebsiteChatbot() {
               AI chatbot that answers questions and captures leads
             </p>
             <Button variant="primary" size="lg" asChild>
-              <Link to="/book-demo">Book a Demo</Link>
+              <BookingLink>Book a Demo</BookingLink>
             </Button>
           </motion.div>
         </div>

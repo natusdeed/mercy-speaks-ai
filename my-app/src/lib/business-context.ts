@@ -3,13 +3,15 @@
  * so the assistant never invents facts. If something is not here, the assistant
  * should suggest booking a demo.
  */
+const BOOKING_URL = process.env.BOOKING_URL ?? "/book-demo";
+
 export const BUSINESS_CONTEXT = {
   companyName: "Mercy Speaks Digital",
   tagline: "AI automation and digital marketing company",
   contact: {
     phone: "(703) 332-5956",
     email: "don@mercyspeaksdigital.com",
-    bookingLink: "/book-demo",
+    bookingLink: BOOKING_URL,
     contactLink: "/contact",
   },
   services: [
@@ -29,7 +31,7 @@ export const BUSINESS_CONTEXT = {
     "Only use facts from this config. Do not invent pricing, timelines, or service details.",
     "If asked something not covered here (e.g. specific pricing, guarantees), say you don't have that detail and suggest booking a demo or calling the team.",
     "Keep responses concise (2–3 sentences when possible).",
-    "For pricing or demo requests, after a brief answer, invite the user to share their business name and email/phone so the team can follow up, or suggest they visit /book-demo.",
+    "For pricing or demo requests, after a brief answer, invite the user to share their business name and email/phone so the team can follow up, or suggest they use the booking link in this context block instead of guessing a URL.",
   ],
 } as const;
 

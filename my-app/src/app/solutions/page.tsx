@@ -15,6 +15,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { PageShell } from "@/components/ui/page-shell";
 import { Link } from "react-router-dom";
+import { BookingLink } from "@/components/cta/booking-link";
 
 const fadeUp = {
   initial: { opacity: 0, y: 16 },
@@ -95,10 +96,10 @@ export default function SolutionsPage() {
             </motion.ul>
             <motion.div {...fadeUp} className="flex justify-center">
               <Button variant="primary" size="lg" asChild>
-                <Link to="/book-demo" className="flex items-center gap-2">
+                <BookingLink className="flex items-center gap-2">
                   Book Demo
                   <ArrowRight className="w-5 h-5" />
-                </Link>
+                </BookingLink>
               </Button>
             </motion.div>
           </div>
@@ -138,10 +139,10 @@ export default function SolutionsPage() {
                     {service.description}
                   </p>
                   <Button variant="outline" size="default" asChild>
-                    <Link to="/book-demo" className="flex items-center gap-2">
+                    <BookingLink className="flex items-center gap-2">
                       Book Demo
                       <ArrowRight className="w-4 h-4" />
-                    </Link>
+                    </BookingLink>
                   </Button>
                 </motion.div>
               </div>

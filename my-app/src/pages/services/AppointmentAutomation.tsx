@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
+import { BookingLink } from "@/components/cta/booking-link";
 
 export default function ServiceAppointmentAutomation() {
   return (
@@ -21,7 +22,7 @@ export default function ServiceAppointmentAutomation() {
               Automate scheduling and reduce no-shows
             </p>
             <Button variant="primary" size="lg" asChild>
-              <Link to="/book-demo">Book a Demo</Link>
+              <BookingLink>Book a Demo</BookingLink>
             </Button>
           </motion.div>
         </div>

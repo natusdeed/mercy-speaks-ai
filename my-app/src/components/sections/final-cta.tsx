@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { BookingLink } from "@/components/cta/booking-link";
 
 export function FinalCTA() {
   return (
@@ -40,11 +41,11 @@ export function FinalCTA() {
               asChild
               className="w-full sm:w-auto"
             >
-              <Link to="/book-demo" className="flex items-center gap-2">
+              <BookingLink className="flex items-center gap-2">
                 <Phone className="w-5 h-5" />
                 Book Demo
                 <ArrowRight className="w-5 h-5" />
-              </Link>
+              </BookingLink>
             </Button>
           </motion.div>
 

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { PageShell } from "@/components/ui/page-shell";
 import { PortfolioGallery, type PortfolioItem } from "@/components/sections/portfolio-gallery";
 import { Link } from "react-router-dom";
+import { BookingLink } from "@/components/cta/booking-link";
 
 const fadeUp = {
   initial: { opacity: 0, y: 16 },
@@ -193,10 +194,10 @@ export default function ResultsPage() {
                     &ldquo;{study.quote}&rdquo;
                   </p>
                   <Button variant="primary" size="default" className="w-full" asChild>
-                    <Link to="/book-demo" className="flex items-center justify-center gap-2">
+                    <BookingLink className="flex items-center justify-center gap-2">
                       Book Demo
                       <ArrowRight className="w-4 h-4" />
-                    </Link>
+                    </BookingLink>
                   </Button>
                 </motion.article>
               ))}
@@ -215,10 +216,10 @@ export default function ResultsPage() {
                 Want outcomes like these? Book a demo and we’ll show you how we can do the same for your business.
               </p>
               <Button variant="primary" size="lg" asChild>
-                <Link to="/book-demo" className="flex items-center justify-center gap-2">
+                <BookingLink className="flex items-center justify-center gap-2">
                   Book Demo
                   <ArrowRight className="w-5 h-5" />
-                </Link>
+                </BookingLink>
               </Button>
             </motion.div>
           </div>

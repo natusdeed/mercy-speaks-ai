@@ -14,27 +14,43 @@ import {
   Users,
   Video,
 } from "lucide-react";
+import { BookingLink } from "@/components/cta/booking-link";
+import { getBookingUrl, isExternalBookingUrl } from "@/lib/booking-url";
 
-const API_BOOK_DEMO = "/api/book-demo";
+const API_LEAD = "/api/lead";
 
 export default function BookDemoPage() {
+  const bookingUrl = getBookingUrl();
+  const externalBooking = isExternalBookingUrl(bookingUrl);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleSubmit = async (data: LeadFormData) => {
     setSubmitError(null);
     try {
-      const res = await fetch(API_BOOK_DEMO, {
+      console.log("[BookDemo] Submitting lead form", data);
+      const res = await fetch(API_LEAD, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
       if (!res.ok) {
         const err = await res.json().catch(() => ({}));
-        throw new Error(err.message ?? "Submission failed. Please try again.");
+        const message =
+          (err && (err.error || err.message)) ||
+          "Submission failed. Please try again.";
+        console.error(
+          "[BookDemo] Server returned error for lead form submission",
+          res.status,
+          message,
+          err
+        );
+        throw new Error(message);
       }
+      console.log("[BookDemo] Lead form submitted successfully");
       setIsSubmitted(true);
     } catch (e) {
+      console.error("[BookDemo] Lead form submission failed", e);
       setSubmitError(e instanceof Error ? e.message : "Something went wrong. Please try again.");
     }
   };
@@ -64,7 +80,39 @@ export default function BookDemoPage() {
               </p>
             </motion.div>
 
-            {isSubmitted ? (
+            {externalBooking ? (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="card text-center max-w-2xl mx-auto"
+              >
+                <CheckCircle2 className="w-14 h-14 sm:w-16 sm:h-16 text-neon-cyan mx-auto mb-4" />
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-50 mb-4">
+                  Book Your Demo
+                </h2>
+                <p className="text-slate-400 mb-4">
+                  We use an external booking tool to schedule demos. Click below to choose a time that
+                  works for you.
+                </p>
+                <div className="mb-6">
+                  <BookingLink className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-neon-cyan text-slate-950 font-semibold text-lg shadow-lg hover:bg-neon-cyan/90 transition-colors">
+                    <Calendar className="w-5 h-5 mr-2" />
+                    Book via our scheduler
+                  </BookingLink>
+                </div>
+                <p className="text-xs text-slate-500 break-all">
+                  Booking link:{" "}
+                  <a
+                    href={bookingUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-neon-cyan hover:text-cyan-300 underline"
+                  >
+                    {bookingUrl}
+                  </a>
+                </p>
+              </motion.div>
+            ) : isSubmitted ? (
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}

@@ -3,6 +3,7 @@ import { Phone, BarChart3, Globe, MessageSquare, Star, ArrowRight } from "lucide
 import { Button } from "@/components/ui/button";
 import { PageShell } from "@/components/ui/page-shell";
 import { Link } from "react-router-dom";
+import { BookingLink } from "@/components/cta/booking-link";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -71,10 +72,10 @@ export default function ServicesPage() {
                 </li>
               </ul>
               <Button variant="primary" size="lg" asChild>
-                <Link to="/book-demo" className="flex items-center gap-2">
+                <BookingLink className="flex items-center gap-2">
                   Book Demo
                   <ArrowRight className="w-5 h-5" />
-                </Link>
+                </BookingLink>
               </Button>
             </motion.div>
           </div>
@@ -107,10 +108,10 @@ export default function ServicesPage() {
                 Visitors become appointments without extra back-and-forth.
               </p>
               <Button variant="primary" size="lg" asChild>
-                <Link to="/book-demo" className="flex items-center gap-2">
+                <BookingLink className="flex items-center gap-2">
                   Book Demo
                   <ArrowRight className="w-5 h-5" />
-                </Link>
+                </BookingLink>
               </Button>
             </motion.div>
           </div>
@@ -134,10 +135,10 @@ export default function ServicesPage() {
                 Captures leads 24/7 and hands them to your team or calendar—no more forms that go unanswered.
               </p>
               <Button variant="primary" size="lg" asChild>
-                <Link to="/book-demo" className="flex items-center gap-2">
+                <BookingLink className="flex items-center gap-2">
                   Book Demo
                   <ArrowRight className="w-5 h-5" />
-                </Link>
+                </BookingLink>
               </Button>
             </motion.div>
           </div>
@@ -161,10 +162,10 @@ export default function ServicesPage() {
                 then nurture leads so they come back—without you chasing them.
               </p>
               <Button variant="primary" size="lg" asChild>
-                <Link to="/book-demo" className="flex items-center gap-2">
+                <BookingLink className="flex items-center gap-2">
                   Book Demo
                   <ArrowRight className="w-5 h-5" />
-                </Link>
+                </BookingLink>
               </Button>
             </motion.div>
           </div>

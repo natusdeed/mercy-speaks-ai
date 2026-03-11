@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { BookingLink } from "@/components/cta/booking-link";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -51,20 +52,20 @@ export function Header() {
               );
             })}
             <Button variant="primary" size="default" asChild className="shrink-0 ml-2">
-              <Link to="/book-demo" className="flex items-center gap-2">
+              <BookingLink className="flex items-center gap-2">
                 <Phone className="w-4 h-4" />
                 Book Demo
-              </Link>
+              </BookingLink>
             </Button>
           </div>
 
           {/* Mobile: hamburger + Book Demo */}
           <div className="flex md:hidden items-center gap-2">
             <Button variant="primary" size="default" asChild>
-              <Link to="/book-demo" className="flex items-center gap-1.5">
+              <BookingLink className="flex items-center gap-1.5">
                 <Phone className="w-4 h-4" />
                 Book Demo
-              </Link>
+              </BookingLink>
             </Button>
             <button
               type="button"
@@ -102,10 +103,10 @@ export function Header() {
             </div>
             <div className="pt-4 mt-2 border-t border-slate-800/50">
               <Button variant="primary" size="default" asChild className="w-full">
-                <Link to="/book-demo" onClick={() => setMobileOpen(false)} className="flex items-center justify-center gap-2">
+                <BookingLink onClick={() => setMobileOpen(false)} className="flex items-center justify-center gap-2">
                   <Phone className="w-4 h-4" />
                   Book Demo
-                </Link>
+                </BookingLink>
               </Button>
             </div>
           </div>

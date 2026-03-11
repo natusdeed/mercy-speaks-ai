@@ -9,6 +9,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { BookingLink } from "@/components/cta/booking-link";
 
 export default function RAGDataPage() {
   const features = [
@@ -75,8 +76,10 @@ export default function RAGDataPage() {
               Transform your documents, databases, and knowledge bases into an intelligent
               AI assistant that understands your business and provides instant answers.
             </p>
-            <Button variant="primary" size="lg">
-              Get Started
+            <Button variant="primary" size="lg" asChild>
+              <BookingLink>
+                Get Started
+              </BookingLink>
             </Button>
           </motion.div>
 
