@@ -17,7 +17,8 @@ import {
 import { BookingLink } from "@/components/cta/booking-link";
 import { getBookingUrl, isExternalBookingUrl } from "@/lib/booking-url";
 
-const API_LEAD = "/api/lead";
+const API_LEAD = "/api/book-demo";
+const CAL_COM_BOOKING_URL = "https://cal.com/natusdeed/free-ai-receptionist-demo";
 
 export default function BookDemoPage() {
   const bookingUrl = getBookingUrl();
@@ -35,15 +36,33 @@ export default function BookDemoPage() {
         body: JSON.stringify(data),
       });
       if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
+        let errorPayload: unknown = null;
+        let rawBody: string | null = null;
+        try {
+          rawBody = await res.text();
+          errorPayload = rawBody ? JSON.parse(rawBody) : null;
+        } catch {
+          // Non-JSON or empty body – keep as raw text for logging only.
+        }
+
+        const err =
+          (errorPayload && typeof errorPayload === "object" ? (errorPayload as any) : {}) ?? {};
+
         const message =
-          (err && (err.error || err.message)) ||
-          "Submission failed. Please try again.";
+          err.error ||
+          err.message ||
+          (rawBody && rawBody.length < 200 ? rawBody : null) ||
+          `Request failed with status ${res.status}`;
+
         console.error(
           "[BookDemo] Server returned error for lead form submission",
-          res.status,
-          message,
-          err
+          {
+            status: res.status,
+            statusText: res.statusText,
+            message,
+            errorPayload: err,
+            rawBody,
+          }
         );
         throw new Error(message);
       }
@@ -184,18 +203,49 @@ export default function BookDemoPage() {
                   className="lg:col-span-2 order-1 lg:order-2"
                 >
                   <div className="card">
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-50 mb-4 sm:mb-6">Schedule Your Demo</h2>
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-50 mb-4 sm:mb-6">
+                      Schedule Your Demo
+                    </h2>
+
+                    <div className="space-y-3 mb-6">
+                      <a
+                        href={CAL_COM_BOOKING_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-neon-cyan px-6 py-3 text-base sm:text-lg font-semibold text-slate-950 shadow-lg hover:bg-neon-cyan/90 transition-colors"
+                      >
+                        Schedule Demo
+                        <Calendar className="w-5 h-5" />
+                      </a>
+                      <p className="text-center text-xs sm:text-sm text-slate-400">
+                        Prefer instant booking? Use our live calendar to choose a time.
+                      </p>
+                      <a
+                        href={CAL_COM_BOOKING_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-cyan-500/60 bg-slate-900/60 px-6 py-2.5 text-sm sm:text-base font-medium text-cyan-300 hover:border-cyan-300 hover:text-cyan-100 transition-colors"
+                      >
+                        Book Instantly with Cal.com
+                      </a>
+                    </div>
+
                     {submitError && (
-                      <p className="mb-4 p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-sm" role="alert">
+                      <p
+                        className="mb-4 p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-sm"
+                        role="alert"
+                      >
                         {submitError}
                       </p>
                     )}
                     <LeadForm
-                      submitLabel="Schedule Demo"
-                      submittingLabel="Scheduling..."
+                      submitLabel="Request Callback"
+                      submittingLabel="Sending..."
                       submitIcon={<Calendar className="w-5 h-5" />}
                       onSubmit={handleSubmit}
-                      placeholders={{ message: "Tell us about your challenges or use cases..." }}
+                      placeholders={{
+                        message: "Tell us about your challenges or use cases...",
+                      }}
                     />
                   </div>
                 </motion.div>
