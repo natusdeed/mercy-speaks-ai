@@ -111,13 +111,16 @@ export default function SiteChatbot() {
     retryAfter?: number;
     networkError?: boolean;
   }> => {
+    const logUrl = 'http://127.0.0.1:7243/ingest/e6485d11-3b9f-4fe8-abde-87df7488e504';
     const conversationHistory = messages
       .filter((m) => m.role === 'user' || m.role === 'assistant')
       .map((m) => ({ role: m.role, content: m.content }));
     const context = typeof window !== 'undefined' ? window.location.pathname : undefined;
 
     let response: Response;
+    // #region agent log
     try {
+      fetch(logUrl,{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'7bd99d'},body:JSON.stringify({sessionId:'7bd99d',location:'SiteChatbot.tsx:sendToApi',message:'fetch start',data:{url:'/api/chat'},timestamp:Date.now(),hypothesisId:'H2'})}).catch(()=>{});
       response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -128,15 +131,21 @@ export default function SiteChatbot() {
         }),
         cache: 'no-store',
       });
-    } catch {
+    } catch (e) {
+      fetch(logUrl,{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'7bd99d'},body:JSON.stringify({sessionId:'7bd99d',location:'SiteChatbot.tsx:sendToApi',message:'fetch threw',data:{networkError:true,err:String(e)},timestamp:Date.now(),hypothesisId:'H2'})}).catch(()=>{});
       return { ok: false, error: 'Failed to fetch', networkError: true };
     }
+    // #endregion
 
     let data: Record<string, unknown> = {};
     const contentType = response.headers.get('content-type');
+    // #region agent log
+    fetch(logUrl,{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'7bd99d'},body:JSON.stringify({sessionId:'7bd99d',location:'SiteChatbot.tsx:sendToApi',message:'response',data:{status:response.status,ok:response.ok,contentType:contentType ?? 'null'},timestamp:Date.now(),hypothesisId:'H1'})}).catch(()=>{});
+    // #endregion
     if (contentType?.includes('application/json')) {
       data = await response.json().catch(() => ({}));
     } else {
+      fetch(logUrl,{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'7bd99d'},body:JSON.stringify({sessionId:'7bd99d',location:'SiteChatbot.tsx:sendToApi',message:'non-json response',data:{status:response.status},timestamp:Date.now(),hypothesisId:'H3'})}).catch(()=>{});
       await response.text().catch(() => '');
       return {
         ok: false,
@@ -152,6 +161,7 @@ export default function SiteChatbot() {
       return { ok: false, error: (data.error as string) || 'Invalid request' };
     }
     if (!response.ok) {
+      fetch(logUrl,{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'7bd99d'},body:JSON.stringify({sessionId:'7bd99d',location:'SiteChatbot.tsx:sendToApi',message:'not ok',data:{status:response.status,error:data.error},timestamp:Date.now(),hypothesisId:'H1'})}).catch(()=>{});
       return {
         ok: false,
         error: (data.error as string) || 'Request failed',
@@ -220,6 +230,9 @@ export default function SiteChatbot() {
     if (result.retryAfter != null) setErrorState('rate-limited');
     else setErrorState('error');
     setShowPremiumFallback(true);
+    // #region agent log
+    fetch('http://127.0.0.1:7243/ingest/e6485d11-3b9f-4fe8-abde-87df7488e504',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'7bd99d'},body:JSON.stringify({sessionId:'7bd99d',location:'SiteChatbot.tsx:handleSend',message:'showing connection error',data:{retryAfter:result.retryAfter,error:result.error,networkError:result.networkError},timestamp:Date.now(),hypothesisId:'A'})}).catch(()=>{});
+    // #endregion
     // Show only the premium fallback card (Retry / Book demo / Contact / Call); do not append fallback text to history to avoid spam
   };
 

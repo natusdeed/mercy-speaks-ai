@@ -173,14 +173,21 @@ export async function handleChatRequest(request: Request): Promise<Response> {
   }
 
   const apiKey = process.env.OPENAI_API_KEY;
+  // #region agent log
+  const debugLog = (msg: string, data: Record<string, unknown>) => {
+    fetch("http://127.0.0.1:7243/ingest/e6485d11-3b9f-4fe8-abde-87df7488e504", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "7bd99d" }, body: JSON.stringify({ sessionId: "7bd99d", location: "chat-handler.ts", message: msg, data, timestamp: Date.now(), hypothesisId: "H1" }) }).catch(() => {});
+  };
+  // #endregion
   if (!apiKey) {
     console.error("[chat-api] Missing OPENAI_API_KEY — cannot serve chat.");
+    debugLog("missing OPENAI_API_KEY, returning 500", { hasKey: false, status: 500 });
     logRequest({ requestId, route, status: 500, upstreamError: "Missing OPENAI_API_KEY", userAgent });
     return Response.json(
       { error: "Missing OPENAI_API_KEY" },
       { status: 500 }
     );
   }
+  debugLog("OPENAI_API_KEY present, parsing body", { hasKey: true });
 
   let body: ChatRequestBody;
   try {
@@ -324,7 +331,8 @@ export async function handleChatRequest(request: Request): Promise<Response> {
   }
 
   const upstreamMessage = lastError instanceof Error ? lastError.message : String(lastError);
-  console.error("[chat-api] OpenAI call failed:", upstreamMessage);
+  const upstreamStack = lastError instanceof Error ? lastError.stack : undefined;
+  console.error("[chat-api] OpenAI call failed:", upstreamMessage, upstreamStack ? "\n" + upstreamStack : "");
   // Server-side fallback: if AI failed but user intent was booking/pricing, return helpful CTA instead of error.
   if (isLeadIntent(userMessage)) {
     logRequest({
@@ -341,6 +349,7 @@ export async function handleChatRequest(request: Request): Promise<Response> {
       fallbackCta: true,
     });
   }
+  debugLog("OpenAI failed, returning 502", { status: 502, upstreamError: upstreamMessage });
   logRequest({
     requestId,
     route,
