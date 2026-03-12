@@ -253,13 +253,15 @@ export async function handleChatRequest(request: Request): Promise<Response> {
 
   const runWithTimeout = async (signal: AbortSignal): Promise<Response> => {
     if (streamRequest) {
-      const stream = await openai.chat.completions.create({
-        model: "gpt-4o-mini",
-        messages,
-        max_tokens: 1024,
-        stream: true,
-        signal,
-      });
+      const stream = await openai.chat.completions.create(
+        {
+          model: "gpt-4o-mini",
+          messages,
+          max_tokens: 1024,
+          stream: true,
+        },
+        { signal }
+      );
 
       const encoder = new TextEncoder();
       let fullText = "";
@@ -293,12 +295,14 @@ export async function handleChatRequest(request: Request): Promise<Response> {
       });
     }
 
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages,
-      max_tokens: 1024,
-      signal,
-    });
+    const completion = await openai.chat.completions.create(
+      {
+        model: "gpt-4o-mini",
+        messages,
+        max_tokens: 1024,
+      },
+      { signal }
+    );
     const text =
       completion.choices[0]?.message?.content?.trim() ||
       "Sorry, I couldn't generate a response.";

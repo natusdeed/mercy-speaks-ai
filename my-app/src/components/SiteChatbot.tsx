@@ -99,6 +99,40 @@ export default function SiteChatbot() {
     if (isOpen && !isMinimized) inputRef.current?.focus();
   }, [isOpen, isMinimized]);
 
+  // #region agent log
+  useEffect(() => {
+    if (!isOpen || isMinimized || !messages.length) return;
+    const el = scrollContainerRef.current;
+    if (!el) return;
+    const t = setTimeout(() => {
+      const bubbles = el.querySelectorAll('[data-chat-bubble]');
+      bubbles.forEach((b, i) => {
+        const div = b as HTMLDivElement;
+        const content = div.querySelector('[data-chat-bubble-content]') as HTMLDivElement | null;
+        const ow = div.offsetWidth;
+        const sw = div.scrollWidth;
+        const oh = div.offsetHeight;
+        const sh = div.scrollHeight;
+        const overflowX = sw > ow;
+        const overflowY = sh > oh;
+        const msg = messages[i];
+        const hid = overflowX ? 'H1' : (overflowY ? 'H2' : 'H0');
+        const ancestors: { tag: string; overflow: string; overflowY: string }[] = [];
+        let node: HTMLElement | null = div;
+        while (node && node !== el) {
+          const cs = window.getComputedStyle(node);
+          ancestors.push({ tag: node.tagName + (node.className ? '.' + (node.className as string).slice(0, 40) : ''), overflow: cs.overflow, overflowY: cs.overflowY });
+          node = node.parentElement;
+        }
+        const scrollEl = el;
+        const scrollCs = window.getComputedStyle(scrollEl);
+        fetch('http://127.0.0.1:7243/ingest/e6485d11-3b9f-4fe8-abde-87df7488e504',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'1d1fa1'},body:JSON.stringify({sessionId:'1d1fa1',location:'SiteChatbot.tsx:bubble-measure',message:'bubble dimensions',data:{index:i,role:msg?.role,overflowX,overflowY,offsetWidth:ow,scrollWidth:sw,offsetHeight:oh,scrollHeight:sh,contentLen:msg?.content?.length,ancestors,scrollOverflow:scrollCs.overflow,scrollOverflowY:scrollCs.overflowY},timestamp:Date.now(),hypothesisId:hid})}).catch(()=>{});
+      });
+    }, 100);
+    return () => clearTimeout(t);
+  }, [messages, isOpen, isMinimized]);
+  // #endregion
+
   const assistantReplyCount = messages.filter((m) => m.role === 'assistant').length;
 
   const sendToApi = async (userMessage: string): Promise<{
@@ -332,7 +366,7 @@ export default function SiteChatbot() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 z-50 bg-linear-to-r from-purple-600 to-pink-600 p-2 rounded-full hover:scale-110 transition-transform duration-300 border-4 border-white animate-slow-glow"
+          className="fixed bottom-6 right-6 z-50 bg-[#6D28D9] p-2 rounded-full hover:bg-[#5B21B6] hover:scale-110 transition-all duration-300 border-2 border-[#24324A] animate-slow-glow"
           aria-label="Open chat"
         >
           <img
@@ -347,11 +381,11 @@ export default function SiteChatbot() {
 
       {isOpen && (
         <div
-          className={`fixed bottom-6 left-6 z-50 bg-slate-900 border-2 border-purple-500/30 rounded-2xl shadow-2xl transition-all ${
+          className={`fixed bottom-6 left-6 z-50 bg-[#0B1220] border border-[#24324A] rounded-2xl shadow-2xl transition-all ${
             isMinimized ? 'w-80 h-16' : 'w-96 h-[600px] max-h-[90vh]'
           } flex flex-col`}
         >
-          <div className="bg-linear-to-r from-purple-500 to-pink-500 p-4 rounded-t-2xl flex items-center justify-between">
+          <div className="bg-linear-to-b from-[#111B2E] to-[#0B1220] p-4 rounded-t-2xl flex items-center justify-between border-b border-[#24324A]">
             <div className="flex items-center gap-3">
               <img
                 src="/images/Mercy-avatar.png"
@@ -361,9 +395,9 @@ export default function SiteChatbot() {
                 className="w-11 h-11 rounded-full object-cover shadow-lg"
               />
               <div>
-                <div className="font-bold text-white text-lg">Mercy AI</div>
-                <div className="text-xs text-purple-100 flex items-center gap-1">
-                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                <div className="font-bold text-[#E5E7EB] text-lg">Mercy AI</div>
+                <div className="text-xs text-[#94A3B8] flex items-center gap-1">
+                  <div className="w-2 h-2 bg-emerald-500/80 rounded-full animate-pulse" />
                   Online • Responds instantly
                 </div>
               </div>
@@ -371,14 +405,14 @@ export default function SiteChatbot() {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setIsMinimized(!isMinimized)}
-                className="text-white hover:bg-white/20 p-2 rounded-lg transition-colors"
+                className="text-[#E5E7EB] hover:bg-[#24324A]/50 p-2 rounded-lg transition-colors"
                 aria-label={isMinimized ? 'Maximize' : 'Minimize'}
               >
                 {isMinimized ? <Maximize2 className="w-5 h-5" /> : <Minimize2 className="w-5 h-5" />}
               </button>
               <button
                 onClick={() => setIsOpen(false)}
-                className="text-white hover:bg-white/20 p-2 rounded-lg transition-colors"
+                className="text-[#E5E7EB] hover:bg-[#24324A]/50 p-2 rounded-lg transition-colors"
                 aria-label="Close chat"
               >
                 <X className="w-5 h-5" />
@@ -390,27 +424,28 @@ export default function SiteChatbot() {
             <>
               <div
                 ref={scrollContainerRef}
-                className="flex-1 overflow-y-auto overscroll-contain px-4 pt-4 pb-8 bg-linear-to-b from-slate-800/50 to-slate-900/50 min-h-0"
+                className="flex-1 overflow-y-auto overscroll-contain px-4 pt-4 pb-10 bg-[#0B1220] min-h-0"
               >
-                <div className="space-y-5 pb-6">
+                <div className="space-y-5 pb-10">
                   {messages.map((message, idx) => (
-                    <div key={idx} className="space-y-2">
+                    <div key={idx} className="space-y-2 flex-shrink-0">
                       <div
-                        className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                        className={`flex flex-shrink-0 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                       >
                         <div
-                          className={`max-w-[85%] rounded-2xl px-4 py-3 shadow-lg ${
+                          data-chat-bubble
+                          className={`inline-flex flex-col w-fit max-w-[85%] rounded-2xl px-4 py-3.5 shadow-lg ${
                             message.role === 'user'
-                              ? 'bg-linear-to-r from-purple-500 to-pink-500 text-white'
-                              : 'bg-slate-700 text-slate-100 border border-slate-600'
+                              ? 'bg-linear-to-r from-[#6D28D9] to-[#4F46E5] text-white'
+                              : 'bg-[#111B2E] text-[#E5E7EB] border border-[#24324A]'
                           }`}
                         >
-                          <div className="text-[15px] leading-6 whitespace-pre-wrap font-normal">
+                          <div data-chat-bubble-content className="text-[15px] leading-[1.6] whitespace-pre-wrap break-words font-normal antialiased min-h-[1.6em]">
                             {message.content.replace(/\*\*(.*?)\*\*/g, '$1')}
                           </div>
                           <div
-                            className={`text-xs mt-2 ${
-                              message.role === 'user' ? 'text-purple-100/90' : 'text-slate-400'
+                            className={`text-[11px] mt-1 opacity-80 antialiased ${
+                              message.role === 'user' ? 'text-white' : 'text-[#94A3B8]'
                             }`}
                           >
                             {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
@@ -419,14 +454,14 @@ export default function SiteChatbot() {
                       </div>
                       {message.showBookingCta && (
                         <div className="flex justify-start">
-                          <div className="rounded-xl bg-slate-800/70 border border-slate-600/50 px-3 py-2.5 inline-flex flex-wrap gap-1.5">
-                            <BookingLink className="inline-flex items-center gap-1 px-2 py-1.5 rounded-md text-xs font-medium text-purple-300 hover:text-purple-200 hover:bg-purple-500/20 transition-colors">
+                          <div className="rounded-xl bg-[#111B2E] border border-[#24324A] px-3 py-2.5 inline-flex flex-wrap gap-1.5">
+                            <BookingLink className="inline-flex items-center gap-1 px-2 py-1.5 rounded-md text-xs font-medium text-[#E5E7EB] hover:bg-[#6D28D9]/20 hover:text-white transition-colors">
                               <Calendar className="w-3 h-3" />
                               Book a Demo
                             </BookingLink>
                             <a
                               href="/contact"
-                              className="inline-flex items-center gap-1 px-2 py-1.5 rounded-md text-xs font-medium text-slate-400 hover:text-slate-300 transition-colors"
+                              className="inline-flex items-center gap-1 px-2 py-1.5 rounded-md text-xs font-medium text-[#94A3B8] hover:text-[#E5E7EB] transition-colors"
                             >
                               <Mail className="w-3 h-3" />
                               Contact us
@@ -439,11 +474,11 @@ export default function SiteChatbot() {
 
                   {isLoading && (
                     <div className="flex justify-start">
-                      <div className="rounded-2xl bg-slate-700/90 border border-slate-600 px-4 py-3 shadow-sm">
+                      <div className="rounded-2xl bg-[#111B2E] border border-[#24324A] px-4 py-3 shadow-sm">
                         <div className="flex items-center gap-1.5" aria-label="Mercy is typing">
-                          <span className="w-2 h-2 rounded-full bg-slate-400/90 animate-bounce [animation-delay:0ms]" />
-                          <span className="w-2 h-2 rounded-full bg-slate-400/90 animate-bounce [animation-delay:150ms]" />
-                          <span className="w-2 h-2 rounded-full bg-slate-400/90 animate-bounce [animation-delay:300ms]" />
+                          <span className="w-2 h-2 rounded-full bg-[#94A3B8] animate-bounce [animation-delay:0ms]" />
+                          <span className="w-2 h-2 rounded-full bg-[#94A3B8] animate-bounce [animation-delay:150ms]" />
+                          <span className="w-2 h-2 rounded-full bg-[#94A3B8] animate-bounce [animation-delay:300ms]" />
                         </div>
                       </div>
                     </div>
@@ -457,7 +492,7 @@ export default function SiteChatbot() {
                         key={label}
                         type="button"
                         onClick={() => handleQuickReply(value)}
-                        className="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-700/80 text-slate-200 border border-slate-600 hover:bg-slate-600 hover:border-slate-500 transition-colors"
+                        className="px-3 py-1.5 rounded-lg text-xs font-medium bg-transparent text-[#E5E7EB] border border-[#24324A] hover:bg-[#24324A]/50 transition-colors"
                       >
                         {label}
                       </button>
@@ -466,8 +501,8 @@ export default function SiteChatbot() {
                 )}
 
                 {showLeadForm && !leadSubmitted && (
-                  <div className="rounded-2xl bg-slate-700/80 border border-slate-600 p-4 space-y-3 mt-4">
-                    <p className="text-sm text-slate-200 font-medium">
+                  <div className="rounded-2xl bg-[#111B2E] border border-[#24324A] p-4 space-y-3 mt-4">
+                    <p className="text-sm text-[#E5E7EB] font-medium">
                       Get a tailored quote or demo — share your details and we&apos;ll follow up quickly.
                     </p>
                     <form onSubmit={handleLeadSubmit} className="space-y-2">
@@ -476,21 +511,21 @@ export default function SiteChatbot() {
                         placeholder="Business name"
                         value={leadForm.businessName}
                         onChange={(e) => setLeadForm((f) => ({ ...f, businessName: e.target.value }))}
-                        className="w-full rounded-lg bg-slate-800 border border-slate-600 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-purple-500"
+                        className="w-full rounded-lg bg-[#0B1220] border border-[#24324A] px-3 py-2 text-sm text-[#E5E7EB] placeholder:text-[#94A3B8] focus:outline-none focus:border-[#6D28D9] focus:ring-2 focus:ring-[#6D28D9]/20"
                       />
                       <input
                         type="email"
                         placeholder="Email"
                         value={leadForm.email}
                         onChange={(e) => setLeadForm((f) => ({ ...f, email: e.target.value }))}
-                        className="w-full rounded-lg bg-slate-800 border border-slate-600 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-purple-500"
+                        className="w-full rounded-lg bg-[#0B1220] border border-[#24324A] px-3 py-2 text-sm text-[#E5E7EB] placeholder:text-[#94A3B8] focus:outline-none focus:border-[#6D28D9] focus:ring-2 focus:ring-[#6D28D9]/20"
                       />
                       <input
                         type="tel"
                         placeholder="Phone"
                         value={leadForm.phone}
                         onChange={(e) => setLeadForm((f) => ({ ...f, phone: e.target.value }))}
-                        className="w-full rounded-lg bg-slate-800 border border-slate-600 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-purple-500"
+                        className="w-full rounded-lg bg-[#0B1220] border border-[#24324A] px-3 py-2 text-sm text-[#E5E7EB] placeholder:text-[#94A3B8] focus:outline-none focus:border-[#6D28D9] focus:ring-2 focus:ring-[#6D28D9]/20"
                       />
                       {leadError && (
                         <p className="text-xs text-amber-400" role="alert">{leadError}</p>
@@ -498,7 +533,7 @@ export default function SiteChatbot() {
                       <button
                         type="submit"
                         disabled={leadSubmitting}
-                        className="w-full rounded-lg bg-linear-to-r from-purple-500 to-pink-500 text-white text-sm font-medium py-2.5 hover:opacity-90 disabled:opacity-50"
+                        className="w-full rounded-lg bg-[#6D28D9] text-white text-sm font-medium py-2.5 hover:bg-[#5B21B6] focus:outline-none focus:ring-2 focus:ring-[#6D28D9]/50 disabled:opacity-50 transition-colors"
                       >
                         {leadSubmitting ? 'Sending…' : 'Submit'}
                       </button>
@@ -507,11 +542,11 @@ export default function SiteChatbot() {
                 )}
 
                 {leadSubmitted && (
-                  <div className="rounded-2xl bg-slate-700/80 border border-slate-600 p-4 space-y-2 mt-4">
-                    <p className="text-sm text-slate-200 font-medium">
+                  <div className="rounded-2xl bg-[#111B2E] border border-[#24324A] p-4 space-y-2 mt-4">
+                    <p className="text-sm text-[#E5E7EB] font-medium">
                       Thanks! We&apos;ve received your info and will reach out soon.
                     </p>
-                    <BookingLink className="inline-flex items-center gap-1.5 text-sm font-medium text-neon-cyan hover:text-cyan-300">
+                    <BookingLink className="inline-flex items-center gap-1.5 text-sm font-medium text-[#22D3EE] hover:text-[#22D3EE]/90">
                       <Calendar className="w-4 h-4" />
                       Schedule a demo
                     </BookingLink>
@@ -519,8 +554,8 @@ export default function SiteChatbot() {
                 )}
 
                 {errorState !== 'idle' && !isLoading && (
-                  <div className="rounded-xl bg-slate-800/70 border border-slate-600/50 px-3 py-2.5 mt-4">
-                    <p className="text-xs text-slate-400 mb-2">
+                  <div className="rounded-xl bg-[#111B2E] border border-[#24324A] px-3 py-2.5 mt-4">
+                    <p className="text-xs text-[#94A3B8] mb-2">
                       {errorState === 'rate-limited'
                         ? 'Too many messages. Wait a moment or use the links below.'
                         : 'Connection issue. Reach us:'}
@@ -529,25 +564,25 @@ export default function SiteChatbot() {
                       <button
                         type="button"
                         onClick={handleRetry}
-                        className="inline-flex items-center gap-1 px-2 py-1.5 rounded-md text-xs font-medium bg-slate-600/80 text-slate-300 hover:bg-slate-500/80 transition-colors"
+                        className="inline-flex items-center gap-1 px-2 py-1.5 rounded-md text-xs font-medium bg-transparent text-[#E5E7EB] border border-[#24324A] hover:bg-[#24324A]/50 transition-colors"
                       >
                         <RefreshCw className="w-3 h-3" />
                         Retry
                       </button>
-                      <BookingLink className="inline-flex items-center gap-1 px-2 py-1.5 rounded-md text-xs font-medium text-purple-300 hover:text-purple-200 hover:bg-purple-500/20 transition-colors">
+                      <BookingLink className="inline-flex items-center gap-1 px-2 py-1.5 rounded-md text-xs font-medium text-[#E5E7EB] hover:bg-[#6D28D9]/20 hover:text-white transition-colors">
                         <Calendar className="w-3 h-3" />
                         Book demo
                       </BookingLink>
                       <a
                         href="/contact"
-                        className="inline-flex items-center gap-1 px-2 py-1.5 rounded-md text-xs font-medium text-slate-400 hover:text-slate-300 transition-colors"
+                        className="inline-flex items-center gap-1 px-2 py-1.5 rounded-md text-xs font-medium text-[#94A3B8] hover:text-[#E5E7EB] transition-colors"
                       >
                         <Mail className="w-3 h-3" />
                         Contact
                       </a>
                       <a
                         href="tel:+17033325956"
-                        className="inline-flex items-center gap-1 px-2 py-1.5 rounded-md text-xs font-medium text-emerald-400/90 hover:text-emerald-300 transition-colors"
+                        className="inline-flex items-center gap-1 px-2 py-1.5 rounded-md text-xs font-medium text-[#22D3EE] hover:text-[#22D3EE]/90 transition-colors"
                       >
                         <Phone className="w-3 h-3" />
                         Call
@@ -559,7 +594,7 @@ export default function SiteChatbot() {
                 <div ref={messagesEndRef} className="h-0" aria-hidden />
               </div>
 
-              <div className="shrink-0 p-4 pt-3 bg-slate-900 rounded-b-2xl border-t border-slate-700">
+              <div className="shrink-0 p-4 pt-3 bg-[#0B1220] rounded-b-2xl border-t border-[#24324A]">
                 <div className="flex gap-2">
                   <input
                     ref={inputRef}
@@ -569,24 +604,24 @@ export default function SiteChatbot() {
                     onKeyDown={handleKeyPress}
                     placeholder="Type your message..."
                     maxLength={MAX_MESSAGE_LENGTH}
-                    className="flex-1 bg-slate-800 text-white border border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all"
+                    className="flex-1 bg-[#111B2E] text-[#E5E7EB] border border-[#24324A] rounded-lg px-4 py-3 placeholder:text-[#94A3B8] focus:outline-none focus:border-[#6D28D9] focus:ring-2 focus:ring-[#6D28D9]/20 transition-all"
                     disabled={isLoading}
                   />
                   <button
                     onClick={() => handleSend()}
                     disabled={!input.trim() || isLoading}
-                    className="bg-linear-to-r from-purple-500 to-pink-500 text-white px-5 py-3 rounded-lg hover:scale-105 transition-transform disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-lg"
+                    className="bg-[#6D28D9] text-white px-5 py-3 rounded-lg hover:bg-[#5B21B6] focus:outline-none focus:ring-2 focus:ring-[#6D28D9]/50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
                     aria-label="Send message"
                   >
                     <Send className="w-5 h-5" />
                   </button>
                 </div>
-                <div className="text-xs text-slate-500 mt-2.5 text-center">
+                <div className="text-xs text-[#94A3B8] mt-2.5 text-center">
                   {input.length > MAX_MESSAGE_LENGTH * 0.9 && (
                     <span className="text-amber-400">{input.length}/{MAX_MESSAGE_LENGTH}</span>
                   )}
                   {' '}
-                  Powered by AI • <a href="tel:7033325956" className="text-purple-400 hover:text-purple-300 font-medium">Call (703) 332-5956</a>
+                  Powered by AI • <a href="tel:7033325956" className="text-[#22D3EE] hover:text-[#22D3EE]/90 font-medium">Call (703) 332-5956</a>
                 </div>
               </div>
             </>
