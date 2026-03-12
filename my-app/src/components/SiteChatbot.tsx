@@ -1,7 +1,9 @@
+'use client';
+
 import React, { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { X, Send, Minimize2, Maximize2, RefreshCw, Calendar, Mail } from 'lucide-react';
+import { X, Send, Minimize2, Maximize2, RefreshCw, Calendar, Mail, Phone } from 'lucide-react';
 import { BookingLink } from '@/components/cta/booking-link';
+// Contact links use <a href> for compatibility with current Vite build. On Next.js App Router, use: import Link from 'next/link' and <Link href="/contact">.
 
 // =============================================================================
 // WEBSITE CHATBOT — OpenAI, conversion-focused: quick replies, lead capture, guardrails
@@ -22,13 +24,27 @@ const QUICK_REPLIES = [
   { label: "Talk to a human", value: "I'd prefer to talk to a human. How do I reach your team?" },
 ] as const;
 
+/** Lightweight intent check: user wants to book/schedule/call/talk — show CTA card without calling API. */
+function isBookingIntent(text: string): boolean {
+  const lower = text.toLowerCase().trim();
+  const triggers = [
+    'book a demo', 'book demo', 'schedule a demo', 'schedule demo',
+    'schedule', 'book a call', 'book call', 'schedule a call', 'schedule a meeting',
+    'call', 'talk', 'meeting', 'set up a call', 'set up call',
+    'speak with', 'speak to', 'talk to someone', 'talk with',
+  ];
+  return triggers.some((t) => lower.includes(t));
+}
+
 interface Message {
   role: 'user' | 'assistant';
   content: string;
   timestamp: Date;
+  /** When true, render Book a Demo + Contact CTA card below this message. */
+  showBookingCta?: boolean;
 }
 
-export default function ClaudeChatbot() {
+export default function SiteChatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
@@ -38,6 +54,8 @@ export default function ClaudeChatbot() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorState, setErrorState] = useState<'idle' | 'error' | 'rate-limited'>('idle');
   const [retryCount, setRetryCount] = useState(0);
+  /** When true, show the calm premium fallback card (Book demo, Contact, Call) instead of spamming history. */
+  const [showPremiumFallback, setShowPremiumFallback] = useState(false);
 
   // Lead capture: show after 2 assistant replies OR when API returns askForLead
   const [showLeadForm, setShowLeadForm] = useState(false);
@@ -47,10 +65,36 @@ export default function ClaudeChatbot() {
   const [leadError, setLeadError] = useState<string | null>(null);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const userScrolledUpRef = useRef(false);
 
-  const scrollToBottom = () => messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  useEffect(() => scrollToBottom(), [messages]);
+  const scrollToBottom = (behavior: ScrollBehavior = 'smooth') => {
+    messagesEndRef.current?.scrollIntoView({ behavior });
+  };
+
+  const isNearBottom = (el: HTMLDivElement, threshold = 120) => {
+    const { scrollTop, scrollHeight, clientHeight } = el;
+    return scrollHeight - scrollTop - clientHeight <= threshold;
+  };
+
+  useEffect(() => {
+    const el = scrollContainerRef.current;
+    if (!el || !messages.length) return;
+    if (userScrolledUpRef.current) return;
+    scrollToBottom('smooth');
+  }, [messages, isLoading]);
+
+  useEffect(() => {
+    const el = scrollContainerRef.current;
+    if (!el) return;
+    const onScroll = () => {
+      userScrolledUpRef.current = !isNearBottom(el);
+    };
+    el.addEventListener('scroll', onScroll, { passive: true });
+    return () => el.removeEventListener('scroll', onScroll);
+  }, [isOpen, isMinimized]);
+
   useEffect(() => {
     if (isOpen && !isMinimized) inputRef.current?.focus();
   }, [isOpen, isMinimized]);
@@ -61,43 +105,64 @@ export default function ClaudeChatbot() {
     ok: boolean;
     response?: string;
     askForLead?: boolean;
+    fallbackCta?: boolean;
     error?: string;
     fallbackMessage?: string;
     retryAfter?: number;
+    networkError?: boolean;
   }> => {
     const conversationHistory = messages
       .filter((m) => m.role === 'user' || m.role === 'assistant')
       .map((m) => ({ role: m.role, content: m.content }));
     const context = typeof window !== 'undefined' ? window.location.pathname : undefined;
 
-    const response = await fetch('/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        userMessage: userMessage.slice(0, MAX_MESSAGE_LENGTH),
-        conversationHistory: conversationHistory.slice(-20),
-        context,
-      }),
-    });
+    let response: Response;
+    try {
+      response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userMessage: userMessage.slice(0, MAX_MESSAGE_LENGTH),
+          conversationHistory: conversationHistory.slice(-20),
+          context,
+        }),
+        cache: 'no-store',
+      });
+    } catch {
+      return { ok: false, error: 'Failed to fetch', networkError: true };
+    }
 
-    const data = await response.json().catch(() => ({}));
+    let data: Record<string, unknown> = {};
+    const contentType = response.headers.get('content-type');
+    if (contentType?.includes('application/json')) {
+      data = await response.json().catch(() => ({}));
+    } else {
+      await response.text().catch(() => '');
+      return {
+        ok: false,
+        error: 'Invalid response from server. Please try again or use the options below.',
+        fallbackMessage: FALLBACK_MESSAGE,
+      };
+    }
+
     if (response.status === 429) {
-      return { ok: false, error: data.error || 'Too many requests', retryAfter: data.retryAfter };
+      return { ok: false, error: (data.error as string) || 'Too many requests', retryAfter: data.retryAfter as number | undefined };
     }
     if (response.status === 400) {
-      return { ok: false, error: data.error || 'Invalid request' };
+      return { ok: false, error: (data.error as string) || 'Invalid request' };
     }
     if (!response.ok) {
       return {
         ok: false,
-        error: data.error || 'Request failed',
-        fallbackMessage: data.fallbackMessage || FALLBACK_MESSAGE,
+        error: (data.error as string) || 'Request failed',
+        fallbackMessage: (data.fallbackMessage as string) || FALLBACK_MESSAGE,
       };
     }
     return {
       ok: true,
-      response: data.response,
+      response: data.response as string | undefined,
       askForLead: Boolean(data.askForLead),
+      fallbackCta: Boolean(data.fallbackCta),
     };
   };
 
@@ -108,21 +173,45 @@ export default function ClaudeChatbot() {
     setInput('');
     setIsLoading(true);
     setErrorState('idle');
+    setShowPremiumFallback(false);
+    userScrolledUpRef.current = false;
 
     const newUserMessage: Message = { role: 'user', content: raw, timestamp: new Date() };
     setMessages((prev) => [...prev, newUserMessage]);
 
-    const result = await sendToApi(raw);
+    // Intent routing: if user clearly wants to book/schedule/call, show CTA card immediately (no API call).
+    if (isBookingIntent(raw)) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: 'assistant',
+          content: "I'd love to help you get on the calendar or connect with the team. What industry are you in?",
+          timestamp: new Date(),
+          showBookingCta: true,
+        },
+      ]);
+      setIsLoading(false);
+      return;
+    }
+
+    let result = await sendToApi(raw);
+    if (!result.ok && result.networkError) {
+      result = await sendToApi(raw);
+    }
     setIsLoading(false);
 
     if (result.ok && result.response) {
       setMessages((prev) => [
         ...prev,
-        { role: 'assistant', content: result.response!, timestamp: new Date() },
+        {
+          role: 'assistant',
+          content: result.response!,
+          timestamp: new Date(),
+          showBookingCta: result.fallbackCta ?? false,
+        },
       ]);
       setErrorState('idle');
       setRetryCount(0);
-      // Show lead form after 2 assistant replies OR when API says askForLead
       const shouldAskLead = result.askForLead || assistantReplyCount + 1 >= 2;
       if (shouldAskLead && !showLeadForm && !leadSubmitted) setShowLeadForm(true);
       return;
@@ -130,21 +219,48 @@ export default function ClaudeChatbot() {
 
     if (result.retryAfter != null) setErrorState('rate-limited');
     else setErrorState('error');
-
-    const fallback = result.fallbackMessage || result.error || FALLBACK_MESSAGE;
-    setMessages((prev) => [
-      ...prev,
-      { role: 'assistant', content: fallback, timestamp: new Date() },
-    ]);
+    setShowPremiumFallback(true);
+    // Show only the premium fallback card (Retry / Book demo / Contact / Call); do not append fallback text to history to avoid spam
   };
 
-  const handleRetry = () => {
+  const handleRetry = async () => {
     const lastUser = [...messages].reverse().find((m) => m.role === 'user');
-    if (lastUser) {
-      setMessages((prev) => prev.slice(0, -2));
-      setRetryCount((c) => c + 1);
-      handleSend(lastUser.content);
+    if (!lastUser) return;
+    // Remove only the last assistant (fallback) message if present, then retry once
+    setMessages((prev) => {
+      const last = prev[prev.length - 1];
+      if (last?.role === 'assistant') return prev.slice(0, -1);
+      return prev;
+    });
+    setRetryCount((c) => c + 1);
+    setIsLoading(true);
+    setErrorState('idle');
+    setShowPremiumFallback(false);
+    userScrolledUpRef.current = false;
+
+    let result = await sendToApi(lastUser.content);
+    if (!result.ok && result.networkError) result = await sendToApi(lastUser.content);
+    setIsLoading(false);
+
+    if (result.ok && result.response) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: 'assistant',
+          content: result.response!,
+          timestamp: new Date(),
+          showBookingCta: result.fallbackCta ?? false,
+        },
+      ]);
+      setErrorState('idle');
+      setRetryCount(0);
+      const count = messages.filter((m) => m.role === 'assistant').length + 1;
+      if ((result.askForLead || count >= 2) && !showLeadForm && !leadSubmitted) setShowLeadForm(true);
+      return;
     }
+    if (result.retryAfter != null) setErrorState('rate-limited');
+    else setErrorState('error');
+    setShowPremiumFallback(true);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -259,47 +375,70 @@ export default function ClaudeChatbot() {
 
           {!isMinimized && (
             <>
-              <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-linear-to-b from-slate-800/50 to-slate-900/50">
-                {messages.map((message, idx) => (
-                  <div
-                    key={idx}
-                    className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
-                  >
-                    <div
-                      className={`max-w-[85%] rounded-2xl px-4 py-3 shadow-lg ${
-                        message.role === 'user'
-                          ? 'bg-linear-to-r from-purple-500 to-pink-500 text-white'
-                          : 'bg-slate-700 text-slate-100 border border-slate-600'
-                      }`}
-                    >
-                      <div className="text-sm leading-relaxed whitespace-pre-wrap">
-                        {message.content.replace(/\*\*(.*?)\*\*/g, '$1')}
-                      </div>
+              <div
+                ref={scrollContainerRef}
+                className="flex-1 overflow-y-auto overscroll-contain px-4 pt-4 pb-8 bg-linear-to-b from-slate-800/50 to-slate-900/50 min-h-0"
+              >
+                <div className="space-y-5 pb-6">
+                  {messages.map((message, idx) => (
+                    <div key={idx} className="space-y-2">
                       <div
-                        className={`text-xs mt-1.5 ${
-                          message.role === 'user' ? 'text-purple-100' : 'text-slate-400'
-                        }`}
+                        className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                       >
-                        {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                        <div
+                          className={`max-w-[85%] rounded-2xl px-4 py-3 shadow-lg ${
+                            message.role === 'user'
+                              ? 'bg-linear-to-r from-purple-500 to-pink-500 text-white'
+                              : 'bg-slate-700 text-slate-100 border border-slate-600'
+                          }`}
+                        >
+                          <div className="text-[15px] leading-6 whitespace-pre-wrap font-normal">
+                            {message.content.replace(/\*\*(.*?)\*\*/g, '$1')}
+                          </div>
+                          <div
+                            className={`text-xs mt-2 ${
+                              message.role === 'user' ? 'text-purple-100/90' : 'text-slate-400'
+                            }`}
+                          >
+                            {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                          </div>
+                        </div>
                       </div>
+                      {message.showBookingCta && (
+                        <div className="flex justify-start">
+                          <div className="rounded-xl bg-slate-800/70 border border-slate-600/50 px-3 py-2.5 inline-flex flex-wrap gap-1.5">
+                            <BookingLink className="inline-flex items-center gap-1 px-2 py-1.5 rounded-md text-xs font-medium text-purple-300 hover:text-purple-200 hover:bg-purple-500/20 transition-colors">
+                              <Calendar className="w-3 h-3" />
+                              Book a Demo
+                            </BookingLink>
+                            <a
+                              href="/contact"
+                              className="inline-flex items-center gap-1 px-2 py-1.5 rounded-md text-xs font-medium text-slate-400 hover:text-slate-300 transition-colors"
+                            >
+                              <Mail className="w-3 h-3" />
+                              Contact us
+                            </a>
+                          </div>
+                        </div>
+                      )}
                     </div>
-                  </div>
-                ))}
+                  ))}
 
-                {isLoading && (
-                  <div className="flex justify-start">
-                    <div className="bg-slate-700 border border-slate-600 rounded-2xl px-4 py-3 shadow-lg">
-                      <div className="flex gap-1.5">
-                        <div className="w-2.5 h-2.5 bg-purple-400 rounded-full animate-bounce" />
-                        <div className="w-2.5 h-2.5 bg-purple-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }} />
-                        <div className="w-2.5 h-2.5 bg-purple-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
+                  {isLoading && (
+                    <div className="flex justify-start">
+                      <div className="rounded-2xl bg-slate-700/90 border border-slate-600 px-4 py-3 shadow-sm">
+                        <div className="flex items-center gap-1.5" aria-label="Mercy is typing">
+                          <span className="w-2 h-2 rounded-full bg-slate-400/90 animate-bounce [animation-delay:0ms]" />
+                          <span className="w-2 h-2 rounded-full bg-slate-400/90 animate-bounce [animation-delay:150ms]" />
+                          <span className="w-2 h-2 rounded-full bg-slate-400/90 animate-bounce [animation-delay:300ms]" />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                )}
+                  )}
+                </div>
 
                 {showQuickReplies && (
-                  <div className="flex flex-wrap gap-2 pt-2">
+                  <div className="flex flex-wrap gap-2 pt-2 mt-2">
                     {QUICK_REPLIES.map(({ label, value }) => (
                       <button
                         key={label}
@@ -314,7 +453,7 @@ export default function ClaudeChatbot() {
                 )}
 
                 {showLeadForm && !leadSubmitted && (
-                  <div className="rounded-2xl bg-slate-700/80 border border-slate-600 p-4 space-y-3">
+                  <div className="rounded-2xl bg-slate-700/80 border border-slate-600 p-4 space-y-3 mt-4">
                     <p className="text-sm text-slate-200 font-medium">
                       Get a tailored quote or demo — share your details and we&apos;ll follow up quickly.
                     </p>
@@ -355,7 +494,7 @@ export default function ClaudeChatbot() {
                 )}
 
                 {leadSubmitted && (
-                  <div className="rounded-2xl bg-slate-700/80 border border-slate-600 p-4 space-y-2">
+                  <div className="rounded-2xl bg-slate-700/80 border border-slate-600 p-4 space-y-2 mt-4">
                     <p className="text-sm text-slate-200 font-medium">
                       Thanks! We&apos;ve received your info and will reach out soon.
                     </p>
@@ -367,40 +506,47 @@ export default function ClaudeChatbot() {
                 )}
 
                 {errorState !== 'idle' && !isLoading && (
-                  <div className="rounded-2xl bg-slate-700/80 border border-slate-600 p-3 space-y-2">
-                    <p className="text-xs text-slate-300">
+                  <div className="rounded-xl bg-slate-800/70 border border-slate-600/50 px-3 py-2.5 mt-4">
+                    <p className="text-xs text-slate-400 mb-2">
                       {errorState === 'rate-limited'
-                        ? 'Too many messages. Please wait a moment.'
-                        : 'Something went wrong. You can still reach us directly:'}
+                        ? 'Too many messages. Wait a moment or use the links below.'
+                        : 'Connection issue. Reach us:'}
                     </p>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-1.5">
                       <button
                         type="button"
                         onClick={handleRetry}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-600 text-slate-200 border border-slate-500 hover:bg-slate-500"
+                        className="inline-flex items-center gap-1 px-2 py-1.5 rounded-md text-xs font-medium bg-slate-600/80 text-slate-300 hover:bg-slate-500/80 transition-colors"
                       >
-                        <RefreshCw className="w-3.5 h-3.5" />
-                        Try again
+                        <RefreshCw className="w-3 h-3" />
+                        Retry
                       </button>
-                      <BookingLink className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-purple-600 text-white hover:bg-purple-500">
-                        <Calendar className="w-3.5 h-3.5" />
-                        Book a demo
+                      <BookingLink className="inline-flex items-center gap-1 px-2 py-1.5 rounded-md text-xs font-medium text-purple-300 hover:text-purple-200 hover:bg-purple-500/20 transition-colors">
+                        <Calendar className="w-3 h-3" />
+                        Book demo
                       </BookingLink>
-                      <Link
-                        to="/contact"
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-600 text-slate-200 border border-slate-500 hover:bg-slate-500"
+                      <a
+                        href="/contact"
+                        className="inline-flex items-center gap-1 px-2 py-1.5 rounded-md text-xs font-medium text-slate-400 hover:text-slate-300 transition-colors"
                       >
-                        <Mail className="w-3.5 h-3.5" />
-                        Contact us
-                      </Link>
+                        <Mail className="w-3 h-3" />
+                        Contact
+                      </a>
+                      <a
+                        href="tel:+17033325956"
+                        className="inline-flex items-center gap-1 px-2 py-1.5 rounded-md text-xs font-medium text-emerald-400/90 hover:text-emerald-300 transition-colors"
+                      >
+                        <Phone className="w-3 h-3" />
+                        Call
+                      </a>
                     </div>
                   </div>
                 )}
 
-                <div ref={messagesEndRef} />
+                <div ref={messagesEndRef} className="h-0" aria-hidden />
               </div>
 
-              <div className="p-4 bg-slate-900 rounded-b-2xl border-t border-slate-700">
+              <div className="shrink-0 p-4 pt-3 bg-slate-900 rounded-b-2xl border-t border-slate-700">
                 <div className="flex gap-2">
                   <input
                     ref={inputRef}

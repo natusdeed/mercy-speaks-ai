@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { Header } from '@/components/navigation/header';
 import { Footer } from '@/components/navigation/footer';
-import { ClaudeChatbotWrapper } from '@/components/ClaudeChatbotWrapper';
+import { SiteChatbotWrapper } from '@/components/SiteChatbotWrapper';
 import { ClientErrorHandler } from '@/components/debug/ClientErrorHandler';
 
 // Pages (homepage from app/page.tsx)
@@ -51,7 +51,7 @@ function App() {
           </Routes>
         </main>
         <Footer />
-        <ClaudeChatbotWrapper />
+        <SiteChatbotWrapper />
       </div>
     </>
   );
