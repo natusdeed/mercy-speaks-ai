@@ -3,26 +3,23 @@
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
 
-const CASE_STUDIES = [
+const PROOF_POLICY = [
   {
-    name: "Maria Rodriguez",
-    business: "Rodriguez Law Firm",
-    result: "$24K new revenue in first month",
-    quote: "We were losing 15-20 potential clients per month to missed calls. Since the AI receptionist, we've captured every call and converted 8 new clients in the first month.",
+    label: "No fake testimonials",
+    detail:
+      "We don’t publish invented quotes, names, or “results.” If it’s not verified, it doesn’t go on the site.",
   },
   {
-    name: "James Chen",
-    business: "Chen's Auto Repair",
-    result: "40% reduction in no-shows",
-    quote: "The AI handles scheduling, reminders, and follow-ups. Our receptionist can focus on in-person customers. Best $197 we spend every month.",
+    label: "Live links + screenshots",
+    detail:
+      "Portfolio cards link to real work (or real demos) and use real screenshots—so prospects can verify quality fast.",
   },
   {
-    name: "Sarah Martinez",
-    business: "Martinez HVAC Solutions",
-    result: "60% increase in emergency bookings",
-    quote: "Our AI answers emergency calls at 2 AM, qualifies leads, and books service calls. We never miss a hot lead. The ROI was immediate.",
+    label: "References on request",
+    detail:
+      "If you need references for a similar project, book a call and we’ll share what we can for your niche and scope.",
   },
-];
+] as const;
 
 export function Results() {
   return (
@@ -42,17 +39,17 @@ export function Results() {
             id="results-title"
             className="text-3xl md:text-4xl font-bold text-slate-50 mb-3"
           >
-            Results
+            Social proof
           </h2>
           <p className="text-slate-400 max-w-2xl mx-auto">
-            Real outcomes from Houston businesses.
+            Credibility only: verified proof, real screenshots, and references when appropriate.
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
-          {CASE_STUDIES.map((study, index) => (
+          {PROOF_POLICY.map((item, index) => (
             <motion.article
-              key={study.business}
+              key={item.label}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -68,16 +65,16 @@ export function Results() {
                 ))}
               </div>
               <p className="card-body text-slate-300 flex-1 mb-4">
-                "{study.quote}"
+                {item.detail}
               </p>
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-neon-cyan/10 w-fit mb-4">
                 <span className="text-sm font-semibold text-neon-cyan">
-                  {study.result}
+                  {item.label}
                 </span>
               </div>
               <div>
-                <p className="card-title text-slate-50 mb-0.5">{study.name}</p>
-                <p className="card-body text-slate-400 mb-0">{study.business}</p>
+                <p className="card-title text-slate-50 mb-0.5">Mercy Speaks Digital</p>
+                <p className="card-body text-slate-400 mb-0">Proof policy</p>
               </div>
             </motion.article>
           ))}

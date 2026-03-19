@@ -17,9 +17,11 @@ export interface PortfolioItem {
   title: string;
   url: string;
   category: PortfolioCategory;
+  /** Short summary of what was built */
   description: string;
   stack: string[];
-  metric?: string;
+  /** Optional outcome statement (no fabricated metrics) */
+  outcome?: string;
   thumbnail?: string;
   detailsUrl?: string;
   /** Optional industry/niche tag shown on the card */
@@ -33,19 +35,36 @@ export interface PortfolioItem {
 }
 
 const FILTERS: { value: PortfolioCategory | "All"; label: string }[] = [
-  { value: "All", label: "All" },
   { value: "Websites", label: "Websites" },
-  { value: "Automation", label: "Automation" },
   { value: "AI Receptionist", label: "AI Receptionist" },
+  { value: "Automation", label: "Automation" },
   { value: "E-commerce", label: "E-commerce" },
+  { value: "All", label: "All" },
 ];
 
 interface PortfolioGalleryProps {
   items: PortfolioItem[];
+  /** Default selected category; use "Websites" on homepage for positioning */
+  defaultFilter?: PortfolioCategory | "All";
+  /** Optional eyebrow label above the title */
+  eyebrow?: string;
+  /** Optional heading override */
+  title?: string;
+  /** Optional description override */
+  description?: string;
+  /** Optional id for in-page anchor links */
+  sectionId?: string;
 }
 
-export function PortfolioGallery({ items }: PortfolioGalleryProps) {
-  const [activeFilter, setActiveFilter] = useState<PortfolioCategory | "All">("All");
+export function PortfolioGallery({
+  items,
+  defaultFilter = "All",
+  eyebrow,
+  title = "Portfolio",
+  description = "Explore websites, automation, AI receptionists, and e-commerce projects we’ve built.",
+  sectionId,
+}: PortfolioGalleryProps) {
+  const [activeFilter, setActiveFilter] = useState<PortfolioCategory | "All">(defaultFilter);
 
   const filtered =
     activeFilter === "All"
@@ -53,27 +72,33 @@ export function PortfolioGallery({ items }: PortfolioGalleryProps) {
       : items.filter((item) => item.category === activeFilter);
 
   return (
-    <section className="section" aria-label="Portfolio gallery">
+    <section id={sectionId} className="section scroll-mt-24" aria-label="Portfolio gallery">
       <div className="section-inner max-w-5xl mx-auto">
+        {eyebrow && (
+          <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">
+            {eyebrow}
+          </p>
+        )}
         <h2 className="text-2xl md:text-3xl font-bold text-slate-50 mb-2">
-          Portfolio Gallery
+          {title}
         </h2>
         <p className="text-slate-400 mb-6 max-w-2xl">
-          Projects we&apos;ve built: websites, automation, AI receptionists, and e-commerce.
+          {description}
         </p>
 
         {/* Filter chips */}
-        <div className="flex flex-wrap gap-2 mb-8">
+        <div className="flex gap-2 mb-8 overflow-x-auto pb-2 -mx-1 px-1 md:flex-wrap md:overflow-visible md:pb-0 md:mx-0 md:px-0">
           {FILTERS.map((filter) => (
             <button
               key={filter.value}
               type="button"
               onClick={() => setActiveFilter(filter.value)}
+              aria-pressed={activeFilter === filter.value}
               className={cn(
-                "px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200",
+                "shrink-0 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
                 activeFilter === filter.value
-                  ? "bg-electric-purple/20 text-electric-purple border border-electric-purple/40"
-                  : "bg-slate-800/50 text-slate-400 border border-slate-700/50 hover:bg-slate-800 hover:text-slate-300 hover:border-slate-600"
+                  ? "bg-electric-purple/20 text-slate-50 border border-electric-purple/40 shadow-[0_0_0_1px_rgba(139,92,246,0.15)]"
+                  : "bg-slate-900/30 text-slate-300 border border-slate-800/60 hover:bg-slate-900/60 hover:text-slate-50 hover:border-slate-700"
               )}
             >
               {filter.label}
@@ -103,11 +128,13 @@ export function PortfolioGallery({ items }: PortfolioGalleryProps) {
                       rel="noopener noreferrer"
                       className="block h-full w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 rounded-2xl"
                     >
+                      {/* Thumbnail placeholder: keep screenshots at 16:10 for consistent portfolio cards. */}
                       <img
                         src={item.thumbnail}
-                        alt=""
+                        alt={`${item.title} website thumbnail`}
                         className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                         loading="lazy"
+                        decoding="async"
                       />
                       <div
                         className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none"
@@ -119,11 +146,6 @@ export function PortfolioGallery({ items }: PortfolioGalleryProps) {
                       className="h-full w-full bg-linear-to-br from-slate-800 via-slate-800/90 to-electric-purple/10"
                       aria-hidden
                     />
-                  )}
-                  {item.metric && (
-                    <span className="absolute top-3 right-3 px-2.5 py-1 rounded-lg bg-slate-900/90 text-xs font-semibold text-neon-cyan backdrop-blur-sm">
-                      {item.metric}
-                    </span>
                   )}
                 </div>
 
@@ -148,6 +170,14 @@ export function PortfolioGallery({ items }: PortfolioGalleryProps) {
                 <p className="text-slate-400 text-sm leading-relaxed mb-4 line-clamp-2 flex-1">
                   {item.description}
                 </p>
+
+                {/* Outcome */}
+                {item.outcome && (
+                  <p className="text-slate-300 text-sm leading-relaxed mb-4">
+                    <span className="text-slate-500 font-medium">Outcome: </span>
+                    {item.outcome}
+                  </p>
+                )}
 
                 {/* Stack tags */}
                 <div className="flex flex-wrap gap-2 mb-4">

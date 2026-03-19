@@ -1,0 +1,44 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1600" y2="1000" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#020617"/>
+      <stop offset="0.6" stop-color="#0B1224"/>
+      <stop offset="1" stop-color="#020617"/>
+    </linearGradient>
+    <radialGradient id="glowCyan2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(520 640) rotate(-18) scale(720 520)">
+      <stop stop-color="#06b6d4" stop-opacity="0.26"/>
+      <stop offset="1" stop-color="#06b6d4" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowPurple2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1130 350) rotate(18) scale(740 520)">
+      <stop stop-color="#8b5cf6" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#8b5cf6" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="stroke2" x1="240" y1="210" x2="1360" y2="790" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8b5cf6" stop-opacity="0.75"/>
+      <stop offset="1" stop-color="#06b6d4" stop-opacity="0.75"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="1000" rx="64" fill="url(#bg2)"/>
+  <rect width="1600" height="1000" rx="64" fill="url(#glowCyan2)"/>
+  <rect width="1600" height="1000" rx="64" fill="url(#glowPurple2)"/>
+
+  <rect x="200" y="180" width="1200" height="640" rx="36" fill="#0B1224" fill-opacity="0.55" stroke="url(#stroke2)" stroke-opacity="0.55" stroke-width="2"/>
+  <rect x="240" y="230" width="1120" height="92" rx="22" fill="#0F172A" fill-opacity="0.75"/>
+  <rect x="270" y="260" width="290" height="30" rx="15" fill="#8b5cf6" fill-opacity="0.28"/>
+  <rect x="580" y="260" width="220" height="30" rx="15" fill="#94A3B8" fill-opacity="0.18"/>
+  <rect x="820" y="260" width="240" height="30" rx="15" fill="#94A3B8" fill-opacity="0.14"/>
+
+  <rect x="240" y="360" width="700" height="220" rx="30" fill="#0F172A" fill-opacity="0.7"/>
+  <rect x="980" y="360" width="380" height="220" rx="30" fill="#0F172A" fill-opacity="0.7"/>
+  <rect x="240" y="610" width="380" height="190" rx="30" fill="#0F172A" fill-opacity="0.62"/>
+  <rect x="650" y="610" width="710" height="190" rx="30" fill="#0F172A" fill-opacity="0.62"/>
+
+  <g font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji'">
+    <text x="270" y="445" font-size="38" font-weight="700" fill="#E2E8F0">Embeddable Widget Portal</text>
+    <text x="270" y="498" font-size="22" font-weight="500" fill="#94A3B8">Install page + branded widget frame for multi-tenant rollout</text>
+
+    <text x="270" y="760" font-size="18" font-weight="600" fill="#8b5cf6">Web app UI</text>
+    <text x="270" y="795" font-size="18" font-weight="500" fill="#94A3B8">Thumbnail placeholder  replace with screenshot</text>
+  </g>
+</svg>

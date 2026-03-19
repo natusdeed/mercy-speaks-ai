@@ -1,0 +1,45 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="1000" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#020617"/>
+      <stop offset="0.55" stop-color="#0B1224"/>
+      <stop offset="1" stop-color="#020617"/>
+    </linearGradient>
+    <radialGradient id="glowCyan" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(420 310) rotate(22) scale(620 420)">
+      <stop stop-color="#06b6d4" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#06b6d4" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowPurple" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1120 650) rotate(-12) scale(680 460)">
+      <stop stop-color="#8b5cf6" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#8b5cf6" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="stroke" x1="260" y1="190" x2="1340" y2="810" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#06b6d4" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="#8b5cf6" stop-opacity="0.8"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="1000" rx="64" fill="url(#bg)"/>
+  <rect width="1600" height="1000" rx="64" fill="url(#glowCyan)"/>
+  <rect width="1600" height="1000" rx="64" fill="url(#glowPurple)"/>
+
+  <rect x="190" y="170" width="1220" height="660" rx="36" fill="#0B1224" fill-opacity="0.55" stroke="url(#stroke)" stroke-opacity="0.55" stroke-width="2"/>
+  <rect x="230" y="220" width="1140" height="70" rx="18" fill="#0F172A" fill-opacity="0.75"/>
+  <rect x="260" y="244" width="180" height="22" rx="11" fill="#06b6d4" fill-opacity="0.35"/>
+  <rect x="460" y="244" width="260" height="22" rx="11" fill="#94A3B8" fill-opacity="0.22"/>
+  <rect x="740" y="244" width="260" height="22" rx="11" fill="#94A3B8" fill-opacity="0.18"/>
+
+  <rect x="230" y="320" width="520" height="210" rx="28" fill="#0F172A" fill-opacity="0.75"/>
+  <rect x="790" y="320" width="580" height="210" rx="28" fill="#0F172A" fill-opacity="0.68"/>
+  <rect x="230" y="560" width="360" height="220" rx="28" fill="#0F172A" fill-opacity="0.62"/>
+  <rect x="610" y="560" width="380" height="220" rx="28" fill="#0F172A" fill-opacity="0.62"/>
+  <rect x="1010" y="560" width="360" height="220" rx="28" fill="#0F172A" fill-opacity="0.62"/>
+
+  <g font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji'">
+    <text x="260" y="405" font-size="40" font-weight="700" fill="#E2E8F0">Mercy Speaks Digital</text>
+    <text x="260" y="458" font-size="22" font-weight="500" fill="#94A3B8">Agency website + conversion-focused service pages</text>
+
+    <text x="260" y="740" font-size="20" font-weight="600" fill="#06b6d4">Website Project</text>
+    <text x="260" y="775" font-size="18" font-weight="500" fill="#94A3B8">Thumbnail placeholder  replace with screenshot</text>
+  </g>
+</svg>

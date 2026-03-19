@@ -68,6 +68,51 @@ const TIERS = [
   },
 ];
 
+const WEBSITE_TIERS = [
+  {
+    name: "Starter Website",
+    priceLabel: "Starting at $997",
+    audience: "Perfect for new or local businesses that need a clean, trustworthy website fast.",
+    included: [
+      "Premium 1–3 page site (home + core pages)",
+      "Mobile-first design + fast performance",
+      "Conversion-ready contact/quote flow",
+      "Basic on-page SEO + analytics setup",
+    ],
+    cta: "Get a Website Quote",
+    href: "/contact",
+    popular: false,
+  },
+  {
+    name: "Business Website",
+    priceLabel: "Starting at $1,997",
+    audience: "For established companies that need stronger messaging, structure, and lead capture.",
+    included: [
+      "Premium 5–8 page website",
+      "Service pages built for conversion",
+      "SEO-ready structure + technical cleanup",
+      "Integrations (forms, email, booking, CRM-ready)",
+    ],
+    cta: "Book Website Call",
+    href: "/book-demo",
+    popular: true,
+  },
+  {
+    name: "Premium / Custom Website",
+    priceLabel: "Custom quote",
+    audience: "For high-growth brands that need custom UI, advanced sections, and tailored strategy.",
+    included: [
+      "Custom UX + design system direction",
+      "Advanced sections (case studies, portals, calculators)",
+      "Performance + SEO optimization",
+      "Ongoing iteration and launch support",
+    ],
+    cta: "Request Custom Quote",
+    href: "/contact",
+    popular: false,
+  },
+] as const;
+
 const TRUST_NOTES = [
   { icon: Clock, text: "Setup in 48 hours" },
   { icon: Smartphone, text: "Works with your current number" },
@@ -187,6 +232,82 @@ export default function PricingPage() {
                         Book Demo
                         <ArrowRight className="w-4 h-4" />
                       </BookingLink>
+                    </Button>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Website Development Pricing */}
+        <section className="section pt-0" aria-labelledby="website-pricing-title">
+          <div className="section-inner max-w-5xl mx-auto">
+            <div className="rounded-2xl border border-slate-800/60 bg-slate-900/10 backdrop-blur-md p-6 md:p-8 mb-6 md:mb-8">
+              <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">
+                Website Development
+              </p>
+              <h2
+                id="website-pricing-title"
+                className="text-2xl md:text-3xl font-bold text-slate-50 mb-2"
+              >
+                Website Development Pricing
+              </h2>
+              <p className="text-slate-400 text-sm md:text-base max-w-3xl">
+                Premium, mobile-first websites built for trust and conversion. Choose a tier to get a
+                starting point—final pricing depends on pages, content, and integrations.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+              {WEBSITE_TIERS.map((tier, index) => (
+                <motion.div
+                  key={tier.name}
+                  {...fadeUpInView}
+                  transition={{ duration: 0.45, delay: index * 0.05 }}
+                  className={`relative flex flex-col rounded-2xl overflow-hidden ${
+                    tier.popular
+                      ? "bg-slate-900/50 shadow-lg shadow-electric-purple/5"
+                      : "card-premium"
+                  }`}
+                >
+                  {tier.popular && (
+                    <div className="absolute top-0 left-0 right-0 py-2 text-center text-xs font-semibold text-slate-950 bg-electric-purple">
+                      Most Popular
+                    </div>
+                  )}
+                  <div className={`flex flex-col flex-1 p-7 ${tier.popular ? "pt-12" : ""}`}>
+                    <h3 className="text-xl font-bold text-slate-50 mb-2">{tier.name}</h3>
+                    <p className="text-slate-400 text-sm leading-relaxed mb-5">{tier.audience}</p>
+                    <div className="mb-6">
+                      <span className="text-3xl font-bold text-slate-50">
+                        {tier.priceLabel}
+                      </span>
+                      {tier.priceLabel !== "Custom quote" && (
+                        <span className="text-slate-400 ml-2 text-sm">USD</span>
+                      )}
+                    </div>
+                    <ul className="space-y-2.5 mb-8 flex-1">
+                      {tier.included.map((item) => (
+                        <li
+                          key={item}
+                          className="flex items-start gap-2 text-slate-300 text-sm leading-snug"
+                        >
+                          <CheckCircle2 className="w-4 h-4 text-neon-cyan shrink-0 mt-0.5" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                    <Button
+                      variant={tier.popular ? "primary" : "outline"}
+                      size="default"
+                      className="w-full"
+                      asChild
+                    >
+                      <Link to={tier.href} className="flex items-center justify-center gap-2">
+                        {tier.cta}
+                        <ArrowRight className="w-4 h-4" />
+                      </Link>
                     </Button>
                   </div>
                 </motion.div>

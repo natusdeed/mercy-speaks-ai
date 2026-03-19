@@ -7,6 +7,7 @@ import { BookingLink } from "@/components/cta/booking-link";
 
 const navLinks = [
   { name: "Home", href: "/" },
+  { name: "Website Development", href: "/services/website-design" },
   { name: "Solutions", href: "/solutions" },
   { name: "Pricing", href: "/pricing" },
   { name: "Results", href: "/results" },
@@ -16,6 +17,7 @@ const navLinks = [
 function isActivePath(href: string, pathname: string): boolean {
   if (href === "/") return pathname === "/";
   if (href === "/solutions") return pathname === "/solutions" || pathname.startsWith("/solutions/");
+  if (href === "/services/website-design") return pathname === "/services/website-design" || pathname.startsWith("/services/website-design/");
   return pathname === href;
 }
 

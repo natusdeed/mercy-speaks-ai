@@ -31,7 +31,7 @@ const CASE_STUDIES = [
       "Clear view of previously missed revenue; now tracked and closed.",
       "Receptionist freed for in-person work; no more call chaos.",
     ],
-    quote: "We went from losing leads to capturing every call. The dashboard alone was worth it.",
+    quote: "References available on request.",
   },
   {
     industry: "Auto repair",
@@ -42,7 +42,7 @@ const CASE_STUDIES = [
       "Scheduling handled 24/7; front desk focused on customers in the shop.",
       "Every inquiry captured and followed up.",
     ],
-    quote: "Best investment we make every month. Our team can actually focus on the work.",
+    quote: "References available on request.",
   },
   {
     industry: "HVAC / home services",
@@ -53,68 +53,33 @@ const CASE_STUDIES = [
       "Leads qualified and scheduled before they call a competitor.",
       "ROI visible in first month; missed-call value now captured.",
     ],
-    quote: "We never miss a hot lead now. The ROI was immediate.",
+    quote: "References available on request.",
   },
 ];
 
 const PORTFOLIO_ITEMS: PortfolioItem[] = [
   {
-    id: "1",
-    title: "Rodriguez Law Firm",
-    url: "https://example.com",
-    category: "AI Receptionist",
-    description: "24/7 AI receptionist for a Houston law firm. Captures after-hours calls, qualifies leads, and books consultations.",
-    stack: ["Vapi", "Twilio", "Cal.com"],
-    metric: "+8 clients/mo",
-    thumbnail: "https://picsum.photos/seed/law1/400/240",
+    id: "mercyspeaks-ai",
+    title: "Mercy Speaks Digital",
+    url: "https://mercyspeaks.ai",
+    category: "Websites",
+    description: "Agency website with clear positioning, premium UI, and conversion-focused inquiry flow.",
+    stack: ["Next.js", "Tailwind"],
+    thumbnail: "/portfolio/mercyspeaks-ai.png",
+    liveUrl: "https://mercyspeaks.ai",
+    ctaLabel: "View Site",
+    featured: true,
   },
   {
-    id: "2",
-    title: "Chen's Auto Repair",
-    url: "https://example.com",
+    id: "widget-install",
+    title: "Chat Widget Install Experience",
+    url: "https://mercyspeaks.ai/widget/install",
     category: "Automation",
-    description: "Automated scheduling, reminders, and follow-up. No-shows dropped; front desk freed for in-shop customers.",
-    stack: ["Cal.com", "Resend", "Postgres"],
-    metric: "40% fewer no-shows",
-    thumbnail: "https://picsum.photos/seed/auto1/400/240",
-  },
-  {
-    id: "3",
-    title: "Martinez HVAC Solutions",
-    url: "https://example.com",
-    category: "AI Receptionist",
-    description: "Emergency call qualification and same-day booking. 2 AM voicemails now answered and scheduled.",
-    stack: ["Vapi", "Twilio", "Slack"],
-    metric: "+60% emergency bookings",
-    thumbnail: "https://picsum.photos/seed/hvac1/400/240",
-  },
-  {
-    id: "4",
-    title: "Houston Dental Group",
-    url: "https://example.com",
-    category: "Websites",
-    description: "Modern practice website with online booking, service pages, and contact forms.",
-    stack: ["React", "Tailwind", "Cal.com"],
-    thumbnail: "https://picsum.photos/seed/dental1/400/240",
-  },
-  {
-    id: "5",
-    title: "Local Plumbing Co.",
-    url: "https://example.com",
-    category: "Websites",
-    description: "Lead-focused site with clear CTAs, service areas, and 24/7 contact options.",
-    stack: ["Next.js", "Tailwind", "Vercel"],
-    thumbnail: "https://picsum.photos/seed/plumb1/400/240",
-  },
-  {
-    id: "6",
-    title: "Boutique Home Goods",
-    url: "https://example.com",
-    category: "E-commerce",
-    description: "Shopify store with custom theme, product collections, and checkout optimization.",
-    stack: ["Shopify", "Liquid", "Klaviyo"],
-    metric: "2x conversion",
-    thumbnail: "https://picsum.photos/seed/shop1/400/240",
+    description: "Self-serve install flow for embedding a branded website chat widget—clear steps + copy-paste snippet.",
+    stack: ["Next.js", "TypeScript"],
+    thumbnail: "/portfolio/widget-install.png",
+    liveUrl: "https://mercyspeaks.ai/widget/install",
+    ctaLabel: "View Install Flow",
   },
   {
     id: "7",
@@ -141,7 +106,7 @@ export default function ResultsPage() {
           <div className="section-inner max-w-4xl mx-auto text-center">
             <motion.div {...fadeUp}>
               <span className="inline-block text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">
-                Pilot examples
+                Proof first
               </span>
               <h1
                 id="results-title"
@@ -150,7 +115,7 @@ export default function ResultsPage() {
                 Results
               </h1>
               <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-                Representative outcomes from the kinds of setups we build. Not yet verified client results—we’re sharing these as pilot examples for v1.
+                We don’t publish invented testimonials. Where we can’t share details publicly, we offer references on request.
               </p>
             </motion.div>
           </div>

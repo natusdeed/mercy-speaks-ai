@@ -12,6 +12,86 @@ Object.assign(process.env, loadEnv(mode, parentDir, ''), loadEnv(mode, cwd, ''))
 export default defineConfig({
   plugins: [
     react(),
+    // Dev-only: handle GET /api/widget/config, POST /api/widget/chat, POST /api/widget/lead
+    {
+      name: 'api-widget-routes',
+      configureServer(server) {
+        server.middlewares.use((req, res, next) => {
+          if (!req.url?.startsWith('/api/widget/')) {
+            next();
+            return;
+          }
+          const isConfig = req.url === '/api/widget/config' || req.url.startsWith('/api/widget/config?');
+          const isWidgetChat = req.url === '/api/widget/chat' || req.url.startsWith('/api/widget/chat?');
+          const isWidgetLead = req.url === '/api/widget/lead' || req.url.startsWith('/api/widget/lead?');
+          if (!isConfig && !isWidgetChat && !isWidgetLead) {
+            next();
+            return;
+          }
+          const forwardHeaders = Object.fromEntries(
+            Object.entries(req.headers).filter(([, v]) => v != null).map(([k, v]) => [k.toLowerCase(), Array.isArray(v) ? v.join(', ') : String(v)])
+          );
+          if (isConfig && req.method === 'GET') {
+            (async () => {
+              try {
+                const fakeRequest = new Request(`http://localhost${req.url}`, { method: 'GET', headers: forwardHeaders });
+                const { GET } = await import('./src/app/api/widget/config/route');
+                const response = await GET(fakeRequest);
+                res.statusCode = response.status;
+                response.headers.forEach((v, k) => res.setHeader(k, v));
+                const data = await response.json();
+                res.setHeader('Content-Type', 'application/json');
+                res.end(JSON.stringify(data));
+              } catch (e) {
+                console.error('Widget config API error:', e);
+                res.statusCode = 500;
+                res.setHeader('Content-Type', 'application/json');
+                res.end(JSON.stringify({ allowed: false, error: 'Internal server error' }));
+              }
+            })();
+            return;
+          }
+          if ((isWidgetChat || isWidgetLead) && req.method === 'POST') {
+            const chunks: Buffer[] = [];
+            req.on('data', (chunk: Buffer) => chunks.push(chunk));
+            req.on('end', async () => {
+              const bodyStr = Buffer.concat(chunks).toString() || '{}';
+              try {
+                const fakeRequest = new Request(`http://localhost${req.url}`, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json', ...forwardHeaders },
+                  body: bodyStr,
+                });
+                if (isWidgetChat) {
+                  const { handleWidgetChatRequest } = await import('./src/app/api/widget/chat-handler');
+                  const response = await handleWidgetChatRequest(fakeRequest);
+                  res.statusCode = response.status;
+                  response.headers.forEach((v, k) => res.setHeader(k, v));
+                  const data = await response.json();
+                  res.setHeader('Content-Type', 'application/json');
+                  res.end(JSON.stringify(data));
+                } else {
+                  const { handleWidgetLeadRequest } = await import('./src/app/api/widget/lead/route');
+                  const response = await handleWidgetLeadRequest(fakeRequest);
+                  res.statusCode = response.status;
+                  response.headers.forEach((v, k) => res.setHeader(k, v));
+                  const data = await response.json();
+                  res.setHeader('Content-Type', 'application/json');
+                  res.end(JSON.stringify(data));
+                }
+              } catch (e) {
+                console.error('Widget API error:', e);
+                res.statusCode = 500;
+                res.setHeader('Content-Type', 'application/json');
+                res.end(JSON.stringify({ error: 'Internal server error' }));
+              }
+            });
+            return;
+          }
+          next();
+        });
+      },
+    },
     // Dev-only: handle POST /api/book-demo, /api/contact, /api/chat, /api/chat/lead
     {
       name: 'api-lead-routes',

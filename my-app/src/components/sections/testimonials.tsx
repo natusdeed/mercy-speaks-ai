@@ -1,124 +1,122 @@
-import { Star, Quote } from "lucide-react";
-import { useScrollAnimation } from "@/hooks/use-scroll-animation";
+"use client";
 
-interface Testimonial {
-  id: number;
-  name: string;
-  business: string;
-  businessType: string;
+import { motion } from "framer-motion";
+import { Quote, ArrowRight, MessageSquareText } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { BookingLink } from "@/components/cta/booking-link";
+
+export interface Testimonial {
+  id: string;
+  clientName: string;
+  businessName?: string;
+  roleTitle?: string;
   quote: string;
-  rating: number;
-  result: string;
+  /** Optional avatar/logo image URL (local or remote) */
+  imageUrl?: string;
 }
 
-const TESTIMONIALS: Testimonial[] = [
-  {
-    id: 1,
-    name: "Maria Rodriguez",
-    business: "Rodriguez Law Firm",
-    businessType: "Legal Services",
-    quote: "We were losing 15-20 potential clients per month to missed calls after hours. Since implementing the AI receptionist, we've captured every single call and converted 8 new clients in the first month alone. That's $24,000 in new revenue we would have lost.",
-    rating: 5,
-    result: "$24K new revenue in first month",
-  },
-  {
-    id: 2,
-    name: "James Chen",
-    business: "Chen's Auto Repair",
-    businessType: "Automotive Services",
-    quote: "The AI handles all our appointment scheduling, sends reminders, and even follows up on service completion. We've reduced no-shows by 40% and our receptionist can focus on in-person customers. Best $197 we spend every month.",
-    rating: 5,
-    result: "40% reduction in no-shows",
-  },
-  {
-    id: 3,
-    name: "Sarah Martinez",
-    business: "Martinez HVAC Solutions",
-    businessType: "HVAC Services",
-    quote: "Our AI agent answers emergency calls at 2 AM, qualifies leads, and books service calls automatically. We've increased our emergency service bookings by 60% and never miss a hot lead. The ROI was immediate.",
-    rating: 5,
-    result: "60% increase in emergency bookings",
-  },
-];
+interface TestimonialsProps {
+  items?: Testimonial[];
+}
 
-export function Testimonials() {
-  useScrollAnimation({ threshold: 0.1, rootMargin: "-50px", once: true });
+export function Testimonials({ items }: TestimonialsProps) {
+  const testimonials = (items ?? []).slice(0, 6);
 
   return (
-    <section className="section relative overflow-hidden">
-      <div className="section-inner relative z-10">
-        <div
-          data-animate
-          className="text-center mb-8 opacity-0"
+    <section className="section relative overflow-hidden" aria-labelledby="testimonials-title">
+      <div className="section-inner relative z-10 max-w-5xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.45 }}
+          className="text-center mb-8 md:mb-10"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/50 mb-4">
             <Quote className="w-4 h-4 text-neon-cyan" />
             <span className="text-sm text-slate-300 font-medium">
-              Real Results from Real Businesses
+              Client Feedback
             </span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-50 mb-4">
-            Don't Just Take Our Word For It
+          <h2 id="testimonials-title" className="text-3xl md:text-4xl font-bold text-slate-50 mb-3">
+            What clients say about our website work
           </h2>
-          <p className="text-lg md:text-xl leading-relaxed text-slate-300 max-w-2xl mx-auto">
-            See how Houston businesses are using AI automation to capture more leads and grow revenue
+          <p className="text-slate-400 max-w-3xl mx-auto">
+            We only publish real testimonials. References are available on request.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-          {TESTIMONIALS.map((testimonial, index) => (
-            <div
-              key={testimonial.id}
-              data-animate
-              className="card flex flex-col relative overflow-hidden group opacity-0"
-              style={{
-                '--delay': `${index * 100}ms`,
-                willChange: 'opacity, transform',
-              } as React.CSSProperties}
-            >
-              <div className="relative z-10 flex flex-col h-full">
-                {/* Rating Stars */}
-                <div className="flex items-center gap-1 mb-4">
-                  {Array.from({ length: testimonial.rating }).map((_, i) => (
-                    <Star
-                      key={i}
-                      className="w-6 h-6 text-electric-purple fill-electric-purple"
-                    />
-                  ))}
-                </div>
-
-                {/* Quote */}
-                <div className="flex-1 mb-4">
-                  <p className="text-slate-300 leading-relaxed text-lg md:text-xl italic">
-                    "{testimonial.quote}"
-                  </p>
-                </div>
-
-                {/* Result Badge */}
-                <div className="mb-4">
-                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-neon-cyan/10">
-                    <span className="text-sm font-semibold text-neon-cyan">
-                      {testimonial.result}
-                    </span>
+        {testimonials.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+            {testimonials.map((t, index) => (
+              <motion.article
+                key={t.id}
+                initial={{ opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.45, delay: index * 0.05 }}
+                className="card-premium flex flex-col"
+              >
+                <div className="flex items-start justify-between gap-3 mb-4">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div className="h-10 w-10 rounded-xl bg-slate-900/60 border border-slate-800/60 flex items-center justify-center shrink-0">
+                      {t.imageUrl ? (
+                        <img
+                          src={t.imageUrl}
+                          alt={`${t.clientName} avatar`}
+                          className="h-full w-full object-cover rounded-xl"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      ) : (
+                        <MessageSquareText className="h-5 w-5 text-neon-cyan" />
+                      )}
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-slate-50 font-semibold leading-tight truncate">
+                        {t.clientName}
+                      </p>
+                      <p className="text-slate-400 text-sm leading-tight truncate">
+                        {[t.roleTitle, t.businessName].filter(Boolean).join(" • ")}
+                      </p>
+                    </div>
                   </div>
                 </div>
 
-                {/* Author Info */}
-                <div className="pt-4">
-                  <p className="text-slate-50 font-semibold text-base">
-                    {testimonial.name}
-                  </p>
-                  <p className="text-slate-400 text-sm">
-                    {testimonial.business}
-                  </p>
-                  <p className="text-slate-500 text-xs mt-1">
-                    {testimonial.businessType}
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+                <p className="text-slate-300 text-sm leading-relaxed flex-1">
+                  “{t.quote}”
+                </p>
+              </motion.article>
+            ))}
+          </div>
+        ) : (
+          <div className="card-premium text-center max-w-3xl mx-auto">
+            <p className="text-slate-300">
+              We don’t publish unverified quotes. If you want references for similar website projects, book a call and we’ll share them where appropriate.
+            </p>
+          </div>
+        )}
+
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.45, delay: 0.05 }}
+          className="mt-8 md:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3"
+        >
+          <Button variant="primary" size="lg" asChild className="w-full sm:w-auto">
+            <BookingLink className="flex items-center justify-center gap-2">
+              Book a Website Strategy Call
+              <ArrowRight className="w-5 h-5" />
+            </BookingLink>
+          </Button>
+          <Button variant="outline" size="lg" asChild className="w-full sm:w-auto">
+            <a href="#portfolio" className="flex items-center justify-center gap-2">
+              View Website Work
+              <ArrowRight className="w-5 h-5" />
+            </a>
+          </Button>
+        </motion.div>
       </div>
     </section>
   );

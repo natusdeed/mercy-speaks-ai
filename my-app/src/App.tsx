@@ -22,6 +22,8 @@ import ServiceVoiceAgents from './pages/services/VoiceAgents';
 import ServiceWebsiteChatbot from './pages/services/WebsiteChatbot';
 import ServiceWebsiteDesign from './pages/services/WebsiteDesign';
 import ServiceWorkflowAutomation from './pages/services/WorkflowAutomation';
+import WidgetFramePage from './app/widget/frame/page';
+import WidgetInstallPage from './app/widget/install/page';
 
 function App() {
   return (
@@ -48,6 +50,8 @@ function App() {
             <Route path="/services/website-chatbot" element={<ServiceWebsiteChatbot />} />
             <Route path="/services/website-design" element={<ServiceWebsiteDesign />} />
             <Route path="/services/workflow-automation" element={<ServiceWorkflowAutomation />} />
+            <Route path="/widget/frame" element={<WidgetFramePage />} />
+            <Route path="/widget/install" element={<WidgetInstallPage />} />
           </Routes>
         </main>
         <Footer />

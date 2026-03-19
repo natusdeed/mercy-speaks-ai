@@ -63,8 +63,8 @@ export function Footer() {
     { 
       icon: Mail, 
       label: "Email", 
-      value: "hello@mercyspeaks.com", 
-      href: "mailto:hello@mercyspeaks.com" 
+      value: "don@mercyspeaksdigital.com", 
+      href: "mailto:don@mercyspeaksdigital.com" 
     },
     { 
       icon: Phone, 
@@ -102,8 +102,7 @@ export function Footer() {
               </div>
             </Link>
             <p className="text-slate-300 text-base md:text-lg leading-relaxed">
-              We install digital employees. Stop hiring overhead. Start installing intelligence. 
-              AI automation agency delivering voice agents, workflow automation, and RAG solutions.
+              Premium websites, AI receptionists, and automation systems built to capture leads, follow up fast, and help you convert more customers—without adding headcount.
             </p>
           </motion.div>
 
