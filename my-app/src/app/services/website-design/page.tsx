@@ -1,272 +1,442 @@
+"use client";
+
 import { motion } from "framer-motion";
 import {
-  Globe,
-  Smartphone,
-  Search,
-  TrendingUp,
-  CheckCircle2,
   ArrowRight,
-  Building2,
-  Church,
-  MapPin,
-  FileText,
+  CheckCircle2,
+  Globe,
+  LayoutTemplate,
   RefreshCw,
+  FileText,
+  CalendarCheck,
+  Shield,
   Zap,
+  Search,
+  Smartphone,
+  MessageSquare,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { PageShell } from "@/components/ui/page-shell";
+import { PortfolioGallery, type PortfolioItem } from "@/components/sections/portfolio-gallery";
 import { Link } from "react-router-dom";
 import { BookingLink } from "@/components/cta/booking-link";
 
+const fadeUp = {
+  initial: { opacity: 0, y: 16 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.45 },
+};
+
+const fadeUpInView = {
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-40px" },
+  transition: { duration: 0.45 },
+};
+
+const whatWeBuild = [
+  {
+    icon: LayoutTemplate,
+    title: "Business Websites",
+    description:
+      "A premium, trust-building site that explains your services clearly and makes it easy to contact you or book.",
+  },
+  {
+    icon: RefreshCw,
+    title: "Website Redesigns",
+    description:
+      "A modern rebuild that upgrades credibility, clarity, and speed—so your business looks established and wins more inquiries.",
+  },
+  {
+    icon: FileText,
+    title: "Landing Pages",
+    description:
+      "Offer-focused pages built for one job: convert traffic into quote requests, calls, and booked appointments.",
+  },
+  {
+    icon: CalendarCheck,
+    title: "Booking & Lead Capture Websites",
+    description:
+      "Forms, calendars, and follow-up flows that remove friction and turn interest into a next step—fast.",
+  },
+] as const;
+
+const whyItMatters = [
+  {
+    title: "Look credible the moment they land",
+    description:
+      "First impressions happen in seconds. A premium design signals trust, stability, and professionalism.",
+  },
+  {
+    title: "Turn visitors into inquiries (not browsers)",
+    description:
+      "Clear positioning, strong CTAs, and a conversion-led layout guide people toward booking or contacting you.",
+  },
+  {
+    title: "Make your services easy to understand",
+    description:
+      "If your offer feels confusing, people leave. We structure pages so buyers quickly “get it.”",
+  },
+  {
+    title: "Win on mobile (where most decisions happen)",
+    description:
+      "Mobile-first design ensures your site is fast, readable, and effortless to navigate on phones.",
+  },
+] as const;
+
+const included = [
+  "Custom, brand-aligned design (premium dark aesthetic)",
+  "Mobile-responsive layout (mobile-first)",
+  "Service/offer pages with trust-building structure",
+  "Contact or lead-capture form (with clean handoff)",
+  "Conversion-focused calls-to-action across key pages",
+  "On-page SEO foundations (titles, meta, structure)",
+  "Performance-first build for speed and clarity",
+  "Optional: booking/calendar integration if needed",
+  "Optional: website chat / lead capture integrations",
+] as const;
+
+const trustChips = ["Mobile-first", "SEO-ready", "Built for conversion", "Fast + clean UX"] as const;
+
+const portfolioItems: PortfolioItem[] = [
+  {
+    id: "primeglobal",
+    title: "PRIME Global Logistics",
+    url: "https://primeglobal-logistics-dzls.vercel.app/",
+    category: "Websites",
+    industryTag: "Logistics / Solar Supply",
+    description: "Premium marketing site with product categories, gallery, FAQs, and a quote flow.",
+    outcome: "Professional business website launch for stronger online presence and easier quote requests.",
+    stack: ["Next.js", "Tailwind", "Vercel"],
+    thumbnail: "/portfolio/primeglobal-logistics.png",
+    liveUrl: "https://primeglobal-logistics-dzls.vercel.app/",
+    ctaLabel: "View Live Site",
+    featured: true,
+  },
+  {
+    id: "mercy-speaks-digital",
+    title: "Mercy Speaks Digital",
+    url: "https://mercyspeaks.ai",
+    category: "Websites",
+    industryTag: "AI Automation Agency",
+    description: "Agency website with clear service positioning, premium layout, and conversion-focused inquiry flow.",
+    outcome: "Premium redesign for stronger online presence and clearer service presentation.",
+    stack: ["Next.js", "Tailwind"],
+    thumbnail: "/portfolio/mercyspeaks-ai.png",
+    liveUrl: "https://mercyspeaks.ai",
+    ctaLabel: "View Site",
+  },
+];
+
 export default function WebsiteDesignPage() {
-  const features = [
-    {
-      icon: Smartphone,
-      title: "Mobile-Friendly",
-      description: "Your website looks perfect on phones, tablets, and desktops—so customers can find you anywhere.",
-    },
-    {
-      icon: Zap,
-      title: "Built Fast with AI",
-      description: "We use modern AI tools to build your website quickly, without sacrificing quality or attention to detail.",
-    },
-    {
-      icon: Search,
-      title: "SEO-Ready",
-      description: "Your website is optimized so customers can find you when they search online for what you offer.",
-    },
-    {
-      icon: TrendingUp,
-      title: "Designed to Convert",
-      description: "Every page is crafted to turn visitors into customers—clear calls to action and easy navigation.",
-    },
-  ];
-
-  const subServices = [
-    {
-      name: "Business Websites",
-      description: "Professional websites that showcase your business and help you stand out online.",
-      icon: Building2,
-    },
-    {
-      name: "Church Websites",
-      description: "Warm, welcoming websites that help your congregation stay connected and grow.",
-      icon: Church,
-    },
-    {
-      name: "Local Business Websites",
-      description: "Designed to help local customers find you, learn about your services, and visit your location.",
-      icon: MapPin,
-    },
-    {
-      name: "Landing Pages",
-      description: "Single-page websites focused on one goal—getting visitors to take action.",
-      icon: FileText,
-    },
-    {
-      name: "Website Redesigns",
-      description: "Give your existing website a modern makeover that better represents your business today.",
-      icon: RefreshCw,
-    },
-  ];
-
-  const benefits = [
-    "More customers find you online",
-    "Professional image that builds trust",
-    "Easy to update and manage",
-    "Works on all devices",
-    "Helps you compete with bigger businesses",
-    "Grows with your business",
-  ];
-
   return (
-    <div className="min-h-screen bg-slate-950">
+    <PageShell className="min-h-screen bg-slate-950">
       <main>
-        {/* Hero Section */}
-        <section className="section">
-          <div className="section-inner">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-16"
-            >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-electric-purple/20 mb-6">
-                <Globe className="w-4 h-4 text-electric-purple" />
-                <span className="text-sm text-electric-purple font-medium">
-                  AI-Powered Website Design
-                </span>
-              </div>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-slate-50 mb-6 title-3d">
-                Modern Websites for{" "}
-                <span className="text-neon-cyan">
-                  Small Businesses & Churches
-                </span>
-              </h1>
-              <p className="text-xl text-slate-400 max-w-3xl mx-auto mb-8">
-                We build modern, mobile-friendly websites fast using AI—so you get a professional 
-                online presence without the high agency costs. Perfect for small businesses, local 
-                businesses, churches, and organizations.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button variant="primary" size="lg" asChild>
-                  <BookingLink className="flex items-center gap-2">
-                    Get Your Website
-                    <ArrowRight className="w-5 h-5" />
-                  </BookingLink>
-                </Button>
-                <Button variant="outline" size="lg" asChild>
-                  <BookingLink>Book a Free Strategy Call</BookingLink>
-                </Button>
-              </div>
-            </motion.div>
+        {/* Hero */}
+        <section className="section section-hero" aria-labelledby="website-design-title">
+          <div className="section-inner max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+              <motion.div {...fadeUp} className="lg:col-span-7">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-electric-purple/15 border border-electric-purple/20 mb-5">
+                  <Globe className="w-4 h-4 text-electric-purple" />
+                  <span className="text-xs sm:text-sm text-electric-purple font-semibold tracking-wide">
+                    Website Development
+                  </span>
+                </div>
 
-            {/* Features Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-              {features.map((feature, idx) => (
-                <motion.div
-                  key={feature.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: idx * 0.1 }}
-                  className="card hover:shadow-md transition-shadow"
+                <h1
+                  id="website-design-title"
+                  className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-50 tracking-tight mb-5 title-3d"
                 >
-                  <feature.icon className="w-8 h-8 text-electric-purple mb-4" />
-                  <h3 className="text-lg font-semibold text-slate-50 mb-2">{feature.title}</h3>
-                  <p className="text-sm text-slate-400">{feature.description}</p>
-                </motion.div>
-              ))}
-            </div>
+                  Conversion‑Focused Websites That Help You{" "}
+                  <span className="text-neon-cyan">Win More Clients</span>
+                </h1>
 
-            {/* What We Build Section */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="card mb-16"
-            >
-              <h2 className="text-3xl font-bold text-slate-50 mb-8 text-center">
-                What We Build For You
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {subServices.map((service, idx) => {
-                  const Icon = service.icon;
-                  return (
-                    <motion.div
-                      key={service.name}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.4, delay: 0.5 + idx * 0.05 }}
-                      className="card hover:shadow-md transition-shadow"
-                    >
-                      <Icon className="w-8 h-8 text-neon-cyan mb-4" />
-                      <h3 className="text-lg font-semibold text-slate-50 mb-2">{service.name}</h3>
-                      <p className="text-sm text-slate-400">{service.description}</p>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </motion.div>
-
-            {/* Benefits Section */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="card mb-16"
-            >
-              <h2 className="text-3xl font-bold text-slate-50 mb-8 text-center">
-                Why Your Business Needs a Modern Website
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto">
-                {benefits.map((benefit, idx) => (
-                  <motion.div
-                    key={benefit}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.4, delay: 0.7 + idx * 0.05 }}
-                    className="flex items-start gap-3"
-                  >
-                    <CheckCircle2 className="w-5 h-5 text-neon-cyan mt-0.5 flex-shrink-0" />
-                    <span className="text-slate-300">{benefit}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* How It Works */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              className="card mb-16"
-            >
-              <h2 className="text-3xl font-bold text-slate-50 mb-8 text-center">
-                How We Build Your Website
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-                <div className="text-center">
-                  <div className="w-16 h-16 rounded-full bg-electric-purple/20 flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl font-bold text-electric-purple">1</span>
-                  </div>
-                  <h3 className="text-lg font-semibold text-slate-50 mb-2">We Listen</h3>
-                  <p className="text-slate-400">
-                    We start with a free strategy call to understand your business, your goals, and 
-                    what makes you unique.
-                  </p>
-                </div>
-                <div className="text-center">
-                  <div className="w-16 h-16 rounded-full bg-neon-cyan/20 flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl font-bold text-neon-cyan">2</span>
-                  </div>
-                  <h3 className="text-lg font-semibold text-slate-50 mb-2">We Build</h3>
-                  <p className="text-slate-400">
-                    Using modern AI tools, we build your website quickly—without cutting corners on 
-                    quality or design.
-                  </p>
-                </div>
-                <div className="text-center">
-                  <div className="w-16 h-16 rounded-full bg-electric-purple/20 flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl font-bold text-electric-purple">3</span>
-                  </div>
-                  <h3 className="text-lg font-semibold text-slate-50 mb-2">You Grow</h3>
-                  <p className="text-slate-400">
-                    Your new website helps you attract more customers, build credibility, and grow 
-                    your business.
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* CTA Section */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1 }}
-              className="text-center"
-            >
-              <div className="card max-w-3xl mx-auto">
-                <h2 className="text-3xl font-bold text-slate-50 mb-4">
-                  Ready to Get Your Website?
-                </h2>
-                <p className="text-xl text-slate-400 mb-8">
-                  Let's talk about how we can help you build a modern website that grows your business.
+                <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl mb-7">
+                  We design premium, mobile-first websites that make your business look credible, explain your
+                  services clearly, and convert visitors into inquiries and booked customers.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button variant="primary" size="lg" asChild >
-                    <BookingLink className="flex items-center gap-2">
-                      Get Your Website
+
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center">
+                  <Button variant="primary" size="lg" asChild className="rounded-xl">
+                    <BookingLink className="flex items-center justify-center gap-2">
+                      Book a Website Strategy Call
                       <ArrowRight className="w-5 h-5" />
                     </BookingLink>
                   </Button>
-                  <Button variant="outline" size="lg" asChild>
-                    <BookingLink>Book a Free Strategy Call</BookingLink>
+                  <Button variant="outline" size="lg" asChild className="rounded-xl">
+                    <Link to="/results" className="flex items-center justify-center gap-2">
+                      View Website Work
+                      <ArrowRight className="w-5 h-5" />
+                    </Link>
+                  </Button>
+                </div>
+
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {trustChips.map((chip) => (
+                    <span
+                      key={chip}
+                      className="px-3 py-1.5 rounded-xl bg-slate-900/30 border border-slate-800/60 text-xs text-slate-300"
+                    >
+                      {chip}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Right-side premium panel */}
+              <motion.aside {...fadeUp} className="lg:col-span-5">
+                <div className="card-premium rounded-2xl relative overflow-hidden">
+                  <div className="absolute -top-24 -right-24 h-56 w-56 bg-electric-purple/10 blur-3xl rounded-full" />
+                  <div className="absolute -bottom-24 -left-24 h-56 w-56 bg-neon-cyan/10 blur-3xl rounded-full" />
+
+                  <div className="relative">
+                    <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">
+                      Built for trust + conversion
+                    </p>
+                    <h2 className="text-lg sm:text-xl font-bold text-slate-50 mb-3">
+                      A website should do more than “look nice.”
+                    </h2>
+                    <p className="text-sm sm:text-base text-slate-400 leading-relaxed mb-6">
+                      We build pages with clear messaging, clean hierarchy, and conversion paths—so visitors know
+                      what you do, why you’re the right choice, and exactly how to take the next step.
+                    </p>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {[
+                        { icon: Smartphone, label: "Mobile-first UX" },
+                        { icon: Search, label: "SEO foundations" },
+                        { icon: Zap, label: "Performance-led build" },
+                        { icon: Shield, label: "Trust-first structure" },
+                      ].map(({ icon: Icon, label }) => (
+                        <div
+                          key={label}
+                          className="rounded-2xl bg-slate-900/20 border border-slate-800/60 p-4 flex items-center gap-3"
+                        >
+                          <span className="p-2 rounded-xl bg-neon-cyan/10">
+                            <Icon className="w-4 h-4 text-neon-cyan" />
+                          </span>
+                          <span className="text-sm text-slate-200">{label}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <p className="mt-5 text-xs text-slate-500">
+                      Clean build • Premium design • No clutter • Designed to convert
+                    </p>
+                  </div>
+                </div>
+              </motion.aside>
+            </div>
+          </div>
+        </section>
+
+        {/* What we build */}
+        <section className="section pt-0" aria-labelledby="what-we-build-title">
+          <div className="section-inner max-w-6xl mx-auto">
+            <motion.div {...fadeUpInView} className="mb-7">
+              <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">
+                What we build
+              </p>
+              <h2 id="what-we-build-title" className="text-2xl md:text-3xl font-bold text-slate-50 mb-3">
+                Premium websites built for real business outcomes
+              </h2>
+              <p className="text-slate-400 text-base md:text-lg max-w-3xl">
+                Whether you need a new site, a redesign, or a focused landing page—everything is structured to
+                build trust, capture leads, and guide visitors toward booking.
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              {whatWeBuild.map(({ icon: Icon, title, description }) => (
+                <motion.div key={title} {...fadeUpInView} className="card-premium rounded-2xl">
+                  <div className="p-2.5 rounded-xl w-fit bg-electric-purple/10 mb-4">
+                    <Icon className="w-5 h-5 text-electric-purple" />
+                  </div>
+                  <h3 className="text-base font-semibold text-slate-50 mb-2">{title}</h3>
+                  <p className="text-sm text-slate-400 leading-relaxed">{description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Why it matters */}
+        <section className="section pt-0" aria-labelledby="why-it-matters-title">
+          <div className="section-inner max-w-6xl mx-auto">
+            <motion.div {...fadeUpInView} className="card-premium rounded-2xl">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+                <div className="lg:col-span-5">
+                  <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">
+                    Why it matters
+                  </p>
+                  <h2 id="why-it-matters-title" className="text-2xl md:text-3xl font-bold text-slate-50 mb-3">
+                    Your website is your credibility engine.
+                  </h2>
+                  <p className="text-slate-400 text-base md:text-lg leading-relaxed">
+                    In most industries, people decide whether to trust you before they ever call. A premium,
+                    conversion-led site helps you win the decision—then makes the next step effortless.
+                  </p>
+                </div>
+
+                <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {whyItMatters.map((b) => (
+                    <div
+                      key={b.title}
+                      className="rounded-2xl bg-slate-900/20 border border-slate-800/60 p-5"
+                    >
+                      <h3 className="text-sm font-semibold text-slate-50 mb-2">{b.title}</h3>
+                      <p className="text-sm text-slate-400 leading-relaxed">{b.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* What's included */}
+        <section className="section pt-0" aria-labelledby="included-title">
+          <div className="section-inner max-w-6xl mx-auto">
+            <motion.div {...fadeUpInView} className="card-premium rounded-2xl">
+              <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8">
+                <div className="max-w-2xl">
+                  <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">
+                    What’s included
+                  </p>
+                  <h2 id="included-title" className="text-2xl md:text-3xl font-bold text-slate-50 mb-3">
+                    A clear, complete offer—no mystery deliverables.
+                  </h2>
+                  <p className="text-slate-400 text-base md:text-lg leading-relaxed">
+                    You get the foundations that make a website feel premium and perform: structure, copy
+                    hierarchy, conversion paths, and a clean build that supports growth.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
+                  {included.map((item) => (
+                    <div key={item} className="flex items-start gap-3 rounded-2xl bg-slate-900/20 border border-slate-800/60 p-4">
+                      <CheckCircle2 className="w-5 h-5 text-neon-cyan shrink-0 mt-0.5" />
+                      <span className="text-sm text-slate-200 leading-relaxed">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Website + AI Receptionist */}
+        <section className="section pt-0" aria-labelledby="combo-title">
+          <div className="section-inner max-w-6xl mx-auto">
+            <motion.div {...fadeUpInView} className="card-premium rounded-2xl relative overflow-hidden">
+              <div className="absolute -top-28 left-1/2 h-72 w-72 -translate-x-1/2 bg-electric-purple/10 blur-3xl rounded-full" />
+              <div className="relative">
+                <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">
+                  Better together
+                </p>
+                <h2 id="combo-title" className="text-2xl md:text-3xl font-bold text-slate-50 mb-3">
+                  Build the Website. Capture the Lead. Book the Client.
+                </h2>
+                <p className="text-slate-400 text-base md:text-lg leading-relaxed max-w-3xl mb-6">
+                  Your website attracts and educates. Your AI receptionist answers questions, qualifies intent,
+                  and books appointments—so you don’t lose opportunities after-hours or between follow-ups.
+                </p>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-7">
+                  {[
+                    {
+                      title: "Website",
+                      body: "Clear offers, trust-building layout, and conversion paths that guide visitors to the next step.",
+                      icon: Globe,
+                      accent: "bg-neon-cyan/10 text-neon-cyan",
+                    },
+                    {
+                      title: "AI Receptionist",
+                      body: "Answers, qualifies, and routes leads—so every inquiry gets handled fast and professionally.",
+                      icon: MessageSquare,
+                      accent: "bg-electric-purple/10 text-electric-purple",
+                    },
+                    {
+                      title: "Booking System",
+                      body: "Calendar + follow-up that closes the loop and turns intent into booked appointments.",
+                      icon: CalendarCheck,
+                      accent: "bg-neon-cyan/10 text-neon-cyan",
+                    },
+                  ].map(({ title, body, icon: Icon, accent }) => (
+                    <div key={title} className="rounded-2xl bg-slate-900/20 border border-slate-800/60 p-5">
+                      <div className={`p-2.5 rounded-xl w-fit mb-4 ${accent.split(" ")[0]}`}>
+                        <Icon className={`w-5 h-5 ${accent.split(" ")[1]}`} />
+                      </div>
+                      <h3 className="text-base font-semibold text-slate-50 mb-2">{title}</h3>
+                      <p className="text-sm text-slate-400 leading-relaxed">{body}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Button variant="primary" size="default" asChild className="rounded-xl">
+                    <BookingLink className="flex items-center justify-center gap-2">
+                      Book Demo
+                      <ArrowRight className="w-4 h-4" />
+                    </BookingLink>
+                  </Button>
+                  <Button variant="outline" size="default" asChild className="rounded-xl">
+                    <Link to="/contact" className="flex items-center justify-center gap-2">
+                      Get a Website Quote
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
                   </Button>
                 </div>
               </div>
             </motion.div>
           </div>
         </section>
+
+        {/* Proof / Work */}
+        <PortfolioGallery
+          items={portfolioItems}
+          defaultFilter="Websites"
+          sectionId="website-work"
+          eyebrow="Proof"
+          title="Featured website work"
+          description="A preview of real websites we’ve built. Need niche-specific examples? References and private work samples are available on request."
+        />
+
+        {/* Closing CTA */}
+        <section className="section pt-0 pb-24 md:pb-32" aria-label="Website development call to action">
+          <div className="section-inner max-w-4xl mx-auto">
+            <motion.div {...fadeUpInView} className="card-premium rounded-2xl text-center">
+              <h2 className="text-2xl md:text-3xl font-bold text-slate-50 mb-3">
+                Ready for a website that feels premium—and performs like it?
+              </h2>
+              <p className="text-slate-400 text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-7">
+                If your current site feels outdated, unclear, or hard to act on, we’ll rebuild it with stronger
+                messaging, better structure, and booking-ready conversion paths.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <Button variant="primary" size="lg" asChild className="rounded-xl">
+                  <BookingLink className="flex items-center justify-center gap-2">
+                    Book a Website Strategy Call
+                    <ArrowRight className="w-5 h-5" />
+                  </BookingLink>
+                </Button>
+                <Button variant="outline" size="lg" asChild className="rounded-xl">
+                  <Link to="/contact" className="flex items-center justify-center gap-2">
+                    Get a Website Quote
+                    <ArrowRight className="w-5 h-5" />
+                  </Link>
+                </Button>
+              </div>
+
+              <p className="mt-4 text-sm text-slate-500">
+                Mobile-first • SEO-ready foundations • Built for conversion
+              </p>
+            </motion.div>
+          </div>
+        </section>
       </main>
-    </div>
+    </PageShell>
   );
 }
