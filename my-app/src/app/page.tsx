@@ -33,15 +33,15 @@ export default function Home() {
     {
       id: "mercy-speaks-digital",
       title: "Mercy Speaks Digital",
-      url: "https://mercyspeaks.ai",
+      url: "https://www.mercyspeaksdigital.com",
       category: "Websites",
       industryTag: "AI Automation Agency",
       description:
         "Agency website with clear service positioning, premium layout, and conversion-focused inquiry flow.",
       outcome: "Premium redesign for stronger online presence and clearer service presentation.",
       stack: ["Next.js", "Tailwind"],
-      thumbnail: "/portfolio/mercyspeaks-ai.png",
-      liveUrl: "https://mercyspeaks.ai",
+      thumbnail: "/portfolio/mercyspeaks-ai-home.png",
+      liveUrl: "https://www.mercyspeaksdigital.com",
       ctaLabel: "View Site",
     },
     {
