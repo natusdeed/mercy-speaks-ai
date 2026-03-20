@@ -27,7 +27,7 @@ export function ElevenLabsWidgetMount() {
       data-elevenlabs-convai-host
     >
       <div className="pointer-events-auto inline-block max-w-full">
-        <elevenlabs-convai agent-id={AGENT_ID} />
+        <elevenlabs-convai agent-id={AGENT_ID}></elevenlabs-convai>
       </div>
     </div>
   );
