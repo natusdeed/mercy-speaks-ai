@@ -1,32 +1,23 @@
-import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 /**
- * ElevenLabs ConvAI widget — same embed as the official snippet, mounted once for the SPA.
+ * ElevenLabs ConvAI widget — official embed (script in index.html + custom element here).
+ *
+ * ```html
+ * <elevenlabs-convai agent-id="agent_8701km3kg91aem4t0z0es35ft0t1"></elevenlabs-convai>
+ * <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+ * ```
+ *
  * Skipped on `/widget/frame` so the multi-tenant Mercy chat iframe stays a single chat surface.
  *
  * @see https://elevenlabs.io/docs/conversational-ai
  * Prompts / workflow copy: repo root docs/ELEVENLABS-AGENT-CONFIG.md
  */
-const SCRIPT_ID = "elevenlabs-convai-widget-embed";
-const SCRIPT_SRC = "https://unpkg.com/@elevenlabs/convai-widget-embed";
 const AGENT_ID = "agent_8701km3kg91aem4t0z0es35ft0t1";
 
 export function ElevenLabsWidgetMount() {
-  const { pathname } = useLocation();
+  const pathname = useLocation().pathname;
   const skipForMercyWidgetFrame = pathname.startsWith("/widget/frame");
-
-  useEffect(() => {
-    if (skipForMercyWidgetFrame) return;
-    if (document.getElementById(SCRIPT_ID)) return;
-
-    const script = document.createElement("script");
-    script.id = SCRIPT_ID;
-    script.src = SCRIPT_SRC;
-    script.async = true;
-    script.type = "text/javascript";
-    document.body.appendChild(script);
-  }, [skipForMercyWidgetFrame]);
 
   if (skipForMercyWidgetFrame) return null;
 
