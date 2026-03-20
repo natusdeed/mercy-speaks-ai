@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
  * Skipped on `/widget/frame` so the multi-tenant Mercy chat iframe stays a single chat surface.
  *
  * @see https://elevenlabs.io/docs/conversational-ai
+ * Prompts / workflow copy: repo root docs/ELEVENLABS-AGENT-CONFIG.md
  */
 const SCRIPT_ID = "elevenlabs-convai-widget-embed";
 const SCRIPT_SRC = "https://unpkg.com/@elevenlabs/convai-widget-embed";
