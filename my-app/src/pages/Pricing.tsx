@@ -32,7 +32,7 @@ const TIERS: Tier[] = [
   {
     name: "Professional",
     price: 397,
-    callVolume: "Up to 1,500 calls/month",
+    callVolume: "Up to 1,200 calls/month",
     description: "For growing teams that need more capacity and control.",
     popular: true,
     features: [

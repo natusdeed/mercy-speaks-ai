@@ -1,6 +1,6 @@
 # Embeddable multi-tenant chat widget — MVP
 
-This doc describes the widget architecture, file structure, database schema, and install snippet. **The in-site chatbot (SiteChatbot) is unchanged** and continues to use `/api/chat` and `/api/chat/lead`.
+This doc describes the widget architecture, file structure, database schema, and install snippet. **The main site no longer mounts the old floating chat UI**; integrate ElevenLabs (or another provider) in `my-app/src/components/ElevenLabsWidgetMount.tsx`. The `/api/chat` and `/api/chat/lead` routes remain in the repo for custom or future clients.
 
 ---
 
