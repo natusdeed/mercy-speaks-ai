@@ -105,6 +105,30 @@ Brief thanks, one sentence on what happens next. Offer one follow-up question on
 
 ---
 
+## Guardrails (dashboard) — false positives like “Tomorrow at 10am”
+
+**Symptom:** Chat ends with *“Conversation was stopped because the ‘No sharing personal/internal info’ custom guardrail was triggered”* (or similar) right after the user gives a **time slot**, **name**, **email**, or **phone** for booking.
+
+**Cause:** [Custom guardrails](https://elevenlabs.io/docs/eleven-agents/best-practices/guardrails) use a small LLM to judge **agent replies** against your rule. Overly broad wording (“personal,” “internal”) is easy to misfire when the agent **repeats the user’s slot** for confirmation or discusses scheduling.
+
+**Fix (in ElevenLabs, not in this repo):**
+
+1. Open [ElevenLabs Agents](https://elevenlabs.io) → your agent (`agent_8701km3kg91aem4t0z0es35ft0t1`) → **Security** (guardrails).
+2. Find the custom guardrail named like *No sharing personal/internal info*.
+3. Either **toggle it off** temporarily to confirm it’s the culprit, or **replace its prompt** with a **narrow, explicit** rule (short prompts = fewer false positives per ElevenLabs).
+
+**Suggested replacement prompt** (paste as the guardrail’s natural-language rule):
+
+```text
+Block only if the agent reveals: non-public company secrets, internal tools or credentials, other customers’ private data, or unpublished roadmaps/pricing not on the public website.
+
+Always ALLOW: the user’s own booking details (name, email, phone, preferred date/time) and the agent repeating those back to confirm; general public service descriptions; and directing users to official contact channels.
+```
+
+4. If the session still drops harshly, set **trigger action** to **retry** (with feedback) instead of **end call** where the dashboard offers it, so one bad evaluation doesn’t kill the conversation.
+
+---
+
 ## ElevenLabs settings (targets)
 
 | Setting | Target |
@@ -138,4 +162,4 @@ Brief thanks, one sentence on what happens next. Offer one follow-up question on
 
 ## Changelog
 
-- 2026-03-20 — Added repo doc; verified widget host uses `z-100` (Tailwind v4) so ConvAI stays above the `z-50` header.
+- 2026-03-20 — Repo doc; widget `z-100`; guardrails troubleshooting (booking-time false positives + suggested custom-guardrail prompt).
