@@ -1,6 +1,7 @@
 import type { DetailedHTMLProps, HTMLAttributes } from "react";
 
-declare global {
+/** Custom element from ElevenLabs embed script (see ElevenLabsWidgetMount). */
+declare module "react" {
   namespace JSX {
     interface IntrinsicElements {
       "elevenlabs-convai": DetailedHTMLProps<

@@ -127,7 +127,7 @@ export function PricingPreview() {
                 {tier.description}
               </p>
               <Button
-                variant={tier.highlight ? "glow" : "outline"}
+                variant={tier.highlight ? "primary" : "outline"}
                 size="default"
                 asChild
                 className="mt-auto w-full"

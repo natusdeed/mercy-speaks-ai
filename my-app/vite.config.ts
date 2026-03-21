@@ -10,6 +10,8 @@ Object.assign(process.env, loadEnv(mode, parentDir, ''), loadEnv(mode, cwd, ''))
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  /* Always resolve index.html from this package (avoids "in/index.html" when cwd/CLI root is wrong in monorepo). */
+  root: path.resolve(__dirname),
   plugins: [
     react(),
     // Dev-only: handle GET /api/widget/config, POST /api/widget/chat, POST /api/widget/lead
@@ -207,6 +209,195 @@ export default defineConfig({
               }
             }
           });
+        });
+      },
+    },
+    {
+      name: 'api-dashboard-auth',
+      configureServer(server) {
+        server.middlewares.use((req, res, next) => {
+          if (req.method !== 'POST' || !req.url?.startsWith('/api/dashboard/')) {
+            next();
+            return;
+          }
+          const isLogin =
+            req.url === '/api/dashboard/login' || req.url.startsWith('/api/dashboard/login?');
+          const isVerify =
+            req.url === '/api/dashboard/verify' || req.url.startsWith('/api/dashboard/verify?');
+          if (!isLogin && !isVerify) {
+            next();
+            return;
+          }
+          const chunks: Buffer[] = [];
+          req.on('data', (chunk: Buffer) => chunks.push(chunk));
+          req.on('end', async () => {
+            const bodyStr = Buffer.concat(chunks).toString() || '{}';
+            try {
+              const fakeRequest = new Request(`http://localhost${req.url}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: bodyStr,
+              });
+              const { POST } = isLogin
+                ? await import('./src/app/api/dashboard/login/route')
+                : await import('./src/app/api/dashboard/verify/route');
+              const response = await POST(fakeRequest);
+              res.statusCode = response.status;
+              response.headers.forEach((v, k) => res.setHeader(k, v));
+              const data = await response.json();
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify(data));
+            } catch (e) {
+              console.error('Dashboard auth API error:', e);
+              res.statusCode = 500;
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify({ message: 'Internal server error' }));
+            }
+          });
+        });
+      },
+    },
+    {
+      name: 'api-dashboard-leads',
+      configureServer(server) {
+        server.middlewares.use((req, res, next) => {
+          if (!req.url?.startsWith('/api/dashboard/leads')) {
+            next();
+            return;
+          }
+          const url = new URL(req.url, 'http://localhost');
+          const pathname = url.pathname;
+          const idMatch = pathname.match(/^\/api\/dashboard\/leads\/([0-9a-fA-F-]{36})$/);
+          const isList = pathname === '/api/dashboard/leads';
+
+          const listOk =
+            isList && (req.method === 'GET' || req.method === 'POST');
+          const detailOk =
+            idMatch && (req.method === 'GET' || req.method === 'PATCH');
+
+          if (!listOk && !detailOk) {
+            if (isList || idMatch) {
+              res.statusCode = 405;
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify({ message: 'Method not allowed' }));
+              return;
+            }
+            next();
+            return;
+          }
+
+          const forwardHeaders = Object.fromEntries(
+            Object.entries(req.headers)
+              .filter(([, v]) => v != null)
+              .map(([k, v]) => [k.toLowerCase(), Array.isArray(v) ? v.join(', ') : String(v)])
+          );
+
+          const run = async () => {
+            const bodyStr =
+              req.method === 'GET'
+                ? ''
+                : await new Promise<string>((resolve) => {
+                    const chunks: Buffer[] = [];
+                    req.on('data', (chunk: Buffer) => chunks.push(chunk));
+                    req.on('end', () => resolve(Buffer.concat(chunks).toString() || '{}'));
+                  });
+            try {
+              const fakeRequest = new Request(`http://localhost${req.url}`, {
+                method: req.method,
+                headers: new Headers(forwardHeaders),
+                body: req.method === 'GET' ? undefined : bodyStr,
+              });
+              const response =
+                isList && req.method === 'GET'
+                  ? await (await import('./src/app/api/dashboard/leads/route')).GET(fakeRequest)
+                  : isList && req.method === 'POST'
+                    ? await (await import('./src/app/api/dashboard/leads/route')).POST(fakeRequest)
+                    : idMatch && req.method === 'GET'
+                      ? await (await import('./src/app/api/dashboard/leads/[id]/route')).GET(fakeRequest)
+                      : await (await import('./src/app/api/dashboard/leads/[id]/route')).PATCH(fakeRequest);
+              res.statusCode = response.status;
+              response.headers.forEach((v, k) => res.setHeader(k, v));
+              const buf = Buffer.from(await response.arrayBuffer());
+              res.end(buf);
+            } catch (e) {
+              console.error('Dashboard leads API error:', e);
+              res.statusCode = 500;
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify({ message: 'Internal server error' }));
+            }
+          };
+
+          void run();
+        });
+      },
+    },
+    {
+      name: 'api-dashboard-conversations',
+      configureServer(server) {
+        server.middlewares.use((req, res, next) => {
+          if (!req.url?.startsWith('/api/dashboard/conversations')) {
+            next();
+            return;
+          }
+          const url = new URL(req.url, 'http://localhost');
+          const pathname = url.pathname;
+          const idMatch = pathname.match(/^\/api\/dashboard\/conversations\/([0-9a-fA-F-]{36})$/);
+          const isList = pathname === '/api/dashboard/conversations';
+
+          const listOk = isList && req.method === 'GET';
+          const detailOk = idMatch && (req.method === 'GET' || req.method === 'PATCH');
+
+          if (!listOk && !detailOk) {
+            if (isList || idMatch) {
+              res.statusCode = 405;
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify({ message: 'Method not allowed' }));
+              return;
+            }
+            next();
+            return;
+          }
+
+          const forwardHeaders = Object.fromEntries(
+            Object.entries(req.headers)
+              .filter(([, v]) => v != null)
+              .map(([k, v]) => [k.toLowerCase(), Array.isArray(v) ? v.join(', ') : String(v)])
+          );
+
+          const run = async () => {
+            const bodyStr =
+              req.method === 'GET'
+                ? ''
+                : await new Promise<string>((resolve) => {
+                    const chunks: Buffer[] = [];
+                    req.on('data', (chunk: Buffer) => chunks.push(chunk));
+                    req.on('end', () => resolve(Buffer.concat(chunks).toString() || '{}'));
+                  });
+            try {
+              const fakeRequest = new Request(`http://localhost${req.url}`, {
+                method: req.method,
+                headers: new Headers(forwardHeaders),
+                body: req.method === 'GET' ? undefined : bodyStr,
+              });
+              const response =
+                isList && req.method === 'GET'
+                  ? await (await import('./src/app/api/dashboard/conversations/route')).GET(fakeRequest)
+                  : idMatch && req.method === 'GET'
+                    ? await (await import('./src/app/api/dashboard/conversations/[id]/route')).GET(fakeRequest)
+                    : await (await import('./src/app/api/dashboard/conversations/[id]/route')).PATCH(fakeRequest);
+              res.statusCode = response.status;
+              response.headers.forEach((v, k) => res.setHeader(k, v));
+              const buf = Buffer.from(await response.arrayBuffer());
+              res.end(buf);
+            } catch (e) {
+              console.error('Dashboard conversations API error:', e);
+              res.statusCode = 500;
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify({ message: 'Internal server error' }));
+            }
+          };
+
+          void run();
         });
       },
     },

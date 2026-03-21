@@ -1,8 +1,9 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Outlet } from 'react-router-dom';
 import { Header } from '@/components/navigation/header';
 import { Footer } from '@/components/navigation/footer';
 import { ElevenLabsWidgetMount } from '@/components/ElevenLabsWidgetMount';
 import { ClientErrorHandler } from '@/components/debug/ClientErrorHandler';
+import { DashboardApp } from '@/dashboard/dashboard-app';
 
 // Pages (homepage from app/page.tsx)
 import Home from './app/page';
@@ -25,38 +26,49 @@ import ServiceWorkflowAutomation from './pages/services/WorkflowAutomation';
 import WidgetFramePage from './app/widget/frame/page';
 import WidgetInstallPage from './app/widget/install/page';
 
-function App() {
+function PublicChrome() {
   return (
     <>
-      <ClientErrorHandler />
       <Header />
-      <div className="min-h-screen flex flex-col">
+      <div className="flex min-h-screen flex-col">
         <main className="flex-1 pt-24 md:pt-28">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/portfolio" element={<Portfolio />} />
-            <Route path="/pricing" element={<Pricing />} />
-            <Route path="/book-demo" element={<BookDemo />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/solutions" element={<Solutions />} />
-            <Route path="/results" element={<Results />} />
-            <Route path="/services/ai-phone-receptionist" element={<ServiceAIPhoneReceptionist />} />
-            <Route path="/services/appointment-automation" element={<ServiceAppointmentAutomation />} />
-            <Route path="/services/rag-data" element={<ServiceRAGData />} />
-            <Route path="/services/review-generation" element={<ServiceReviewGeneration />} />
-            <Route path="/services/voice-agents" element={<ServiceVoiceAgents />} />
-            <Route path="/services/website-chatbot" element={<ServiceWebsiteChatbot />} />
-            <Route path="/services/website-design" element={<ServiceWebsiteDesign />} />
-            <Route path="/services/workflow-automation" element={<ServiceWorkflowAutomation />} />
-            <Route path="/widget/frame" element={<WidgetFramePage />} />
-            <Route path="/widget/install" element={<WidgetInstallPage />} />
-          </Routes>
+          <Outlet />
         </main>
         <Footer />
         <ElevenLabsWidgetMount />
       </div>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <>
+      <ClientErrorHandler />
+      <Routes>
+        <Route path="/dashboard/*" element={<DashboardApp />} />
+        <Route element={<PublicChrome />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/book-demo" element={<BookDemo />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/solutions" element={<Solutions />} />
+          <Route path="/results" element={<Results />} />
+          <Route path="/services/ai-phone-receptionist" element={<ServiceAIPhoneReceptionist />} />
+          <Route path="/services/appointment-automation" element={<ServiceAppointmentAutomation />} />
+          <Route path="/services/rag-data" element={<ServiceRAGData />} />
+          <Route path="/services/review-generation" element={<ServiceReviewGeneration />} />
+          <Route path="/services/voice-agents" element={<ServiceVoiceAgents />} />
+          <Route path="/services/website-chatbot" element={<ServiceWebsiteChatbot />} />
+          <Route path="/services/website-design" element={<ServiceWebsiteDesign />} />
+          <Route path="/services/workflow-automation" element={<ServiceWorkflowAutomation />} />
+          <Route path="/widget/frame" element={<WidgetFramePage />} />
+          <Route path="/widget/install" element={<WidgetInstallPage />} />
+        </Route>
+      </Routes>
     </>
   );
 }
