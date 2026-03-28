@@ -1,0 +1,210 @@
+{
+  "name": "Mercy AI Agent",
+  "conversation_config": {
+    "asr": {
+      "quality": "high",
+      "provider": "elevenlabs",
+      "user_input_audio_format": "pcm_16000",
+      "keywords": []
+    },
+    "turn": {
+      "turn_timeout": 8,
+      "silence_end_call_timeout": -1,
+      "mode": "turn"
+    },
+    "tts": {
+      "model_id": "eleven_turbo_v2",
+      "voice_id": "cjVigY5qzO86Huf0OWal",
+      "supported_voices": [],
+      "agent_output_audio_format": "pcm_16000",
+      "optimize_streaming_latency": 3,
+      "stability": 0.45,
+      "speed": 1,
+      "similarity_boost": 0.8,
+      "pronunciation_dictionary_locators": []
+    },
+    "conversation": {
+      "text_only": false,
+      "max_duration_seconds": 600,
+      "client_events": [
+        "audio",
+        "interruption"
+      ]
+    },
+    "language_presets": {},
+    "agent": {
+      "first_message": "Thank you for calling Mercy Speaks Digital. This is Mercy AI Agent. How may I help you today?",
+      "language": "en",
+      "dynamic_variables": {
+        "dynamic_variable_placeholders": {}
+      },
+      "prompt": {
+        "prompt": "You are Mercy AI Agent, the premium AI receptionist for Mercy Speaks Digital. You are the first impression of a high-end business. Speak warmly, clearly, confidently, and professionally. Sound natural, polished, calm, and human. Never sound robotic, overly scripted, pushy, or repetitive. Keep responses short to medium length. Ask only one question at a time. Greet only once at the beginning. Do not repeat the caller's words unnecessarily. Do not give long speeches. Confirm important actions before completing them. Your job is to greet callers, understand why they are calling, answer simple business questions, help with booking, help with rescheduling or cancellation, transfer to a human when appropriate, and take a message when the request cannot be completed immediately. If the caller wants to book, schedule a demo, request a consultation, or clearly expresses strong interest in moving forward, collect the minimum booking details: full name, callback number, service needed, and preferred day or time. Once those booking details are collected, use the mercy_booking_intent tool to save the booking request. Include source, notes, and urgency if known. If the caller asks to speak with Don, asks for the owner, asks for a human, asks for a manager, has a sensitive issue, sounds upset, or the request is urgent, complex, or outside your scope, collect the minimum handoff details: full name, callback number, reason for call, and best callback time. Include requestedPerson if known. Once those handoff details are collected, use the mercy_handoff_request tool to save the escalation or human follow-up request. If the caller wants to reschedule or cancel, first collect enough information to identify the appointment. If the request cannot be completed immediately and it is not a booking request or escalation request, politely take a complete message with the caller's full name, callback number, reason for calling, and best callback time. Once all required message details are collected, use the mercy_message_capture tool to save the message. Include source, notes, requested person, and urgency if known. If you do not know the answer, do not invent information. Say you can take a message or connect them with the team. Always end with a clear next step or confirmation. When taking a booking request, confirm the request briefly and professionally after the tool is used successfully. When taking a handoff or escalation request, confirm the request briefly and professionally after the tool is used successfully. When taking a general message, confirm the message back briefly and professionally after the tool is used successfully. Maintain a warm, premium, respectful, businesslike, calm, and helpful tone at all times.",
+        "llm": "gemini-2.5-flash",
+        "temperature": 0,
+        "max_tokens": -1,
+        "tool_ids": [
+          "tool_1001kmre2p2de0z9k3hhsxp9fgxd",
+          "tool_7001kmrjg4emfvjsb7gaywaag1rg",
+          "tool_9501kmrt85ypf0hbg4yer82f3d4j"
+        ],
+        "mcp_server_ids": [],
+        "native_mcp_server_ids": [],
+        "knowledge_base": [],
+        "ignore_default_personality": false,
+        "rag": {
+          "enabled": false,
+          "embedding_model": "e5_mistral_7b_instruct",
+          "max_vector_distance": 0.6,
+          "max_documents_length": 50000,
+          "max_retrieved_rag_chunks_count": 20
+        },
+        "custom_llm": null
+      }
+    }
+  },
+  "platform_settings": {
+    "auth": {
+      "enable_auth": false,
+      "allowlist": [],
+      "shareable_token": null
+    },
+    "evaluation": {
+      "criteria": []
+    },
+    "widget": {
+      "variant": "full",
+      "placement": "bottom-right",
+      "expandable": "never",
+      "avatar": {
+        "type": "orb",
+        "color_1": "#2792dc",
+        "color_2": "#9ce6e6"
+      },
+      "feedback_mode": "none",
+      "bg_color": "#ffffff",
+      "text_color": "#000000",
+      "btn_color": "#000000",
+      "btn_text_color": "#ffffff",
+      "border_color": "#e1e1e1",
+      "focus_color": "#000000",
+      "shareable_page_show_terms": true,
+      "show_avatar_when_collapsed": false,
+      "disable_banner": false,
+      "mic_muting_enabled": false,
+      "transcript_enabled": false,
+      "text_input_enabled": true,
+      "text_contents": {
+        "main_label": "Mercy AI Agent",
+        "start_call": "Start conversation",
+        "new_call": "New conversation",
+        "end_call": "End conversation",
+        "mute_microphone": "Mute microphone",
+        "change_language": "Change language",
+        "collapse": "Collapse",
+        "expand": "Chat with Mercy AI Agent",
+        "copied": "Copied",
+        "accept_terms": "Accept",
+        "dismiss_terms": "Dismiss",
+        "listening_status": "Listening...",
+        "speaking_status": "Speaking...",
+        "connecting_status": "Connecting...",
+        "input_label": "Message",
+        "input_placeholder": "Type your message here...",
+        "user_ended_conversation": "Conversation ended",
+        "agent_ended_conversation": "Conversation complete",
+        "conversation_id": "Conversation ID",
+        "error_occurred": "Something went wrong. Please try again.",
+        "copy_id": "Copy ID"
+      },
+      "language_selector": false,
+      "supports_text_only": true,
+      "language_presets": {},
+      "styles": {
+        "base": null,
+        "base_hover": null,
+        "base_active": null,
+        "base_border": null,
+        "base_subtle": null,
+        "base_primary": null,
+        "base_error": null,
+        "accent": null,
+        "accent_hover": null,
+        "accent_active": null,
+        "accent_border": null,
+        "accent_subtle": null,
+        "accent_primary": null,
+        "overlay_padding": null,
+        "button_radius": null,
+        "input_radius": null,
+        "bubble_radius": null,
+        "sheet_radius": null,
+        "compact_sheet_radius": null,
+        "dropdown_sheet_radius": null
+      },
+      "border_radius": null,
+      "btn_radius": null,
+      "action_text": "Talk to Mercy AI Agent",
+      "start_call_text": "Start conversation",
+      "end_call_text": "End conversation",
+      "expand_text": "Chat with Mercy AI Agent",
+      "listening_text": "Listening...",
+      "speaking_text": "Speaking...",
+      "shareable_page_text": "Mercy AI Agent is ready to help.",
+      "terms_text": "By continuing, you agree to the conversation terms.",
+      "terms_html": null,
+      "terms_key": null,
+      "override_link": null,
+      "custom_avatar_path": null
+    },
+    "data_collection": {},
+    "overrides": {
+      "conversation_config_override": {
+        "tts": {
+          "voice_id": false
+        },
+        "conversation": {
+          "text_only": true
+        },
+        "agent": {
+          "first_message": false,
+          "language": false,
+          "prompt": {
+            "prompt": false
+          }
+        }
+      },
+      "custom_llm_extra_body": false,
+      "enable_conversation_initiation_client_data_from_webhook": false
+    },
+    "call_limits": {
+      "agent_concurrency_limit": -1,
+      "daily_limit": 100000,
+      "bursting_enabled": true
+    },
+    "privacy": {
+      "record_voice": true,
+      "retention_days": -1,
+      "delete_transcript_and_pii": false,
+      "delete_audio": false,
+      "apply_to_existing_conversations": false,
+      "zero_retention_mode": false
+    },
+    "workspace_overrides": {
+      "webhooks": {
+        "post_call_webhook_id": null
+      },
+      "conversation_initiation_client_data_webhook": null
+    },
+    "safety": {
+      "is_blocked_ivc": false,
+      "is_blocked_non_ivc": false,
+      "ignore_safety_evaluation": false
+    },
+    "testing": {
+      "attached_tests": []
+    },
+    "ban": null
+  },
+  "tags": []
+}

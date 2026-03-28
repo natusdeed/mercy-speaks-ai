@@ -114,6 +114,22 @@ const portfolioItems: PortfolioItem[] = [
     featured: true,
   },
   {
+    id: "davita-auto-logistics",
+    title: "Davita Auto Logistics",
+    url: "https://davita-auto-logistics.vercel.app/",
+    category: "Websites",
+    industryTag: "Logistics / Solar Supply",
+    description:
+      "Logistics powered by clean energy: Tier-1 solar supply, luxury vehicle transport, and Texas-coordinated global reach.",
+    outcome:
+      "Premium marketing site with strong product storytelling, gallery, shipping regions, and quote capture for B2B buyers.",
+    stack: ["Next.js", "Tailwind", "Vercel"],
+    thumbnail: "/portfolio/davita-auto-logistics.png",
+    liveUrl: "https://davita-auto-logistics.vercel.app/",
+    ctaLabel: "View Live Site",
+    featured: true,
+  },
+  {
     id: "mercy-speaks-digital",
     title: "Mercy Speaks Digital",
     url: "https://mercyspeaks.ai",
@@ -401,6 +417,7 @@ export default function WebsiteDesignPage() {
           eyebrow="Proof"
           title="Featured website work"
           description="A preview of real websites we’ve built. Need niche-specific examples? References and private work samples are available on request."
+          layout="row"
         />
 
         {/* Closing CTA */}

@@ -95,6 +95,22 @@ const PORTFOLIO_ITEMS: PortfolioItem[] = [
     ctaLabel: "View Live Site",
     featured: true,
   },
+  {
+    id: "davita-auto-logistics",
+    title: "Davita Auto Logistics",
+    url: "https://davita-auto-logistics.vercel.app/",
+    category: "Websites",
+    industryTag: "Logistics / Solar Supply",
+    description:
+      "Clean-energy logistics brand: Tier-1 solar supply, luxury auto transport, Texas-based coordination, and global shipping lanes.",
+    outcome:
+      "Conversion-ready site with product proof points, gallery, regional shipping copy, and quote flows for export buyers.",
+    stack: ["Next.js", "Tailwind", "Vercel"],
+    thumbnail: "/portfolio/davita-auto-logistics.png",
+    liveUrl: "https://davita-auto-logistics.vercel.app/",
+    ctaLabel: "View Live Site",
+    featured: true,
+  },
 ];
 
 export default function ResultsPage() {
@@ -171,7 +187,7 @@ export default function ResultsPage() {
         </section>
 
         {/* Portfolio Gallery */}
-        <PortfolioGallery items={PORTFOLIO_ITEMS} />
+        <PortfolioGallery items={PORTFOLIO_ITEMS} layout="row" />
 
         {/* Bottom CTA */}
         <section className="section" aria-label="Book a demo">

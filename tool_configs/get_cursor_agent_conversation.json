@@ -1,0 +1,29 @@
+{
+  "name": "get_cursor_agent_conversation",
+  "description": "Retrieve the conversation history of a Cursor cloud agent, including all user prompts and assistant responses. Note: If the cloud agent has been deleted, you cannot access the conversation.",
+  "type": "webhook",
+  "api_schema": {
+    "url": "https://api.cursor.com/v0/agents/{id}/conversation",
+    "method": "GET",
+    "path_params_schema": {
+      "id": {
+        "type": "string",
+        "description": "Unique identifier for the cloud agent (e.g., bc_abc123)"
+      }
+    },
+    "request_headers": {
+      "Content-Type": "application/json"
+    },
+    "auth_connection": {
+      "auth_connection_id": "icxn_1001km5zqnrvf1kbc3hv8jdc0mvt"
+    }
+  },
+  "response_timeout_secs": 20,
+  "dynamic_variables": {
+    "dynamic_variable_placeholders": {}
+  },
+  "assignments": [],
+  "disable_interruptions": false,
+  "force_pre_tool_speech": false,
+  "execution_mode": "immediate"
+}

@@ -1,0 +1,30 @@
+{
+    "type": "webhook",
+    "name": "mercy_message_capture",
+    "description": "mercy_message_capture webhook tool",
+    "response_timeout_secs": 30,
+    "disable_interruptions": false,
+    "force_pre_tool_speech": false,
+    "assignments": [],
+    "tool_call_sound_behavior": "auto",
+    "tool_error_handling_mode": "auto",
+    "dynamic_variables": {
+        "dynamicVariablePlaceholders": {}
+    },
+    "execution_mode": "immediate",
+    "api_schema": {
+        "request_headers": {
+            "Content-Type": "application/json"
+        },
+        "url": "https://api.example.com/webhook",
+        "method": "POST",
+        "path_params_schema": {},
+        "request_body_schema": {
+            "type": "object",
+            "required": [],
+            "description": "Request body for the webhook",
+            "properties": {}
+        },
+        "content_type": "application/json"
+    }
+}

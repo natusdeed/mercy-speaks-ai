@@ -1,0 +1,34 @@
+{
+    "tools": [
+        {
+            "type": "webhook",
+            "config": "tool_configs\\mercy_booking_intent-1.json",
+            "id": "tool_7001kmrjg4emfvjsb7gaywaag1rg"
+        },
+        {
+            "type": "webhook",
+            "config": "tool_configs\\mercy_message_capture.json",
+            "id": "tool_1001kmre2p2de0z9k3hhsxp9fgxd"
+        },
+        {
+            "type": "webhook",
+            "config": "tool_configs\\mercy_message_capture-2.json",
+            "id": "tool_4001kmrdy1wyfx5t9hb0wg1qbww6"
+        },
+        {
+            "type": "webhook",
+            "config": "tool_configs\\get_cursor_agent_conversation.json",
+            "id": "tool_2001km6bn1vceq8vzsq45q4fjjs6"
+        },
+        {
+            "type": "webhook",
+            "config": "tool_configs\\add_cursor_agent_followup.json",
+            "id": "tool_3301km6bn22he56a1a8rd9tv317p"
+        },
+        {
+            "type": "webhook",
+            "config": "tool_configs\\mercy_handoff_request.json",
+            "id": "tool_9501kmrt85ypf0hbg4yer82f3d4j"
+        }
+    ]
+}

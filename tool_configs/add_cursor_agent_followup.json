@@ -1,0 +1,48 @@
+{
+  "name": "add_cursor_agent_followup",
+  "description": "Add a follow-up instruction to an existing Cursor cloud agent. This allows you to provide additional guidance or requests to an agent that is already working on a task.",
+  "type": "webhook",
+  "api_schema": {
+    "url": "https://api.cursor.com/v0/agents/{id}/followup",
+    "method": "POST",
+    "content_type": "application/json",
+    "path_params_schema": {
+      "id": {
+        "type": "string",
+        "description": "Unique identifier for the cloud agent (e.g., bc_abc123)"
+      }
+    },
+    "request_body_schema": {
+      "type": "object",
+      "description": "Follow-up body for the Cursor agents API.",
+      "properties": {
+        "prompt": {
+          "type": "object",
+          "description": "Prompt object for the agent.",
+          "properties": {
+            "text": {
+              "type": "string",
+              "description": "The instruction text for the agent"
+            }
+          },
+          "required": ["text"]
+        }
+      },
+      "required": ["prompt"]
+    },
+    "request_headers": {
+      "Content-Type": "application/json"
+    },
+    "auth_connection": {
+      "auth_connection_id": "icxn_1001km5zqnrvf1kbc3hv8jdc0mvt"
+    }
+  },
+  "response_timeout_secs": 20,
+  "dynamic_variables": {
+    "dynamic_variable_placeholders": {}
+  },
+  "assignments": [],
+  "disable_interruptions": false,
+  "force_pre_tool_speech": false,
+  "execution_mode": "immediate"
+}

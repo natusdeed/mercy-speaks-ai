@@ -1,0 +1,63 @@
+{
+  "name": "mercy_handoff_request",
+  "description": "Use this tool to capture a human handoff or escalation request when a caller or visitor asks to speak with Don, the owner, a manager, or a human team member, or when the issue is sensitive, urgent, complex, or outside the agent's scope. Before using this tool, collect the person's full name, callback number, reason for calling, requested person if known, urgency if known, and best callback time.",
+  "type": "webhook",
+  "api_schema": {
+    "url": "http://localhost:3001/api/ai/handoff-request",
+    "method": "POST",
+    "request_body_schema": {
+      "type": "object",
+      "description": "Request body for saving a human handoff, escalation, owner request, or urgent follow-up request from Mercy AI Agent.",
+      "properties": {
+        "fullName": {
+          "type": "string",
+          "description": "The full name of the caller or visitor."
+        },
+        "callbackNumber": {
+          "type": "string",
+          "description": "The best phone number for follow-up."
+        },
+        "reasonForCall": {
+          "type": "string",
+          "description": "The main reason the person wants human assistance or escalation."
+        },
+        "requestedPerson": {
+          "type": "string",
+          "description": "The specific person requested, such as Don, owner, manager, or team."
+        },
+        "urgency": {
+          "type": "string",
+          "description": "The urgency level if known, such as low, normal, high, or urgent."
+        },
+        "bestCallbackTime": {
+          "type": "string",
+          "description": "The best time for a team member to call the person back."
+        },
+        "source": {
+          "type": "string",
+          "description": "Where the request came from, such as phone_call, website_chat, widget, or elevenlabs."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Extra helpful notes, short summary, or context about the escalation request."
+        }
+      },
+      "required": [
+        "fullName",
+        "callbackNumber",
+        "reasonForCall",
+        "bestCallbackTime"
+      ]
+    },
+    "request_headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "response_timeout_secs": 30,
+  "dynamic_variables": {
+    "dynamic_variable_placeholders": {}
+  },
+  "assignments": [],
+  "disable_interruptions": false,
+  "force_pre_tool_speech": false
+}

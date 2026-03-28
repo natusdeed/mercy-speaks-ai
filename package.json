@@ -4,14 +4,18 @@
   "private": true,
   "scripts": {
     "dev": "npm run dev -w my-app",
+    "dev:server": "npm run dev -w mercy-ai-server",
     "build": "npm run build -w my-app",
+    "build:server": "npm run build -w mercy-ai-server",
     "start": "npm run start -w my-app",
+    "start:server": "npm run start -w mercy-ai-server",
     "lint": "npm run lint -w my-app",
     "install-deps": "node scripts/install.js",
     "dashboard:bootstrap": "node scripts/dashboard-bootstrap.mjs"
   },
   "workspaces": [
-    "my-app"
+    "my-app",
+    "server"
   ],
   "dependencies": {
     "@supabase/supabase-js": "^2.47.0"

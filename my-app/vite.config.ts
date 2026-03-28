@@ -408,8 +408,17 @@ export default defineConfig({
     },
   },
   server: {
+    // Keep 3001 free for mercy-ai-server (tool webhooks). Without strictPort, Vite steals the next
+    // port (often 3001) when 3000 is in use — POST /api/ai/* then hits Vite and returns "Cannot POST".
     port: 3000,
+    strictPort: true,
     open: true,
+    proxy: {
+      '/api/ai': {
+        target: 'http://127.0.0.1:3001',
+        changeOrigin: true,
+      },
+    },
   },
   build: {
     outDir: 'dist',

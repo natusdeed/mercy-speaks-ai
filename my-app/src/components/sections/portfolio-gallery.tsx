@@ -54,6 +54,8 @@ interface PortfolioGalleryProps {
   description?: string;
   /** Optional id for in-page anchor links */
   sectionId?: string;
+  /** "row" = horizontal scroll row; "grid" = responsive 1–2 column grid */
+  layout?: "grid" | "row";
 }
 
 export function PortfolioGallery({
@@ -63,6 +65,7 @@ export function PortfolioGallery({
   title = "Portfolio",
   description = "Explore websites, automation, AI receptionists, and e-commerce projects we’ve built.",
   sectionId,
+  layout = "grid",
 }: PortfolioGalleryProps) {
   const [activeFilter, setActiveFilter] = useState<PortfolioCategory | "All">(defaultFilter);
 
@@ -106,10 +109,17 @@ export function PortfolioGallery({
           ))}
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Grid or horizontal row */}
+        <div
+          className={cn(
+            "gap-6",
+            layout === "row"
+              ? "flex flex-row overflow-x-auto overflow-y-visible pb-3 snap-x snap-mandatory scroll-pl-4 scroll-pr-4 -mx-1 px-1 [scrollbar-width:thin]"
+              : "grid grid-cols-1 md:grid-cols-2"
+          )}
+        >
           <AnimatePresence mode="popLayout">
-            {filtered.map((item, index) => (
+            {filtered.map((item) => (
               <motion.article
                 key={item.id}
                 layout
@@ -117,7 +127,11 @@ export function PortfolioGallery({
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.98 }}
                 transition={{ duration: 0.3 }}
-                className="card-premium flex flex-col overflow-hidden group"
+                className={cn(
+                  "card-premium flex flex-col overflow-hidden group",
+                  layout === "row" &&
+                    "shrink-0 w-[min(22rem,calc(100vw-2rem))] sm:w-80 snap-start"
+                )}
               >
                 {/* Thumbnail — 16:10, rounded-2xl, hover overlay; clickable when item has a URL */}
                 <div className="relative -mx-7 -mt-7 mb-4 aspect-16/10 overflow-hidden rounded-2xl bg-slate-800/60">

@@ -31,6 +31,22 @@ export default function Home() {
       featured: true,
     },
     {
+      id: "davita-auto-logistics",
+      title: "Davita Auto Logistics",
+      url: "https://davita-auto-logistics.vercel.app/",
+      category: "Websites",
+      industryTag: "Logistics / Solar Supply",
+      description:
+        "Clean-energy logistics brand: Tier-1 solar supply, luxury auto transport, Texas-based coordination, and global shipping stories.",
+      outcome:
+        "High-trust marketing site with product tiers, gallery, shipping lanes, and quote capture for export-heavy buyers.",
+      stack: ["Next.js", "Tailwind", "Vercel"],
+      thumbnail: "/portfolio/davita-auto-logistics.png",
+      liveUrl: "https://davita-auto-logistics.vercel.app/",
+      ctaLabel: "View Live Site",
+      featured: true,
+    },
+    {
       id: "mercy-speaks-digital",
       title: "Mercy Speaks Digital",
       url: "https://www.mercyspeaksdigital.com",
@@ -93,6 +109,7 @@ export default function Home() {
           eyebrow="Featured Work"
           title="Explore our website projects"
           description="A preview of premium websites we’ve built for businesses—designed for trust, speed, and conversion."
+          layout="row"
         />
 
         {/* 5.75) Website testimonials (placeholder-safe; no fabricated feedback) */}
