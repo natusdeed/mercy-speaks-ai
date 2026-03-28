@@ -102,7 +102,7 @@ const portfolioItems: PortfolioItem[] = [
   {
     id: "primeglobal",
     title: "PRIME Global Logistics",
-    url: "https://primeglobal-logistics-dzls.vercel.app/",
+    url: "https://primeglogistics.com/",
     category: "Websites",
     industryTag: "Logistics / Solar Supply",
     description:
@@ -110,7 +110,7 @@ const portfolioItems: PortfolioItem[] = [
     outcome: "Professional business website launch for stronger online presence and easier quote requests.",
     stack: ["Next.js", "Tailwind", "Vercel"],
     thumbnail: "/portfolio/primeglobal-logistics.png",
-    liveUrl: "https://primeglobal-logistics-dzls.vercel.app/",
+    liveUrl: "https://primeglogistics.com/",
     ctaLabel: "View Live Site",
     featured: true,
   },
