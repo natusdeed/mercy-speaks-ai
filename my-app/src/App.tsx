@@ -21,7 +21,7 @@ import ServiceRAGData from './pages/services/RAGData';
 import ServiceReviewGeneration from './pages/services/ReviewGeneration';
 import ServiceVoiceAgents from './pages/services/VoiceAgents';
 import ServiceWebsiteChatbot from './pages/services/WebsiteChatbot';
-import ServiceWebsiteDesign from './pages/services/WebsiteDesign';
+import ServiceWebsiteDesign from './app/services/website-design/page';
 import ServiceWorkflowAutomation from './pages/services/WorkflowAutomation';
 import WidgetFramePage from './app/widget/frame/page';
 import WidgetInstallPage from './app/widget/install/page';

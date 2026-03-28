@@ -394,6 +394,17 @@ section {
   line-height: 1.625;
 }
 
+/* Portfolio: crop a single horizontal “strip” screenshot so each card shows one site preview */
+.object-position-strip-left {
+  object-position: 17% 50%;
+}
+.object-position-strip-center {
+  object-position: 50% 50%;
+}
+.object-position-strip-right {
+  object-position: 83% 50%;
+}
+
 /* Gradient: hero background + primary CTA only. Text gradient for hero/CTA accent when needed. */
 .gradient {
   background: linear-gradient(to right, var(--electric-purple), var(--neon-cyan));

@@ -105,7 +105,8 @@ const portfolioItems: PortfolioItem[] = [
     url: "https://primeglobal-logistics-dzls.vercel.app/",
     category: "Websites",
     industryTag: "Logistics / Solar Supply",
-    description: "Premium marketing site with product categories, gallery, FAQs, and a quote flow.",
+    description:
+      "Premium marketing site with product categories, gallery, FAQs, and a conversion-ready quote flow—built to look established and make the next step obvious.",
     outcome: "Professional business website launch for stronger online presence and easier quote requests.",
     stack: ["Next.js", "Tailwind", "Vercel"],
     thumbnail: "/portfolio/primeglobal-logistics.png",
@@ -120,9 +121,9 @@ const portfolioItems: PortfolioItem[] = [
     category: "Websites",
     industryTag: "Logistics / Solar Supply",
     description:
-      "Logistics powered by clean energy: Tier-1 solar supply, luxury vehicle transport, and Texas-coordinated global reach.",
+      "Clean-energy logistics brand: Tier-1 solar supply, luxury auto transport, Texas-based coordination, and global shipping stories—messaged for export-heavy buyers.",
     outcome:
-      "Premium marketing site with strong product storytelling, gallery, shipping regions, and quote capture for B2B buyers.",
+      "High-trust marketing site with product tiers, gallery, shipping lanes, and quote capture for export-heavy buyers.",
     stack: ["Next.js", "Tailwind", "Vercel"],
     thumbnail: "/portfolio/davita-auto-logistics.png",
     liveUrl: "https://davita-auto-logistics.vercel.app/",
@@ -132,14 +133,15 @@ const portfolioItems: PortfolioItem[] = [
   {
     id: "mercy-speaks-digital",
     title: "Mercy Speaks Digital",
-    url: "https://mercyspeaks.ai",
+    url: "https://www.mercyspeaksdigital.com",
     category: "Websites",
     industryTag: "AI Automation Agency",
-    description: "Agency website with clear service positioning, premium layout, and conversion-focused inquiry flow.",
+    description:
+      "Agency website with clear service positioning, premium layout, and conversion-led inquiry paths—built to communicate AI ROI without noise.",
     outcome: "Premium redesign for stronger online presence and clearer service presentation.",
     stack: ["Next.js", "Tailwind"],
-    thumbnail: "/portfolio/mercyspeaks-ai.png",
-    liveUrl: "https://mercyspeaks.ai",
+    thumbnail: "/portfolio/mercyspeaks-ai-home.png",
+    liveUrl: "https://www.mercyspeaksdigital.com",
     ctaLabel: "View Site",
   },
 ];
@@ -181,10 +183,10 @@ export default function WebsiteDesignPage() {
                     </BookingLink>
                   </Button>
                   <Button variant="outline" size="lg" asChild className="rounded-xl">
-                    <Link to="/results" className="flex items-center justify-center gap-2">
+                    <a href="#website-work" className="flex items-center justify-center gap-2">
                       View Website Work
                       <ArrowRight className="w-5 h-5" />
-                    </Link>
+                    </a>
                   </Button>
                 </div>
 
@@ -246,6 +248,20 @@ export default function WebsiteDesignPage() {
             </div>
           </div>
         </section>
+
+        {/* Live website gallery — directly under hero for immediate proof */}
+        <PortfolioGallery
+          items={portfolioItems}
+          defaultFilter="Websites"
+          sectionId="website-work"
+          eyebrow="Explore our website projects"
+          title="Real launches. Premium builds. Built to convert."
+          description="Three live client-grade sites in production today—each paired with sharp visuals, credible storytelling, and a clear path to quotes, calls, and bookings. Tap a preview or button to open the live URL."
+          layout="grid"
+          variant="showcase"
+          showFilters={false}
+          gridColumns={3}
+        />
 
         {/* What we build */}
         <section className="section pt-0" aria-labelledby="what-we-build-title">
@@ -408,17 +424,6 @@ export default function WebsiteDesignPage() {
             </motion.div>
           </div>
         </section>
-
-        {/* Proof / Work */}
-        <PortfolioGallery
-          items={portfolioItems}
-          defaultFilter="Websites"
-          sectionId="website-work"
-          eyebrow="Proof"
-          title="Featured website work"
-          description="A preview of real websites we’ve built. Need niche-specific examples? References and private work samples are available on request."
-          layout="row"
-        />
 
         {/* Closing CTA */}
         <section className="section pt-0 pb-24 md:pb-32" aria-label="Website development call to action">
