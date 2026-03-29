@@ -236,7 +236,7 @@ export default function AIPhoneReceptionistPage() {
                   Ready to Replace Your Receptionist?
                 </h2>
                 <p className="text-lg md:text-xl leading-relaxed text-slate-300 mb-8">
-                  Get started in 48 hours. No setup fees. Cancel anytime.
+                  Book a strategy call to confirm scope, onboarding steps, and plan terms before you commit.
                 </p>
                 <Button variant="primary" size="lg" asChild>
                   <BookingLink>

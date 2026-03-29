@@ -1,5 +1,6 @@
 import { PageShell } from "@/components/ui/page-shell";
 import { Hero } from "@/components/sections/hero";
+import { EntitySummaryStrip } from "@/components/sections/entity-summary-strip";
 import { ServicesOverview } from "@/components/sections/services-overview";
 import { ProblemRow } from "@/components/sections/problem-row";
 import { WhatWeInstall } from "@/components/sections/what-we-install";
@@ -12,6 +13,11 @@ import { FAQ } from "@/components/sections/faq";
 import { FinalCTA } from "@/components/sections/final-cta";
 import { PortfolioGallery, type PortfolioItem } from "@/components/sections/portfolio-gallery";
 import { Testimonials } from "@/components/sections/testimonials";
+import { SeoHead } from "@/components/seo/seo-head";
+import { JsonLd } from "@/components/seo/json-ld";
+import { BRAND_TAGLINE } from "@/lib/site-config";
+import { faqPageSchema, organizationSchema, websiteSchema } from "@/lib/schema";
+import { HOME_PAGE_FAQS } from "@/content/home-faqs";
 
 export default function Home() {
   const portfolioItems: PortfolioItem[] = [
@@ -77,11 +83,23 @@ export default function Home() {
     },
   ];
 
+  const faqsForSchema = HOME_PAGE_FAQS.map((f) => ({ question: f.question, answer: f.answer }));
+
   return (
     <PageShell className="min-h-screen bg-slate-950 w-full">
+      <SeoHead
+        path="/"
+        title="Mercy Speaks Digital"
+        description={BRAND_TAGLINE}
+      />
+      <JsonLd
+        data={[organizationSchema(), websiteSchema(), faqPageSchema(faqsForSchema)]}
+      />
       <main className="w-full">
         {/* 1) Minimal Hero */}
         <Hero />
+
+        <EntitySummaryStrip />
 
         {/* 1.5) Services overview (Websites + AI + Automation + E-commerce) */}
         <ServicesOverview />

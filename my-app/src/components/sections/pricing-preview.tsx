@@ -9,7 +9,7 @@ const TIERS = [
   {
     name: "Starter",
     price: 197,
-    description: "AI phone receptionist, lead capture, 48-hour setup.",
+    description: "AI phone receptionist, lead capture, guided onboarding.",
     highlight: false,
   },
   {
@@ -95,7 +95,7 @@ export function PricingPreview() {
             Pricing Preview
           </h2>
           <p className="text-slate-400 max-w-2xl mx-auto">
-            Plans that scale. 48-hour setup. No long-term contracts.
+            Plans that scale. Timelines confirmed on your strategy call. Terms reviewed before you start.
           </p>
         </motion.div>
 
@@ -130,7 +130,7 @@ export function PricingPreview() {
                 variant={tier.highlight ? "primary" : "outline"}
                 size="default"
                 asChild
-                className="mt-auto w-full"
+                className="mt-auto w-full min-h-[48px]"
               >
                 <Link to="/pricing">View plan</Link>
               </Button>
@@ -209,7 +209,7 @@ export function PricingPreview() {
                   <Button
                     variant={tier.popular ? "primary" : "outline"}
                     size="default"
-                    className="w-full"
+                    className="w-full min-h-[48px]"
                     asChild
                   >
                     <Link

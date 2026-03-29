@@ -1,32 +1,41 @@
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Calendar } from "lucide-react";
-import { Link } from "react-router-dom";
-import { BookingLink } from "@/components/cta/booking-link";
+import { CalendarClock } from "lucide-react";
+import { ServiceMarketingPage } from "@/components/templates/service-marketing-page";
+import { NAV_PATHS } from "@/lib/site-config";
 
 export default function ServiceAppointmentAutomation() {
   return (
-    <div className="min-h-screen bg-slate-950">
-      <main className="py-16 md:py-24 px-6 lg:px-12">
-        <div className="max-w-7xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <Calendar className="w-16 h-16 text-neon-cyan mx-auto mb-4" />
-            <h1 className="text-5xl md:text-6xl font-bold text-slate-50 mb-6">
-              Appointment Automation
-            </h1>
-            <p className="text-xl text-slate-400 mb-8">
-              Automate scheduling and reduce no-shows
-            </p>
-            <Button variant="primary" size="lg" asChild>
-              <BookingLink>Book a Demo</BookingLink>
-            </Button>
-          </motion.div>
-        </div>
-      </main>
-    </div>
+    <ServiceMarketingPage
+      path={NAV_PATHS.appointmentAutomation}
+      seoTitle="Appointment automation"
+      seoDescription="Automation for scheduling, reminders, and handoffs—fewer no-shows and less phone tag. Mercy Speaks Digital."
+      icon={CalendarClock}
+      h1="Appointment automation"
+      intro="Make booking and reminders reliable: fewer empty slots, less back-and-forth, clearer expectations for customers and staff."
+      atAGlance="We tie your calendar, notifications, and receptionist or chat flows together so appointments are created with the right buffers, confirmations go out automatically, and your team sees prepared context before the meeting or visit."
+      serviceType="Appointment scheduling"
+      sections={[
+        {
+          title: "What it is",
+          body: "Appointment automation is the layer around your calendar—self-serve booking where appropriate, plus confirmations, reschedules, and prep messages that run on rules instead of ad hoc texts.",
+        },
+        {
+          title: "Who it helps",
+          body: "Anyone who lives in their calendar: clinics, consultants, home services, salons, and sales teams that book discovery calls. If no-shows or scheduling friction cost you revenue, this is high leverage.",
+        },
+        {
+          title: "Outcomes",
+          body: "Cleaner calendar data, higher show rates from proactive reminders, and faster rebooking when plans change—without your front desk living in manual follow-up mode.",
+        },
+        {
+          title: "Implementation notes",
+          body: "We align on booking policies (deposit, cancellation windows, service durations, staff assignments). Then we connect the channels—phone AI, web forms, chat—that feed the same calendar truth.",
+        },
+      ]}
+      related={[
+        { to: NAV_PATHS.aiReceptionist, label: "AI receptionist" },
+        { to: NAV_PATHS.websiteDesign, label: "Websites & booking UX" },
+        { to: NAV_PATHS.workflowAutomation, label: "Workflow automation" },
+      ]}
+    />
   );
 }

@@ -1,94 +1,59 @@
 import { motion } from "framer-motion";
-import { MapPin, Star, ShieldCheck, CheckCircle2, Clock, X } from "lucide-react";
+import { MapPin, CheckCircle2, Clock } from "lucide-react";
+import { Link } from "react-router-dom";
 
+/**
+ * Factual trust strip only—no ratings, guarantees, or metrics unless sourced elsewhere in the product.
+ */
 export function TrustSignals() {
   return (
-    <section className="w-full border-b border-slate-800/50 bg-slate-950/50 backdrop-blur-sm px-6 pt-4">
+    <section className="w-full border-b border-slate-800/50 bg-slate-950/50 backdrop-blur-sm px-4 sm:px-6 pt-4">
       <div className="max-w-7xl mx-auto py-5">
-        {/* Main Trust Signals - Above the Fold */}
         <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 mb-4">
-          {/* Location */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -12 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex items-center gap-2 text-slate-300"
+            transition={{ duration: 0.45 }}
+            className="flex items-center gap-2 text-slate-300 min-h-[44px]"
           >
-            <MapPin className="w-5 h-5 text-neon-cyan" />
-            <span className="text-sm md:text-base font-medium">
-              Serving: <span className="text-slate-50">Houston, TX & Surrounding Areas</span>
-            </span>
-          </motion.div>
-
-          {/* Rating */}
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="flex items-center gap-2 text-slate-300"
-          >
-            <div className="flex items-center gap-1">
-              <Star className="w-5 h-5 text-electric-purple fill-electric-purple" />
-              <span className="text-sm md:text-base font-semibold text-slate-50">4.9/5</span>
-            </div>
-            <span className="text-sm md:text-base">
-              rating from <span className="text-slate-50 font-medium">47 local businesses</span>
-            </span>
-          </motion.div>
-
-          {/* ROI Guarantee */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex items-center gap-2 text-slate-300"
-          >
-            <ShieldCheck className="w-5 h-5 text-neon-cyan" />
-            <span className="text-sm md:text-base">
-              <span className="text-slate-50 font-semibold">ROI Guarantee:</span> Make your money back in 30 days
+            <MapPin className="w-5 h-5 text-neon-cyan shrink-0" aria-hidden />
+            <span className="text-sm md:text-base font-medium text-center sm:text-left">
+              Based in <span className="text-slate-50">Richmond, TX</span> · Houston metro · US-wide
             </span>
           </motion.div>
         </div>
 
-        {/* Trust Badges */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex flex-wrap items-center justify-center gap-4 md:gap-6 mb-4"
+          transition={{ duration: 0.45, delay: 0.08 }}
+          className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-4"
         >
-          <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-900/50 border border-slate-800/50">
-            <CheckCircle2 className="w-4 h-4 text-neon-cyan" />
-            <span className="text-sm text-slate-300">No Setup Fees</span>
+          <div className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-slate-900/50 border border-slate-800/50 min-h-[44px]">
+            <CheckCircle2 className="w-4 h-4 text-neon-cyan shrink-0" aria-hidden />
+            <span className="text-sm text-slate-300">Scope &amp; timeline on a strategy call</span>
           </div>
-          <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-900/50 border border-slate-800/50">
-            <Clock className="w-4 h-4 text-electric-purple" />
-            <span className="text-sm text-slate-300">48-Hour Setup</span>
-          </div>
-          <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-900/50 border border-slate-800/50">
-            <X className="w-4 h-4 text-slate-400" />
-            <span className="text-sm text-slate-300">Cancel Anytime</span>
+          <div className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-slate-900/50 border border-slate-800/50 min-h-[44px]">
+            <Clock className="w-4 h-4 text-electric-purple shrink-0" aria-hidden />
+            <span className="text-sm text-slate-300">Guided onboarding</span>
           </div>
         </motion.div>
 
-        {/* Pricing Preview */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
+          transition={{ duration: 0.45, delay: 0.15 }}
           className="text-center"
         >
-          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-800/40 border border-slate-700/20 backdrop-blur-sm">
-            <span className="text-lg md:text-xl font-bold text-slate-50">
-              Starting at <span className="text-neon-cyan">$197/month</span>
+          <Link
+            to="/pricing"
+            className="inline-flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 px-5 py-3 rounded-xl bg-slate-800/40 border border-slate-700/20 backdrop-blur-sm text-slate-50 hover:border-neon-cyan/30 transition-colors min-h-[48px]"
+          >
+            <span className="text-base md:text-lg font-bold">
+              View pricing <span className="text-neon-cyan">from $197/mo</span>
             </span>
-            <span className="text-sm text-slate-400 hidden md:inline">
-              (Less than 1 hour of employee wages)
-            </span>
-            <span className="text-xs text-slate-400 md:hidden">
-              (&lt;1hr wages)
-            </span>
-          </div>
+            <span className="text-sm text-slate-400">AI receptionist tiers — websites quoted separately</span>
+          </Link>
         </motion.div>
       </div>
     </section>

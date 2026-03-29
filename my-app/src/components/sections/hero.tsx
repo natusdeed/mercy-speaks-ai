@@ -26,7 +26,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-slate-50 tracking-tight leading-[1.12] mb-5"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-slate-50 tracking-tight leading-[1.12] mb-5"
         >
           Premium Websites, E-commerce, AI Receptionists & Automation for Growing Businesses
         </motion.h1>
@@ -35,7 +35,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-lg md:text-xl text-slate-400 leading-relaxed max-w-2xl mx-auto mb-6"
+          className="text-base sm:text-lg md:text-xl text-slate-400 leading-relaxed max-w-2xl mx-auto mb-6 px-1"
         >
           We build premium websites and storefronts, then add AI and automation that capture leads and follow up fast—so more visitors become booked customers.
         </motion.p>
@@ -44,16 +44,16 @@ export function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.15 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8"
+          className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 mb-8"
         >
-          <Button variant="primary" size="lg" asChild className="w-full sm:w-auto">
+          <Button variant="primary" size="lg" asChild className="w-full sm:w-auto min-h-[48px]">
             <BookingLink className="flex items-center justify-center gap-2">
               <Phone className="w-5 h-5" />
               Book a Free Strategy Call
               <ArrowRight className="w-5 h-5" />
             </BookingLink>
           </Button>
-          <Button variant="outline" size="lg" asChild className="w-full sm:w-auto">
+          <Button variant="outline" size="lg" asChild className="w-full sm:w-auto min-h-[48px]">
             <a href="#portfolio" className="flex items-center justify-center gap-2">
               <Globe className="w-5 h-5" />
               View Website Work
@@ -82,7 +82,7 @@ export function Hero() {
         </motion.div>
 
         <p className="mt-6 text-sm text-slate-500">
-          Based in Houston • Serving businesses across the U.S.
+          Based in the Houston metro (Richmond, TX) • Serving businesses across the U.S.
         </p>
       </div>
     </section>

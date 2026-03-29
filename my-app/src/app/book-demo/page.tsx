@@ -16,6 +16,10 @@ import {
 } from "lucide-react";
 import { BookingLink } from "@/components/cta/booking-link";
 import { getBookingUrl, isExternalBookingUrl } from "@/lib/booking-url";
+import { SeoHead } from "@/components/seo/seo-head";
+import { JsonLd } from "@/components/seo/json-ld";
+import { BRAND_TAGLINE } from "@/lib/site-config";
+import { breadcrumbSchema, organizationSchema, webPageSchema } from "@/lib/schema";
 
 const API_LEAD = "/api/book-demo";
 
@@ -73,8 +77,21 @@ export default function BookDemoPage() {
     }
   };
 
+  const description = `Book a strategy call or demo for websites, AI receptionists, and automation. ${BRAND_TAGLINE}`;
+
   return (
     <PageShell className="min-h-screen bg-slate-950">
+      <SeoHead path="/book-demo" title="Book a demo" description={description} />
+      <JsonLd
+        data={[
+          organizationSchema(),
+          webPageSchema({ name: "Book a demo", description, path: "/book-demo" }),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Book a demo", path: "/book-demo" },
+          ]),
+        ]}
+      />
       <main className="pb-16">
         <section className="section">
           <div className="section-inner">

@@ -25,7 +25,7 @@ const TIERS: Tier[] = [
       "Appointment scheduling",
       "Missed-call text back",
       "Email notifications",
-      "48-hour setup",
+      "Guided onboarding",
       "Email support",
     ],
   },
@@ -61,7 +61,7 @@ const TIERS: Tier[] = [
 ];
 
 const TRUST_NOTES = [
-  "Setup in 48 hours",
+  "Guided setup—timeline on your call",
   "Works with your current number",
   "Cancel anytime",
 ];

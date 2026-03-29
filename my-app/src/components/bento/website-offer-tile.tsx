@@ -7,7 +7,7 @@ export function WebsiteOfferTile() {
   const benefits = [
     {
       icon: Zap,
-      text: "Built with AI in days, not months",
+      text: "Efficient build process with clear milestones",
       color: "neon-cyan",
     },
     {
@@ -26,7 +26,7 @@ export function WebsiteOfferTile() {
     "SEO-optimized for maximum visibility",
     "Designed to convert visitors to customers",
     "Integration-ready for digital employees",
-    "Fast setup with 48-hour delivery",
+    "Delivery timeline scoped on your strategy call",
   ];
 
   return (
@@ -117,7 +117,7 @@ export function WebsiteOfferTile() {
                 </Link>
               </Button>
               <p className="text-sm text-center text-slate-400 mt-3 font-medium">
-                Starting at $997 • 48-Hour Setup
+                Starting at $997 • timeline on your call
               </p>
             </div>
           </div>

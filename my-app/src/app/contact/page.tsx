@@ -14,6 +14,10 @@ import {
   MessageSquare,
   CheckCircle2,
 } from "lucide-react";
+import { SeoHead } from "@/components/seo/seo-head";
+import { JsonLd } from "@/components/seo/json-ld";
+import { BRAND_TAGLINE } from "@/lib/site-config";
+import { breadcrumbSchema, contactPageSchema, organizationSchema, webPageSchema } from "@/lib/schema";
 
 const API_CONTACT = "/api/contact";
 
@@ -41,6 +45,26 @@ export default function ContactPage() {
 
   return (
     <PageShell className="min-h-screen bg-slate-950">
+      <SeoHead
+        path="/contact"
+        title="Contact"
+        description="Contact Mercy Speaks Digital for websites, AI receptionists, and business automation. Email, phone, or send a message—we reply to real inquiries."
+      />
+      <JsonLd
+        data={[
+          organizationSchema(),
+          webPageSchema({
+            name: "Contact Mercy Speaks Digital",
+            description: BRAND_TAGLINE,
+            path: "/contact",
+          }),
+          contactPageSchema(),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Contact", path: "/contact" },
+          ]),
+        ]}
+      />
       <main className="pb-16">
         <section className="section">
           <div className="section-inner">
@@ -59,8 +83,8 @@ export default function ContactPage() {
                 <span className="text-neon-cyan">Talk</span>
               </h1>
               <p className="text-lg sm:text-xl leading-relaxed text-slate-300 max-w-3xl mx-auto px-1">
-                Have questions? Want to see a demo? We&apos;re here to help you transform your business
-                with AI automation.
+                Questions about a website build, AI receptionist, or automation roadmap? Send a note—we reply to real
+                business inquiries, fast.
               </p>
             </motion.div>
 
@@ -73,7 +97,7 @@ export default function ContactPage() {
               >
                 <div className="card">
                   <MapPin className="w-7 h-7 sm:w-8 sm:h-8 text-electric-purple mb-4" />
-                  <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-50 mb-2">Location</h3>
+                  <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-50 mb-2">Location</h2>
                   <p className="text-base sm:text-lg md:text-xl text-slate-300">
                     Richmond, Texas 77407
                     <br />
@@ -82,7 +106,7 @@ export default function ContactPage() {
                 </div>
                 <div className="card">
                   <Phone className="w-7 h-7 sm:w-8 sm:h-8 text-neon-cyan mb-4" />
-                  <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-50 mb-2">Phone</h3>
+                  <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-50 mb-2">Phone</h2>
                   <a
                     href="tel:7033325956"
                     className="text-base sm:text-lg md:text-xl text-slate-300 hover:text-neon-cyan transition-colors"
@@ -92,7 +116,7 @@ export default function ContactPage() {
                 </div>
                 <div className="card">
                   <Mail className="w-7 h-7 sm:w-8 sm:h-8 text-electric-purple mb-4" />
-                  <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-50 mb-2">Email</h3>
+                  <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-50 mb-2">Email</h2>
                   <a
                     href="mailto:don@mercyspeaksdigital.com"
                     className="text-base sm:text-lg md:text-xl text-slate-300 hover:text-neon-cyan transition-colors break-all"
@@ -102,7 +126,7 @@ export default function ContactPage() {
                 </div>
                 <div className="card">
                   <Clock className="w-7 h-7 sm:w-8 sm:h-8 text-neon-cyan mb-4" />
-                  <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-50 mb-2">Business Hours</h3>
+                  <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-50 mb-2">Business Hours</h2>
                   <p className="text-base sm:text-lg md:text-xl text-slate-300">
                     Monday - Friday: 9:00 AM - 6:00 PM CST
                     <br />

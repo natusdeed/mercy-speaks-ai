@@ -1,4 +1,5 @@
-import { defineConfig, loadEnv } from 'vite';
+import { Socket } from 'node:net';
+import { defineConfig, loadEnv, type UserConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 
@@ -8,11 +9,74 @@ const cwd = process.cwd();
 const parentDir = path.resolve(cwd, '..');
 Object.assign(process.env, loadEnv(mode, parentDir, ''), loadEnv(mode, cwd, ''));
 
+/**
+ * True if something already accepts TCP on this port on loopback (checks both IPv4 and IPv6).
+ * A bare `listen(3000)` probe can succeed on IPv4 while another process holds [::1]:3000 — then Vite fails.
+ */
+function portHasLoopbackListener(port: number): Promise<boolean> {
+  const probe = (host: string) =>
+    new Promise<boolean>((resolve) => {
+      const s = new Socket();
+      s.setTimeout(500);
+      s.once('connect', () => {
+        s.destroy();
+        resolve(true);
+      });
+      s.once('timeout', () => {
+        s.destroy();
+        resolve(false);
+      });
+      s.once('error', () => {
+        s.destroy();
+        resolve(false);
+      });
+      s.connect(port, host);
+    });
+  return probe('127.0.0.1').then((v4) => v4 || probe('::1'));
+}
+
+/**
+ * Prefer 3000; if busy on either stack, pick a fallback — never 3001 (mercy-ai-server /api/ai proxy).
+ * Override with VITE_DEV_PORT=n in .env
+ */
+async function pickDevServerPort(): Promise<number> {
+  const raw = process.env.VITE_DEV_PORT;
+  if (raw && /^\d+$/.test(raw)) {
+    const p = Number(raw);
+    if (p > 0 && p < 65536 && p !== 3001) return p;
+  }
+  const candidates = [3000, 3020, 3030, 5173, 5174, 8080];
+  for (const p of candidates) {
+    if (p === 3001) continue;
+    if (await portHasLoopbackListener(p)) continue;
+    return p;
+  }
+  return 5173;
+}
+
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(async (): Promise<UserConfig> => {
+  const devPort = await pickDevServerPort();
+
+  return {
   /* Always resolve index.html from this package (avoids "in/index.html" when cwd/CLI root is wrong in monorepo). */
   root: path.resolve(__dirname),
   plugins: [
+    {
+      name: 'dev-fallback-port-hint',
+      configureServer(server) {
+        server.httpServer?.once('listening', () => {
+          const addr = server.httpServer?.address();
+          const port =
+            typeof addr === 'object' && addr && 'port' in addr ? (addr as { port: number }).port : undefined;
+          if (port != null && port !== 3000) {
+            console.info(
+              `[vite] Port 3000 is in use — dev app: http://localhost:${port}/ (port 3001 left free for mercy-ai-server).`,
+            );
+          }
+        });
+      },
+    },
     react(),
     // Dev-only: handle GET /api/widget/config, POST /api/widget/chat, POST /api/widget/lead
     {
@@ -408,9 +472,8 @@ export default defineConfig({
     },
   },
   server: {
-    // Keep 3001 free for mercy-ai-server (tool webhooks). Without strictPort, Vite steals the next
-    // port (often 3001) when 3000 is in use — POST /api/ai/* then hits Vite and returns "Cannot POST".
-    port: 3000,
+    // strictPort: we pre-pick a free port (never auto-use 3001 — that breaks /api/ai proxy to mercy-ai-server).
+    port: devPort,
     strictPort: true,
     open: true,
     proxy: {
@@ -423,5 +486,18 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('framer-motion')) return 'motion';
+            if (id.includes('react-router')) return 'router';
+            if (id.includes('lucide-react')) return 'icons';
+            if (id.includes('@radix-ui')) return 'radix';
+          }
+        },
+      },
+    },
   },
+};
 });

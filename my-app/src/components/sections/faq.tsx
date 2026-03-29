@@ -5,45 +5,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-interface FAQItem {
-  question: string;
-  answer: string;
-}
+import { HOME_PAGE_FAQS } from "@/content/home-faqs";
 
-const FAQS: FAQItem[] = [
-  {
-    question: "How fast can you set this up?",
-    answer: "We get you live in 48 hours. We handle setup and integration; you don't need to do anything technical.",
-  },
-  {
-    question: "What if customers don't like talking to AI?",
-    answer: "Our AI sounds natural and helpful. Most callers don't notice. Many businesses see better satisfaction after switching.",
-  },
-  {
-    question: "Can it work with my current system?",
-    answer: "Yes. We integrate with common CRMs, scheduling tools, and payment systems. We plug into what you already use.",
-  },
-  {
-    question: "What if I need to cancel?",
-    answer: "Cancel anytime. No fees or penalties.",
-  },
-  {
-    question: "Do I need to be technical?",
-    answer: "No. We set everything up and give you a simple dashboard. You can use it from day one.",
-  },
-  {
-    question: "What's included in the Missed Revenue Dashboard?",
-    answer: "You see missed calls, dropped leads, and estimated revenue left on the table—so you know exactly what to fix.",
-  },
-  {
-    question: "Do you serve businesses outside Houston?",
-    answer: "Yes. We're based in Houston and serve clients nationwide. Setup and support are remote.",
-  },
-  {
-    question: "Is there a long-term contract?",
-    answer: "No. Month-to-month. You can cancel anytime with no early-exit fees.",
-  },
-];
+const FAQS = HOME_PAGE_FAQS.map((f) => ({ question: f.question, answer: f.answer }));
 
 export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -80,8 +44,12 @@ export function FAQ() {
               className="rounded-2xl bg-slate-900/20 shadow-sm overflow-hidden"
             >
               <button
+                type="button"
+                id={`faq-trigger-${index}`}
+                aria-expanded={openIndex === index}
+                aria-controls={`faq-panel-${index}`}
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full p-7 flex items-center justify-between text-left hover:bg-slate-800/20 transition-colors group"
+                className="w-full p-5 sm:p-7 flex items-center justify-between text-left hover:bg-slate-800/20 transition-colors group min-h-[52px]"
               >
                 <span className="card-title text-slate-50 group-hover:text-neon-cyan transition-colors pr-4">
                   {faq.question}
@@ -91,18 +59,22 @@ export function FAQ() {
                     "w-5 h-5 text-slate-400 shrink-0 transition-transform",
                     openIndex === index && "rotate-180 text-neon-cyan"
                   )}
+                  aria-hidden
                 />
               </button>
               <AnimatePresence>
                 {openIndex === index && (
                   <motion.div
+                    id={`faq-panel-${index}`}
+                    role="region"
+                    aria-labelledby={`faq-trigger-${index}`}
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden"
                   >
-                    <div className="px-7 pb-7 pt-0 text-slate-300 text-sm leading-relaxed">
+                    <div className="px-5 sm:px-7 pb-5 sm:pb-7 pt-0 text-slate-300 text-sm leading-relaxed">
                       {faq.answer}
                     </div>
                   </motion.div>

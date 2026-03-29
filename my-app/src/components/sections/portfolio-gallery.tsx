@@ -237,11 +237,15 @@ export function PortfolioGallery({
                       <img
                         src={item.thumbnail}
                         alt={`${item.title} website thumbnail`}
+                        width={960}
+                        height={600}
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
                         className={cn(
                           "h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]",
                           item.thumbnailImgClassName
                         )}
-                        loading="lazy"
+                        loading={index === 0 ? "eager" : "lazy"}
+                        fetchPriority={index === 0 ? "high" : undefined}
                         decoding="async"
                       />
                       <div

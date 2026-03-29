@@ -12,6 +12,10 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { BookingLink } from "@/components/cta/booking-link";
+import { SeoHead } from "@/components/seo/seo-head";
+import { JsonLd } from "@/components/seo/json-ld";
+import { BRAND_TAGLINE } from "@/lib/site-config";
+import { breadcrumbSchema, faqPageSchema, organizationSchema, webPageSchema } from "@/lib/schema";
 
 const fadeUp = {
   initial: { opacity: 0, y: 16 },
@@ -36,7 +40,7 @@ const TIERS = [
       "Appointment scheduling",
       "Lead capture & qualification",
       "Email notifications",
-      "48-hour setup",
+      "Guided onboarding & setup",
     ],
     popular: false,
   },
@@ -114,9 +118,9 @@ const WEBSITE_TIERS = [
 ] as const;
 
 const TRUST_NOTES = [
-  { icon: Clock, text: "Setup in 48 hours" },
+  { icon: Clock, text: "Guided setup—timeline confirmed on your call" },
   { icon: Smartphone, text: "Works with your current number" },
-  { icon: RotateCcw, text: "Cancel anytime" },
+  { icon: RotateCcw, text: "Flexible plans—terms reviewed before you start" },
 ];
 
 const FAQ_ITEMS = [
@@ -126,17 +130,31 @@ const FAQ_ITEMS = [
   },
   {
     q: "How long does setup take?",
-    a: "Most accounts go live within 48 hours. We handle integration with your number and calendar.",
+    a: "It depends on your phone setup, calendar tools, and how complex your call flows are. After a strategy call we give you a written onboarding sequence with milestones—many teams move quickly once requirements are locked.",
   },
   {
     q: "Can I cancel?",
-    a: "Yes. Month-to-month, no long-term contract. Cancel anytime with no fees.",
+    a: "Billing and commitment details are shown before you start. Ask on a strategy call so we can match you to the right plan.",
   },
 ];
 
 export default function PricingPage() {
+  const description = `Transparent pricing for AI receptionist and website packages. ${BRAND_TAGLINE}`;
+
   return (
     <PageShell className="min-h-screen bg-slate-950">
+      <SeoHead path="/pricing" title="Pricing" description={description} />
+      <JsonLd
+        data={[
+          organizationSchema(),
+          webPageSchema({ name: "Pricing", description, path: "/pricing" }),
+          faqPageSchema(FAQ_ITEMS.map((x) => ({ question: x.q, answer: x.a }))),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Pricing", path: "/pricing" },
+          ]),
+        ]}
+      />
       <main>
         {/* Hero */}
         <section className="section" aria-labelledby="pricing-title">

@@ -16,6 +16,10 @@ import { Button } from "@/components/ui/button";
 import { PageShell } from "@/components/ui/page-shell";
 import { Link } from "react-router-dom";
 import { BookingLink } from "@/components/cta/booking-link";
+import { SeoHead } from "@/components/seo/seo-head";
+import { JsonLd } from "@/components/seo/json-ld";
+import { BRAND_TAGLINE } from "@/lib/site-config";
+import { breadcrumbSchema, organizationSchema, webPageSchema } from "@/lib/schema";
 
 const fadeUp = {
   initial: { opacity: 0, y: 16 },
@@ -63,9 +67,28 @@ const supportingServices = [
 ] as const;
 
 export default function SolutionsPage() {
+  const description =
+    "Flagship AI receptionist plus websites, chat, and automation—capture calls and leads 24/7. Mercy Speaks Digital solutions overview.";
+
   return (
     <PageShell className="min-h-screen bg-slate-950">
+      <SeoHead path="/solutions" title="Solutions" description={description} />
+      <JsonLd
+        data={[
+          organizationSchema(),
+          webPageSchema({ name: "Solutions", description, path: "/solutions" }),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Solutions", path: "/solutions" },
+          ]),
+        ]}
+      />
       <main>
+        <section className="section pt-6 pb-0 border-b border-slate-800/30" aria-label="Summary">
+          <div className="section-inner max-w-4xl mx-auto">
+            <p className="text-slate-400 text-center text-sm sm:text-base leading-relaxed px-1">{BRAND_TAGLINE}</p>
+          </div>
+        </section>
         {/* Flagship — top section */}
         <section className="section pt-10 md:pt-12" aria-labelledby="flagship-title">
           <div className="section-inner max-w-4xl mx-auto">

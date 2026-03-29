@@ -7,6 +7,10 @@ import { PageShell } from "@/components/ui/page-shell";
 import { PortfolioGallery, type PortfolioItem } from "@/components/sections/portfolio-gallery";
 import { Link } from "react-router-dom";
 import { BookingLink } from "@/components/cta/booking-link";
+import { SeoHead } from "@/components/seo/seo-head";
+import { JsonLd } from "@/components/seo/json-ld";
+import { BRAND_TAGLINE } from "@/lib/site-config";
+import { breadcrumbSchema, organizationSchema, webPageSchema } from "@/lib/schema";
 
 const fadeUp = {
   initial: { opacity: 0, y: 16 },
@@ -24,14 +28,15 @@ const fadeUpInView = {
 const CASE_STUDIES = [
   {
     industry: "Legal",
-    situation: "Small firm was missing 15–20 potential clients per month to after-hours and overflow calls.",
+    situation:
+      "Small firm had steady after-hours and overflow call volume that often landed in voicemail—potential clients moving on before anyone could respond.",
     installed: "24/7 AI receptionist + calendar sync; missed-revenue dashboard.",
     outcomes: [
-      "Captured every after-hours call; 8 new clients in first month.",
-      "Clear view of previously missed revenue; now tracked and closed.",
-      "Receptionist freed for in-person work; no more call chaos.",
+      "After-hours calls were answered and qualified instead of lost to voicemail.",
+      "Leadership gained clearer visibility into missed-call patterns and follow-up.",
+      "Front-desk time shifted toward in-person priorities while the line stayed covered.",
     ],
-    quote: "References available on request.",
+    quote: "Illustrative scenario. References available on request.",
   },
   {
     industry: "Auto repair",
@@ -42,18 +47,18 @@ const CASE_STUDIES = [
       "Scheduling handled 24/7; front desk focused on customers in the shop.",
       "Every inquiry captured and followed up.",
     ],
-    quote: "References available on request.",
+    quote: "Illustrative scenario. References available on request.",
   },
   {
     industry: "HVAC / home services",
     situation: "Emergency calls at night and on weekends were going to voicemail; leads went cold.",
     installed: "24/7 AI that qualifies emergencies, books same-day/next-day slots, and notifies the team.",
     outcomes: [
-      "Emergency bookings up; no more 2 AM voicemails going unanswered.",
-      "Leads qualified and scheduled before they call a competitor.",
-      "ROI visible in first month; missed-call value now captured.",
+      "Emergency bookings improved with fewer overnight voicemails sitting untouched.",
+      "Callers could be qualified and scheduled before moving to the next name on Google.",
+      "Reporting made call outcomes easier to review than ad hoc text chains or voicemail.",
     ],
-    quote: "References available on request.",
+    quote: "Illustrative scenario. References available on request.",
   },
 ];
 
@@ -114,8 +119,21 @@ const PORTFOLIO_ITEMS: PortfolioItem[] = [
 ];
 
 export default function ResultsPage() {
+  const description = `Results and illustrative outcomes: ${BRAND_TAGLINE}`;
+
   return (
     <PageShell className="min-h-screen bg-slate-950">
+      <SeoHead path="/results" title="Results & proof" description={description} />
+      <JsonLd
+        data={[
+          organizationSchema(),
+          webPageSchema({ name: "Results & proof", description, path: "/results" }),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Results", path: "/results" },
+          ]),
+        ]}
+      />
       <main>
         {/* Hero + pilot label */}
         <section className="section" aria-labelledby="results-title">
@@ -131,7 +149,8 @@ export default function ResultsPage() {
                 Results
               </h1>
               <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-                We don’t publish invented testimonials. Where we can’t share details publicly, we offer references on request.
+                We don&apos;t publish invented testimonials. The scenarios below are illustrative composites—not named
+                clients. Where we can&apos;t share details publicly, we offer references on request.
               </p>
             </motion.div>
           </div>

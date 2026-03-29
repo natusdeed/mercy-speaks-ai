@@ -76,7 +76,12 @@ export function ServicesOverview() {
             Websites first—then AI systems that capture and convert
           </h2>
           <p className="text-slate-400 max-w-3xl mx-auto">
-            Choose a premium website build, add an AI receptionist, and automate follow-up—so your online presence turns into booked customers.
+            Choose a premium website build, add an AI receptionist, and automate follow-up—so your online presence turns
+            into booked customers.{" "}
+            <Link to="/services" className="text-neon-cyan hover:underline font-medium whitespace-nowrap">
+              View all services
+            </Link>
+            .
           </p>
         </motion.div>
 

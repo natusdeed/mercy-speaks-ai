@@ -2,10 +2,20 @@
 
 import { useEffect, useState, useCallback } from "react";
 import type { WidgetConfigResponse } from "@/lib/widget-types";
+import { SeoHead } from "@/components/seo/seo-head";
 
 type Message = { role: "user" | "assistant"; content: string };
 
 export default function WidgetFramePage() {
+  const head = (
+    <SeoHead
+      path="/widget/frame"
+      title="Chat widget"
+      description="Mercy Speaks Digital embeddable chat widget frame."
+      noindex
+    />
+  );
+
   const [config, setConfig] = useState<WidgetConfigResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -114,22 +124,30 @@ export default function WidgetFramePage() {
 
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-950 text-slate-300 p-4">
-        <p>{error}</p>
-      </div>
+      <>
+        {head}
+        <div className="min-h-screen flex items-center justify-center bg-slate-950 text-slate-300 p-4">
+          <p>{error}</p>
+        </div>
+      </>
     );
   }
 
   if (!config) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-950 text-slate-300 p-4">
-        <p>Loading…</p>
-      </div>
+      <>
+        {head}
+        <div className="min-h-screen flex items-center justify-center bg-slate-950 text-slate-300 p-4">
+          <p>Loading…</p>
+        </div>
+      </>
     );
   }
 
   return (
-    <div className="flex flex-col h-full min-h-[400px] bg-slate-950 text-slate-100 font-sans text-sm">
+    <>
+      {head}
+      <div className="flex flex-col h-full min-h-[400px] bg-slate-950 text-slate-100 font-sans text-sm">
       {/* Header */}
       <header
         className="flex items-center justify-between shrink-0 px-4 py-3 text-white"
@@ -254,16 +272,20 @@ export default function WidgetFramePage() {
           </button>
         </form>
         <div className="mt-2 text-center text-xs text-slate-500">
-          <a
-            href="https://mercyspeaks.ai"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex max-w-full items-center justify-center gap-1 truncate hover:text-slate-300"
-          >
-            Powered by <span className="font-medium text-slate-300 hover:text-white">Mercy AI</span>
-          </a>
+          <span className="inline-flex max-w-full flex-wrap items-center justify-center gap-x-1 text-center">
+            <span className="text-slate-500">Powered by</span>
+            <a
+              href="https://www.mercyspeaksdigital.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-slate-300 hover:text-white truncate"
+            >
+              Mercy Speaks Digital
+            </a>
+          </span>
         </div>
       </div>
     </div>
+    </>
   );
 }

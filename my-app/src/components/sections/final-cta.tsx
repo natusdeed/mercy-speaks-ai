@@ -1,13 +1,12 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Phone } from "lucide-react";
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { BookingLink } from "@/components/cta/booking-link";
 
 export function FinalCTA() {
   return (
     <section
-      className="section relative overflow-hidden bg-slate-950"
+      className="section relative overflow-hidden bg-slate-950 pb-[max(2rem,env(safe-area-inset-bottom,0px))]"
       aria-labelledby="final-cta-title"
     >
       <div className="section-inner relative z-10">
@@ -39,9 +38,9 @@ export function FinalCTA() {
               variant="primary"
               size="lg"
               asChild
-              className="w-full sm:w-auto"
+              className="w-full sm:w-auto min-h-[48px]"
             >
-              <BookingLink className="flex items-center gap-2">
+              <BookingLink className="flex items-center justify-center gap-2">
                 <Phone className="w-5 h-5" />
                 Book Demo
                 <ArrowRight className="w-5 h-5" />
@@ -50,7 +49,7 @@ export function FinalCTA() {
           </motion.div>
 
           <p className="mt-4 text-sm text-slate-500">
-            No credit card required • 48-hour setup • Cancel anytime
+            No credit card required • Guided onboarding • Terms reviewed on your call
           </p>
         </motion.div>
       </div>

@@ -20,6 +20,16 @@ import { PageShell } from "@/components/ui/page-shell";
 import { PortfolioGallery, type PortfolioItem } from "@/components/sections/portfolio-gallery";
 import { Link } from "react-router-dom";
 import { BookingLink } from "@/components/cta/booking-link";
+import { SeoHead } from "@/components/seo/seo-head";
+import { JsonLd } from "@/components/seo/json-ld";
+import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
+import { BRAND_TAGLINE, NAV_PATHS } from "@/lib/site-config";
+import {
+  breadcrumbSchema,
+  organizationSchema,
+  serviceSchema,
+  webPageSchema,
+} from "@/lib/schema";
 
 const fadeUp = {
   initial: { opacity: 0, y: 16 },
@@ -147,14 +157,53 @@ const portfolioItems: PortfolioItem[] = [
 ];
 
 export default function WebsiteDesignPage() {
+  const seoDescription =
+    "Premium website design, redesigns, and landing pages built for trust and conversion—mobile-first, fast, and SEO-aware. Mercy Speaks Digital.";
+
   return (
     <PageShell className="min-h-screen bg-slate-950">
+      <SeoHead
+        path={NAV_PATHS.websiteDesign}
+        title="Website design & development"
+        description={seoDescription}
+      />
+      <JsonLd
+        data={[
+          organizationSchema(),
+          webPageSchema({
+            name: "Website design & development",
+            description: seoDescription,
+            path: NAV_PATHS.websiteDesign,
+          }),
+          serviceSchema({
+            name: "Website design & development",
+            description: seoDescription,
+            path: NAV_PATHS.websiteDesign,
+            serviceType: "Web design",
+          }),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Services", path: NAV_PATHS.services },
+            { name: "Website design", path: NAV_PATHS.websiteDesign },
+          ]),
+        ]}
+      />
       <main>
         {/* Hero */}
         <section className="section section-hero" aria-labelledby="website-design-title">
           <div className="section-inner max-w-6xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
               <motion.div {...fadeUp} className="lg:col-span-7">
+                <Breadcrumbs
+                  className="mb-5 text-left"
+                  items={[
+                    { name: "Services", path: NAV_PATHS.services },
+                    { name: "Website design" },
+                  ]}
+                />
+                <p className="text-sm text-slate-400 leading-relaxed max-w-2xl mb-5 border-l-2 border-neon-cyan/40 pl-4">
+                  {BRAND_TAGLINE}
+                </p>
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-electric-purple/15 border border-electric-purple/20 mb-5">
                   <Globe className="w-4 h-4 text-electric-purple" />
                   <span className="text-xs sm:text-sm text-electric-purple font-semibold tracking-wide">

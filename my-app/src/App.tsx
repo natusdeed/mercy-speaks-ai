@@ -1,11 +1,14 @@
+import { lazy, Suspense } from 'react';
 import { Routes, Route, Outlet } from 'react-router-dom';
 import { Header } from '@/components/navigation/header';
 import { Footer } from '@/components/navigation/footer';
 import { ElevenLabsWidgetMount } from '@/components/ElevenLabsWidgetMount';
 import { ClientErrorHandler } from '@/components/debug/ClientErrorHandler';
-import { DashboardApp } from '@/dashboard/dashboard-app';
 
-// Pages (homepage from app/page.tsx)
+/**
+ * Eager imports: required for `renderToString` prerender (React.lazy + Suspense only renders fallback in SSR).
+ * Route-level chunks still come from `manualChunks` + dynamic import() inside pages where safe.
+ */
 import Home from './app/page';
 import About from './pages/About';
 import Contact from './app/contact/page';
@@ -26,14 +29,37 @@ import ServiceWorkflowAutomation from './pages/services/WorkflowAutomation';
 import WidgetFramePage from './app/widget/frame/page';
 import WidgetInstallPage from './app/widget/install/page';
 
+/** Code-split below-the-fold / secondary dashboards later without breaking prerender. */
+const LazyDashboardApp = lazy(() =>
+  import('@/dashboard/dashboard-app').then((m) => ({ default: m.DashboardApp }))
+);
+
+function DashboardRouteFallback() {
+  return (
+    <div className="flex min-h-screen flex-col items-center justify-center bg-slate-950 text-slate-400">
+      <p className="text-sm">Loading dashboard…</p>
+    </div>
+  );
+}
+
 function PublicChrome() {
   return (
     <>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-100 focus:rounded-lg focus:bg-slate-900 focus:px-4 focus:py-3 focus:text-sm focus:font-medium focus:text-slate-50 focus:ring-2 focus:ring-neon-cyan focus:outline-none"
+      >
+        Skip to main content
+      </a>
       <Header />
-      <div className="flex min-h-screen flex-col">
-        <main className="flex-1 pt-24 md:pt-28">
+      <div className="flex min-h-screen flex-col" id="public-layout">
+        {/*
+          Outer wrapper is a div so each route can expose a single <main> landmark (no nested mains).
+          Vertical offset for the fixed header is set in globals.css (.public-main).
+        */}
+        <div id="main-content" tabIndex={-1} className="flex-1 public-main w-full outline-none">
           <Outlet />
-        </main>
+        </div>
         <Footer />
         <ElevenLabsWidgetMount />
       </div>
@@ -46,7 +72,14 @@ function App() {
     <>
       <ClientErrorHandler />
       <Routes>
-        <Route path="/dashboard/*" element={<DashboardApp />} />
+        <Route
+          path="/dashboard/*"
+          element={
+            <Suspense fallback={<DashboardRouteFallback />}>
+              <LazyDashboardApp />
+            </Suspense>
+          }
+        />
         <Route element={<PublicChrome />}>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />

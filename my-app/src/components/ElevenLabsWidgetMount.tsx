@@ -23,7 +23,7 @@ export function ElevenLabsWidgetMount() {
 
   return (
     <div
-      className="pointer-events-none fixed bottom-6 right-6 z-100 max-w-full"
+      className="pointer-events-none fixed right-6 z-100 max-w-full bottom-[max(1.5rem,env(safe-area-inset-bottom,0px))]"
       data-elevenlabs-convai-host
     >
       <div className="pointer-events-auto inline-block max-w-full">

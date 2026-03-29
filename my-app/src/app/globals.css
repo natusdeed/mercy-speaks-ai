@@ -83,6 +83,14 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
+
+  /* Public layout: padding below fixed header (see App.tsx #public-layout) */
+  --header-offset: 5.75rem;
+}
+@media (min-width: 768px) {
+  :root {
+    --header-offset: 7rem;
+  }
 }
 
 @theme {
@@ -117,10 +125,16 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 96px;
+  /* Fixed header (~64px mobile, ~72px md) + breathing room for anchor targets */
+  scroll-padding-top: 5.5rem;
   width: 100%;
   margin: 0;
   padding: 0;
+}
+@media (min-width: 768px) {
+  html {
+    scroll-padding-top: 6.5rem;
+  }
 }
 
 body {
@@ -135,24 +149,9 @@ body {
   text-align: left; /* Reset text alignment, containers handle their own centering */
 }
 
-/* Layout main: ensure content sits below fixed header (runtime logs showed Tailwind pt-* not applied) */
-body > div > main {
-  padding-top: 6rem;   /* 96px — below ~64px header */
-}
-@media (min-width: 768px) {
-  body > div > main {
-    padding-top: 7rem;  /* 112px — below ~72px header */
-  }
-}
-
-/* About hero: explicit top padding so H1 clears nav (reduced by 30% from 9rem/11rem) */
-.about-hero {
-  padding-top: 6.3rem;   /* 70% of 9rem */
-}
-@media (min-width: 768px) {
-  .about-hero {
-    padding-top: 7.7rem; /* 70% of 11rem */
-  }
+/* Public routes: single scroll container below fixed header (see App.tsx #public-layout) */
+#public-layout > .public-main {
+  padding-top: var(--header-offset);
 }
 
 /* Ensure all direct children of body are full width */
@@ -552,4 +551,17 @@ section {
 
 .animate-slow-glow {
   animation: slow-glow 5s ease-in-out infinite;  /* Changed from 3s to 5s */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }

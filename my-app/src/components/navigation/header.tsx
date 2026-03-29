@@ -7,17 +7,20 @@ import { BookingLink } from "@/components/cta/booking-link";
 
 const navLinks = [
   { name: "Home", href: "/" },
-  { name: "Website Development", href: "/services/website-design" },
+  { name: "Services", href: "/services" },
+  { name: "Websites", href: "/services/website-design" },
   { name: "Solutions", href: "/solutions" },
   { name: "Pricing", href: "/pricing" },
   { name: "Results", href: "/results" },
   { name: "About", href: "/about" },
+  { name: "Contact", href: "/contact" },
 ] as const;
 
 function isActivePath(href: string, pathname: string): boolean {
   if (href === "/") return pathname === "/";
   if (href === "/solutions") return pathname === "/solutions" || pathname.startsWith("/solutions/");
   if (href === "/services/website-design") return pathname === "/services/website-design" || pathname.startsWith("/services/website-design/");
+  if (href === "/services") return pathname === "/services" || pathname.startsWith("/services/");
   return pathname === href;
 }
 
@@ -37,7 +40,7 @@ export function Header() {
           </Link>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex flex-1 items-center justify-center gap-8">
+          <div className="hidden md:flex flex-1 items-center justify-center gap-2 lg:gap-3 xl:gap-4 min-w-0">
             {navLinks.map((link) => {
               const active = isActivePath(link.href, pathname);
               return (
@@ -45,7 +48,7 @@ export function Header() {
                   key={link.href}
                   to={link.href}
                   className={cn(
-                    "text-sm font-medium transition-colors",
+                    "text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
                     active ? "text-electric-purple" : "text-slate-300 hover:text-slate-50"
                   )}
                 >

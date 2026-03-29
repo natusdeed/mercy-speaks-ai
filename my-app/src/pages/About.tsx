@@ -16,6 +16,10 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { BookingLink } from "@/components/cta/booking-link";
+import { SeoHead } from "@/components/seo/seo-head";
+import { JsonLd } from "@/components/seo/json-ld";
+import { BRAND_TAGLINE } from "@/lib/site-config";
+import { breadcrumbSchema, organizationSchema, webPageSchema } from "@/lib/schema";
 
 export default function AboutPage() {
   const values = [
@@ -45,13 +49,6 @@ export default function AboutPage() {
     },
   ];
 
-  const teamStats = [
-    { number: "500+", label: "Businesses Automated" },
-    { number: "10M+", label: "Calls Handled" },
-    { number: "$50M+", label: "Cost Savings Delivered" },
-    { number: "99.9%", label: "Uptime Guarantee" },
-  ];
-
   const differentiators = [
     "Based in Richmond, Texas—Houston metro area",
     "Specialized focus on websites for small businesses, local businesses, and churches",
@@ -63,9 +60,27 @@ export default function AboutPage() {
 
   return (
     <PageShell className="min-h-screen bg-slate-950">
+      <SeoHead
+        path="/about"
+        title="About Mercy Speaks Digital"
+        description={`${BRAND_TAGLINE} Learn who we are, how we work, and who we partner with.`}
+      />
+      <JsonLd
+        data={[
+          organizationSchema(),
+          webPageSchema({
+            name: "About Mercy Speaks Digital",
+            description: BRAND_TAGLINE,
+            path: "/about",
+          }),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "About", path: "/about" },
+          ]),
+        ]}
+      />
       <main className="pb-16">
-        {/* Hero Section — extra top padding so H1 clears the fixed header (class for explicit CSS; Tailwind pt-* not applied at runtime) */}
-        <section className="about-hero pb-16 md:pb-24 px-6 lg:px-12">
+        <section className="section !pt-6 md:!pt-8 pb-16 md:pb-24 px-6 lg:px-12">
           <div className="max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -77,7 +92,7 @@ export default function AboutPage() {
                 <Users className="w-4 h-4 text-neon-cyan" />
                 <span className="text-sm text-neon-cyan font-medium">About Us</span>
               </div>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-slate-50 mb-6 title-3d">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-slate-50 mb-6 title-3d">
                 Modern Websites &{" "}
                 <span className="bg-gradient-to-r from-electric-purple to-neon-cyan bg-clip-text text-transparent">
                   Digital Solutions
@@ -142,30 +157,21 @@ export default function AboutPage() {
               ))}
             </div>
 
-            {/* Stats Section */}
+            {/* Focus — outcomes without unverified metrics */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="glass rounded-2xl p-8 md:p-12 mb-16"
+              className="glass rounded-2xl p-8 md:p-12 mb-16 max-w-4xl mx-auto"
             >
-              <h2 className="text-4xl md:text-5xl font-bold text-slate-50 mb-8 text-center">By The Numbers</h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                {teamStats.map((stat, idx) => (
-                  <motion.div
-                    key={stat.label}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.4, delay: 0.7 + idx * 0.1 }}
-                    className="text-center"
-                  >
-                    <div className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-electric-purple to-neon-cyan bg-clip-text text-transparent mb-2">
-                      {stat.number}
-                    </div>
-                    <div className="text-base md:text-lg text-slate-300">{stat.label}</div>
-                  </motion.div>
-                ))}
-              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-50 mb-6 text-center">
+                What we optimize for
+              </h2>
+              <p className="text-lg md:text-xl text-slate-300 leading-relaxed text-center max-w-2xl mx-auto">
+                Clear positioning on your website, fewer missed calls and stalled leads, faster follow-up, and booking
+                flows that are easy for customers to complete. We ship premium creative and systems you can actually
+                run—not buzzwords or vanity dashboards.
+              </p>
             </motion.div>
 
             {/* What Makes Us Different */}

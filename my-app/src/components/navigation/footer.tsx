@@ -19,10 +19,13 @@ export function Footer() {
 
   // Matches header nav: Solutions, Pricing, Results, About + Book Demo. v1 proof page is /results.
   const navigationLinks = [
+    { name: "Services", href: "/services" },
+    { name: "Website Design", href: "/services/website-design" },
     { name: "Solutions", href: "/solutions" },
     { name: "Pricing", href: "/pricing" },
     { name: "Results", href: "/results" },
     { name: "About", href: "/about" },
+    { name: "Contact", href: "/contact" },
     { name: "Book Demo", href: "BOOKING" },
   ];
 
@@ -70,12 +73,12 @@ export function Footer() {
       icon: Phone, 
       label: "Phone", 
       value: "(703) 332-5956", 
-      href: "tel:7033325956" 
+      href: "tel:+17033325956" 
     },
     { 
       icon: MapPin, 
       label: "Location", 
-      value: "Houston, TX", 
+      value: "Richmond, TX · Houston metro", 
       href: null 
     },
   ];
@@ -102,7 +105,7 @@ export function Footer() {
               </div>
             </Link>
             <p className="text-slate-300 text-base md:text-lg leading-relaxed">
-              Premium websites, AI receptionists, and automation systems built to capture leads, follow up fast, and help you convert more customers—without adding headcount.
+              Premium websites, AI receptionists, and automation that capture leads, speed up follow-up, and improve booking—without extra headcount. Based in the Houston metro; serving businesses nationwide.
             </p>
           </motion.div>
 

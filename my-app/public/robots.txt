@@ -1,0 +1,14 @@
+# https://www.robotstxt.org/robotstxt.html
+# Production host: set via deployment; sitemap URL should match your canonical domain (see VITE_SITE_URL in .env.example).
+
+User-agent: *
+Allow: /
+
+# Do not index authenticated app areas or API (SPA may still serve index.html for unknown paths—configure hosting rewrites as needed).
+Disallow: /dashboard
+Disallow: /api/
+
+# Embeddable widget frame is for iframes, not organic landing pages.
+Disallow: /widget/frame
+
+Sitemap: https://www.mercyspeaksdigital.com/sitemap.xml
