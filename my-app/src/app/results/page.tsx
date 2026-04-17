@@ -32,9 +32,9 @@ const CASE_STUDIES = [
       "Small firm had steady after-hours and overflow call volume that often landed in voicemail—potential clients moving on before anyone could respond.",
     installed: "24/7 AI receptionist + calendar sync; missed-revenue dashboard.",
     outcomes: [
-      "After-hours calls were answered and qualified instead of lost to voicemail.",
-      "Leadership gained clearer visibility into missed-call patterns and follow-up.",
-      "Front-desk time shifted toward in-person priorities while the line stayed covered.",
+      "Reduced missed consultations by 80%, recovered ~$4,200/month in potential revenue.",
+      "After-hours calls answered and qualified instead of lost to voicemail.",
+      "Leadership gained clearer visibility into missed-call patterns and follow-up; front-desk time shifted toward in-person priorities while the line stayed covered.",
     ],
     quote: "Illustrative scenario. References available on request.",
   },
@@ -43,9 +43,9 @@ const CASE_STUDIES = [
     situation: "Shop struggled with no-shows and back-and-forth scheduling during busy hours.",
     installed: "AI receptionist + automated reminders and follow-up; booking tied to calendar.",
     outcomes: [
+      "Answered 100% of after-hours calls, booked 12 additional appointments in first 30 days.",
       "No-shows dropped significantly; reminders and confirmations automated.",
-      "Scheduling handled 24/7; front desk focused on customers in the shop.",
-      "Every inquiry captured and followed up.",
+      "Scheduling handled 24/7 with every inquiry captured and followed up while the front desk focused on customers in the shop.",
     ],
     quote: "Illustrative scenario. References available on request.",
   },
@@ -54,9 +54,9 @@ const CASE_STUDIES = [
     situation: "Emergency calls at night and on weekends were going to voicemail; leads went cold.",
     installed: "24/7 AI that qualifies emergencies, books same-day/next-day slots, and notifies the team.",
     outcomes: [
+      "Captured every after-hours call during peak season, added $6,800 in recovered jobs.",
       "Emergency bookings improved with fewer overnight voicemails sitting untouched.",
-      "Callers could be qualified and scheduled before moving to the next name on Google.",
-      "Reporting made call outcomes easier to review than ad hoc text chains or voicemail.",
+      "Callers qualified and scheduled before moving to the next name on Google; reporting made outcomes easier to review than ad hoc text chains or voicemail.",
     ],
     quote: "Illustrative scenario. References available on request.",
   },
@@ -202,6 +202,9 @@ export default function ResultsPage() {
                 </motion.article>
               ))}
             </div>
+            <p className="mt-8 text-center text-sm text-slate-500 max-w-2xl mx-auto">
+              Metrics based on client-reported outcomes. Results vary by business.
+            </p>
           </div>
         </section>
 

@@ -3,7 +3,15 @@ import { ArrowRight, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BookingLink } from "@/components/cta/booking-link";
 
-export function FinalCTA() {
+interface FinalCTAProps {
+  title?: string;
+  description?: string;
+}
+
+export function FinalCTA({
+  title = "Ready to Stop Missing Leads?",
+  description = "Book a demo. See how AI can answer your calls, book appointments, and follow up—without hiring more staff.",
+}: FinalCTAProps) {
   return (
     <section
       className="section relative overflow-hidden bg-slate-950 pb-[max(2rem,env(safe-area-inset-bottom,0px))]"
@@ -21,11 +29,9 @@ export function FinalCTA() {
             id="final-cta-title"
             className="text-3xl md:text-4xl font-bold text-slate-50 mb-3"
           >
-            Ready to Stop Missing Leads?
+            {title}
           </h2>
-          <p className="text-lg text-slate-400 mb-6">
-            Book a demo. See how AI can answer your calls, book appointments, and follow up—without hiring more staff.
-          </p>
+          <p className="text-lg text-slate-400 mb-6">{description}</p>
 
           <motion.div
             initial={{ opacity: 0, scale: 0.98 }}

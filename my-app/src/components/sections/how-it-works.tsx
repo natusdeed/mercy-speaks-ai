@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Phone, Bot, BarChart3 } from "lucide-react";
+import { Phone, Bot, BarChart3, Play } from "lucide-react";
 import { BookingLink } from "@/components/cta/booking-link";
 
 const STEPS = [
@@ -83,6 +83,30 @@ export function HowItWorks() {
             );
           })}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mt-10 md:mt-14 max-w-4xl mx-auto w-full"
+        >
+          {/* TODO: Replace with real Loom/YouTube embed URL. */}
+          <div className="rounded-xl overflow-hidden border border-slate-800/60 bg-slate-900/90 shadow-lg shadow-black/20">
+            <div
+              className="aspect-video flex items-center justify-center bg-slate-950"
+              role="img"
+              aria-label="Video preview placeholder"
+            >
+              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-slate-800/90 ring-2 ring-neon-cyan/30">
+                <Play className="h-8 w-8 translate-x-0.5 text-neon-cyan" aria-hidden />
+              </div>
+            </div>
+            <p className="px-4 py-3 text-center text-sm text-slate-400">
+              Watch: AI Receptionist handling a real inbound call.
+            </p>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

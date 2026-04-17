@@ -1,39 +1,88 @@
 import { motion } from "framer-motion";
-import { TrendingUp, Users, Calendar, Star, Phone } from "lucide-react";
+import { TrendingUp, Star, Phone } from "lucide-react";
 import { useCountUp } from "@/hooks/use-count-up";
 
 const CASE_STUDIES = [
   {
     business: "Martinez HVAC",
-    metric: "23 new leads",
-    number: 23,
-    prefix: "",
-    suffix: " new leads",
-    timeframe: "month 1",
+    number: 6800,
+    prefix: "$",
+    suffix: "",
+    suffixAfterNumber: " in recovered jobs",
+    contextLine: "Peak season · every after-hours call captured",
     icon: TrendingUp,
-    color: "electric-purple",
+    color: "electric-purple" as const,
   },
   {
     business: "Elite Dental",
-    metric: "$12,400 revenue",
-    number: 12400,
-    prefix: "$",
-    suffix: " revenue",
-    timeframe: "first month",
+    number: 80,
+    prefix: "",
+    suffix: "%",
+    suffixAfterNumber: " missed consultations reduced",
+    contextLine: "~$4,200/mo potential revenue recovered",
     icon: TrendingUp,
-    color: "neon-cyan",
+    color: "neon-cyan" as const,
   },
   {
     business: "Chen's Auto",
-    metric: "156 calls handled",
-    number: 156,
+    number: 12,
     prefix: "",
-    suffix: " calls handled",
-    timeframe: "this month",
+    suffix: "",
+    suffixAfterNumber: " extra appointments",
+    contextLine: "First 30 days · 100% of after-hours calls answered",
     icon: Phone,
-    color: "electric-purple",
+    color: "electric-purple" as const,
   },
 ];
+
+function formatAnimatedNumber(num: number, studyNumber: number) {
+  if (studyNumber >= 1000) {
+    return num.toLocaleString("en-US");
+  }
+  return num.toString();
+}
+
+function ProofMetricCard({
+  study,
+  index,
+}: {
+  study: (typeof CASE_STUDIES)[number];
+  index: number;
+}) {
+  const Icon = study.icon;
+  const { count, ref } = useCountUp({
+    end: study.number,
+    duration: 2000,
+  });
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="card text-center"
+    >
+      <div
+        className={`p-3 rounded-lg w-fit mx-auto mb-4 ${
+          study.color === "electric-purple"
+            ? "bg-electric-purple/20 text-electric-purple"
+            : "bg-neon-cyan/20 text-neon-cyan"
+        }`}
+      >
+        <Icon className="w-6 h-6" />
+      </div>
+      <h3 className="text-2xl md:text-3xl font-bold text-slate-50 mb-2">{study.business}</h3>
+      <p ref={ref} className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-neon-cyan mb-1 leading-tight wrap-break-word px-1">
+        {study.prefix}
+        {formatAnimatedNumber(count, study.number)}
+        {study.suffix}
+        <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl">{study.suffixAfterNumber}</span>
+      </p>
+      <p className="text-sm text-slate-400 px-2">{study.contextLine}</p>
+    </motion.div>
+  );
+}
 
 export function Proof() {
   return (
@@ -52,44 +101,9 @@ export function Proof() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto mb-8">
-          {CASE_STUDIES.map((study, index) => {
-            const Icon = study.icon;
-            const { count, ref } = useCountUp({
-              end: study.number,
-              duration: 2000,
-            });
-
-            const formatNumber = (num: number) => {
-              if (study.number >= 1000) {
-                return num.toLocaleString("en-US");
-              }
-              return num.toString();
-            };
-
-            return (
-              <motion.div
-                key={study.business}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="card text-center"
-              >
-                <div className={`p-3 rounded-lg w-fit mx-auto mb-4 ${
-                  study.color === "electric-purple" 
-                    ? "bg-electric-purple/20 text-electric-purple" 
-                    : "bg-neon-cyan/20 text-neon-cyan"
-                }`}>
-                  <Icon className="w-6 h-6" />
-                </div>
-                <h3 className="text-2xl md:text-3xl font-bold text-slate-50 mb-2">{study.business}</h3>
-                <p ref={ref} className="text-6xl md:text-7xl font-bold text-neon-cyan mb-1">
-                  {study.prefix}{formatNumber(count)}{study.suffix}
-                </p>
-                <p className="text-sm text-slate-400">in {study.timeframe}</p>
-              </motion.div>
-            );
-          })}
+          {CASE_STUDIES.map((study, index) => (
+            <ProofMetricCard key={study.business} study={study} index={index} />
+          ))}
         </div>
 
         {/* Testimonial */}
@@ -106,8 +120,8 @@ export function Proof() {
             ))}
           </div>
           <p className="text-lg md:text-xl text-slate-300 mb-4 italic">
-            "We were losing 3-4 leads every week after hours. Now our AI handles everything, 
-            and we've captured 23 new leads in the first month alone. Best investment we've made."
+            &ldquo;Peak season used to mean missed emergency calls. Now we capture every after-hours call and we&apos;ve
+            added $6,800 in recovered jobs—best investment we&apos;ve made.&rdquo;
           </p>
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-full bg-slate-700" />

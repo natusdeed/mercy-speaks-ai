@@ -1,5 +1,6 @@
 import { Phone } from "lucide-react";
 import { ServiceMarketingPage } from "@/components/templates/service-marketing-page";
+import { AI_RECEPTIONIST_SERVICE_FAQS } from "@/content/service-page-faqs";
 import { NAV_PATHS } from "@/lib/site-config";
 
 export default function ServiceAIPhoneReceptionist() {
@@ -37,6 +38,7 @@ export default function ServiceAIPhoneReceptionist() {
         { to: NAV_PATHS.workflowAutomation, label: "Workflow automation" },
         { to: NAV_PATHS.services, label: "All services" },
       ]}
+      faqs={AI_RECEPTIONIST_SERVICE_FAQS}
     />
   );
 }

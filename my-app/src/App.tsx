@@ -2,7 +2,6 @@ import { lazy, Suspense } from 'react';
 import { Routes, Route, Outlet } from 'react-router-dom';
 import { Header } from '@/components/navigation/header';
 import { Footer } from '@/components/navigation/footer';
-import { ElevenLabsWidgetMount } from '@/components/ElevenLabsWidgetMount';
 import { ClientErrorHandler } from '@/components/debug/ClientErrorHandler';
 
 /**
@@ -28,6 +27,9 @@ import ServiceWebsiteDesign from './app/services/website-design/page';
 import ServiceWorkflowAutomation from './pages/services/WorkflowAutomation';
 import WidgetFramePage from './app/widget/frame/page';
 import WidgetInstallPage from './app/widget/install/page';
+import RoofingPage from './app/roofing/page';
+import HvacPage from './app/hvac/page';
+import PlumbingPage from './app/plumbing/page';
 
 /** Code-split below-the-fold / secondary dashboards later without breaking prerender. */
 const LazyDashboardApp = lazy(() =>
@@ -61,7 +63,6 @@ function PublicChrome() {
           <Outlet />
         </div>
         <Footer />
-        <ElevenLabsWidgetMount />
       </div>
     </>
   );
@@ -89,6 +90,9 @@ function App() {
           <Route path="/book-demo" element={<BookDemo />} />
           <Route path="/services" element={<Services />} />
           <Route path="/solutions" element={<Solutions />} />
+          <Route path="/roofing" element={<RoofingPage />} />
+          <Route path="/hvac" element={<HvacPage />} />
+          <Route path="/plumbing" element={<PlumbingPage />} />
           <Route path="/results" element={<Results />} />
           <Route path="/services/ai-phone-receptionist" element={<ServiceAIPhoneReceptionist />} />
           <Route path="/services/appointment-automation" element={<ServiceAppointmentAutomation />} />

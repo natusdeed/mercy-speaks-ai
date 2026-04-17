@@ -9,7 +9,8 @@ import { SeoHead } from "@/components/seo/seo-head";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import { NAV_PATHS } from "@/lib/site-config";
-import { breadcrumbSchema, serviceSchema, webPageSchema } from "@/lib/schema";
+import { breadcrumbSchema, faqPageSchema, serviceSchema, webPageSchema } from "@/lib/schema";
+import { Accordion, type AccordionItemData } from "@/components/ui/Accordion";
 
 export type ServiceSection = {
   title: string;
@@ -30,6 +31,8 @@ export type ServiceMarketingPageProps = {
   sections: ServiceSection[];
   related?: RelatedLink[];
   serviceType?: string;
+  /** Optional per-service FAQ (collapsible accordion). */
+  faqs?: AccordionItemData[];
 };
 
 export function ServiceMarketingPage({
@@ -43,6 +46,7 @@ export function ServiceMarketingPage({
   sections,
   related = [],
   serviceType,
+  faqs,
 }: ServiceMarketingPageProps) {
   const crumbs = [
     { name: "Services", path: NAV_PATHS.services },
@@ -62,6 +66,13 @@ export function ServiceMarketingPage({
       { name: "Services", path: NAV_PATHS.services },
       { name: h1, path },
     ]),
+    ...(faqs?.length
+      ? [
+          faqPageSchema(
+            faqs.map((f) => ({ question: f.question, answer: f.answer }))
+          ),
+        ]
+      : []),
   ];
 
   return (
@@ -132,6 +143,34 @@ export function ServiceMarketingPage({
             ))}
           </div>
         </section>
+
+        {faqs && faqs.length > 0 && (
+          <section
+            className="section pt-0"
+            aria-labelledby="service-faq-heading"
+          >
+            <div className="section-inner max-w-3xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="text-center mb-8 md:mb-10"
+              >
+                <h2
+                  id="service-faq-heading"
+                  className="text-3xl md:text-4xl font-bold text-slate-50 mb-3"
+                >
+                  Frequently asked questions
+                </h2>
+                <p className="text-slate-400 max-w-2xl mx-auto">
+                  Quick answers about setup, integration, and support.
+                </p>
+              </motion.div>
+              <Accordion items={faqs} />
+            </div>
+          </section>
+        )}
 
         {related.length > 0 && (
           <section className="section pt-0" aria-label="Related services">

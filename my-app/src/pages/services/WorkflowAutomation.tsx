@@ -1,5 +1,6 @@
 import { Workflow } from "lucide-react";
 import { ServiceMarketingPage } from "@/components/templates/service-marketing-page";
+import { BUSINESS_AUTOMATION_SERVICE_FAQS } from "@/content/service-page-faqs";
 import { NAV_PATHS } from "@/lib/site-config";
 
 export default function ServiceWorkflowAutomation() {
@@ -36,6 +37,7 @@ export default function ServiceWorkflowAutomation() {
         { to: NAV_PATHS.appointmentAutomation, label: "Appointment automation" },
         { to: NAV_PATHS.services, label: "All services" },
       ]}
+      faqs={BUSINESS_AUTOMATION_SERVICE_FAQS}
     />
   );
 }

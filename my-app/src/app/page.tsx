@@ -13,6 +13,8 @@ import { FAQ } from "@/components/sections/faq";
 import { FinalCTA } from "@/components/sections/final-cta";
 import { PortfolioGallery, type PortfolioItem } from "@/components/sections/portfolio-gallery";
 import { Testimonials } from "@/components/sections/testimonials";
+import { Proof } from "@/components/sections/proof";
+import { ClientLogos } from "@/components/sections/ClientLogos";
 import { SeoHead } from "@/components/seo/seo-head";
 import { JsonLd } from "@/components/seo/json-ld";
 import { BRAND_TAGLINE } from "@/lib/site-config";
@@ -132,6 +134,10 @@ export default function Home() {
 
         {/* 5.75) Website testimonials (placeholder-safe; no fabricated feedback) */}
         <Testimonials />
+
+        {/* 5.85) Quantified proof + trusted-by strip */}
+        <Proof />
+        <ClientLogos />
 
         {/* 6) Live Demo — id="live-demo" (audio + short video placeholder + 3 screenshots placeholder) */}
         <LiveDemoHome />
