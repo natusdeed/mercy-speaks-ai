@@ -485,7 +485,8 @@ export default defineConfig(async (): Promise<UserConfig> => {
   },
   build: {
     outDir: 'dist',
-    sourcemap: true,
+    // Sourcemaps spike Rollup memory; Vercel's default Node heap can OOM during chunk rendering.
+    sourcemap: process.env.VERCEL !== '1',
     rollupOptions: {
       output: {
         manualChunks(id) {
