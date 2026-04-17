@@ -18,6 +18,11 @@
       "@/*": ["my-app/src/*"]
     }
   },
-  "include": ["my-app/src/**/*.ts", "my-app/src/**/*.tsx"],
+  "include": [
+    "my-app/src/**/*.ts",
+    "my-app/src/**/*.tsx",
+    "lib/**/*.ts",
+    "api/**/*.ts"
+  ],
   "exclude": ["node_modules", "my-app/node_modules"]
 }

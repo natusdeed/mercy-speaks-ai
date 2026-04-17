@@ -101,7 +101,7 @@ export default defineConfig(async (): Promise<UserConfig> => {
             (async () => {
               try {
                 const fakeRequest = new Request(`http://localhost${req.url}`, { method: 'GET', headers: forwardHeaders });
-                const { GET } = await import('./src/app/api/widget/config/route');
+                const { GET } = await import('./src/app/api-handlers/widget/config/route');
                 const response = await GET(fakeRequest);
                 res.statusCode = response.status;
                 response.headers.forEach((v, k) => res.setHeader(k, v));
@@ -129,7 +129,7 @@ export default defineConfig(async (): Promise<UserConfig> => {
                   body: bodyStr,
                 });
                 if (isWidgetChat) {
-                  const { handleWidgetChatRequest } = await import('./src/app/api/widget/chat-handler');
+                  const { handleWidgetChatRequest } = await import('./src/app/api-handlers/widget/chat-handler');
                   const response = await handleWidgetChatRequest(fakeRequest);
                   res.statusCode = response.status;
                   response.headers.forEach((v, k) => res.setHeader(k, v));
@@ -137,7 +137,7 @@ export default defineConfig(async (): Promise<UserConfig> => {
                   res.setHeader('Content-Type', 'application/json');
                   res.end(JSON.stringify(data));
                 } else {
-                  const { handleWidgetLeadRequest } = await import('./src/app/api/widget/lead/route');
+                  const { handleWidgetLeadRequest } = await import('./src/app/api-handlers/widget/lead/route');
                   const response = await handleWidgetLeadRequest(fakeRequest);
                   res.statusCode = response.status;
                   response.headers.forEach((v, k) => res.setHeader(k, v));
@@ -188,7 +188,7 @@ export default defineConfig(async (): Promise<UserConfig> => {
                   headers: { 'Content-Type': 'application/json' },
                   body: bodyStr,
                 });
-                const { handleChatLeadRequest } = await import('./src/app/api/chat/lead-route');
+                const { handleChatLeadRequest } = await import('./src/app/api-handlers/chat/lead-route');
                 const response = await handleChatLeadRequest(fakeRequest);
                 res.statusCode = response.status;
                 response.headers.forEach((v, k) => res.setHeader(k, v));
@@ -211,7 +211,7 @@ export default defineConfig(async (): Promise<UserConfig> => {
                   headers: { 'Content-Type': 'application/json', ...Object.fromEntries(Object.entries(req.headers).filter(([, v]) => v != null).map(([k, v]) => [k.toLowerCase(), Array.isArray(v) ? v.join(', ') : String(v)])) },
                   body: bodyStr,
                 });
-                const { handleChatRequest } = await import('./src/app/api/chat/chat-handler');
+                const { handleChatRequest } = await import('./src/app/api-handlers/chat/chat-handler');
                 const response = await handleChatRequest(fakeRequest);
                 res.statusCode = response.status;
                 response.headers.forEach((v, k) => res.setHeader(k, v));
@@ -244,7 +244,7 @@ export default defineConfig(async (): Promise<UserConfig> => {
                 }
                 if (isBookDemo) {
                   try {
-                    const { POST } = await import('./src/app/api/book-demo/route');
+                    const { POST } = await import('./src/app/api-handlers/book-demo/route');
                     const fakeReq = new Request(`http://localhost${req.url}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: bodyStr });
                     const response = await POST(fakeReq);
                     res.statusCode = response.status;
@@ -258,7 +258,7 @@ export default defineConfig(async (): Promise<UserConfig> => {
                     res.end(JSON.stringify({ error: 'Internal server error', message: e instanceof Error ? e.message : 'Submission failed. Please try again.' }));
                   }
                 } else {
-                  const { POST } = await import('./src/app/api/contact/route');
+                  const { POST } = await import('./src/app/api-handlers/contact/route');
                   const fakeReq = new Request(`http://localhost${req.url}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: bodyStr });
                   const response = await POST(fakeReq);
                   res.statusCode = response.status;
@@ -303,8 +303,8 @@ export default defineConfig(async (): Promise<UserConfig> => {
                 body: bodyStr,
               });
               const { POST } = isLogin
-                ? await import('./src/app/api/dashboard/login/route')
-                : await import('./src/app/api/dashboard/verify/route');
+                ? await import('./src/app/api-handlers/dashboard/login/route')
+                : await import('./src/app/api-handlers/dashboard/verify/route');
               const response = await POST(fakeRequest);
               res.statusCode = response.status;
               response.headers.forEach((v, k) => res.setHeader(k, v));
@@ -373,12 +373,12 @@ export default defineConfig(async (): Promise<UserConfig> => {
               });
               const response =
                 isList && req.method === 'GET'
-                  ? await (await import('./src/app/api/dashboard/leads/route')).GET(fakeRequest)
+                  ? await (await import('./src/app/api-handlers/dashboard/leads/route')).GET(fakeRequest)
                   : isList && req.method === 'POST'
-                    ? await (await import('./src/app/api/dashboard/leads/route')).POST(fakeRequest)
+                    ? await (await import('./src/app/api-handlers/dashboard/leads/route')).POST(fakeRequest)
                     : idMatch && req.method === 'GET'
-                      ? await (await import('./src/app/api/dashboard/leads/[id]/route')).GET(fakeRequest)
-                      : await (await import('./src/app/api/dashboard/leads/[id]/route')).PATCH(fakeRequest);
+                      ? await (await import('./src/app/api-handlers/dashboard/leads/[id]/route')).GET(fakeRequest)
+                      : await (await import('./src/app/api-handlers/dashboard/leads/[id]/route')).PATCH(fakeRequest);
               res.statusCode = response.status;
               response.headers.forEach((v, k) => res.setHeader(k, v));
               const buf = Buffer.from(await response.arrayBuffer());
@@ -445,10 +445,10 @@ export default defineConfig(async (): Promise<UserConfig> => {
               });
               const response =
                 isList && req.method === 'GET'
-                  ? await (await import('./src/app/api/dashboard/conversations/route')).GET(fakeRequest)
+                  ? await (await import('./src/app/api-handlers/dashboard/conversations/route')).GET(fakeRequest)
                   : idMatch && req.method === 'GET'
-                    ? await (await import('./src/app/api/dashboard/conversations/[id]/route')).GET(fakeRequest)
-                    : await (await import('./src/app/api/dashboard/conversations/[id]/route')).PATCH(fakeRequest);
+                    ? await (await import('./src/app/api-handlers/dashboard/conversations/[id]/route')).GET(fakeRequest)
+                    : await (await import('./src/app/api-handlers/dashboard/conversations/[id]/route')).PATCH(fakeRequest);
               res.statusCode = response.status;
               response.headers.forEach((v, k) => res.setHeader(k, v));
               const buf = Buffer.from(await response.arrayBuffer());
