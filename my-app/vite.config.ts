@@ -467,9 +467,14 @@ export default defineConfig(async (): Promise<UserConfig> => {
     },
   ],
   resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src'),
-    },
+    // Order matters: `@` must not steal `@/lib/react-helmet-compat` (object keys are not ordered reliably).
+    alias: [
+      {
+        find: "@/lib/react-helmet-compat",
+        replacement: path.resolve(__dirname, "./src/lib/react-helmet-compat.browser.tsx"),
+      },
+      { find: "@", replacement: path.resolve(__dirname, "./src") },
+    ],
   },
   server: {
     // strictPort: we pre-pick a free port (never auto-use 3001 — that breaks /api/ai proxy to mercy-ai-server).

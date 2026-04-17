@@ -8,7 +8,7 @@ import { fileURLToPath } from "node:url";
 import type { ComponentType } from "react";
 import React from "react";
 import { renderToString } from "react-dom/server";
-import { HelmetProvider } from "../src/lib/react-helmet-compat";
+import { HelmetProvider } from "@/lib/react-helmet-compat";
 import { StaticRouter } from "react-router-dom/server";
 import { loadEnv } from "vite";
 

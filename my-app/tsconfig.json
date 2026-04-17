@@ -16,7 +16,9 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      // Must point at .node.ts: tsx resolves imports in src/* (e.g. seo-head) via this config; the browser bundle uses vite.config.ts alias → .browser.tsx instead.
+      "@/lib/react-helmet-compat": ["./src/lib/react-helmet-compat.node.ts"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "vite.config.ts", "scripts/prerender.tsx"],
