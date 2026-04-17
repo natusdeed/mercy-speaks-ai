@@ -149,9 +149,22 @@ body {
   text-align: left; /* Reset text alignment, containers handle their own centering */
 }
 
+/* Flex column layout from App.tsx — allow children to shrink so wide content cannot force page scroll */
+#public-layout {
+  min-width: 0;
+}
+
 /* Public routes: single scroll container below fixed header (see App.tsx #public-layout) */
 #public-layout > .public-main {
   padding-top: var(--header-offset);
+  /* Flex/grid children default to min-width:auto and can force horizontal overflow */
+  min-width: 0;
+}
+
+/* Prevent media from exceeding the layout width (esp. unstyled or third-party images) */
+img,
+video {
+  max-width: 100%;
 }
 
 /* Ensure all direct children of body are full width */

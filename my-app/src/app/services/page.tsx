@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { PageShell } from "@/components/ui/page-shell";
 import { Link } from "react-router-dom";
 import { BookingLink } from "@/components/cta/booking-link";
+import { ServicePairCallout } from "@/components/marketing/service-pair-callout";
+import { NAV_PATHS } from "@/lib/site-config";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -61,6 +63,16 @@ export default function ServicesPage() {
                 Never miss a call again. Our AI answers every call, qualifies leads, and books appointments around the clock. 
                 The dashboard shows you exactly how much revenue was at risk and how much you're now capturing—so you see the ROI in real time.
               </p>
+              <ServicePairCallout className="mb-8">
+                Pair it with{" "}
+                <Link
+                  to={NAV_PATHS.bookDemo}
+                  className="font-medium text-sky-200 underline-offset-2 hover:underline"
+                >
+                  Missed-Call Text Back
+                </Link>{" "}
+                for maximum lead capture.
+              </ServicePairCallout>
               <ul className="space-y-2 text-slate-300 mb-10">
                 <li className="flex items-center gap-2">
                   <BarChart3 className="w-4 h-4 text-neon-cyan shrink-0" />
@@ -103,10 +115,20 @@ export default function ServicesPage() {
               <h2 className="text-2xl md:text-3xl font-bold text-slate-50 mb-3">
                 Conversion Website + Booking
               </h2>
-              <p className="text-lg text-slate-400 mb-8 max-w-2xl">
+              <p className="text-lg text-slate-400 mb-4 max-w-2xl">
                 A site built to convert: clear offers, social proof, and booking that syncs with your AI receptionist and calendar. 
                 Visitors become appointments without extra back-and-forth.
               </p>
+              <ServicePairCallout className="mb-8">
+                Pair it with an{" "}
+                <Link
+                  to={NAV_PATHS.aiReceptionist}
+                  className="font-medium text-sky-200 underline-offset-2 hover:underline"
+                >
+                  AI Receptionist
+                </Link>{" "}
+                to turn your site visitors into booked customers.
+              </ServicePairCallout>
               <Button variant="primary" size="lg" asChild>
                 <BookingLink className="flex items-center gap-2">
                   Book Demo

@@ -9,6 +9,9 @@ import {
   BarChart3,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+import { ServicePairCallout } from "@/components/marketing/service-pair-callout";
+import { NAV_PATHS } from "@/lib/site-config";
 
 interface AutomationStep {
   id: number;
@@ -140,9 +143,21 @@ export default function WorkflowAutomationPage() {
               Connect your tools, eliminate manual work, and let AI handle repetitive tasks
               so your team can focus on what matters most.
             </p>
-            <Button variant="primary" size="lg" onClick={startDemo}>
-              See It in Action
-            </Button>
+            <ServicePairCallout className="mx-auto">
+              Pair it with a{" "}
+              <Link
+                to={NAV_PATHS.websiteDesign}
+                className="font-medium text-sky-200 underline-offset-2 hover:underline"
+              >
+                custom-built website
+              </Link>{" "}
+              for a complete growth system.
+            </ServicePairCallout>
+            <div className="mt-8 flex justify-center">
+              <Button variant="primary" size="lg" onClick={startDemo}>
+                See It in Action
+              </Button>
+            </div>
           </motion.div>
 
           {/* Animated List Demo */}

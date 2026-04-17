@@ -179,13 +179,13 @@ export default function ServicesPage() {
                 </li>
               </ul>
               <div className="flex flex-col sm:flex-row gap-3">
-                <Button variant="primary" size="lg" asChild className="min-h-[48px]">
+                <Button variant="primary" size="lg" asChild>
                   <Link to={NAV_PATHS.aiReceptionist} className="flex items-center justify-center gap-2">
                     AI receptionist details
                     <ArrowRight className="w-5 h-5" />
                   </Link>
                 </Button>
-                <Button variant="outline" size="lg" asChild className="min-h-[48px]">
+                <Button variant="outline" size="lg" asChild>
                   <BookingLink className="flex items-center justify-center gap-2">
                     Book a call
                     <ArrowRight className="w-5 h-5" />
@@ -213,7 +213,7 @@ export default function ServicesPage() {
                 Clear offers, proof, and CTAs—structured so visitors understand the next step and can book or inquire
                 without friction.
               </p>
-              <Button variant="primary" size="lg" asChild className="min-h-[48px]">
+              <Button variant="primary" size="lg" asChild>
                 <Link to={NAV_PATHS.websiteDesign} className="flex items-center gap-2">
                   Website design
                   <ArrowRight className="w-5 h-5" />
@@ -240,7 +240,7 @@ export default function ServicesPage() {
                 On-site chat that answers common questions and routes people to a booking or lead capture path—so
                 traffic does not go quiet after hours.
               </p>
-              <Button variant="primary" size="lg" asChild className="min-h-[48px]">
+              <Button variant="primary" size="lg" asChild>
                 <Link to={NAV_PATHS.websiteChatbot} className="flex items-center gap-2">
                   Website chat service
                   <ArrowRight className="w-5 h-5" />
@@ -267,7 +267,7 @@ export default function ServicesPage() {
                 Prompts and sequences that ask for reviews at the right time and keep leads from going cold—without
                 manual hand-holding on every step.
               </p>
-              <Button variant="primary" size="lg" asChild className="min-h-[48px]">
+              <Button variant="primary" size="lg" asChild>
                 <Link to={NAV_PATHS.reviewGeneration} className="flex items-center gap-2">
                   Review & follow-up
                   <ArrowRight className="w-5 h-5" />

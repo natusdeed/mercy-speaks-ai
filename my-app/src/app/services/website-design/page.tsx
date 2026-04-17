@@ -24,6 +24,7 @@ import { SeoHead } from "@/components/seo/seo-head";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import { BRAND_TAGLINE, NAV_PATHS } from "@/lib/site-config";
+import { ServicePairCallout } from "@/components/marketing/service-pair-callout";
 import {
   breadcrumbSchema,
   organizationSchema,
@@ -224,7 +225,18 @@ export default function WebsiteDesignPage() {
                   services clearly, and convert visitors into inquiries and booked customers.
                 </p>
 
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center">
+                <ServicePairCallout>
+                  Pair it with an{" "}
+                  <Link
+                    to={NAV_PATHS.aiReceptionist}
+                    className="font-medium text-sky-200 underline-offset-2 hover:underline"
+                  >
+                    AI Receptionist
+                  </Link>{" "}
+                  to turn your site visitors into booked customers.
+                </ServicePairCallout>
+
+                <div className="mt-7 flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center">
                   <Button variant="primary" size="lg" asChild className="rounded-xl">
                     <BookingLink className="flex items-center justify-center gap-2">
                       Book a Website Strategy Call

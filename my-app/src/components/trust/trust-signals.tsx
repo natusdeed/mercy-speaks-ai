@@ -47,7 +47,7 @@ export function TrustSignals() {
         >
           <Link
             to="/pricing"
-            className="inline-flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 px-5 py-3 rounded-xl bg-slate-800/40 border border-slate-700/20 backdrop-blur-sm text-slate-50 hover:border-neon-cyan/30 transition-colors min-h-[48px]"
+            className="inline-flex min-h-11 flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 px-5 py-3 rounded-xl bg-slate-800/40 border border-slate-700/20 backdrop-blur-sm text-slate-50 hover:border-neon-cyan/30 transition-colors"
           >
             <span className="text-base md:text-lg font-bold">
               View pricing <span className="text-neon-cyan">from $197/mo</span>

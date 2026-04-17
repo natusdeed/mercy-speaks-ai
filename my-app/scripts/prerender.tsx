@@ -30,6 +30,7 @@ export const PRERENDER_PATHS: string[] = [
   "/hvac",
   "/plumbing",
   "/results",
+  "/testimonials",
   "/services/ai-phone-receptionist",
   "/services/appointment-automation",
   "/services/rag-data",

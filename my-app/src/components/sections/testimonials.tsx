@@ -24,6 +24,8 @@ interface TestimonialsProps {
   primaryCtaOnly?: boolean;
   /** Center a single testimonial card instead of a wide 3-column row */
   singleCardLayout?: boolean;
+  /** Hide the default booking / portfolio buttons (e.g. dedicated page supplies its own CTA). */
+  hideFooterCta?: boolean;
 }
 
 export function Testimonials({
@@ -32,6 +34,7 @@ export function Testimonials({
   description = "We only publish real testimonials. References are available on request.",
   primaryCtaOnly = false,
   singleCardLayout = false,
+  hideFooterCta = false,
 }: TestimonialsProps) {
   const testimonials = (items ?? []).slice(0, 6);
 
@@ -114,37 +117,39 @@ export function Testimonials({
           </div>
         )}
 
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.45, delay: 0.05 }}
-          className="mt-8 md:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3"
-        >
-          {primaryCtaOnly ? (
-            <Button variant="primary" size="lg" asChild className="w-full sm:w-auto">
-              <BookingLink className="flex items-center justify-center gap-2">
-                Book Demo
-                <ArrowRight className="w-5 h-5" />
-              </BookingLink>
-            </Button>
-          ) : (
-            <>
+        {!hideFooterCta ? (
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.45, delay: 0.05 }}
+            className="mt-8 md:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3"
+          >
+            {primaryCtaOnly ? (
               <Button variant="primary" size="lg" asChild className="w-full sm:w-auto">
                 <BookingLink className="flex items-center justify-center gap-2">
-                  Book a Website Strategy Call
+                  Book Demo
                   <ArrowRight className="w-5 h-5" />
                 </BookingLink>
               </Button>
-              <Button variant="outline" size="lg" asChild className="w-full sm:w-auto">
-                <a href="#portfolio" className="flex items-center justify-center gap-2">
-                  View Website Work
-                  <ArrowRight className="w-5 h-5" />
-                </a>
-              </Button>
-            </>
-          )}
-        </motion.div>
+            ) : (
+              <>
+                <Button variant="primary" size="lg" asChild className="w-full sm:w-auto">
+                  <BookingLink className="flex items-center justify-center gap-2">
+                    Book a Website Strategy Call
+                    <ArrowRight className="w-5 h-5" />
+                  </BookingLink>
+                </Button>
+                <Button variant="outline" size="lg" asChild className="w-full sm:w-auto">
+                  <a href="#portfolio" className="flex items-center justify-center gap-2">
+                    View Website Work
+                    <ArrowRight className="w-5 h-5" />
+                  </a>
+                </Button>
+              </>
+            )}
+          </motion.div>
+        ) : null}
       </div>
     </section>
   );

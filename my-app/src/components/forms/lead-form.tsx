@@ -25,7 +25,7 @@ export const BUSINESS_TYPES = [
 ] as const;
 
 const inputBase =
-  "w-full min-h-[48px] px-4 rounded-xl border bg-slate-900/60 border-slate-600/80 text-slate-50 placeholder:text-slate-500 focus:outline-none transition-all duration-200 text-base touch-manipulation";
+  "w-full min-h-11 px-4 rounded-xl border bg-slate-900/60 border-slate-600/80 text-slate-50 placeholder:text-slate-500 focus:outline-none transition-all duration-200 text-base touch-manipulation";
 const inputFocus = "focus:border-neon-cyan focus:ring-2 focus:ring-neon-cyan/20 focus:ring-offset-0 focus:ring-offset-transparent";
 const inputError = "border-amber-500/70 focus:border-amber-500 focus:ring-amber-500/20";
 

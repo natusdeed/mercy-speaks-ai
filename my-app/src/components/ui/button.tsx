@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 /**
  * CTA design system: primary (Executive Violet), secondary, outline.
- * Standard sizes: h-10 mobile, h-11 desktop; px-4 mobile, px-5 desktop; rounded-xl/2xl.
+ * Standard sizes: min 44px height (h-11) on mobile; lg uses h-12 from md+; rounded-xl/2xl.
  * All "Book Demo" and main CTAs use variant="primary".
  */
 const buttonVariants = cva(
@@ -26,10 +26,11 @@ const buttonVariants = cva(
           "border border-slate-500/60 bg-transparent text-slate-300 rounded-xl hover:bg-slate-800/40 hover:text-slate-50 focus-visible:ring-slate-400",
       },
       size: {
-        default: "h-10 md:h-11 px-4 md:px-5 text-sm rounded-xl",
-        sm: "h-10 px-4 text-sm rounded-xl",
-        lg: "h-10 md:h-11 px-5 md:px-6 text-base rounded-2xl",
-        icon: "h-10 md:h-11 w-10 md:w-11 rounded-xl",
+        /* Mobile tap targets: min 44px (2.75rem) */
+        default: "min-h-11 h-11 px-4 md:px-5 text-sm rounded-xl",
+        sm: "min-h-11 h-11 px-4 text-sm rounded-xl",
+        lg: "min-h-11 h-11 md:min-h-12 md:h-12 px-5 md:px-6 text-base rounded-2xl",
+        icon: "min-h-11 h-11 min-w-11 w-11 rounded-xl",
       },
     },
     defaultVariants: {

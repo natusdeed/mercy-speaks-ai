@@ -122,14 +122,14 @@ export function Footer() {
               {navigationLinks.map((link) => (
                 <li key={link.name}>
                   {link.href === "BOOKING" ? (
-                    <BookingLink className="text-slate-300 hover:text-electric-purple transition-colors text-base md:text-lg flex items-center gap-2 group">
+                    <BookingLink className="text-slate-300 hover:text-electric-purple transition-colors text-base md:text-lg flex min-h-11 items-center gap-2 rounded-lg py-1.5 -mx-2 px-2 group">
                       <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
                       <span>{link.name}</span>
                     </BookingLink>
                   ) : (
                     <Link
                       to={link.href}
-                      className="text-slate-300 hover:text-electric-purple transition-colors text-base md:text-lg flex items-center gap-2 group"
+                      className="text-slate-300 hover:text-electric-purple transition-colors text-base md:text-lg flex min-h-11 items-center gap-2 rounded-lg py-1.5 -mx-2 px-2 group"
                     >
                       <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
                       <span>{link.name}</span>
@@ -157,7 +157,7 @@ export function Footer() {
                     {contact.href ? (
                       <a
                         href={contact.href}
-                        className="text-slate-300 hover:text-electric-purple transition-colors text-base md:text-lg flex items-center gap-3 group"
+                        className="text-slate-300 hover:text-electric-purple transition-colors text-base md:text-lg flex min-h-11 items-center gap-3 rounded-lg py-1.5 -mx-2 px-2 group"
                       >
                         <Icon className="w-4 h-4 text-slate-500 group-hover:text-electric-purple transition-colors" />
                         <span>{contact.value}</span>

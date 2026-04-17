@@ -130,7 +130,7 @@ export function PricingPreview() {
                 variant={tier.highlight ? "primary" : "outline"}
                 size="default"
                 asChild
-                className="mt-auto w-full min-h-[48px]"
+                className="mt-auto w-full"
               >
                 <Link to="/pricing">View plan</Link>
               </Button>
@@ -209,7 +209,7 @@ export function PricingPreview() {
                   <Button
                     variant={tier.popular ? "primary" : "outline"}
                     size="default"
-                    className="w-full min-h-[48px]"
+                    className="w-full"
                     asChild
                   >
                     <Link

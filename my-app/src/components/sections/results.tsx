@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const PROOF_POLICY = [
   {
@@ -43,6 +44,14 @@ export function Results() {
           </h2>
           <p className="text-slate-400 max-w-2xl mx-auto">
             Credibility only: verified proof, real screenshots, and references when appropriate.
+          </p>
+          <p className="mt-4">
+            <Link
+              to="/testimonials"
+              className="text-neon-cyan font-medium underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan/50 rounded-sm"
+            >
+              Read client testimonials
+            </Link>
           </p>
         </motion.div>
 

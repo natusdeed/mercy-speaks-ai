@@ -17,6 +17,7 @@ import BookDemo from './app/book-demo/page';
 import Services from './pages/Services';
 import Solutions from './app/solutions/page';
 import Results from './app/results/page';
+import TestimonialsPage from './app/testimonials/page';
 import ServiceAIPhoneReceptionist from './pages/services/AIPhoneReceptionist';
 import ServiceAppointmentAutomation from './pages/services/AppointmentAutomation';
 import ServiceRAGData from './pages/services/RAGData';
@@ -94,6 +95,7 @@ function App() {
           <Route path="/hvac" element={<HvacPage />} />
           <Route path="/plumbing" element={<PlumbingPage />} />
           <Route path="/results" element={<Results />} />
+          <Route path="/testimonials" element={<TestimonialsPage />} />
           <Route path="/services/ai-phone-receptionist" element={<ServiceAIPhoneReceptionist />} />
           <Route path="/services/appointment-automation" element={<ServiceAppointmentAutomation />} />
           <Route path="/services/rag-data" element={<ServiceRAGData />} />

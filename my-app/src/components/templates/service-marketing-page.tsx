@@ -98,13 +98,13 @@ export function ServiceMarketingPage({
               </h1>
               <p className="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto mb-8 px-1">{intro}</p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center items-stretch sm:items-center">
-                <Button variant="primary" size="lg" asChild className="w-full sm:w-auto min-h-[48px]">
+                <Button variant="primary" size="lg" asChild className="w-full sm:w-auto">
                   <BookingLink className="flex items-center justify-center gap-2">
                     Book a strategy call
                     <ArrowRight className="w-5 h-5" />
                   </BookingLink>
                 </Button>
-                <Button variant="outline" size="lg" asChild className="w-full sm:w-auto min-h-[48px]">
+                <Button variant="outline" size="lg" asChild className="w-full sm:w-auto">
                   <Link to={NAV_PATHS.contact} className="flex items-center justify-center gap-2">
                     Contact
                   </Link>
@@ -181,7 +181,7 @@ export function ServiceMarketingPage({
                   <li key={r.to}>
                     <Link
                       to={r.to}
-                      className="inline-flex items-center gap-2 rounded-xl border border-slate-700/60 bg-slate-900/40 px-4 py-3 text-slate-300 hover:text-neon-cyan hover:border-neon-cyan/30 transition-colors min-h-[48px]"
+                      className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-slate-700/60 bg-slate-900/40 px-4 py-3 text-slate-300 hover:text-neon-cyan hover:border-neon-cyan/30 transition-colors"
                     >
                       {r.label}
                       <ArrowRight className="w-4 h-4" aria-hidden />
@@ -195,7 +195,7 @@ export function ServiceMarketingPage({
 
         <section className="section pt-0">
           <div className="section-inner max-w-3xl mx-auto text-center">
-            <Button variant="primary" size="lg" asChild className="min-h-[48px] px-8">
+            <Button variant="primary" size="lg" asChild className="px-8">
               <BookingLink className="flex items-center justify-center gap-2">
                 Book a free strategy call
                 <ArrowRight className="w-5 h-5" />

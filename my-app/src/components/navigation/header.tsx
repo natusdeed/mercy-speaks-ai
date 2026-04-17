@@ -21,6 +21,7 @@ const navLinksAfterIndustries = [
   { name: "Solutions", href: "/solutions" },
   { name: "Pricing", href: "/pricing" },
   { name: "Results", href: "/results" },
+  { name: "Testimonials", href: "/testimonials" },
   { name: "About", href: "/about" },
   { name: "Contact", href: "/contact" },
 ] as const;
@@ -67,7 +68,7 @@ export function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-xl border-b border-slate-800/25">
-      <nav className="section-inner py-4">
+      <nav className="section-inner py-4 px-4 sm:px-6">
         <div className="flex items-center justify-between">
           <Link
             to="/"
@@ -182,7 +183,7 @@ export function Header() {
             <button
               type="button"
               onClick={() => setMobileOpen((o) => !o)}
-              className="p-2 rounded-lg text-slate-400 hover:text-slate-50 hover:bg-slate-800 transition-colors"
+              className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-lg text-slate-400 hover:text-slate-50 hover:bg-slate-800 transition-colors"
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileOpen}
             >
@@ -193,7 +194,7 @@ export function Header() {
 
         {/* Mobile menu — premium layout; Industries uses accordion (no hover) */}
         {mobileOpen && (
-          <div className="md:hidden mt-4 pt-4 pb-2 border-t border-slate-800/50 bg-slate-900/50 -mx-4 px-4 rounded-b-xl backdrop-blur-md">
+          <div className="md:hidden mt-4 pt-4 pb-2 border-t border-slate-800/50 bg-slate-900/50 -mx-4 px-4 sm:-mx-6 sm:px-6 rounded-b-xl backdrop-blur-md">
             <div className="flex flex-col gap-0.5">
               {navLinksBeforeIndustries.map((link) => {
                 const active = isActivePath(link.href, pathname);

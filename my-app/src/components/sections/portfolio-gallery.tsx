@@ -155,7 +155,7 @@ export function PortfolioGallery({
                 onClick={() => setActiveFilter(filter.value)}
                 aria-pressed={activeFilter === filter.value}
                 className={cn(
-                  "shrink-0 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
+                  "shrink-0 min-h-11 inline-flex items-center px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
                   activeFilter === filter.value
                     ? "bg-electric-purple/20 text-slate-50 border border-electric-purple/40 shadow-[0_0_0_1px_rgba(139,92,246,0.15)]"
                     : "bg-slate-900/30 text-slate-300 border border-slate-800/60 hover:bg-slate-900/60 hover:text-slate-50 hover:border-slate-700"
@@ -176,7 +176,7 @@ export function PortfolioGallery({
           className={cn(
             "gap-6 md:gap-8",
             layout === "row"
-              ? "flex flex-row overflow-x-auto overflow-y-visible pb-3 snap-x snap-mandatory scroll-pl-1 scroll-pr-4 -mx-1 px-1 [scrollbar-width:thin] md:scroll-pl-0"
+              ? "flex min-w-0 flex-row overflow-x-auto overflow-y-visible pb-3 snap-x snap-mandatory scroll-pl-1 scroll-pr-4 -mx-1 px-1 [scrollbar-width:thin] md:scroll-pl-0"
               : cn(
                   "grid",
                   gridColumns === 3
@@ -211,8 +211,8 @@ export function PortfolioGallery({
                   "card-premium flex flex-col overflow-hidden group",
                   layout === "row" &&
                     (isShowcase
-                      ? "shrink-0 w-[min(24rem,calc(100vw-2.5rem))] sm:w-96 snap-start border border-white/8 bg-slate-950/50 backdrop-blur-sm shadow-[0_0_0_1px_rgba(139,92,246,0.1),0_20px_50px_-15px_rgba(0,0,0,0.65)] transition-[box-shadow,border-color,transform] duration-300 hover:border-electric-purple/30 hover:shadow-[0_0_0_1px_rgba(139,92,246,0.2),0_28px_60px_-12px_rgba(139,92,246,0.12)]"
-                      : "shrink-0 w-[min(22rem,calc(100vw-2rem))] sm:w-80 snap-start"),
+                      ? "shrink-0 w-[min(24rem,100%)] sm:w-96 snap-start border border-white/8 bg-slate-950/50 backdrop-blur-sm shadow-[0_0_0_1px_rgba(139,92,246,0.1),0_20px_50px_-15px_rgba(0,0,0,0.65)] transition-[box-shadow,border-color,transform] duration-300 hover:border-electric-purple/30 hover:shadow-[0_0_0_1px_rgba(139,92,246,0.2),0_28px_60px_-12px_rgba(139,92,246,0.12)]"
+                      : "shrink-0 w-[min(22rem,100%)] sm:w-80 snap-start"),
                   layout === "grid" &&
                     isShowcase &&
                     "border border-white/8 bg-slate-950/50 backdrop-blur-sm shadow-[0_0_0_1px_rgba(139,92,246,0.1),0_20px_50px_-15px_rgba(0,0,0,0.65)] transition-[box-shadow,border-color,transform] duration-300 hover:-translate-y-1 hover:border-electric-purple/35 hover:shadow-[0_0_0_1px_rgba(139,92,246,0.22),0_28px_60px_-12px_rgba(6,182,212,0.08)]",

@@ -46,14 +46,14 @@ export function Hero() {
           transition={{ duration: 0.5, delay: 0.15 }}
           className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 mb-8"
         >
-          <Button variant="primary" size="lg" asChild className="w-full sm:w-auto min-h-[48px]">
+          <Button variant="primary" size="lg" asChild className="w-full sm:w-auto">
             <BookingLink className="flex items-center justify-center gap-2">
               <Phone className="w-5 h-5" />
               Book a Free Strategy Call
               <ArrowRight className="w-5 h-5" />
             </BookingLink>
           </Button>
-          <Button variant="outline" size="lg" asChild className="w-full sm:w-auto min-h-[48px]">
+          <Button variant="outline" size="lg" asChild className="w-full sm:w-auto">
             <a href="#portfolio" className="flex items-center justify-center gap-2">
               <Globe className="w-5 h-5" />
               View Website Work

@@ -44,7 +44,7 @@ export function FinalCTA({
               variant="primary"
               size="lg"
               asChild
-              className="w-full sm:w-auto min-h-[48px]"
+              className="w-full sm:w-auto"
             >
               <BookingLink className="flex items-center justify-center gap-2">
                 <Phone className="w-5 h-5" />

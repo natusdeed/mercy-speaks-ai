@@ -13,6 +13,8 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { BookingLink } from "@/components/cta/booking-link";
+import { ServicePairCallout } from "@/components/marketing/service-pair-callout";
+import { NAV_PATHS } from "@/lib/site-config";
 
 export default function AIPhoneReceptionistPage() {
   const features = [
@@ -107,7 +109,17 @@ export default function AIPhoneReceptionistPage() {
                 never get tired, and provide consistent, professional service every time—all for
                 less than 1 hour of employee wages per month.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <ServicePairCallout className="mx-auto">
+                Pair it with{" "}
+                <Link
+                  to={NAV_PATHS.bookDemo}
+                  className="font-medium text-sky-200 underline-offset-2 hover:underline"
+                >
+                  Missed-Call Text Back
+                </Link>{" "}
+                for maximum lead capture.
+              </ServicePairCallout>
+              <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
                 <Button variant="primary" size="lg" asChild>
                   <BookingLink>Schedule a Demo</BookingLink>
                 </Button>
