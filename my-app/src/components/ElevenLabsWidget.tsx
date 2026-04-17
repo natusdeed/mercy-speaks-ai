@@ -1,16 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      "elevenlabs-convai": { "agent-id": string };
-    }
-  }
-}
-
-export {};
-
 const CONVAI_SCRIPT_SRC =
   "https://unpkg.com/@elevenlabs/convai-widget-embed";
 const AGENT_ID = "agent_5601kmr4v057ebqvfjbg64jpatq2";

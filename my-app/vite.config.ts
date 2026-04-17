@@ -490,12 +490,15 @@ export default defineConfig(async (): Promise<UserConfig> => {
     rollupOptions: {
       output: {
         manualChunks(id) {
-          if (id.includes('node_modules')) {
-            if (id.includes('framer-motion')) return 'motion';
-            if (id.includes('react-router')) return 'router';
-            if (id.includes('lucide-react')) return 'icons';
-            if (id.includes('@radix-ui')) return 'radix';
+          if (!id.includes('node_modules')) return;
+          // React core first — avoids one huge "index" chunk and improves long-term cache hits.
+          if (/node_modules[/\\](?:react-dom|react|scheduler)[/\\]/.test(id)) {
+            return 'vendor-react';
           }
+          if (id.includes('framer-motion')) return 'motion';
+          if (id.includes('react-router')) return 'router';
+          if (id.includes('lucide-react')) return 'icons';
+          if (id.includes('@radix-ui')) return 'radix';
         },
       },
     },
