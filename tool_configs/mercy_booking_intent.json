@@ -1,9 +1,9 @@
 {
   "name": "mercy_booking_intent",
-  "description": "Use this tool to capture a booking or demo request when a caller or visitor wants to schedule an appointment, request a consultation, book a demo, or express strong interest in moving forward. Before using this tool, collect the person's full name, callback number, service needed, and preferred day or time. Include helpful notes if available.",
+  "description": "REQUIRED during booking flows: Call this webhook as soon as full_name and callback_number are confirmed — do not wait for service or preferred time. Call again with service_needed and preferred_day_or_time once collected so the record is complete. Include email, business_name, notes, source, and urgency when known.",
   "type": "webhook",
   "api_schema": {
-    "url": "https://script.google.com/macros/s/AKfycbwooNe15RdOHmskzAQ-XQd-ya6sCTbfnIZ3K3QPBWU1x9CON8fuPSQ9jhmPi7obTCsYtw/exec",
+    "url": "https://hook.us2.make.com/aniana8d64s67gje6texu2iq6s62prx9",
     "method": "POST",
     "request_body_schema": {
       "type": "object",
@@ -25,6 +25,14 @@
           "type": "string",
           "description": "The person's preferred day, time, or general availability for the appointment or callback."
         },
+        "email": {
+          "type": "string",
+          "description": "The caller's email address if collected."
+        },
+        "business_name": {
+          "type": "string",
+          "description": "The caller's business or company name if mentioned."
+        },
         "source": {
           "type": "string",
           "description": "Where the request came from, such as phone_call, website_chat, widget, or elevenlabs."
@@ -40,9 +48,7 @@
       },
       "required": [
         "full_name",
-        "callback_number",
-        "service_needed",
-        "preferred_day_or_time"
+        "callback_number"
       ]
     },
     "request_headers": {
