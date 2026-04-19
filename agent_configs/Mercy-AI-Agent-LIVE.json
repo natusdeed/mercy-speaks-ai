@@ -578,7 +578,7 @@
   },
   "metadata": {
     "created_at_unix_secs": 1774631880,
-    "updated_at_unix_secs": 1776561315
+    "updated_at_unix_secs": 1776562793
   },
   "platform_settings": {
     "evaluation": {
@@ -1149,26 +1149,6 @@
         },
         "backward_condition": null
       },
-      "edge_01knd3wtp1eh0a3wfaqs99djs5": {
-        "source": "node_01kms0wffze0689rf5txr2d1f1",
-        "target": "node_01knczrdy9fq8s47tcjcfc7x4b",
-        "forward_condition": {
-          "label": "— Ready to move forward",
-          "type": "llm",
-          "condition": "Use this path when the user is ready to discuss or book the next step for automation services."
-        },
-        "backward_condition": null
-      },
-      "edge_01knd3xd5weh0a3wfq1gzjtfjg": {
-        "source": "node_01kms1x20pe0689rfjwrea1qt1",
-        "target": "node_01knczrdy9fq8s47tcjcfc7x4b",
-        "forward_condition": {
-          "label": "— Wants automation info",
-          "type": "llm",
-          "condition": "Use this path only when the caller is specifically \nasking about automation services and wants more \ninformation before booking. Never use this path \nwhen the caller asks for Don, Donatus, the owner, \nor any human — those must stay in the Handoff node \nand trigger the transfer_to_number tool."
-        },
-        "backward_condition": null
-      },
       "edge_01knd3xrrjeh0a3wfrk3b2cbqh": {
         "source": "node_01kmryqkj7e0689renf5nhjqs9",
         "target": "node_01knczrdy9fq8s47tcjcfc7x4b",
@@ -1179,13 +1159,53 @@
         },
         "backward_condition": null
       },
-      "edge_01knd3yjrjeh0a3wg2jt1gpwgr": {
-        "source": "node_01kms3hsp3e0689rhkxg2xp1re",
-        "target": "node_01knczrdy9fq8s47tcjcfc7x4b",
+      "edge_01knd4auto1e0689rweb001abcde": {
+        "source": "node_01knczrdy9fq8s47tcjcfc7x4b",
+        "target": "node_01knczgam6fq8s47sdbeffdmrx",
+        "forward_condition": {
+          "label": "— Best fit is website",
+          "type": "llm",
+          "condition": "Use this path when the caller's need is actually website design, web redesign, SEO, or landing pages rather than workflow automation."
+        },
+        "backward_condition": null
+      },
+      "edge_01knd4auto2e0689rairec002abcd": {
+        "source": "node_01knczrdy9fq8s47tcjcfc7x4b",
+        "target": "node_01knczn0zkfq8s47syy9an20yc",
+        "forward_condition": {
+          "label": "— Best fit is AI receptionist",
+          "type": "llm",
+          "condition": "Use this path when the caller's need is actually AI receptionist, call answering, or voice agents rather than back-office automation."
+        },
+        "backward_condition": null
+      },
+      "edge_01knd4auto3e0689rbook003abcde": {
+        "source": "node_01knczrdy9fq8s47tcjcfc7x4b",
+        "target": "node_01kms0wffze0689rf5txr2d1f1",
+        "forward_condition": {
+          "label": "— Ready to move forward",
+          "type": "llm",
+          "condition": "Use this path when automation is the right fit and the caller wants to schedule a consultation, demo, strategy call, or move forward with booking now."
+        },
+        "backward_condition": null
+      },
+      "edge_01knd4auto4e0689rmsg4004abcde": {
+        "source": "node_01knczrdy9fq8s47tcjcfc7x4b",
+        "target": "node_01kms3hsp3e0689rhkxg2xp1re",
         "forward_condition": {
           "label": "— Not ready yet",
           "type": "llm",
-          "condition": "Use this path when the user is interested in automation services but is not ready to move forward now and prefers to follow up later."
+          "condition": "Use this path when the caller is interested in automation but not ready to book, wants follow-up later, or prefers to leave a message."
+        },
+        "backward_condition": null
+      },
+      "edge_01knd4auto5e0689rhand005abcde": {
+        "source": "node_01knczrdy9fq8s47tcjcfc7x4b",
+        "target": "node_01kms1x20pe0689rfjwrea1qt1",
+        "forward_condition": {
+          "label": "— Needs human",
+          "type": "llm",
+          "condition": "Use this path when the caller asks for Don, the owner, a human, has a complex integration question, or needs technical help beyond this node's scope."
         },
         "backward_condition": null
       },
@@ -1380,7 +1400,6 @@
         },
         "edge_order": [
           "edge_01kms38sn5e0689rgycfc4vpp2",
-          "edge_01knd3wtp1eh0a3wfaqs99djs5",
           "edge_01knzkvnwxfvn8degwwknccdm0",
           "edge_01knzkvw7qfvn8deh023wj1nh6"
         ],
@@ -1415,7 +1434,6 @@
         },
         "edge_order": [
           "edge_01kms3cm4we0689rhas81h6pj6",
-          "edge_01knd3xd5weh0a3wfq1gzjtfjg",
           "edge_01kpenrvg0exyrm1c1g8vvnkp7"
         ],
         "label": "— Handoff / Human Request"
@@ -1431,7 +1449,7 @@
         ],
         "tools": [
           {
-            "tool_id": "tool_2101kpf6mhsze1ntd11w6syx9nvf"
+            "tool_id": "tool_5301kph79z49fj2vz5p6xr6gcp2p"
           }
         ]
       },
@@ -1446,7 +1464,7 @@
         ],
         "tools": [
           {
-            "tool_id": "tool_6301kpf6mhxefndr7mcb6t00h8jt"
+            "tool_id": "tool_4701kph79z4aft4v3h5txqda90zj"
           }
         ]
       },
@@ -1478,8 +1496,7 @@
           "y": -1094.587165827397
         },
         "edge_order": [
-          "edge_01kms66t3pe0689rjt01e09mj3",
-          "edge_01knd3yjrjeh0a3wg2jt1gpwgr"
+          "edge_01kms66t3pe0689rjt01e09mj3"
         ],
         "label": "— General Message"
       },
@@ -1494,7 +1511,7 @@
         ],
         "tools": [
           {
-            "tool_id": "tool_2701kpf6mhzqefqatmcsp9aybbtq"
+            "tool_id": "tool_8901kph79z4benja6tr7jn4cma6d"
           }
         ]
       },
@@ -1632,7 +1649,13 @@
           "x": 1664.82060346531,
           "y": -1685.2305830425444
         },
-        "edge_order": [],
+        "edge_order": [
+          "edge_01knd4auto1e0689rweb001abcde",
+          "edge_01knd4auto2e0689rairec002abcd",
+          "edge_01knd4auto3e0689rbook003abcde",
+          "edge_01knd4auto4e0689rmsg4004abcde",
+          "edge_01knd4auto5e0689rhand005abcde"
+        ],
         "label": "— Automation Lead Qualification"
       },
       "node_01knczv3fdfq8s47ttee4dc7ez": {
