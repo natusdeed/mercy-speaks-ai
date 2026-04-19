@@ -16,7 +16,7 @@
         "request_headers": {
             "Content-Type": "application/json"
         },
-        "url": "https://api.example.com/webhook",
+        "url": "https://script.google.com/macros/s/AKfycby8VvopVjBhPyMHEbXtCSPxcPqTUuuV5yQBIbpj-XTwe7jwefHZmHo5YYUDvsISAMGg/exec",
         "method": "POST",
         "path_params_schema": {},
         "request_body_schema": {
@@ -28,3 +28,4 @@
         "content_type": "application/json"
     }
 }
+

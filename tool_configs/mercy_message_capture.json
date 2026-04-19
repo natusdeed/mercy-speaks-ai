@@ -1,30 +1,64 @@
 {
-    "type": "webhook",
-    "name": "mercy_message_capture",
-    "description": "mercy_message_capture webhook tool",
-    "response_timeout_secs": 30,
-    "disable_interruptions": false,
-    "force_pre_tool_speech": false,
-    "assignments": [],
-    "tool_call_sound_behavior": "auto",
-    "tool_error_handling_mode": "auto",
-    "dynamic_variables": {
-        "dynamicVariablePlaceholders": {}
+  "name": "mercy_message_capture",
+  "description": "Use this tool to capture a general message when the caller's request cannot be completed immediately and it is not a booking or escalation request. Before using this tool, collect the caller's full name, callback number, reason for calling, and best callback time.",
+  "type": "webhook",
+  "api_schema": {
+    "url": "https://hook.us2.make.com/tifvwnhdp7n7xshu74ezx39js3f091fj",
+    "method": "POST",
+    "request_body_schema": {
+      "type": "object",
+      "description": "Request body for saving a general message from Mercy AI Agent.",
+      "properties": {
+        "full_name": {
+          "type": "string",
+          "description": "The full name of the caller."
+        },
+        "callback_number": {
+          "type": "string",
+          "description": "The best phone number to call back."
+        },
+        "reason_for_calling": {
+          "type": "string",
+          "description": "The main reason the caller is reaching out."
+        },
+        "best_callback_time": {
+          "type": "string",
+          "description": "The best time to call the person back."
+        },
+        "requested_person": {
+          "type": "string",
+          "description": "The specific person the caller is trying to reach if known."
+        },
+        "source": {
+          "type": "string",
+          "description": "Where the request came from such as phone_call, website_chat, or widget."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Any extra context or helpful notes about the message."
+        },
+        "urgency": {
+          "type": "string",
+          "description": "The urgency level if known such as low, normal, or urgent."
+        }
+      },
+      "required": [
+        "full_name",
+        "callback_number",
+        "reason_for_calling",
+        "best_callback_time"
+      ]
     },
-    "execution_mode": "immediate",
-    "api_schema": {
-        "request_headers": {
-            "Content-Type": "application/json"
-        },
-        "url": "https://api.example.com/webhook",
-        "method": "POST",
-        "path_params_schema": {},
-        "request_body_schema": {
-            "type": "object",
-            "required": [],
-            "description": "Request body for the webhook",
-            "properties": {}
-        },
-        "content_type": "application/json"
+    "request_headers": {
+      "Content-Type": "application/json"
     }
+  },
+  "response_timeout_secs": 30,
+  "dynamic_variables": {
+    "dynamic_variable_placeholders": {}
+  },
+  "assignments": [],
+  "disable_interruptions": false,
+  "force_pre_tool_speech": false
 }
+

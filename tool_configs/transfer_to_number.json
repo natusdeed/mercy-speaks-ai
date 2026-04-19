@@ -1,0 +1,18 @@
+﻿{
+  "name": "transfer_to_number",
+  "description": "Transfer the caller to a human when they ask to speak to Don, the owner, a manager, or a real person, or when the issue is urgent, sensitive, or outside Mercy's scope.",
+  "type": "system",
+  "system_tool_type": "transfer_to_number",
+  "transfers": [
+    {
+      "transfer_destination": {
+        "type": "phone",
+        "phone_number": "+17033325956"
+      },
+      "condition": "When the caller asks to speak to Don, the owner, a manager, or a human, or when the issue is urgent, sensitive, complex, or outside Mercy's scope.",
+      "transfer_type": "conference",
+      "client_message": "Please hold for just a moment while I connect you with Don.",
+      "agent_message": "Hi Don, you have an incoming call from a Mercy Speaks Digital caller. They need your assistance."
+    }
+  ]
+}

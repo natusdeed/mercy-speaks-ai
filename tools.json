@@ -2,7 +2,7 @@
     "tools": [
         {
             "type": "webhook",
-            "config": "tool_configs\\mercy_booking_intent-1.json",
+            "config": "tool_configs/mercy_booking_intent.json",
             "id": "tool_7001kmrjg4emfvjsb7gaywaag1rg"
         },
         {
