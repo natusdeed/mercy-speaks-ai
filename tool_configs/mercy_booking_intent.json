@@ -3,7 +3,7 @@
   "description": "Use this tool to capture a booking or demo request when a caller or visitor wants to schedule an appointment, request a consultation, book a demo, or express strong interest in moving forward. Before using this tool, collect the person's full name, callback number, service needed, and preferred day or time. Include helpful notes if available.",
   "type": "webhook",
   "api_schema": {
-    "url": "https://hook.us2.make.com/aniana8d64s67gje6texu2iq6s62prx9",
+    "url": "https://script.google.com/macros/s/AKfycbwooNe15RdOHmskzAQ-XQd-ya6sCTbfnIZ3K3QPBWU1x9CON8fuPSQ9jhmPi7obTCsYtw/exec",
     "method": "POST",
     "request_body_schema": {
       "type": "object",

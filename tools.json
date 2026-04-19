@@ -12,7 +12,7 @@
         },
         {
             "type": "webhook",
-            "config": "tool_configs\\mercy_message_capture-2.json",
+            "config": "tool_configs\\mercy_message_capture.json",
             "id": "tool_4001kmrdy1wyfx5t9hb0wg1qbww6"
         },
         {

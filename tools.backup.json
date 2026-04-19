@@ -4,7 +4,7 @@
       "id": "tool_4001kmrdy1wyfx5t9hb0wg1qbww6",
       "name": "mercy_message_capture",
       "type": "webhook",
-      "config_path": "tool_configs/mercy_message_capture-1.json"
+      "config_path": "tool_configs/mercy_message_capture.json"
     },
     {
       "id": "tool_7001kmrjg4emfvjsb7gaywaag1rg",

@@ -26,7 +26,7 @@
     },
     "tts": {
       "model_id": "eleven_turbo_v2",
-      "voice_id": "cjVigY5qzO86Huf0OWal",
+      "voice_id": "4RZ84U1b4WCqpu57LvIq",
       "supported_voices": [],
       "expressive_mode": false,
       "suggested_audio_tags": [],
@@ -213,7 +213,7 @@
               "request_headers": {
                 "Content-Type": "application/json"
               },
-              "url": "https://script.google.com/macros/s/AKfycby8VvopVjBhPyMHEbXtCSPxcPqTUuuV5yQBIbpj-XTwe7jwefHZmHo5YYUDvsISAMGg/exec",
+              "url": "https://hook.us2.make.com/aniana8d64s67gje6texu2iq6s62prx9",
               "method": "POST",
               "path_params_schema": {},
               "query_params_schema": null,
@@ -308,7 +308,7 @@
               "request_headers": {
                 "Content-Type": "application/json"
               },
-              "url": "https://script.google.com/macros/s/AKfycby8VvopVjBhPyMHEbXtCSPxcPqTUuuV5yQBIbpj-XTwe7jwefHZmHo5YYUDvsISAMGg/exec",
+              "url": "https://hook.us2.make.com/ott2fgmhwe6je72in4au71rc93fyu4is",
               "method": "POST",
               "path_params_schema": {},
               "query_params_schema": null,
@@ -411,7 +411,7 @@
               "request_headers": {
                 "Content-Type": "application/json"
               },
-              "url": "https://script.google.com/macros/s/AKfycby8VvopVjBhPyMHEbXtCSPxcPqTUuuV5yQBIbpj-XTwe7jwefHZmHo5YYUDvsISAMGg/exec",
+              "url": "https://hook.us2.make.com/tifvwnhdp7n7xshu74ezx39js3f091fj",
               "method": "POST",
               "path_params_schema": {},
               "query_params_schema": null,
@@ -578,7 +578,7 @@
   },
   "metadata": {
     "created_at_unix_secs": 1774631880,
-    "updated_at_unix_secs": 1776562793
+    "updated_at_unix_secs": 1776564541
   },
   "platform_settings": {
     "evaluation": {
@@ -589,9 +589,8 @@
       "placement": "bottom-right",
       "expandable": "never",
       "avatar": {
-        "type": "orb",
-        "color_1": "#2792dc",
-        "color_2": "#9ce6e6"
+        "type": "image",
+        "url": "https://storage.googleapis.com/eleven-public-cdn/convai/agent_5601kmr4v057ebqvfjbg64jpatq2/avatar.png"
       },
       "feedback_mode": "none",
       "end_feedback": {
@@ -709,7 +708,7 @@
       },
       "language_selector": false,
       "supports_text_only": true,
-      "custom_avatar_path": null,
+      "custom_avatar_path": "convai/agent_5601kmr4v057ebqvfjbg64jpatq2/avatar.png",
       "language_presets": {}
     },
     "data_collection": {},

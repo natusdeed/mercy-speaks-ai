@@ -3,7 +3,7 @@
   "description": "Use this tool to capture a general message when the caller's request cannot be completed immediately and it is not a booking or escalation request. Before using this tool, collect the caller's full name, callback number, reason for calling, and best callback time.",
   "type": "webhook",
   "api_schema": {
-    "url": "https://hook.us2.make.com/tifvwnhdp7n7xshu74ezx39js3f091fj",
+    "url": "https://script.google.com/macros/s/AKfycbwooNe15RdOHmskzAQ-XQd-ya6sCTbfnIZ3K3QPBWU1x9CON8fuPSQ9jhmPi7obTCsYtw/exec",
     "method": "POST",
     "request_body_schema": {
       "type": "object",
