@@ -1,6 +1,6 @@
 {
   "agent_id": "agent_5601kmr4v057ebqvfjbg64jpatq2",
-  "name": "Mercy AI Agent ",
+  "name": "Mercy AI Agent — ",
   "conversation_config": {
     "asr": {
       "quality": "high",
@@ -641,7 +641,7 @@
       "strip_audio_tags": true,
       "syntax_highlight_theme": null,
       "text_contents": {
-        "main_label": "Mercy AI Agent ",
+        "main_label": "Mercy AI Agent — ",
         "start_call": "Start conversation",
         "start_chat": null,
         "new_call": "New conversation",
@@ -855,7 +855,7 @@
       "phone_number_id": "phnum_4601km48dmj1fdwtz4yg48sja6z9",
       "assigned_agent": {
         "agent_id": "agent_5601kmr4v057ebqvfjbg64jpatq2",
-        "agent_name": "Mercy AI Agent "
+        "agent_name": "Mercy AI Agent — "
       },
       "provider": "twilio"
     }
@@ -1384,7 +1384,7 @@
           "edge_01knzkvnwxfvn8degwwknccdm0",
           "edge_01knzkvw7qfvn8deh023wj1nh6"
         ],
-        "label": "— Booking Request"
+        "label": "Booking Request"
       },
       "node_01kms1x20pe0689rfjwrea1qt1": {
         "conversation_config": {

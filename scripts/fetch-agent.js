@@ -15,17 +15,18 @@ async function main() {
 
   const result = await response.json();
   // Debugger breadcrumbs concatenate agent name + node label with no separator ("...AgentBooking...").
-  // Keep one trailing space on the agent title so joined text stays readable after each pull.
-  if (result.name === 'Mercy AI Agent') {
-    result.name = 'Mercy AI Agent ';
+  // End the display title with space–em dash–space so the joined breadcrumb stays readable after each pull.
+  const titleWithSeparator = 'Mercy AI Agent — ';
+  if (result.name === 'Mercy AI Agent' || result.name === 'Mercy AI Agent ' || result.name === 'Mercy AI Agent —') {
+    result.name = titleWithSeparator;
   }
   const assigned = result.phone_numbers?.[0]?.assigned_agent;
-  if (assigned?.agent_name === 'Mercy AI Agent') {
-    assigned.agent_name = 'Mercy AI Agent ';
+  if (assigned && (assigned.agent_name === 'Mercy AI Agent' || assigned.agent_name === 'Mercy AI Agent ' || assigned.agent_name === 'Mercy AI Agent —')) {
+    assigned.agent_name = titleWithSeparator;
   }
   const mainLabel = result.platform_settings?.widget?.text_contents?.main_label;
-  if (mainLabel === 'Mercy AI Agent') {
-    result.platform_settings.widget.text_contents.main_label = 'Mercy AI Agent ';
+  if (mainLabel === 'Mercy AI Agent' || mainLabel === 'Mercy AI Agent ' || mainLabel === 'Mercy AI Agent —') {
+    result.platform_settings.widget.text_contents.main_label = titleWithSeparator;
   }
   fs.writeFileSync('agent_configs/Mercy-AI-Agent-LIVE.json', JSON.stringify(result, null, 2));
   console.log('✅ Live config saved to agent_configs/Mercy-AI-Agent-LIVE.json');
