@@ -28,6 +28,10 @@ export function Footer() {
     { name: "Contact", href: "/contact" },
     { name: "Book Demo", href: "BOOKING" },
   ];
+  const exploreLinkColumns = [
+    navigationLinks.slice(0, 4),
+    navigationLinks.slice(4),
+  ];
 
   const socialLinks = [
     { 
@@ -118,26 +122,35 @@ export function Footer() {
             className="lg:col-span-1"
           >
             <h3 className="text-lg font-semibold text-slate-50 mb-4">Explore</h3>
-            <ul className="space-y-3">
-              {navigationLinks.map((link) => (
-                <li key={link.name}>
-                  {link.href === "BOOKING" ? (
-                    <BookingLink className="text-slate-300 hover:text-electric-purple transition-colors text-base md:text-lg flex min-h-11 items-center gap-2 rounded-lg py-1.5 -mx-2 px-2 group">
-                      <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-                      <span>{link.name}</span>
-                    </BookingLink>
-                  ) : (
-                    <Link
-                      to={link.href}
-                      className="text-slate-300 hover:text-electric-purple transition-colors text-base md:text-lg flex min-h-11 items-center gap-2 rounded-lg py-1.5 -mx-2 px-2 group"
-                    >
-                      <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-                      <span>{link.name}</span>
-                    </Link>
-                  )}
-                </li>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {exploreLinkColumns.map((columnLinks, columnIndex) => (
+                <div
+                  key={`explore-column-${columnIndex}`}
+                  className="rounded-xl border border-slate-800/70 bg-slate-900/40 p-3 backdrop-blur-sm"
+                >
+                  <ul className="space-y-2">
+                    {columnLinks.map((link) => (
+                      <li key={link.name}>
+                        {link.href === "BOOKING" ? (
+                          <BookingLink className="text-slate-300 hover:text-electric-purple transition-colors text-base md:text-lg flex min-h-11 items-center gap-2 rounded-lg py-1.5 -mx-2 px-2 group">
+                            <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                            <span>{link.name}</span>
+                          </BookingLink>
+                        ) : (
+                          <Link
+                            to={link.href}
+                            className="text-slate-300 hover:text-electric-purple transition-colors text-base md:text-lg flex min-h-11 items-center gap-2 rounded-lg py-1.5 -mx-2 px-2 group"
+                          >
+                            <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                            <span>{link.name}</span>
+                          </Link>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
-            </ul>
+            </div>
           </motion.div>
 
           {/* Contact */}

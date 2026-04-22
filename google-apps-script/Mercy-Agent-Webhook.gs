@@ -8,7 +8,8 @@
  * Deploy → New deployment → Web app → Execute as: Me, Who has access: Anyone
  *
  * Fixes vs naive version:
- * - Reads POST body from postData, form fields, or Make.com-style parameters (empty postData was why nothing updated).
+ * - Reads POST body from postData (including getDataAsString), form fields, or Make.com-style parameters (empty postData was why nothing updated).
+ * - Synthesizes JSON from flat e.parameter when the client sends application/x-www-form-urlencoded or omits postData.contents (some ConvAI / proxy stacks).
  * - Routes flat JSON from ElevenLabs (no tool_name) using field inference.
  * - Does not use data.name as tool name (that is often the caller's name).
  * - Gmail failures do not block sheet writes.
@@ -25,10 +26,60 @@ const LOG_RAW_DEBUG = false;
 // ============================================================
 // POST body extraction (Make / proxies often omit postData.contents)
 // ============================================================
+/** Known webhook field names — if flat parameters include any, treat as JSON tool payload. */
+function synthesizeJsonFromFlatParameters_(param) {
+  if (!param || typeof param !== 'object') return '';
+  var toolKeys = {
+    fullName: 1,
+    callbackNumber: 1,
+    full_name: 1,
+    callback_number: 1,
+    serviceNeeded: 1,
+    preferredDayOrTime: 1,
+    service_needed: 1,
+    preferred_day_or_time: 1,
+    reasonForCall: 1,
+    bestCallbackTime: 1,
+    reason_for_calling: 1,
+    best_callback_time: 1,
+    requested_person: 1,
+    requestedPerson: 1,
+    email: 1,
+    businessName: 1,
+    business_name: 1,
+    notes: 1,
+    source: 1,
+    urgency: 1,
+    tool_name: 1,
+    parameters: 1,
+  };
+  var keys = Object.keys(param);
+  var hit = 0;
+  for (var i = 0; i < keys.length; i++) {
+    if (toolKeys[keys[i]]) hit++;
+  }
+  if (hit === 0) return '';
+  var out = {};
+  for (var j = 0; j < keys.length; j++) {
+    var k = keys[j];
+    var v = param[k];
+    if (v !== undefined && v !== null && String(v) !== '') out[k] = v;
+  }
+  return JSON.stringify(out);
+}
+
 function getRawPostBody_(e) {
   if (!e) return '';
-  if (e.postData && e.postData.contents) {
-    return String(e.postData.contents);
+  if (e.postData) {
+    if (e.postData.contents != null && String(e.postData.contents).trim() !== '') {
+      return String(e.postData.contents);
+    }
+    if (typeof e.postData.getDataAsString === 'function') {
+      try {
+        var asStr = e.postData.getDataAsString();
+        if (asStr && String(asStr).trim() !== '') return String(asStr);
+      } catch (ignore) {}
+    }
   }
   if (e.parameter) {
     if (e.parameter.payload) return String(e.parameter.payload);
@@ -39,6 +90,8 @@ function getRawPostBody_(e) {
       var v = e.parameter[keys[i]];
       if (v && String(v).trim().indexOf('{') === 0) return String(v);
     }
+    var synth = synthesizeJsonFromFlatParameters_(e.parameter);
+    if (synth) return synth;
   }
   return '';
 }
@@ -82,12 +135,23 @@ function inferToolName_(data, params) {
     d.preferred_day_or_time ||
     p.preferred_day_or_time ||
     d.service_interest ||
-    p.service_interest
+    p.service_interest ||
+    d.serviceNeeded ||
+    p.serviceNeeded ||
+    d.preferredDayOrTime ||
+    p.preferredDayOrTime
   ) {
     return 'mercy_booking_intent';
   }
+  /** Early booking (name + phone only) uses camelCase like the ElevenLabs tool schema; distinguish from handoff via reasonForCall / bestCallbackTime. */
   if (d.fullName || p.fullName || d.callbackNumber || p.callbackNumber) {
-    return 'mercy_handoff_request';
+    if (d.reasonForCall || p.reasonForCall || d.bestCallbackTime || p.bestCallbackTime) {
+      return 'mercy_handoff_request';
+    }
+    return 'mercy_booking_intent';
+  }
+  if ((d.full_name || p.full_name) && (d.callback_number || p.callback_number)) {
+    return 'mercy_booking_intent';
   }
   return '';
 }
@@ -116,7 +180,7 @@ function doPost(e) {
         '',
         '',
         '',
-        'Fix Make module: map JSON body to HTTP raw body; Content-Type application/json',
+        'Deploy latest Mercy-Agent-Webhook.gs; or client sent no body (check ConvAI tool POST).',
       ]);
       return jsonResponse_({ status: 'error', message: 'Empty body' });
     }
@@ -190,17 +254,17 @@ function doGet() {
 }
 
 // ============================================================
-// HANDLER 1 — Booking (ElevenLabs: full_name, callback_number, service_needed, preferred_day_or_time)
+// HANDLER 1 — Booking (ElevenLabs tool schema: fullName, callbackNumber, serviceNeeded, preferredDayOrTime; snake_case still accepted)
 // ============================================================
 function handleBooking(p) {
   var row = [
     new Date(),
-    p.caller_name || p.full_name || p.name || 'Unknown',
-    p.caller_phone || p.callback_number || p.phone || 'Not provided',
+    p.caller_name || p.fullName || p.full_name || p.name || 'Unknown',
+    p.caller_phone || p.callbackNumber || p.callback_number || p.phone || 'Not provided',
     p.caller_email || p.email || 'Not provided',
-    p.business_name || 'Not provided',
-    p.service_interest || p.service_needed || p.service || p.reason_for_calling || 'Not provided',
-    p.preferred_time || p.preferred_day_or_time || p.best_callback_time || p.time || 'Not provided',
+    p.businessName || p.business_name || 'Not provided',
+    p.service_interest || p.serviceNeeded || p.service_needed || p.service || p.reason_for_calling || 'Not provided',
+    p.preferred_time || p.preferredDayOrTime || p.preferred_day_or_time || p.best_callback_time || p.time || 'Not provided',
     buildBookingSummary_(p),
   ];
 

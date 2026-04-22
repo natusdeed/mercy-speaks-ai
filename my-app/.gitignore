@@ -60,3 +60,5 @@ your-project/
 ├── .env.local               ← Your API key is here
 ├── .gitignore
 └── package.json
+
+.vercel

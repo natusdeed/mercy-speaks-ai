@@ -1,27 +1,27 @@
 {
   "name": "mercy_booking_intent",
-  "description": "REQUIRED during booking flows: Call this webhook as soon as full_name and callback_number are confirmed — do not wait for service or preferred time. Call again with service_needed and preferred_day_or_time once collected so the record is complete. Include email, business_name, notes, source, and urgency when known.",
+  "description": "REQUIRED during booking flows: Call this webhook as soon as fullName and callbackNumber are confirmed — do not wait for service or preferred time. Call again with serviceNeeded and preferredDayOrTime once collected so the record is complete. Include email, businessName, notes, source, and urgency when known.",
   "type": "webhook",
   "api_schema": {
-    "url": "https://hook.us2.make.com/aniana8d64s67gje6texu2iq6s62prx9",
+    "url": "https://script.google.com/macros/s/AKfycbwooNe15RdOHmskzAQ-XQd-ya6sCTbfnIZ3K3QPBWU1x9CON8fuPSQ9jhmPi7obTCsYtw/exec",
     "method": "POST",
     "request_body_schema": {
       "type": "object",
       "description": "Request body for saving a booking intent, consultation request, or demo request from Mercy AI Agent.",
       "properties": {
-        "full_name": {
+        "fullName": {
           "type": "string",
           "description": "The full name of the person requesting a booking or demo."
         },
-        "callback_number": {
+        "callbackNumber": {
           "type": "string",
           "description": "The best phone number for follow-up."
         },
-        "service_needed": {
+        "serviceNeeded": {
           "type": "string",
           "description": "The service the person is interested in, such as website design, AI receptionist, chatbot, automation, or demo."
         },
-        "preferred_day_or_time": {
+        "preferredDayOrTime": {
           "type": "string",
           "description": "The person's preferred day, time, or general availability for the appointment or callback."
         },
@@ -29,7 +29,7 @@
           "type": "string",
           "description": "The caller's email address if collected."
         },
-        "business_name": {
+        "businessName": {
           "type": "string",
           "description": "The caller's business or company name if mentioned."
         },
@@ -47,8 +47,8 @@
         }
       },
       "required": [
-        "full_name",
-        "callback_number"
+        "fullName",
+        "callbackNumber"
       ]
     },
     "request_headers": {

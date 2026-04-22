@@ -61,12 +61,12 @@ function main() {
     bookingFile.api_schema?.request_body_schema?.properties || {}
   );
   const need = [
-    "full_name",
-    "callback_number",
-    "service_needed",
-    "preferred_day_or_time",
+    "fullName",
+    "callbackNumber",
+    "serviceNeeded",
+    "preferredDayOrTime",
     "email",
-    "business_name",
+    "businessName",
     "notes",
   ];
   const missing = need.filter((k) => !props.includes(k));
