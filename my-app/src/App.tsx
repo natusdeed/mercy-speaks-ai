@@ -22,6 +22,7 @@ import ServiceAIPhoneReceptionist from './pages/services/AIPhoneReceptionist';
 import ServiceAppointmentAutomation from './pages/services/AppointmentAutomation';
 import ServiceRAGData from './pages/services/RAGData';
 import ServiceReviewGeneration from './pages/services/ReviewGeneration';
+import ServiceSocialMediaManagement from './pages/services/SocialMediaManagement';
 import ServiceVoiceAgents from './pages/services/VoiceAgents';
 import ServiceWebsiteChatbot from './pages/services/WebsiteChatbot';
 import ServiceWebsiteDesign from './app/services/website-design/page';
@@ -100,6 +101,8 @@ function App() {
           <Route path="/services/appointment-automation" element={<ServiceAppointmentAutomation />} />
           <Route path="/services/rag-data" element={<ServiceRAGData />} />
           <Route path="/services/review-generation" element={<ServiceReviewGeneration />} />
+          <Route path="/services/reputation-management" element={<ServiceReviewGeneration />} />
+          <Route path="/services/social-media-management" element={<ServiceSocialMediaManagement />} />
           <Route path="/services/voice-agents" element={<ServiceVoiceAgents />} />
           <Route path="/services/website-chatbot" element={<ServiceWebsiteChatbot />} />
           <Route path="/services/website-design" element={<ServiceWebsiteDesign />} />

@@ -35,6 +35,8 @@ export const PRERENDER_PATHS: string[] = [
   "/services/appointment-automation",
   "/services/rag-data",
   "/services/review-generation",
+  "/services/reputation-management",
+  "/services/social-media-management",
   "/services/voice-agents",
   "/services/website-chatbot",
   "/services/website-design",

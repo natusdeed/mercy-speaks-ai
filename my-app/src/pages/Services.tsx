@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Phone, BarChart3, Globe, MessageSquare, Star, ArrowRight, Bot, Workflow, CalendarClock, Database } from "lucide-react";
+import { Phone, BarChart3, Globe, MessageSquare, Star, ArrowRight, Bot, Workflow, CalendarClock, Database, Megaphone, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { BookingLink } from "@/components/cta/booking-link";
@@ -35,6 +35,20 @@ const serviceLinks = [
   { to: NAV_PATHS.workflowAutomation, label: "Workflow automation", icon: Workflow },
   { to: NAV_PATHS.appointmentAutomation, label: "Appointment automation", icon: CalendarClock },
   { to: NAV_PATHS.reviewGeneration, label: "Reviews & follow-up", icon: Star },
+  {
+    to: NAV_PATHS.socialMediaManagement,
+    label: "Social Media Management",
+    icon: Megaphone,
+    description:
+      "Branded content, scheduling, and captions — posted consistently every month without you lifting a finger.",
+  },
+  {
+    to: NAV_PATHS.reviewGeneration,
+    label: "Reputation Management",
+    icon: Shield,
+    description:
+      "Automated Google review requests after every job, plus monitoring across Google, Facebook, and Yelp.",
+  },
   { to: NAV_PATHS.voiceAgents, label: "Voice agents", icon: Bot },
   { to: NAV_PATHS.ragData, label: "Knowledge & RAG data", icon: Database },
 ] as const;
@@ -119,14 +133,19 @@ export default function ServicesPage() {
               Browse service pages
             </h2>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {serviceLinks.map(({ to, label, icon: Icon }) => (
-                <li key={to}>
+              {serviceLinks.map(({ to, label, icon: Icon, description }) => (
+                <li key={`${label}-${to}`}>
                   <Link
                     to={to}
-                    className="flex items-center gap-3 rounded-xl border border-slate-800/60 bg-slate-900/25 px-4 py-3.5 text-slate-200 hover:border-neon-cyan/35 hover:text-neon-cyan transition-colors min-h-[52px]"
+                    className="flex items-start gap-3 rounded-xl border border-slate-800/60 bg-slate-900/25 px-4 py-3.5 text-slate-200 hover:border-neon-cyan/35 hover:text-neon-cyan transition-colors min-h-[52px]"
                   >
                     <Icon className="w-5 h-5 text-electric-purple shrink-0" aria-hidden />
-                    <span className="font-medium">{label}</span>
+                    <span className="flex-1">
+                      <span className="block font-medium">{label}</span>
+                      {description ? (
+                        <span className="block text-xs text-slate-400 mt-1">{description}</span>
+                      ) : null}
+                    </span>
                     <ArrowRight className="w-4 h-4 ml-auto shrink-0 opacity-60" aria-hidden />
                   </Link>
                 </li>

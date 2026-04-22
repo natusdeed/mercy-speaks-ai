@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Phone, BarChart3, Globe, MessageSquare, Star, ArrowRight } from "lucide-react";
+import { Phone, BarChart3, Globe, MessageSquare, Star, ArrowRight, Megaphone, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PageShell } from "@/components/ui/page-shell";
 import { Link } from "react-router-dom";
@@ -190,6 +190,45 @@ export default function ServicesPage() {
                 </BookingLink>
               </Button>
             </motion.div>
+          </div>
+        </section>
+
+        <section className="section pt-0 pb-24 md:pb-32">
+          <div className="section-inner">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <motion.div {...fadeUpInView} className="card p-10 md:p-12">
+                <div className="p-2.5 rounded-xl w-fit bg-electric-purple/10 mb-4">
+                  <Megaphone className="w-6 h-6 text-electric-purple" />
+                </div>
+                <h2 className="text-2xl md:text-3xl font-bold text-slate-50 mb-3">Social Media Management</h2>
+                <p className="text-lg text-slate-400 mb-8 max-w-2xl">
+                  Branded content, scheduling, and captions — posted consistently every month without you lifting a
+                  finger.
+                </p>
+                <Button variant="primary" size="lg" asChild>
+                  <Link to="/services/social-media-management" className="flex items-center gap-2">
+                    Explore service
+                    <ArrowRight className="w-5 h-5" />
+                  </Link>
+                </Button>
+              </motion.div>
+
+              <motion.div {...fadeUpInView} className="card p-10 md:p-12">
+                <div className="p-2.5 rounded-xl w-fit bg-neon-cyan/10 mb-4">
+                  <Shield className="w-6 h-6 text-neon-cyan" />
+                </div>
+                <h2 className="text-2xl md:text-3xl font-bold text-slate-50 mb-3">Reputation Management</h2>
+                <p className="text-lg text-slate-400 mb-8 max-w-2xl">
+                  Automated Google review requests after every job, plus monitoring across Google, Facebook, and Yelp.
+                </p>
+                <Button variant="primary" size="lg" asChild>
+                  <Link to="/services/review-generation" className="flex items-center gap-2">
+                    Explore service
+                    <ArrowRight className="w-5 h-5" />
+                  </Link>
+                </Button>
+              </motion.div>
+            </div>
           </div>
         </section>
       </main>

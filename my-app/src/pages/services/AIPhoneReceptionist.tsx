@@ -36,6 +36,8 @@ export default function ServiceAIPhoneReceptionist() {
         { to: NAV_PATHS.websiteDesign, label: "Conversion websites" },
         { to: NAV_PATHS.websiteChatbot, label: "Website chat" },
         { to: NAV_PATHS.workflowAutomation, label: "Workflow automation" },
+        { to: NAV_PATHS.socialMediaManagement, label: "Social Media Management" },
+        { to: NAV_PATHS.reviewGeneration, label: "Reputation Management" },
         { to: NAV_PATHS.services, label: "All services" },
       ]}
       faqs={AI_RECEPTIONIST_SERVICE_FAQS}

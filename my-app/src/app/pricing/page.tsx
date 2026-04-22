@@ -138,6 +138,24 @@ const FAQ_ITEMS = [
   },
 ];
 
+const SOCIAL_AND_REPUTATION_PRICING = [
+  {
+    title: "Social Media Management",
+    items: [
+      "Starter: $397/mo — 12 posts, Facebook + Instagram, content calendar, basic report",
+      "Growth: $697/mo — 20 posts, all platforms, Stories/Reels, review automation, strategy call",
+      "Onboarding fee: $197 one-time",
+    ],
+  },
+  {
+    title: "Reputation Management",
+    items: [
+      "Standalone: $197/mo — review automation, monitoring, alerts, monthly report",
+      "Bundled: Included in SMM Growth at $697/mo",
+    ],
+  },
+] as const;
+
 export default function PricingPage() {
   const description = `Transparent pricing for AI receptionist and website packages. ${BRAND_TAGLINE}`;
 
@@ -169,6 +187,37 @@ export default function PricingPage() {
               <p className="text-lg text-slate-400 max-w-2xl mx-auto">
                 Choose the plan that fits your call volume. All plans include 24/7 AI receptionist and missed-revenue visibility.
               </p>
+            </motion.div>
+          </div>
+        </section>
+
+        <section className="section pt-0" aria-labelledby="social-reputation-pricing-title">
+          <div className="section-inner max-w-5xl mx-auto">
+            <motion.div
+              {...fadeUpInView}
+              className="rounded-2xl border border-slate-800/60 bg-slate-900/10 backdrop-blur-md p-6 md:p-8"
+            >
+              <h2
+                id="social-reputation-pricing-title"
+                className="text-2xl md:text-3xl font-bold text-slate-50 mb-5"
+              >
+                Social media and reputation plans
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {SOCIAL_AND_REPUTATION_PRICING.map((entry) => (
+                  <div key={entry.title} className="rounded-2xl bg-slate-900/20 p-6">
+                    <h3 className="text-lg font-semibold text-slate-50 mb-3">{entry.title}</h3>
+                    <ul className="space-y-2.5">
+                      {entry.items.map((item) => (
+                        <li key={item} className="flex items-start gap-2 text-slate-300 text-sm leading-snug">
+                          <CheckCircle2 className="w-4 h-4 text-neon-cyan shrink-0 mt-0.5" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
             </motion.div>
           </div>
         </section>

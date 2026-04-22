@@ -13,7 +13,19 @@ const industryLinks = [
 
 const navLinksBeforeIndustries = [
   { name: "Home", href: "/" },
-  { name: "Services", href: "/services" },
+] as const;
+
+const serviceLinks = [
+  { name: "AI Phone Receptionist", href: "/services/ai-phone-receptionist" },
+  { name: "Website Design & Development", href: "/services/website-design" },
+  { name: "Website Chat That Books", href: "/services/website-chatbot" },
+  { name: "Workflow Automation", href: "/services/workflow-automation" },
+  { name: "Appointment Automation", href: "/services/appointment-automation" },
+  { name: "Reviews & Follow-up", href: "/services/review-generation" },
+  { name: "Social Media Management", href: "/services/social-media-management" },
+  { name: "Reputation Management", href: "/services/review-generation" },
+  { name: "Voice Agents", href: "/services/voice-agents" },
+  { name: "Knowledge & RAG Data", href: "/services/rag-data" },
 ] as const;
 
 const navLinksAfterIndustries = [
@@ -44,12 +56,17 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileIndustriesOpen, setMobileIndustriesOpen] = useState(false);
   const [desktopIndustriesOpen, setDesktopIndustriesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [desktopServicesOpen, setDesktopServicesOpen] = useState(false);
   const industriesWrapRef = useRef<HTMLDivElement>(null);
+  const servicesWrapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMobileOpen(false);
     setMobileIndustriesOpen(false);
+    setMobileServicesOpen(false);
     setDesktopIndustriesOpen(false);
+    setDesktopServicesOpen(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -63,7 +80,20 @@ export function Header() {
   }, [desktopIndustriesOpen]);
 
   useEffect(() => {
-    if (!mobileOpen) setMobileIndustriesOpen(false);
+    if (!desktopServicesOpen) return;
+    function handlePointerDown(e: MouseEvent) {
+      if (servicesWrapRef.current?.contains(e.target as Node)) return;
+      setDesktopServicesOpen(false);
+    }
+    document.addEventListener("mousedown", handlePointerDown);
+    return () => document.removeEventListener("mousedown", handlePointerDown);
+  }, [desktopServicesOpen]);
+
+  useEffect(() => {
+    if (!mobileOpen) {
+      setMobileIndustriesOpen(false);
+      setMobileServicesOpen(false);
+    }
   }, [mobileOpen]);
 
   return (
@@ -94,6 +124,60 @@ export function Header() {
                 </Link>
               );
             })}
+
+            <div className="relative shrink-0" ref={servicesWrapRef}>
+              <button
+                type="button"
+                onClick={() => setDesktopServicesOpen((o) => !o)}
+                className={cn(
+                  "flex items-center gap-1 text-xs xl:text-sm font-medium transition-colors whitespace-nowrap rounded-lg px-1 py-1",
+                  pathname.startsWith("/services/")
+                    ? "text-electric-purple"
+                    : "text-slate-300 hover:text-slate-50"
+                )}
+                aria-expanded={desktopServicesOpen}
+                aria-haspopup="menu"
+                aria-controls="services-desktop-menu"
+                id="services-desktop-button"
+              >
+                Services
+                <ChevronDown
+                  className={cn(
+                    "w-4 h-4 shrink-0 transition-transform duration-200",
+                    desktopServicesOpen && "rotate-180"
+                  )}
+                  aria-hidden
+                />
+              </button>
+              {desktopServicesOpen ? (
+                <div
+                  id="services-desktop-menu"
+                  role="menu"
+                  aria-labelledby="services-desktop-button"
+                  className="absolute left-0 top-full z-50 mt-2 min-w-72 rounded-xl border border-slate-800/60 bg-slate-900/98 py-2 shadow-xl backdrop-blur-xl"
+                >
+                  {serviceLinks.map((link) => {
+                    const active = pathname === link.href;
+                    return (
+                      <Link
+                        key={`${link.name}-${link.href}`}
+                        role="menuitem"
+                        to={link.href}
+                        onClick={() => setDesktopServicesOpen(false)}
+                        className={cn(
+                          "block px-4 py-2.5 text-sm font-medium transition-colors",
+                          active
+                            ? "bg-electric-purple/15 text-electric-purple"
+                            : "text-slate-300 hover:bg-slate-800/80 hover:text-slate-50"
+                        )}
+                      >
+                        {link.name}
+                      </Link>
+                    );
+                  })}
+                </div>
+              ) : null}
+            </div>
 
             <div className="relative shrink-0" ref={industriesWrapRef}>
               <button
@@ -214,6 +298,73 @@ export function Header() {
                   </Link>
                 );
               })}
+
+              <div className="rounded-lg border border-slate-800/60 bg-slate-950/40 overflow-hidden">
+                <button
+                  type="button"
+                  onClick={() => setMobileServicesOpen((o) => !o)}
+                  className={cn(
+                    "flex w-full items-center justify-between px-4 py-3.5 text-base font-medium transition-colors",
+                    pathname.startsWith("/services/")
+                      ? "text-electric-purple bg-electric-purple/10"
+                      : "text-slate-300 hover:bg-slate-800/80"
+                  )}
+                  aria-expanded={mobileServicesOpen}
+                >
+                  Services
+                  <ChevronDown
+                    className={cn(
+                      "w-5 h-5 shrink-0 transition-transform duration-200",
+                      mobileServicesOpen && "rotate-180"
+                    )}
+                    aria-hidden
+                  />
+                </button>
+                {mobileServicesOpen ? (
+                  <div
+                    className="border-t border-slate-800/60 px-2 py-2 space-y-0.5"
+                    role="group"
+                    aria-label="Service pages"
+                  >
+                    <Link
+                      to="/services"
+                      onClick={() => {
+                        setMobileOpen(false);
+                        setMobileServicesOpen(false);
+                      }}
+                      className={cn(
+                        "block rounded-lg px-4 py-3 text-base font-medium transition-colors",
+                        pathname === "/services"
+                          ? "text-electric-purple bg-electric-purple/15 border border-electric-purple/30"
+                          : "text-slate-300 hover:bg-slate-800/80 hover:text-slate-50"
+                      )}
+                    >
+                      All Services
+                    </Link>
+                    {serviceLinks.map((link) => {
+                      const active = pathname === link.href;
+                      return (
+                        <Link
+                          key={`${link.name}-${link.href}`}
+                          to={link.href}
+                          onClick={() => {
+                            setMobileOpen(false);
+                            setMobileServicesOpen(false);
+                          }}
+                          className={cn(
+                            "block rounded-lg px-4 py-3 text-base font-medium transition-colors",
+                            active
+                              ? "text-electric-purple bg-electric-purple/15 border border-electric-purple/30"
+                              : "text-slate-300 hover:bg-slate-800/80 hover:text-slate-50"
+                          )}
+                        >
+                          {link.name}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                ) : null}
+              </div>
 
               <div className="rounded-lg border border-slate-800/60 bg-slate-950/40 overflow-hidden">
                 <button

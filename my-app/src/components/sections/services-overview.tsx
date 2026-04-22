@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Globe, Phone, Zap, ShoppingCart, ArrowRight } from "lucide-react";
+import { Globe, Phone, Zap, ShoppingCart, ArrowRight, Megaphone, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { BookingLink } from "@/components/cta/booking-link";
@@ -55,6 +55,27 @@ const SERVICES = [
     cta: "Get an E-commerce Quote",
     accent: "electric-purple",
     kind: "booking" as const,
+  },
+  {
+    icon: Megaphone,
+    title: "Social Media Management",
+    description:
+      "Consistent branded content, scheduling, and review automation — posted every month without you touching it.",
+    bullets: ["Branded monthly content", "Captions + scheduling", "Calendar + approvals", "Review automation"],
+    href: "/services/social-media-management",
+    cta: "View Social Media Management",
+    accent: "neon-cyan",
+    kind: "link" as const,
+  },
+  {
+    icon: Shield,
+    title: "Reputation Management",
+    description: "Automated review requests after every job. More Google stars, less manual asking.",
+    bullets: ["Automated review requests", "Google/Facebook/Yelp monitoring", "Alerts + response templates", "Monthly reports"],
+    href: "/services/review-generation",
+    cta: "View Reputation Management",
+    accent: "electric-purple",
+    kind: "link" as const,
   },
 ] as const;
 

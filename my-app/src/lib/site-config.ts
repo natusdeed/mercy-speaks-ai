@@ -68,6 +68,8 @@ export const NAV_PATHS = {
   appointmentAutomation: "/services/appointment-automation",
   websiteChatbot: "/services/website-chatbot",
   reviewGeneration: "/services/review-generation",
+  socialMediaManagement: "/services/social-media-management",
+  reputationManagement: "/services/reputation-management",
   voiceAgents: "/services/voice-agents",
   ragData: "/services/rag-data",
   solutions: "/solutions",
