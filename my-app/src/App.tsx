@@ -3,6 +3,7 @@ import { Routes, Route, Outlet } from 'react-router-dom';
 import { Header } from '@/components/navigation/header';
 import { Footer } from '@/components/navigation/footer';
 import { ClientErrorHandler } from '@/components/debug/ClientErrorHandler';
+import CookieConsent from './components/cookies/CookieConsent';
 
 /**
  * Eager imports: required for `renderToString` prerender (React.lazy + Suspense only renders fallback in SSR).
@@ -32,6 +33,8 @@ import WidgetInstallPage from './app/widget/install/page';
 import RoofingPage from './app/roofing/page';
 import HvacPage from './app/hvac/page';
 import PlumbingPage from './app/plumbing/page';
+import AdminProspecting from './pages/AdminProspecting';
+import CookiePolicy from './pages/CookiePolicy';
 
 /** Code-split below-the-fold / secondary dashboards later without breaking prerender. */
 const LazyDashboardApp = lazy(() =>
@@ -73,6 +76,7 @@ function PublicChrome() {
 function App() {
   return (
     <>
+      <CookieConsent />
       <ClientErrorHandler />
       <Routes>
         <Route
@@ -109,7 +113,9 @@ function App() {
           <Route path="/services/workflow-automation" element={<ServiceWorkflowAutomation />} />
           <Route path="/widget/frame" element={<WidgetFramePage />} />
           <Route path="/widget/install" element={<WidgetInstallPage />} />
+          <Route path="/cookie-policy" element={<CookiePolicy />} />
         </Route>
+        <Route path="/admin/prospecting" element={<AdminProspecting />} />
       </Routes>
     </>
   );

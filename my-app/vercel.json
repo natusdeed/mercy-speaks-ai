@@ -5,5 +5,8 @@
       "destination": "/services/review-generation",
       "permanent": true
     }
-  ]
+  ],
+  "toolbar": {
+    "enabled": false
+  }
 }

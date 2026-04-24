@@ -238,6 +238,14 @@ export function Footer() {
             <p className="text-slate-400 text-base md:text-lg text-center md:text-left">
               © {currentYear} Mercy Speaks Digital. All rights reserved.
             </p>
+            <div className="flex items-center">
+              <Link
+                to="/cookie-policy"
+                className="text-slate-400 hover:text-electric-purple transition-colors text-base md:text-lg"
+              >
+                Cookie Policy
+              </Link>
+            </div>
           </div>
         </motion.div>
       </div>
