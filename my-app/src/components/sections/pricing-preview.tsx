@@ -7,21 +7,24 @@ import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 const TIERS = [
   {
-    name: "Starter",
+    name: "Mercy Starter",
     price: 197,
-    description: "AI phone receptionist, lead capture, guided onboarding.",
+    setup: "$997 setup",
+    description: "AI receptionist, lead capture, GBP audit, missed-call text-back.",
     highlight: false,
   },
   {
-    name: "Professional",
+    name: "Mercy Growth",
     price: 397,
-    description: "Advanced automation, custom workflows, priority support.",
+    setup: "$2,500 setup",
+    description: "Full website + AI receptionist + SMS automation + booking system.",
     highlight: true,
   },
   {
-    name: "Enterprise",
-    price: 797,
-    description: "Unlimited calls, dedicated agent, API & custom integrations.",
+    name: "Mercy Pro",
+    price: 697,
+    setup: "$4,500 setup",
+    description: "Custom AI call flows, CRM, review generation, quarterly strategy.",
     highlight: false,
   },
 ];
@@ -122,6 +125,9 @@ export function PricingPreview() {
                 <span className="text-sm font-normal text-slate-400">
                   /month
                 </span>
+              </p>
+              <p className="text-xs text-neon-cyan mt-1">
+                {tier.setup}
               </p>
               <p className="card-body text-slate-400 mb-5">
                 {tier.description}

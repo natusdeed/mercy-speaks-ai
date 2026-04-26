@@ -39,6 +39,22 @@ export default function Home() {
       featured: true,
     },
     {
+      id: "rccg-shiloh-mega",
+      title: "RCCG Shiloh Mega Parish",
+      url: "https://www.rccgshilohmega.org/",
+      category: "Websites",
+      industryTag: "Church / Faith Community",
+      description:
+        "Full church website for RCCG Shiloh Mega Parish in Sugar Land, TX — sermon library with YouTube integration, events calendar, ministry pages, online giving, and pastor profiles.",
+      outcome:
+        "Modern digital presence replacing an outdated site. Members can watch sermons, register for events, and give online from any device.",
+      stack: ["Next.js", "Tailwind", "Vercel"],
+      thumbnail: "/portfolio/rccg-shiloh-church.png",
+      liveUrl: "https://www.rccgshilohmega.org/",
+      ctaLabel: "View Live Site",
+      featured: true,
+    },
+    {
       id: "davita-auto-logistics",
       title: "Davita Auto Logistics",
       url: "https://davita-auto-logistics.vercel.app/",

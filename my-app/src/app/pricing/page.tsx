@@ -32,41 +32,53 @@ const fadeUpInView = {
 
 const TIERS = [
   {
-    name: "Starter",
+    name: "Mercy Starter",
     price: 197,
+    setup: "$997 one-time setup",
     callVolume: "Up to ~500 calls/month",
+    bestFor: "Churches, solo contractors, cleaning companies",
     included: [
       "24/7 AI receptionist",
       "Appointment scheduling",
       "Lead capture & qualification",
+      "Missed-call text-back automation",
+      "Google Business Profile audit",
       "Email notifications",
-      "Guided onboarding & setup",
+      "Guided onboarding",
     ],
     popular: false,
   },
   {
-    name: "Professional",
+    name: "Mercy Growth",
     price: 397,
+    setup: "$2,500 one-time setup",
     callVolume: "Up to ~1,200 calls/month",
+    bestFor: "HVAC, Plumbing, Roofing, Electrical",
     included: [
-      "Everything in Starter",
-      "Advanced scheduling & CRM sync",
-      "SMS & custom workflows",
+      "Everything in Mercy Starter",
+      "Full website redesign (up to 10 pages)",
+      "SMS & email follow-up automation",
+      "Booking system integration",
+      "Advanced CRM sync",
+      "Monthly performance report",
       "Priority support",
-      "Analytics dashboard",
     ],
     popular: true,
   },
   {
-    name: "Enterprise",
-    price: 797,
+    name: "Mercy Pro",
+    price: 697,
+    setup: "$4,500 one-time setup",
     callVolume: "~3,000+ calls/month",
+    bestFor: "Dental offices, multi-location contractors, med spas",
     included: [
-      "Everything in Professional",
-      "Dedicated AI agent",
-      "API & custom integrations",
+      "Everything in Mercy Growth",
+      "Custom AI call flows & Mercy training",
+      "CRM integration",
+      "Review generation system",
+      "SMS/email nurture sequences",
+      "Quarterly strategy call",
       "Dedicated account manager",
-      "SLA guarantees",
     ],
     popular: false,
   },
@@ -264,6 +276,9 @@ export default function PricingPage() {
                     <h2 className="text-xl font-bold text-slate-50 mb-1">
                       {tier.name}
                     </h2>
+                    <p className="text-slate-400 text-xs italic mb-2">
+                      Best for: {tier.bestFor}
+                    </p>
                     <p className="text-slate-400 text-sm mb-5">
                       {tier.callVolume}
                     </p>
@@ -275,6 +290,9 @@ export default function PricingPage() {
                         /month
                       </span>
                     </div>
+                    <p className="text-neon-cyan text-xs mb-5">
+                      Setup: {tier.setup}
+                    </p>
                     <p className="text-xs text-slate-500 mb-6">
                       Additional calls billed as add-on. Ask for rates.
                     </p>
