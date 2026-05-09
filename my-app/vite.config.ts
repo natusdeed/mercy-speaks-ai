@@ -78,6 +78,60 @@ export default defineConfig(async (): Promise<UserConfig> => {
       },
     },
     react(),
+    // Dev-only: POST /api/agents/run (agent OS orchestration — Phase 2)
+    {
+      name: 'api-agents-run',
+      configureServer(server) {
+        server.middlewares.use((req, res, next) => {
+          if (req.method !== 'POST') {
+            next();
+            return;
+          }
+          const pathnameOnly = req.url?.split('?')[0];
+          if (pathnameOnly !== '/api/agents/run') {
+            next();
+            return;
+          }
+          const chunks: Buffer[] = [];
+          req.on('data', (chunk: Buffer) => chunks.push(chunk));
+          req.on('end', async () => {
+            const bodyStr = Buffer.concat(chunks).toString() || '{}';
+            try {
+              const forwardHeaders = Object.fromEntries(
+                Object.entries(req.headers)
+                  .filter(([, v]) => v != null)
+                  .map(([k, v]) => [k.toLowerCase(), Array.isArray(v) ? v.join(', ') : String(v)])
+              );
+              const fakeRequest = new Request(`http://localhost${req.url}`, {
+                method: 'POST',
+                headers: new Headers(forwardHeaders),
+                body: bodyStr,
+              });
+              // Use Vite's SSR loader — Node's bare import() doesn't apply resolve.alias, so transitive @/ imports fail.
+              const routeTs = path.resolve(__dirname, 'src/app/api-handlers/agents/run/route.ts');
+              const routeModuleId =
+                '/' + path.relative(server.config.root, routeTs).split(path.sep).join('/');
+              const { POST } = await server.ssrLoadModule(routeModuleId);
+              const response = await POST(fakeRequest);
+              res.statusCode = response.status;
+              response.headers.forEach((v, k) => res.setHeader(k, v));
+              const buf = Buffer.from(await response.arrayBuffer());
+              res.end(buf);
+            } catch (e) {
+              console.error('Agents run API error:', e);
+              res.statusCode = 500;
+              res.setHeader('Content-Type', 'application/json');
+              res.end(
+                JSON.stringify({
+                  ok: false,
+                  error: { code: 'INTERNAL', message: 'Internal server error.' },
+                })
+              );
+            }
+          });
+        });
+      },
+    },
     // Dev-only: handle GET /api/widget/config, POST /api/widget/chat, POST /api/widget/lead
     {
       name: 'api-widget-routes',
