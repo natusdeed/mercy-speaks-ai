@@ -26,6 +26,37 @@ function mergeMetadata(base: Record<string, unknown>, patch?: Record<string, unk
   return { ...base, ...patch };
 }
 
+/** When `metadata` JSONB is missing on a lean `leads` table, we still tag the row after adaptation. */
+const PHASE3_LEAD_SOURCE_SMOKE_SUFFIX = "phase3-real-write-smoke-test";
+
+function parseMissingLeadsColumn(msg: string): string | null {
+  const m = /Could not find the '([^']+)' column of 'leads'/i.exec(msg);
+  return m?.[1] ?? null;
+}
+
+async function insertLeadRowAdaptive(
+  sb: NonNullable<ReturnType<typeof getDashboardSupabase>>,
+  initialRow: Record<string, unknown>,
+  sourceBase: string
+): Promise<{ id: string }> {
+  let attemptRow: Record<string, unknown> = { ...initialRow };
+  for (let step = 0; step < 40; step++) {
+    const { data, error } = await sb.from("leads").insert(attemptRow).select("id").single();
+    if (!error && data?.id) return { id: data.id as string };
+    const col = error?.message ? parseMissingLeadsColumn(error.message) : null;
+    if (!col || !(col in attemptRow)) {
+      throw new Error((error?.message ?? "saveLead insert failed").slice(0, 2000));
+    }
+    const next: Record<string, unknown> = { ...attemptRow };
+    delete next[col];
+    if (col === "metadata") {
+      next.source = `${sourceBase}|test=${PHASE3_LEAD_SOURCE_SMOKE_SUFFIX}`;
+    }
+    attemptRow = next;
+  }
+  throw new Error("saveLead insert failed: schema adaptation limit exceeded");
+}
+
 export const executeSaveLead: ToolExecutor = async (input, ambient) => {
   const parsed = saveLeadToolInputSchema.parse(input as JsonObject);
   const simulated = !!parsed.simulate;
@@ -53,23 +84,45 @@ export const executeSaveLead: ToolExecutor = async (input, ambient) => {
   if (parsed.lead_id) {
     const patch: Record<string, unknown> = {
       tenant_id: parsed.tenant_id === undefined ? undefined : parsed.tenant_id,
-      organization_id: orgId ?? null,
-      conversation_id: convId ?? null,
       email: parsed.email,
       phone: parsed.phone,
       name: parsed.name ?? null,
-      first_name: parsed.first_name ?? null,
-      last_name: parsed.last_name ?? null,
-      business_name: parsed.business_name ?? null,
-      message: parsed.message ?? null,
-      service_interest: parsed.service_interest ?? null,
       source: parsed.source,
-      notes: parsed.notes ?? null,
-      status: parsed.status,
-      priority: parsed.priority,
-      estimated_value: parsed.estimated_value ?? null,
       metadata: nowMeta,
     };
+    if (parsed.message !== undefined) {
+      patch.message = parsed.message;
+    }
+    if (parsed.service_interest !== undefined) {
+      patch.service_interest = parsed.service_interest;
+    }
+    if (parsed.notes !== undefined) {
+      patch.notes = parsed.notes;
+    }
+    if (parsed.status !== undefined) {
+      patch.status = parsed.status;
+    }
+    if (parsed.priority !== undefined) {
+      patch.priority = parsed.priority;
+    }
+    if (parsed.estimated_value !== undefined) {
+      patch.estimated_value = parsed.estimated_value;
+    }
+    if (parsed.business_name !== undefined) {
+      patch.business_name = parsed.business_name;
+    }
+    if (orgId !== undefined && orgId !== null) {
+      patch.organization_id = orgId;
+    }
+    if (convId !== undefined && convId !== null) {
+      patch.conversation_id = convId;
+    }
+    if (parsed.first_name !== undefined) {
+      patch.first_name = parsed.first_name;
+    }
+    if (parsed.last_name !== undefined) {
+      patch.last_name = parsed.last_name;
+    }
     const clean = Object.fromEntries(
       Object.entries(patch).filter(([, v]) => v !== undefined)
     ) as Record<string, unknown>;
@@ -85,32 +138,45 @@ export const executeSaveLead: ToolExecutor = async (input, ambient) => {
   }
 
   const insertRow: Record<string, unknown> = {
-    tenant_id: parsed.tenant_id ?? null,
-    organization_id: orgId ?? null,
-    conversation_id: convId ?? null,
     email: parsed.email,
     phone: parsed.phone,
     name: parsed.name ?? null,
-    first_name: parsed.first_name ?? null,
-    last_name: parsed.last_name ?? null,
-    business_name: parsed.business_name ?? null,
-    message: parsed.message ?? null,
     source: parsed.source,
     metadata: nowMeta,
   };
+  if (parsed.message !== undefined) {
+    insertRow.message = parsed.message;
+  }
+  if (parsed.first_name !== undefined) {
+    insertRow.first_name = parsed.first_name;
+  }
+  if (parsed.last_name !== undefined) {
+    insertRow.last_name = parsed.last_name;
+  }
+  if (parsed.tenant_id !== undefined) {
+    insertRow.tenant_id = parsed.tenant_id;
+  }
+  if (orgId !== undefined && orgId !== null) {
+    insertRow.organization_id = orgId;
+  }
+  if (convId !== undefined && convId !== null) {
+    insertRow.conversation_id = convId;
+  }
+  if (parsed.business_name !== undefined) {
+    insertRow.business_name = parsed.business_name;
+  }
   if (parsed.service_interest !== undefined) insertRow.service_interest = parsed.service_interest;
   if (parsed.notes !== undefined) insertRow.notes = parsed.notes;
   if (parsed.status !== undefined) insertRow.status = parsed.status;
   if (parsed.priority !== undefined) insertRow.priority = parsed.priority;
   if (parsed.estimated_value !== undefined) insertRow.estimated_value = parsed.estimated_value;
 
-  const { data, error } = await sb.from("leads").insert(insertRow).select("id").single();
-  if (error || !data?.id) throw new Error(error?.message?.slice(0, 2000) ?? "saveLead insert failed");
+  const { id } = await insertLeadRowAdaptive(sb, insertRow, parsed.source);
 
   return saveLeadToolOutputSchema.parse({
     kind: "tool.saveLead",
     simulated: false,
-    lead_id: data.id as string,
+    lead_id: id,
     action: "inserted",
   });
 };

@@ -24,6 +24,7 @@ import {
 import { handleWidgetChatRequest } from "../my-app/src/app/api-handlers/widget/chat-handler";
 import { getWidgetConfig } from "../my-app/src/lib/widget-tenant";
 import { handleWidgetLeadRequest } from "./widget-lead-handler";
+import { POST as postAgentsRun } from "../my-app/src/app/api-handlers/agents/run/route";
 
 function normalizePathname(pathname: string): string {
   const trimmed = pathname.replace(/\/+$/, "");
@@ -36,6 +37,21 @@ export async function dispatchVercelApi(request: Request): Promise<Response> {
   const method = request.method;
 
   // --- More specific paths first ---
+  if (path === "/api/agents/run" && method === "POST") {
+    try {
+      return await postAgentsRun(request);
+    } catch (e) {
+      console.error("[api/agents/run]", e);
+      return new Response(
+        JSON.stringify({
+          ok: false,
+          error: { code: "INTERNAL", message: "Internal server error." },
+        }),
+        { status: 500, headers: { "Content-Type": "application/json" } }
+      );
+    }
+  }
+
   if (path === "/api/chat/lead" && method === "POST") {
     return handleChatLeadRequest(request);
   }
