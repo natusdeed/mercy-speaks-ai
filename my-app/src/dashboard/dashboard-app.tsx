@@ -10,6 +10,9 @@ import { ConversationDetailPage } from "@/dashboard/pages/conversation-detail-pa
 import { ConversationsPage } from "@/dashboard/pages/conversations-page";
 import { LeadsPage } from "@/dashboard/pages/leads-page";
 import { AgentOsMockPage } from "@/dashboard/pages/agent-os-mock-page";
+import { ApprovalsDemoPage } from "@/dashboard/pages/approvals-demo-page";
+import { LeadOpsDemoPage } from "@/dashboard/pages/lead-ops-demo-page";
+import { MissedRevenueDemoPage } from "@/dashboard/pages/missed-revenue-demo-page";
 
 export function DashboardApp() {
   return (
@@ -20,6 +23,9 @@ export function DashboardApp() {
           <Route element={<DashboardShell />}>
             <Route index element={<DashboardHomePage />} />
             <Route path="ai-employees" element={<AgentOsMockPage />} />
+            <Route path="lead-ops-demo" element={<LeadOpsDemoPage />} />
+            <Route path="missed-revenue-demo" element={<MissedRevenueDemoPage />} />
+            <Route path="approvals-demo" element={<ApprovalsDemoPage />} />
             <Route path="leads" element={<LeadsPage />} />
             <Route path="leads/:id" element={<LeadDetailPage />} />
             <Route path="conversations" element={<ConversationsPage />} />

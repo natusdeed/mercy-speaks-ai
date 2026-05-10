@@ -4,13 +4,16 @@ import {
   BookOpen,
   Bot,
   Calendar,
+  ClipboardCheck,
   LayoutDashboard,
   ListTodo,
   MessageSquare,
+  PiggyBank,
   Settings,
   SlidersHorizontal,
   Users,
   UserSquare2,
+  Waypoints,
 } from "lucide-react";
 
 export type NavItem = {
@@ -22,6 +25,9 @@ export type NavItem = {
 export const DASHBOARD_NAV: NavItem[] = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/dashboard/ai-employees", label: "AI Employees", icon: Bot },
+  { to: "/dashboard/lead-ops-demo", label: "Lead ops (demo)", icon: Waypoints },
+  { to: "/dashboard/missed-revenue-demo", label: "Missed revenue (demo)", icon: PiggyBank },
+  { to: "/dashboard/approvals-demo", label: "Approvals (demo)", icon: ClipboardCheck },
   { to: "/dashboard/leads", label: "Leads", icon: Users },
   { to: "/dashboard/conversations", label: "Conversations", icon: MessageSquare },
   { to: "/dashboard/appointments", label: "Appointments", icon: Calendar },
