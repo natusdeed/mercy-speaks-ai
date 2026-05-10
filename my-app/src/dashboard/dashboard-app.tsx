@@ -9,6 +9,7 @@ import { LeadDetailPage } from "@/dashboard/pages/lead-detail-page";
 import { ConversationDetailPage } from "@/dashboard/pages/conversation-detail-page";
 import { ConversationsPage } from "@/dashboard/pages/conversations-page";
 import { LeadsPage } from "@/dashboard/pages/leads-page";
+import { AgentOsMockPage } from "@/dashboard/pages/agent-os-mock-page";
 
 export function DashboardApp() {
   return (
@@ -18,6 +19,7 @@ export function DashboardApp() {
         <Route element={<AuthGate />}>
           <Route element={<DashboardShell />}>
             <Route index element={<DashboardHomePage />} />
+            <Route path="ai-employees" element={<AgentOsMockPage />} />
             <Route path="leads" element={<LeadsPage />} />
             <Route path="leads/:id" element={<LeadDetailPage />} />
             <Route path="conversations" element={<ConversationsPage />} />

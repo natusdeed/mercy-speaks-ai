@@ -2,6 +2,7 @@ import type { LucideIcon } from "lucide-react";
 import {
   BarChart3,
   BookOpen,
+  Bot,
   Calendar,
   LayoutDashboard,
   ListTodo,
@@ -20,6 +21,7 @@ export type NavItem = {
 
 export const DASHBOARD_NAV: NavItem[] = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { to: "/dashboard/ai-employees", label: "AI Employees", icon: Bot },
   { to: "/dashboard/leads", label: "Leads", icon: Users },
   { to: "/dashboard/conversations", label: "Conversations", icon: MessageSquare },
   { to: "/dashboard/appointments", label: "Appointments", icon: Calendar },
