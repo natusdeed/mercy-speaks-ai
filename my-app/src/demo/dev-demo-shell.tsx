@@ -2,6 +2,7 @@ import { Navigate, useRoutes } from "react-router-dom";
 import { AgentOsMockPage } from "@/dashboard/pages/agent-os-mock-page";
 import { ApprovalsDemoPage } from "@/dashboard/pages/approvals-demo-page";
 import { LeadOpsDemoPage } from "@/dashboard/pages/lead-ops-demo-page";
+import { CommandCenterMockPage } from "@/dashboard/pages/command-center-mock-page";
 import { MarketingSocialMockPage } from "@/dashboard/pages/marketing-social-mock-page";
 import { MissedRevenueDemoPage } from "@/dashboard/pages/missed-revenue-demo-page";
 import { dashboardCanvasClass } from "@/dashboard/lib/dashboard-styles";
@@ -20,6 +21,7 @@ export default function DevDemoShell() {
     { path: "missed-revenue", element: <MissedRevenueDemoPage /> },
     { path: "approvals", element: <ApprovalsDemoPage /> },
     { path: "marketing-social", element: <MarketingSocialMockPage /> },
+    { path: "command-center", element: <CommandCenterMockPage /> },
     { path: "*", element: <Navigate to="ai-employees" replace /> },
   ]);
 
