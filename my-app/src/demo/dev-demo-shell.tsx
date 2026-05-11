@@ -1,10 +1,11 @@
-import { Navigate, useRoutes } from "react-router-dom";
+import { Link, Navigate, useRoutes } from "react-router-dom";
 import { AgentOsMockPage } from "@/dashboard/pages/agent-os-mock-page";
 import { ApprovalsDemoPage } from "@/dashboard/pages/approvals-demo-page";
 import { LeadOpsDemoPage } from "@/dashboard/pages/lead-ops-demo-page";
 import { CommandCenterMockPage } from "@/dashboard/pages/command-center-mock-page";
 import { MarketingSocialMockPage } from "@/dashboard/pages/marketing-social-mock-page";
 import { MissedRevenueDemoPage } from "@/dashboard/pages/missed-revenue-demo-page";
+import { DemoHubPage } from "@/demo/demo-hub-page";
 import { dashboardCanvasClass } from "@/dashboard/lib/dashboard-styles";
 import { cn } from "@/lib/utils";
 import { FlaskConical } from "lucide-react";
@@ -15,14 +16,14 @@ import { FlaskConical } from "lucide-react";
  */
 export default function DevDemoShell() {
   const element = useRoutes([
-    { index: true, element: <Navigate to="ai-employees" replace /> },
+    { index: true, element: <DemoHubPage /> },
     { path: "ai-employees", element: <AgentOsMockPage /> },
     { path: "lead-ops", element: <LeadOpsDemoPage /> },
     { path: "missed-revenue", element: <MissedRevenueDemoPage /> },
     { path: "approvals", element: <ApprovalsDemoPage /> },
     { path: "marketing-social", element: <MarketingSocialMockPage /> },
     { path: "command-center", element: <CommandCenterMockPage /> },
-    { path: "*", element: <Navigate to="ai-employees" replace /> },
+    { path: "*", element: <Navigate to="/demo" replace /> },
   ]);
 
   return (
@@ -31,14 +32,25 @@ export default function DevDemoShell() {
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 md:flex-row md:px-4">
           <span className="inline-flex items-center gap-2 font-medium">
             <FlaskConical className="h-4 w-4 shrink-0 text-amber-300" aria-hidden />
-            Local dev preview — no sign-in. Static mock data only; not available in production builds.
+            <span>Local demo preview — mock data only.</span>
+            <span className="hidden text-amber-100/70 md:inline">
+              No sign-in, outbound actions, Supabase writes, or production wiring.
+            </span>
           </span>
-          <a
-            href="/"
-            className="shrink-0 rounded-md border border-zinc-600 bg-zinc-950/60 px-3 py-1 text-xs font-medium text-zinc-200 hover:border-zinc-500 hover:bg-zinc-900/80"
-          >
-            Back to site
-          </a>
+          <div className="flex shrink-0 flex-wrap items-center justify-center gap-2">
+            <Link
+              to="/demo"
+              className="rounded-md border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-xs font-medium text-cyan-100 hover:border-cyan-400/50 hover:bg-cyan-500/15"
+            >
+              Back to hub
+            </Link>
+            <a
+              href="/"
+              className="rounded-md border border-zinc-600 bg-zinc-950/60 px-3 py-1 text-xs font-medium text-zinc-200 hover:border-zinc-500 hover:bg-zinc-900/80"
+            >
+              Back to site
+            </a>
+          </div>
         </div>
       </div>
       <main className="mx-auto max-w-7xl px-4 py-8 md:px-8">{element}</main>
