@@ -19,6 +19,7 @@ import Services from './pages/Services';
 import Solutions from './app/solutions/page';
 import Results from './app/results/page';
 import TestimonialsPage from './app/testimonials/page';
+import AiEmployeeSystemPage from './app/ai-employee-system/page';
 import ServiceAIPhoneReceptionist from './pages/services/AIPhoneReceptionist';
 import ServiceAppointmentAutomation from './pages/services/AppointmentAutomation';
 import ServiceRAGData from './pages/services/RAGData';
@@ -120,6 +121,7 @@ function App() {
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/book-demo" element={<BookDemo />} />
+          <Route path="/ai-employee-system" element={<AiEmployeeSystemPage />} />
           <Route path="/services" element={<Services />} />
           <Route path="/solutions" element={<Solutions />} />
           <Route path="/roofing" element={<RoofingPage />} />

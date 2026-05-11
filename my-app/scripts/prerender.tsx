@@ -24,6 +24,7 @@ export const PRERENDER_PATHS: string[] = [
   "/portfolio",
   "/pricing",
   "/book-demo",
+  "/ai-employee-system",
   "/services",
   "/solutions",
   "/roofing",
