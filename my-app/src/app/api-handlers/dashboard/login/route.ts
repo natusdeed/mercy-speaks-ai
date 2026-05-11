@@ -11,7 +11,7 @@ import {
 } from "../../../../server/dashboard-auth-env";
 
 const bodySchema = z.object({
-  password: z.string().min(1, "Password is required."),
+  password: z.string().trim().min(1, "Password is required."),
   email: z
     .string()
     .trim()

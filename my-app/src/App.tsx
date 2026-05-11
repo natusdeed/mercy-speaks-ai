@@ -41,10 +41,26 @@ const LazyDashboardApp = lazy(() =>
   import('@/dashboard/dashboard-app').then((m) => ({ default: m.DashboardApp }))
 );
 
+/** True in Vite dev only; false in Node prerender (no `import.meta.env`) and in production client bundles. */
+const viteMetaEnv =
+  typeof import.meta !== "undefined" && import.meta.env ? import.meta.env : undefined;
+const isViteDev = viteMetaEnv?.DEV === true;
+
+/** Local-only mock previews; lazy chunk omitted when `isViteDev` is false at build time. */
+const LazyDevDemoShell = isViteDev ? lazy(() => import('@/demo/dev-demo-shell')) : null;
+
 function DashboardRouteFallback() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-slate-950 text-slate-400">
       <p className="text-sm">Loading dashboard…</p>
+    </div>
+  );
+}
+
+function DevDemoRouteFallback() {
+  return (
+    <div className="flex min-h-screen flex-col items-center justify-center bg-slate-950 text-slate-400">
+      <p className="text-sm">Loading dev preview…</p>
     </div>
   );
 }
@@ -87,6 +103,16 @@ function App() {
             </Suspense>
           }
         />
+        {isViteDev && LazyDevDemoShell ? (
+          <Route
+            path="/demo/*"
+            element={
+              <Suspense fallback={<DevDemoRouteFallback />}>
+                <LazyDevDemoShell />
+              </Suspense>
+            }
+          />
+        ) : null}
         <Route element={<PublicChrome />}>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />

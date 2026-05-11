@@ -8,7 +8,7 @@ import { useDashboardAuth } from "@/dashboard/contexts/dashboard-auth-context";
 
 const loginSchema = z.object({
   email: z.string().trim().min(1, "Work email is required.").email("Enter a valid work email."),
-  password: z.string().min(1, "Password is required."),
+  password: z.string().trim().min(1, "Password is required."),
 });
 
 export function DashboardLoginPage() {
