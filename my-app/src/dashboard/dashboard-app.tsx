@@ -12,6 +12,7 @@ import { LeadsPage } from "@/dashboard/pages/leads-page";
 import { AgentOsMockPage } from "@/dashboard/pages/agent-os-mock-page";
 import { ApprovalsDemoPage } from "@/dashboard/pages/approvals-demo-page";
 import { LeadOpsDemoPage } from "@/dashboard/pages/lead-ops-demo-page";
+import { MarketingSocialMockPage } from "@/dashboard/pages/marketing-social-mock-page";
 import { MissedRevenueDemoPage } from "@/dashboard/pages/missed-revenue-demo-page";
 
 export function DashboardApp() {
@@ -26,6 +27,7 @@ export function DashboardApp() {
             <Route path="lead-ops-demo" element={<LeadOpsDemoPage />} />
             <Route path="missed-revenue-demo" element={<MissedRevenueDemoPage />} />
             <Route path="approvals-demo" element={<ApprovalsDemoPage />} />
+            <Route path="marketing-social-demo" element={<MarketingSocialMockPage />} />
             <Route path="leads" element={<LeadsPage />} />
             <Route path="leads/:id" element={<LeadDetailPage />} />
             <Route path="conversations" element={<ConversationsPage />} />
