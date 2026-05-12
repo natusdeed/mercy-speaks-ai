@@ -7,6 +7,20 @@ A single index of every document used to sell, demo, onboard, and deliver the AI
 
 ---
 
+## Client assets folder (`client-assets/`)
+
+Polished **exports** and bundled materials live under **`client-assets/`** (see `client-assets/README.md`):
+
+| Subfolder | Purpose |
+|-----------|---------|
+| `client-assets/pdf/` | Final PDFs ready to send. |
+| `client-assets/docx/` | Editable Word versions. |
+| `client-assets/source-md/` | Markdown copies from the repo when you assemble a client bundle. |
+
+Repo-root `.md` files remain the usual authoring location; copy or export into `client-assets/` when you are ready to ship a specific package.
+
+---
+
 ## 1. Client-Facing Documents
 
 These are safe to send to prospects and clients.
