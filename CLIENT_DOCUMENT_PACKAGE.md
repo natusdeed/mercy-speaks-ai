@@ -24,10 +24,13 @@ These files live under `client-assets/pdf/` and `client-assets/docx/` and are re
 | Document | PDF | Word (DOCX) |
 |----------|-----|-------------|
 | One Page Offer Sheet | `client-assets/pdf/Revora_AI_One_Page_Offer_Sheet.pdf` | `client-assets/docx/Revora_AI_One_Page_Offer_Sheet.docx` |
-| 10-Minute Demo Script | `client-assets/pdf/Revora_AI_10_Minute_Demo_Script.pdf` | `client-assets/docx/Revora_AI_10_Minute_Demo_Script.docx` |
-| Client Proposal Template | `client-assets/pdf/Revora_AI_Client_Proposal_Template.pdf` | `client-assets/docx/Revora_AI_Client_Proposal_Template.docx` |
 | Client Setup Form | `client-assets/pdf/Revora_AI_Client_Setup_Form.pdf` | `client-assets/docx/Revora_AI_Client_Setup_Form.docx` |
 | Client Onboarding Workbook | `client-assets/pdf/Revora_AI_Client_Onboarding_Workbook.pdf` | `client-assets/docx/Revora_AI_Client_Onboarding_Workbook.docx` |
+| Client Proposal Template | `client-assets/pdf/Revora_AI_Client_Proposal_Template.pdf` | `client-assets/docx/Revora_AI_Client_Proposal_Template.docx` |
+| 10-Minute Demo Script | `client-assets/pdf/Revora_AI_10_Minute_Demo_Script.pdf` | `client-assets/docx/Revora_AI_10_Minute_Demo_Script.docx` |
+| Sales Outreach Kit | `client-assets/pdf/Revora_AI_Sales_Outreach_Kit.pdf` | `client-assets/docx/Revora_AI_Sales_Outreach_Kit.docx` |
+
+**Folder confirmation:** `client-assets/pdf/` and `client-assets/docx/` each include polished pairs for all six: **One Page Offer Sheet**, **Client Setup Form**, **Client Onboarding Workbook**, **Client Proposal Template**, **10-Minute Demo Script**, and **Sales Outreach Kit** (filenames `Revora_AI_*` as in the table).
 
 The **Client Setup Form** row is the polished companion to repo-root `CLIENT_SETUP_FORM.md` (same content, client-ready layout).
 
@@ -35,15 +38,18 @@ The **Client Proposal Template** row is the polished companion to repo-root `CLI
 
 The **10-Minute Demo Script** row is the polished companion to repo-root `10_MINUTE_DEMO_SCRIPT.md` (same content, client-ready layout).
 
+The **Sales Outreach Kit** row is the polished companion to repo-root `SALES_OUTREACH_KIT.md` (same content, client-ready layout).
+
 ### Polished asset checklist (`client-assets/pdf/` + `client-assets/docx/`)
 
 As of this index, the polished export pairs present under `client-assets/` are:
 
 - **One Page Offer Sheet** — PDF and DOCX (`Revora_AI_One_Page_Offer_Sheet.*`)
-- **10-Minute Demo Script** — PDF and DOCX (`Revora_AI_10_Minute_Demo_Script.*`)
 - **Client Setup Form** — PDF and DOCX (`Revora_AI_Client_Setup_Form.*`)
 - **Client Onboarding Workbook** — PDF and DOCX (`Revora_AI_Client_Onboarding_Workbook.*`)
 - **Client Proposal Template** — PDF and DOCX (`Revora_AI_Client_Proposal_Template.*`)
+- **10-Minute Demo Script** — PDF and DOCX (`Revora_AI_10_Minute_Demo_Script.*`)
+- **Sales Outreach Kit** — PDF and DOCX (`Revora_AI_Sales_Outreach_Kit.*`)
 
 Repo-root `.md` files remain the usual authoring location; copy or export into `client-assets/` when you are ready to ship a specific package.
 
