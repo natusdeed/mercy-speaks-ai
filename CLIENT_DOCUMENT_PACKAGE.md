@@ -17,6 +17,18 @@ Polished **exports** and bundled materials live under **`client-assets/`** (see 
 | `client-assets/docx/` | Editable Word versions. |
 | `client-assets/source-md/` | Markdown copies from the repo when you assemble a client bundle. |
 
+### Polished exports (PDF + DOCX)
+
+These files live under `client-assets/pdf/` and `client-assets/docx/` and are ready to email or print:
+
+| Document | PDF | Word (DOCX) |
+|----------|-----|-------------|
+| One Page Offer Sheet | `client-assets/pdf/Revora_AI_One_Page_Offer_Sheet.pdf` | `client-assets/docx/Revora_AI_One_Page_Offer_Sheet.docx` |
+| Client Onboarding Workbook | `client-assets/pdf/Revora_AI_Client_Onboarding_Workbook.pdf` | `client-assets/docx/Revora_AI_Client_Onboarding_Workbook.docx` |
+| Client Setup Form | `client-assets/pdf/Revora_AI_Client_Setup_Form.pdf` | `client-assets/docx/Revora_AI_Client_Setup_Form.docx` |
+
+The **Client Setup Form** row is the polished companion to repo-root `CLIENT_SETUP_FORM.md` (same content, client-ready layout).
+
 Repo-root `.md` files remain the usual authoring location; copy or export into `client-assets/` when you are ready to ship a specific package.
 
 ---
