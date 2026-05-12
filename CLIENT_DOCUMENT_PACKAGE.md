@@ -24,6 +24,7 @@ These files live under `client-assets/pdf/` and `client-assets/docx/` and are re
 | Document | PDF | Word (DOCX) |
 |----------|-----|-------------|
 | One Page Offer Sheet | `client-assets/pdf/Revora_AI_One_Page_Offer_Sheet.pdf` | `client-assets/docx/Revora_AI_One_Page_Offer_Sheet.docx` |
+| 10-Minute Demo Script | `client-assets/pdf/Revora_AI_10_Minute_Demo_Script.pdf` | `client-assets/docx/Revora_AI_10_Minute_Demo_Script.docx` |
 | Client Proposal Template | `client-assets/pdf/Revora_AI_Client_Proposal_Template.pdf` | `client-assets/docx/Revora_AI_Client_Proposal_Template.docx` |
 | Client Setup Form | `client-assets/pdf/Revora_AI_Client_Setup_Form.pdf` | `client-assets/docx/Revora_AI_Client_Setup_Form.docx` |
 | Client Onboarding Workbook | `client-assets/pdf/Revora_AI_Client_Onboarding_Workbook.pdf` | `client-assets/docx/Revora_AI_Client_Onboarding_Workbook.docx` |
@@ -32,11 +33,14 @@ The **Client Setup Form** row is the polished companion to repo-root `CLIENT_SET
 
 The **Client Proposal Template** row is the polished companion to repo-root `CLIENT_PROPOSAL_TEMPLATE.md` (same content, client-ready layout).
 
+The **10-Minute Demo Script** row is the polished companion to repo-root `10_MINUTE_DEMO_SCRIPT.md` (same content, client-ready layout).
+
 ### Polished asset checklist (`client-assets/pdf/` + `client-assets/docx/`)
 
 As of this index, the polished export pairs present under `client-assets/` are:
 
 - **One Page Offer Sheet** — PDF and DOCX (`Revora_AI_One_Page_Offer_Sheet.*`)
+- **10-Minute Demo Script** — PDF and DOCX (`Revora_AI_10_Minute_Demo_Script.*`)
 - **Client Setup Form** — PDF and DOCX (`Revora_AI_Client_Setup_Form.*`)
 - **Client Onboarding Workbook** — PDF and DOCX (`Revora_AI_Client_Onboarding_Workbook.*`)
 - **Client Proposal Template** — PDF and DOCX (`Revora_AI_Client_Proposal_Template.*`)
