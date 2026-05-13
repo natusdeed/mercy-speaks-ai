@@ -1,9 +1,14 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { DashboardPageHeader } from "@/dashboard/components/dashboard-page-header";
+import { OpsEmptyState } from "@/dashboard/components/ops-empty-state";
+import { OpsErrorState } from "@/dashboard/components/ops-error-state";
+import { OpsKpiGrid } from "@/dashboard/components/ops-kpi-grid";
+import { OpsLiveReadonlyBadge } from "@/dashboard/components/ops-live-readonly-badge";
+import { OpsTableToolbar } from "@/dashboard/components/ops-table-toolbar";
 import { useDashboardAuth } from "@/dashboard/contexts/dashboard-auth-context";
 import { fetchOpsTasks, type OpsTasksPayload } from "@/dashboard/lib/dashboard-ops-read-api";
 import {
@@ -14,9 +19,11 @@ import {
   dashboardTableTdClass,
   dashboardTableThClass,
 } from "@/dashboard/lib/dashboard-styles";
+import { matchesOpsSearch, matchesOpsStatusFilter } from "@/dashboard/lib/ops-client-filters";
+import { buildTaskKpis, stringFilterOptions } from "@/dashboard/lib/ops-kpi-stats";
 import { formatOpsDateTime } from "@/dashboard/lib/ops-format";
 import { cn } from "@/lib/utils";
-import { Activity, ListTodo } from "lucide-react";
+import { ListTodo } from "lucide-react";
 
 type Row = OpsTasksPayload["tasks"][number];
 
@@ -26,6 +33,8 @@ export function RealTasksPage() {
   const [rows, setRows] = useState<Row[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState("");
 
   const load = useCallback(async () => {
     const token = getAccessToken();
@@ -50,25 +59,32 @@ export function RealTasksPage() {
     void load();
   }, [load]);
 
+  const filtered = useMemo(
+    () =>
+      rows.filter(
+        (row) =>
+          matchesOpsStatusFilter(statusFilter, row.status) &&
+          matchesOpsSearch(search, [row.title, row.status, row.priority, row.assigned_to, row.id])
+      ),
+    [rows, search, statusFilter]
+  );
+
+  const kpis = useMemo(() => buildTaskKpis(rows), [rows]);
+  const statusOptions = useMemo(() => stringFilterOptions(rows.map((r) => r.status)), [rows]);
+  const filteredView = Boolean(search.trim() || statusFilter);
+
   return (
     <div className="space-y-8">
       <DashboardPageHeader
         eyebrow="Phase 4 · Live data (read-only)"
         title="Follow-up tasks"
         description="Operational follow-ups created by your AI employees: titles, workflow state, priority, due dates, and assignee hints. No task mutations from this screen."
-        actions={
-          <span className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-xs font-medium text-cyan-100">
-            <Activity className="h-3.5 w-3.5 text-cyan-200" aria-hidden />
-            Read-only
-          </span>
-        }
+        actions={<OpsLiveReadonlyBadge />}
       />
 
-      {error ? (
-        <Card className="border-rose-500/30 bg-rose-950/30">
-          <CardContent className="p-4 text-sm text-rose-100">{error}</CardContent>
-        </Card>
-      ) : null}
+      {error ? <OpsErrorState message={error} onRetry={() => void load()} retrying={loading} /> : null}
+
+      <OpsKpiGrid items={kpis} loading={loading && !error} />
 
       <Card
         className={cn(
@@ -84,39 +100,62 @@ export function RealTasksPage() {
             </div>
             {loading ? <span className="text-xs text-zinc-500">Loading…</span> : null}
           </div>
+
+          <div className="border-b border-zinc-800/80 p-2">
+            <OpsTableToolbar
+              searchId="ops-tasks-search"
+              searchPlaceholder="Title, status, priority, assignee…"
+              searchValue={search}
+              onSearchChange={setSearch}
+              statusFilterId="ops-tasks-status"
+              statusValue={statusFilter}
+              statusOptions={statusOptions}
+              onStatusChange={setStatusFilter}
+              totalCount={rows.length}
+              visibleCount={filtered.length}
+              loading={loading}
+            />
+          </div>
+
           <div className={cn("overflow-x-auto p-2", dashboardPanelClass)}>
-            <table className={dashboardTableClass}>
-              <thead>
-                <tr className={dashboardTableHeadRowClass}>
-                  <th className={dashboardTableThClass}>Title</th>
-                  <th className={dashboardTableThClass}>Status</th>
-                  <th className={dashboardTableThClass}>Priority</th>
-                  <th className={dashboardTableThClass}>Due</th>
-                  <th className={dashboardTableThClass}>Assigned to</th>
-                </tr>
-              </thead>
-              <tbody>
-                {!loading && rows.length === 0 ? (
-                  <tr className={dashboardTableBodyRowClass}>
-                    <td className={cn(dashboardTableTdClass, "text-zinc-500")} colSpan={5}>
-                      No tasks returned.
-                    </td>
+            {!loading && filtered.length === 0 ? (
+              <OpsEmptyState
+                icon={ListTodo}
+                filtered={filteredView && rows.length > 0}
+                title={filteredView && rows.length > 0 ? "No tasks match your filters" : "No tasks yet"}
+                description={
+                  filteredView && rows.length > 0
+                    ? "Try clearing search or choosing a different status. Filters are client-side only and never change Supabase."
+                    : "When your AI employees create follow-ups, they will appear here. This screen is live read-only — no task mutations."
+                }
+              />
+            ) : (
+              <table className={dashboardTableClass}>
+                <thead>
+                  <tr className={dashboardTableHeadRowClass}>
+                    <th className={dashboardTableThClass}>Title</th>
+                    <th className={dashboardTableThClass}>Status</th>
+                    <th className={dashboardTableThClass}>Priority</th>
+                    <th className={dashboardTableThClass}>Due</th>
+                    <th className={dashboardTableThClass}>Assigned to</th>
                   </tr>
-                ) : null}
-                {rows.map((row) => (
-                  <tr key={row.id} className={dashboardTableBodyRowClass}>
-                    <td className={dashboardTableTdClass}>
-                      <div className="font-medium text-slate-100">{row.title}</div>
-                      <div className="font-mono text-[11px] text-zinc-500">{row.id}</div>
-                    </td>
-                    <td className={dashboardTableTdClass}>{row.status}</td>
-                    <td className={dashboardTableTdClass}>{row.priority}</td>
-                    <td className={dashboardTableTdClass}>{formatOpsDateTime(row.due_at)}</td>
-                    <td className={dashboardTableTdClass}>{row.assigned_to?.trim() || "—"}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {filtered.map((row) => (
+                    <tr key={row.id} className={dashboardTableBodyRowClass}>
+                      <td className={dashboardTableTdClass}>
+                        <div className="font-medium text-slate-100">{row.title}</div>
+                        <div className="font-mono text-[11px] text-zinc-500">{row.id}</div>
+                      </td>
+                      <td className={dashboardTableTdClass}>{row.status}</td>
+                      <td className={dashboardTableTdClass}>{row.priority}</td>
+                      <td className={dashboardTableTdClass}>{formatOpsDateTime(row.due_at)}</td>
+                      <td className={dashboardTableTdClass}>{row.assigned_to?.trim() || "—"}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
           </div>
         </CardContent>
       </Card>

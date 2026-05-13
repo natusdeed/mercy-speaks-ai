@@ -1,9 +1,14 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { DashboardPageHeader } from "@/dashboard/components/dashboard-page-header";
+import { OpsEmptyState } from "@/dashboard/components/ops-empty-state";
+import { OpsErrorState } from "@/dashboard/components/ops-error-state";
+import { OpsKpiGrid } from "@/dashboard/components/ops-kpi-grid";
+import { OpsLiveReadonlyBadge } from "@/dashboard/components/ops-live-readonly-badge";
+import { OpsTableToolbar } from "@/dashboard/components/ops-table-toolbar";
 import { useDashboardAuth } from "@/dashboard/contexts/dashboard-auth-context";
 import { fetchOpsAgentRuns, type OpsAgentRunsPayload } from "@/dashboard/lib/dashboard-ops-read-api";
 import {
@@ -14,9 +19,11 @@ import {
   dashboardTableTdClass,
   dashboardTableThClass,
 } from "@/dashboard/lib/dashboard-styles";
+import { matchesOpsSearch, matchesOpsStatusFilter } from "@/dashboard/lib/ops-client-filters";
+import { buildAgentRunKpis, stringFilterOptions } from "@/dashboard/lib/ops-kpi-stats";
 import { formatOpsDateTime } from "@/dashboard/lib/ops-format";
 import { cn } from "@/lib/utils";
-import { Activity, Bot } from "lucide-react";
+import { Bot } from "lucide-react";
 
 type Row = OpsAgentRunsPayload["agent_runs"][number];
 
@@ -31,6 +38,8 @@ export function RealAgentRunsPage() {
   const [rows, setRows] = useState<Row[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState("");
 
   const load = useCallback(async () => {
     const token = getAccessToken();
@@ -55,25 +64,32 @@ export function RealAgentRunsPage() {
     void load();
   }, [load]);
 
+  const filtered = useMemo(
+    () =>
+      rows.filter(
+        (row) =>
+          matchesOpsStatusFilter(statusFilter, row.status) &&
+          matchesOpsSearch(search, [row.agent_name, row.status, row.trigger_source, row.id])
+      ),
+    [rows, search, statusFilter]
+  );
+
+  const kpis = useMemo(() => buildAgentRunKpis(rows), [rows]);
+  const statusOptions = useMemo(() => stringFilterOptions(rows.map((r) => r.status)), [rows]);
+  const filteredView = Boolean(search.trim() || statusFilter);
+
   return (
     <div className="space-y-8">
       <DashboardPageHeader
         eyebrow="Phase 4 · Live data (read-only)"
         title="AI employee runs"
         description="Recent orchestration runs: which agent executed, how it was triggered, lifecycle status, and wall-clock duration when recorded."
-        actions={
-          <span className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-xs font-medium text-cyan-100">
-            <Activity className="h-3.5 w-3.5 text-cyan-200" aria-hidden />
-            Read-only
-          </span>
-        }
+        actions={<OpsLiveReadonlyBadge />}
       />
 
-      {error ? (
-        <Card className="border-rose-500/30 bg-rose-950/30">
-          <CardContent className="p-4 text-sm text-rose-100">{error}</CardContent>
-        </Card>
-      ) : null}
+      {error ? <OpsErrorState message={error} onRetry={() => void load()} retrying={loading} /> : null}
+
+      <OpsKpiGrid items={kpis} loading={loading && !error} />
 
       <Card
         className={cn(
@@ -89,39 +105,62 @@ export function RealAgentRunsPage() {
             </div>
             {loading ? <span className="text-xs text-zinc-500">Loading…</span> : null}
           </div>
+
+          <div className="border-b border-zinc-800/80 p-2">
+            <OpsTableToolbar
+              searchId="ops-agent-runs-search"
+              searchPlaceholder="Agent, status, trigger, id…"
+              searchValue={search}
+              onSearchChange={setSearch}
+              statusFilterId="ops-agent-runs-status"
+              statusValue={statusFilter}
+              statusOptions={statusOptions}
+              onStatusChange={setStatusFilter}
+              totalCount={rows.length}
+              visibleCount={filtered.length}
+              loading={loading}
+            />
+          </div>
+
           <div className={cn("overflow-x-auto p-2", dashboardPanelClass)}>
-            <table className={dashboardTableClass}>
-              <thead>
-                <tr className={dashboardTableHeadRowClass}>
-                  <th className={dashboardTableThClass}>Agent</th>
-                  <th className={dashboardTableThClass}>Status</th>
-                  <th className={dashboardTableThClass}>Trigger</th>
-                  <th className={dashboardTableThClass}>Started</th>
-                  <th className={dashboardTableThClass}>Duration</th>
-                </tr>
-              </thead>
-              <tbody>
-                {!loading && rows.length === 0 ? (
-                  <tr className={dashboardTableBodyRowClass}>
-                    <td className={cn(dashboardTableTdClass, "text-zinc-500")} colSpan={5}>
-                      No agent runs returned.
-                    </td>
+            {!loading && filtered.length === 0 ? (
+              <OpsEmptyState
+                icon={Bot}
+                filtered={filteredView && rows.length > 0}
+                title={filteredView && rows.length > 0 ? "No runs match your filters" : "No agent runs yet"}
+                description={
+                  filteredView && rows.length > 0
+                    ? "Try clearing search or choosing a different status. Filters are client-side only and never change Supabase."
+                    : "When your AI employees execute workflows, orchestration runs will appear here. This screen is live read-only — no reruns or cancellations."
+                }
+              />
+            ) : (
+              <table className={dashboardTableClass}>
+                <thead>
+                  <tr className={dashboardTableHeadRowClass}>
+                    <th className={dashboardTableThClass}>Agent</th>
+                    <th className={dashboardTableThClass}>Status</th>
+                    <th className={dashboardTableThClass}>Trigger</th>
+                    <th className={dashboardTableThClass}>Started</th>
+                    <th className={dashboardTableThClass}>Duration</th>
                   </tr>
-                ) : null}
-                {rows.map((row) => (
-                  <tr key={row.id} className={dashboardTableBodyRowClass}>
-                    <td className={dashboardTableTdClass}>
-                      <div className="font-medium text-slate-100">{row.agent_name}</div>
-                      <div className="font-mono text-[11px] text-zinc-500">{row.id}</div>
-                    </td>
-                    <td className={dashboardTableTdClass}>{row.status}</td>
-                    <td className={dashboardTableTdClass}>{row.trigger_source}</td>
-                    <td className={dashboardTableTdClass}>{formatOpsDateTime(row.started_at)}</td>
-                    <td className={dashboardTableTdClass}>{fmtMs(row.duration_ms)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {filtered.map((row) => (
+                    <tr key={row.id} className={dashboardTableBodyRowClass}>
+                      <td className={dashboardTableTdClass}>
+                        <div className="font-medium text-slate-100">{row.agent_name}</div>
+                        <div className="font-mono text-[11px] text-zinc-500">{row.id}</div>
+                      </td>
+                      <td className={dashboardTableTdClass}>{row.status}</td>
+                      <td className={dashboardTableTdClass}>{row.trigger_source}</td>
+                      <td className={dashboardTableTdClass}>{formatOpsDateTime(row.started_at)}</td>
+                      <td className={dashboardTableTdClass}>{fmtMs(row.duration_ms)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
           </div>
         </CardContent>
       </Card>
