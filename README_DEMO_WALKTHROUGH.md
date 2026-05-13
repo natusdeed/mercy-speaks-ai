@@ -12,13 +12,13 @@ or recorded demo session.
 | --- | --- |
 | Phase 2 | Verified |
 | Phase 3 — simulate mode | Verified |
-| Phase 3 — real-write mode | Partially blocked by Supabase migration |
+| Phase 3 — real-write mode | Verified (migration applied; six-tool smoke passed) |
 | Phase 4 — mock / demo pages | Built |
 
-The database blocker is fully documented in
-[`PHASE_3_DATABASE_BLOCKER.md`](./PHASE_3_DATABASE_BLOCKER.md) in the repo root.
-Until that migration applies cleanly, real-write workflows stay gated and the
-demo pages remain mock-only.
+Phase 3 database completion and sign-off are recorded in
+[`PHASE_3_DATABASE_BLOCKER.md`](./PHASE_3_DATABASE_BLOCKER.md) (status: **RESOLVED**).
+Real-write agent tools against Supabase are verified; `/demo/*` preview pages
+remain **mock-only** by design until Phase 4 production dashboard wiring is started.
 
 ---
 
@@ -90,38 +90,43 @@ These pieces are live and working today:
   simulate mode).
 - **AI employee simulate mode** — every AI employee lane runs in simulate mode
   with verified outputs (bookings, follow-ups, recovery drafts, etc.).
+- **Phase 3 real-write smoke (Supabase)** — all six agent tools verified against
+  the live schema: `saveLead`, `qualifyLead`, `createBookingIntent`,
+  `draftFollowUp`, `sendOwnerAlert`, `logMissedRevenue`.
 - **Mock dashboard UI** — every page under `/demo/*` is built, styled, and
   navigable.
 
 ---
 
-## 6. What Is Still Blocked
+## 6. What Is Still Deferred
 
-These pieces are gated until the database blocker is resolved:
+These pieces are intentionally not started or remain mock-only:
 
-- Full real-database workflow until `supabase/migrations/005_phase3_completion.sql`
-  applies cleanly against the live Supabase project.
-- Live writes for bookings, tasks, approvals, and missed-revenue rows.
-- Production dashboard DB wiring (replacing mock data with live reads).
+- **Phase 4 production dashboard wiring** — replacing `/demo/*` mock data with
+  live reads from Supabase (deferred until Phase 4 is explicitly kicked off).
+- **Demo pages** — `/demo/*` continues to use mock data only; they do not read
+  or write Supabase in the current product wiring.
 
-See [`PHASE_3_DATABASE_BLOCKER.md`](./PHASE_3_DATABASE_BLOCKER.md) for the
-exact migration error, attempted fixes, and current status.
+The Phase 3 database blocker is **resolved**; see
+[`PHASE_3_DATABASE_BLOCKER.md`](./PHASE_3_DATABASE_BLOCKER.md) for the verification
+checklist and historical notes.
 
 ---
 
 ## 7. Safety Rules
 
-These rules apply to every demo and every environment until the database
-blocker is fixed and signed off:
+These rules apply to every demo and every environment (Phase 3 DB is signed off;
+Phase 4 production wiring is still deferred):
 
 - **No auto email/SMS/social posting** — every outbound channel stays disabled.
 - **Human approval required** — any high-stakes action surfaces in
   `/demo/approvals` first.
 - **Mock data only on demo pages** — `/demo/*` never reads or writes Supabase,
   ElevenLabs, or any external service.
-- **Do not start live Phase 4 wiring** — production database wiring stays
-  paused until the migration blocker is fixed and verified.
+- **Do not start live Phase 4 wiring** — production dashboard DB wiring stays
+  paused until Phase 4 is explicitly started.
 
 If a prospect asks "is this live data?" the honest answer during a demo is:
-"This is a mock preview of the dashboard. The AI agent itself is fully live;
-the dashboard goes live the moment the database migration is signed off."
+"This is a mock preview of the dashboard. The AI agent is live and Phase 3
+database writes for the agent tools are verified; the owner dashboard goes live
+when we wire Phase 4 reads into the product."

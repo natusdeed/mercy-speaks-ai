@@ -1,42 +1,41 @@
 # Phase 3 — database blocker
 
-## Status
+## Status: **RESOLVED**
 
-1. **Phase 2 is fully verified.**
+The Phase 3 completion migration is applied on the target Supabase project, verification passed, and the Phase 3 real-write smoke suite passed end-to-end. **Phase 4 production wiring is still deferred** by project policy until explicitly started; this document records engineering state only and does not change application behavior.
 
-2. **Phase 3 simulate verification passed.**
+---
 
-3. **Phase 3 real-write smoke partially passed.**
+## Resolution sign-off (verified)
 
-4. **`saveLead` and `qualifyLead` work** against the current database.
+The following were confirmed after apply:
 
-5. **`createBookingIntent`, `draftFollowUp`, `sendOwnerAlert`, and `logMissedRevenue` are blocked** because these tables are missing in `public`:
+| Check | Result |
+| --- | --- |
+| `supabase/migrations/005_phase3_completion.sql` | Applied |
+| `supabase/migrations/005_phase3_completion.verify.sql` | Passed |
+| `public.organizations` | Exists |
+| `public.bookings` | Exists |
+| `public.tasks` | Exists |
+| `public.approvals` | Exists |
+| `public.missed_revenue_events` | Exists |
+| `public.calls` | Exists |
+| `public.leads.metadata` | Exists, type **JSONB** |
 
-   - `bookings`
-   - `tasks`
-   - `approvals`
-   - `missed_revenue_events`
+**Phase 3 real-write smoke test — all six tools passed:**
 
-6. **`leads.metadata` is also missing** (expected type: `jsonb` once the completion migration is applied).
+1. `saveLead`
+2. `qualifyLead`
+3. `createBookingIntent`
+4. `draftFollowUp`
+5. `sendOwnerAlert`
+6. `logMissedRevenue`
 
-## Migration files
+---
 
-`supabase/migrations/005_phase3_completion.sql` and `supabase/migrations/005_phase3_completion.verify.sql` were created to add the missing schema safely (additive / idempotent). They were **not successfully applied** in-repo because **`DATABASE_URL` / Supabase connectivity failed** (e.g. DNS or direct DB host not reachable from the machine used to run the migration).
+## Historical context (pre-resolution)
 
-## Gate before Phase 4
-
-**Do not start Phase 4 production wiring** until:
-
-- the completion migration is **applied** to the target database, and  
-- the **Phase 3 real-write smoke test** passes end-to-end.
-
-## Next fix attempt
-
-Prefer one of:
-
-- **Supabase SQL Editor** (paste and run the migration, then the verify script), or  
-- a **`DATABASE_URL` that uses the Supabase pooler** (or another connection string that resolves and connects from your network), or  
-- **another working network / environment** where `psql`, `pg`, or the SQL Editor can reach the database.
+Previously, Phase 3 real-write was **partially** verified: `saveLead` and `qualifyLead` worked, while `createBookingIntent`, `draftFollowUp`, `sendOwnerAlert`, and `logMissedRevenue` failed because `bookings`, `tasks`, `approvals`, `missed_revenue_events`, and `leads.metadata` (JSONB) were missing until `005_phase3_completion.sql` applied. In some environments, `DATABASE_URL` / direct DB connectivity (DNS, pooler, or network) blocked running the migration locally; **Supabase SQL Editor** or a reachable pooler connection string was the recommended path.
 
 ---
 

@@ -74,7 +74,7 @@ These are for our team only. **Do not share with clients.**
 
 | Document | Status | Purpose |
 |---|---|---|
-| `PHASE_3_DATABASE_BLOCKER.md` | Internal only | Internal engineering notes. Not client-safe. |
+| `PHASE_3_DATABASE_BLOCKER.md` | Internal only — **resolved** | Internal engineering log (Phase 3 DB + real-write smoke). Status: resolved; not client-safe. |
 | `README_DEMO_WALKTHROUGH.md` | Ready | Internal map for navigating the live demo pages. |
 | `PRODUCT_PRESENTATION_PACKAGE.md` | Ready | Internal slide outline and talking points for the full product pitch. |
 
@@ -91,7 +91,7 @@ A simple, repeatable flow from first contact to delivery:
 | 3 | `CLIENT_SETUP_FORM.md` | Send to the client once they show interest. They fill it out. |
 | 4 | `CLIENT_ONBOARDING_CHECKLIST.md` | Use internally to track and complete their setup. |
 | 5 | `README_DEMO_WALKTHROUGH.md` | Use to navigate the live demo screens with confidence. |
-| 6 | `PHASE_3_DATABASE_BLOCKER.md` | Internal reference only. Do not send to clients. |
+| 6 | `PHASE_3_DATABASE_BLOCKER.md` | Internal reference only (blocker **resolved**; history + verification). Do not send to clients. |
 
 ---
 
