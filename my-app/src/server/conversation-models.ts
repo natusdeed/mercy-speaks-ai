@@ -7,7 +7,7 @@ import { parseLeadIdFromPathname } from "./lead-models";
 
 /** Columns for dashboard conversation list (no heavy transcript). */
 export const CONVERSATION_DB_SELECT_LIST =
-  "id, tenant_id, visitor_id, started_at, updated_at, channel, contact_name, last_message_preview, last_message_at, status, intent, outcome, metadata" as const;
+  "id, organization_id, created_at, channel, status" as const;
 
 /** Full row for conversation detail. */
 export const CONVERSATION_DB_SELECT_DETAIL =

@@ -3,7 +3,7 @@ import { LEAD_PRIORITIES, LEAD_STATUSES } from "../lib/dashboard-leads-types";
 
 /** Columns returned by dashboard lead APIs (matches Supabase `leads` table). */
 export const LEAD_DB_SELECT =
-  "id, tenant_id, conversation_id, first_name, last_name, name, business_name, email, phone, service_interest, message, source, status, priority, estimated_value, notes, assigned_to, created_at, updated_at, metadata" as const;
+  "id, organization_id, client_id, name, email, phone, service, intent, preferred_time, source, status, notes, metadata, created_at" as const;
 
 export const leadStatusSchema = z.enum(LEAD_STATUSES);
 export const leadPrioritySchema = z.enum(LEAD_PRIORITIES);

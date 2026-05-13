@@ -2,55 +2,43 @@ import type { LeadDto, LeadPriority, LeadStatus } from "../lib/dashboard-leads-t
 
 export type LeadRowDb = {
   id: string;
-  tenant_id: string | null;
-  conversation_id: string | null;
-  first_name: string | null;
-  last_name: string | null;
+  organization_id: string | null;
+  client_id: string | null;
   name: string | null;
-  business_name: string | null;
   email: string;
   phone: string;
-  service_interest: string | null;
-  message: string | null;
+  service: string | null;
+  intent: string | null;
+  preferred_time: string | null;
   source: string;
   status: string;
-  priority: string;
-  estimated_value: number | string | null;
   notes: string | null;
-  assigned_to: string | null;
-  created_at: string;
-  updated_at: string;
   metadata: Record<string, unknown> | null;
+  created_at: string;
 };
 
 export function mapLeadRow(row: LeadRowDb): LeadDto {
-  const ev = row.estimated_value;
-  const num =
-    ev === null || ev === undefined
-      ? null
-      : typeof ev === "number"
-        ? ev
-        : Number(ev);
+  const displayName = row.name?.trim() || null;
   return {
     id: row.id,
-    tenantId: row.tenant_id,
-    conversationId: row.conversation_id,
-    firstName: row.first_name,
-    lastName: row.last_name,
-    name: row.name,
-    businessName: row.business_name,
+    tenantId: row.organization_id,
+    conversationId: null,
+    firstName: displayName,
+    lastName: null,
+    name: displayName,
+    businessName: null,
     email: row.email,
     phone: row.phone,
-    serviceInterest: row.service_interest,
-    message: row.message,
+    serviceInterest: row.service,
+    message: row.notes?.trim() || null,
     source: row.source,
     status: row.status as LeadStatus,
-    priority: row.priority as LeadPriority,
-    estimatedValue: num !== null && Number.isFinite(num) ? num : null,
+    priority: "medium" as LeadPriority,
+    estimatedValue: null,
     notes: row.notes,
-    assignedTo: row.assigned_to,
+    assignedTo: null,
     createdAt: row.created_at,
-    updatedAt: row.updated_at,
+    updatedAt: row.created_at,
     metadata: row.metadata && typeof row.metadata === "object" ? row.metadata : {},
   };
 }

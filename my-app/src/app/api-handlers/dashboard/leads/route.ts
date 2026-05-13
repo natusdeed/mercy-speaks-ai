@@ -6,9 +6,7 @@ import {
   LEAD_DB_SELECT,
 } from "../../../../server/lead-models";
 import {
-  LEAD_PRIORITIES,
   LEAD_STATUSES,
-  type LeadPriority,
   type LeadStatus,
 } from "../../../../lib/dashboard-leads-types";
 
@@ -32,7 +30,6 @@ export async function GET(request: Request) {
   const url = new URL(request.url);
   const qRaw = url.searchParams.get("q")?.trim() ?? "";
   const statusFilter = url.searchParams.get("status")?.trim() ?? "";
-  const priorityFilter = url.searchParams.get("priority")?.trim() ?? "";
   const limit = Math.min(100, Math.max(1, Number(url.searchParams.get("limit") ?? "50") || 50));
   const offset = Math.max(0, Number(url.searchParams.get("offset") ?? "0") || 0);
 
@@ -45,15 +42,11 @@ export async function GET(request: Request) {
   if (statusFilter && LEAD_STATUSES.includes(statusFilter as LeadStatus)) {
     query = query.eq("status", statusFilter);
   }
-  if (priorityFilter && LEAD_PRIORITIES.includes(priorityFilter as LeadPriority)) {
-    query = query.eq("priority", priorityFilter);
-  }
-
   const q = sanitizeIlike(qRaw);
   if (q.length > 0) {
     const pattern = `%${q}%`;
     query = query.or(
-      `email.ilike.${pattern},phone.ilike.${pattern},name.ilike.${pattern},business_name.ilike.${pattern},first_name.ilike.${pattern},last_name.ilike.${pattern}`
+      `name.ilike.${pattern},email.ilike.${pattern},phone.ilike.${pattern},service.ilike.${pattern},source.ilike.${pattern},status.ilike.${pattern}`
     );
   }
 

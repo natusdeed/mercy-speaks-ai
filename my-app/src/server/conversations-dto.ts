@@ -13,18 +13,10 @@ import type {
 
 export type ConversationRowDbList = {
   id: string;
-  tenant_id: string;
-  visitor_id: string | null;
-  started_at: string;
-  updated_at: string;
+  organization_id: string | null;
+  created_at: string;
   channel: string;
-  contact_name: string | null;
-  last_message_preview: string | null;
-  last_message_at: string | null;
   status: string;
-  intent: string | null;
-  outcome: string | null;
-  metadata: Record<string, unknown> | null;
 };
 
 export type ConversationRowDbDetail = ConversationRowDbList & {
@@ -32,6 +24,7 @@ export type ConversationRowDbDetail = ConversationRowDbList & {
   ai_summary: string | null;
   qualification_result: string | null;
   internal_notes: string | null;
+  metadata: Record<string, unknown> | null;
 };
 
 export type LeadLinkRowDb = {
@@ -80,22 +73,6 @@ export function parseTranscript(raw: unknown): TranscriptTurn[] {
   return out;
 }
 
-function lastActivityAt(row: ConversationRowDbList): string {
-  return row.last_message_at ?? row.updated_at ?? row.started_at;
-}
-
-function contactNameFrom(row: ConversationRowDbList, lead: LeadLinkRowDb | null): string {
-  const explicit = row.contact_name?.trim();
-  if (explicit) return explicit;
-  if (lead) {
-    const n = displayNameFromLead(lead);
-    if (n !== "—") return n;
-  }
-  const vid = row.visitor_id?.trim();
-  if (vid) return `Visitor ${vid.slice(0, 8)}…`;
-  return "Visitor";
-}
-
 function toLinkedLead(row: LeadLinkRowDb | null): LinkedLeadSummary | null {
   if (!row) return null;
   return {
@@ -112,14 +89,14 @@ export function mapConversationToListItem(
   const linkedLead = toLinkedLead(lead);
   return {
     id: row.id,
-    tenantId: row.tenant_id,
-    contactName: contactNameFrom(row, lead),
+    tenantId: row.organization_id,
+    contactName: "Visitor",
     channel: normalizeChannel(row.channel),
-    lastMessagePreview: row.last_message_preview?.trim() || null,
+    lastMessagePreview: null,
     status: normalizeStatus(row.status),
-    intent: row.intent?.trim() || null,
-    outcome: row.outcome?.trim() || null,
-    lastActivityAt: lastActivityAt(row),
+    intent: null,
+    outcome: null,
+    lastActivityAt: row.created_at,
     linkedLead,
   };
 }
@@ -131,8 +108,8 @@ export function mapConversationToDetail(
   const base = mapConversationToListItem(row, lead);
   return {
     ...base,
-    visitorId: row.visitor_id,
-    startedAt: row.started_at,
+    visitorId: null,
+    startedAt: row.created_at,
     transcript: parseTranscript(row.transcript),
     aiSummary: row.ai_summary?.trim() || null,
     qualificationResult: row.qualification_result?.trim() || null,
