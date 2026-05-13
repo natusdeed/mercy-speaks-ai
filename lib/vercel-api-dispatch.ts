@@ -21,6 +21,13 @@ import {
   GET as getLeadById,
   PATCH as patchLeadById,
 } from "../my-app/src/app/api-handlers/dashboard/leads/[id]/route";
+import { GET as getOpsAgentRuns } from "../my-app/src/app/api-handlers/dashboard/ops/agent-runs/route";
+import { GET as getOpsApprovals } from "../my-app/src/app/api-handlers/dashboard/ops/approvals/route";
+import { GET as getOpsBookings } from "../my-app/src/app/api-handlers/dashboard/ops/bookings/route";
+import { GET as getOpsLeads } from "../my-app/src/app/api-handlers/dashboard/ops/leads/route";
+import { GET as getOpsMissedRevenue } from "../my-app/src/app/api-handlers/dashboard/ops/missed-revenue/route";
+import { GET as getOpsTasks } from "../my-app/src/app/api-handlers/dashboard/ops/tasks/route";
+import { GET as getOpsToolCalls } from "../my-app/src/app/api-handlers/dashboard/ops/tool-calls/route";
 import { handleWidgetChatRequest } from "../my-app/src/app/api-handlers/widget/chat-handler";
 import { getWidgetConfig } from "../my-app/src/lib/widget-tenant";
 import { handleWidgetLeadRequest } from "./widget-lead-handler";
@@ -101,6 +108,63 @@ export async function dispatchVercelApi(request: Request): Promise<Response> {
           headers: { "Content-Type": "application/json" },
         }
       );
+    }
+  }
+
+  if (path === "/api/dashboard/ops/leads" && method === "GET") {
+    try {
+      return await getOpsLeads(request);
+    } catch (e) {
+      console.error("[api/dashboard/ops/leads]", e);
+      return Response.json({ message: "Request failed." }, { status: 500 });
+    }
+  }
+  if (path === "/api/dashboard/ops/agent-runs" && method === "GET") {
+    try {
+      return await getOpsAgentRuns(request);
+    } catch (e) {
+      console.error("[api/dashboard/ops/agent-runs]", e);
+      return Response.json({ message: "Request failed." }, { status: 500 });
+    }
+  }
+  if (path === "/api/dashboard/ops/tool-calls" && method === "GET") {
+    try {
+      return await getOpsToolCalls(request);
+    } catch (e) {
+      console.error("[api/dashboard/ops/tool-calls]", e);
+      return Response.json({ message: "Request failed." }, { status: 500 });
+    }
+  }
+  if (path === "/api/dashboard/ops/bookings" && method === "GET") {
+    try {
+      return await getOpsBookings(request);
+    } catch (e) {
+      console.error("[api/dashboard/ops/bookings]", e);
+      return Response.json({ message: "Request failed." }, { status: 500 });
+    }
+  }
+  if (path === "/api/dashboard/ops/tasks" && method === "GET") {
+    try {
+      return await getOpsTasks(request);
+    } catch (e) {
+      console.error("[api/dashboard/ops/tasks]", e);
+      return Response.json({ message: "Request failed." }, { status: 500 });
+    }
+  }
+  if (path === "/api/dashboard/ops/approvals" && method === "GET") {
+    try {
+      return await getOpsApprovals(request);
+    } catch (e) {
+      console.error("[api/dashboard/ops/approvals]", e);
+      return Response.json({ message: "Request failed." }, { status: 500 });
+    }
+  }
+  if (path === "/api/dashboard/ops/missed-revenue" && method === "GET") {
+    try {
+      return await getOpsMissedRevenue(request);
+    } catch (e) {
+      console.error("[api/dashboard/ops/missed-revenue]", e);
+      return Response.json({ message: "Request failed." }, { status: 500 });
     }
   }
 

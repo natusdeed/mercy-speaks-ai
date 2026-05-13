@@ -15,6 +15,7 @@ import {
   Users,
   UserSquare2,
   Waypoints,
+  Wrench,
 } from "lucide-react";
 
 export type NavItem = {
@@ -30,6 +31,13 @@ export const DASHBOARD_NAV: NavItem[] = [
   { to: "/dashboard/missed-revenue-demo", label: "Missed revenue (demo)", icon: PiggyBank },
   { to: "/dashboard/approvals-demo", label: "Approvals (demo)", icon: ClipboardCheck },
   { to: "/dashboard/marketing-social-demo", label: "Marketing & social (demo)", icon: Megaphone },
+  { to: "/dashboard/ops/leads", label: "Lead ops (live)", icon: Waypoints },
+  { to: "/dashboard/ops/agent-runs", label: "AI runs (live)", icon: Bot },
+  { to: "/dashboard/ops/tool-calls", label: "Tool calls (live)", icon: Wrench },
+  { to: "/dashboard/ops/bookings", label: "Bookings (live)", icon: Calendar },
+  { to: "/dashboard/ops/tasks", label: "Tasks (live)", icon: ListTodo },
+  { to: "/dashboard/ops/approvals", label: "Approvals (live)", icon: ClipboardCheck },
+  { to: "/dashboard/ops/missed-revenue", label: "Missed revenue (live)", icon: PiggyBank },
   { to: "/dashboard/leads", label: "Leads", icon: Users },
   { to: "/dashboard/conversations", label: "Conversations", icon: MessageSquare },
   { to: "/dashboard/appointments", label: "Appointments", icon: Calendar },

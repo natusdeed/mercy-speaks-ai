@@ -519,6 +519,63 @@ export default defineConfig(async (): Promise<UserConfig> => {
         });
       },
     },
+    {
+      name: "api-dashboard-ops",
+      configureServer(server) {
+        server.middlewares.use((req, res, next) => {
+          if (req.method !== "GET" || !req.url?.startsWith("/api/dashboard/ops/")) {
+            next();
+            return;
+          }
+          const pathname = new URL(req.url, "http://localhost").pathname;
+          const routeFile: Record<string, string> = {
+            "/api/dashboard/ops/leads": "src/app/api-handlers/dashboard/ops/leads/route.ts",
+            "/api/dashboard/ops/agent-runs": "src/app/api-handlers/dashboard/ops/agent-runs/route.ts",
+            "/api/dashboard/ops/tool-calls": "src/app/api-handlers/dashboard/ops/tool-calls/route.ts",
+            "/api/dashboard/ops/bookings": "src/app/api-handlers/dashboard/ops/bookings/route.ts",
+            "/api/dashboard/ops/tasks": "src/app/api-handlers/dashboard/ops/tasks/route.ts",
+            "/api/dashboard/ops/approvals": "src/app/api-handlers/dashboard/ops/approvals/route.ts",
+            "/api/dashboard/ops/missed-revenue": "src/app/api-handlers/dashboard/ops/missed-revenue/route.ts",
+          };
+          const rel = routeFile[pathname];
+          if (!rel) {
+            res.statusCode = 404;
+            res.setHeader("Content-Type", "application/json");
+            res.end(JSON.stringify({ message: "Not found" }));
+            return;
+          }
+
+          const forwardHeaders = Object.fromEntries(
+            Object.entries(req.headers)
+              .filter(([, v]) => v != null)
+              .map(([k, v]) => [k.toLowerCase(), Array.isArray(v) ? v.join(", ") : String(v)])
+          );
+
+          void (async () => {
+            try {
+              const abs = path.resolve(__dirname, rel);
+              const routeModuleId =
+                "/" + path.relative(server.config.root, abs).split(path.sep).join("/");
+              const { GET } = await server.ssrLoadModule(routeModuleId);
+              const fakeRequest = new Request(`http://localhost${req.url}`, {
+                method: "GET",
+                headers: new Headers(forwardHeaders),
+              });
+              const response = await GET(fakeRequest);
+              res.statusCode = response.status;
+              response.headers.forEach((v, k) => res.setHeader(k, v));
+              const buf = Buffer.from(await response.arrayBuffer());
+              res.end(buf);
+            } catch (e) {
+              console.error("Dashboard ops API error:", e);
+              res.statusCode = 500;
+              res.setHeader("Content-Type", "application/json");
+              res.end(JSON.stringify({ message: "Internal server error" }));
+            }
+          })();
+        });
+      },
+    },
   ],
   resolve: {
     // Order matters: `@` must not steal `@/lib/react-helmet-compat` (object keys are not ordered reliably).

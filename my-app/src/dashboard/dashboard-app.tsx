@@ -14,6 +14,13 @@ import { ApprovalsDemoPage } from "@/dashboard/pages/approvals-demo-page";
 import { LeadOpsDemoPage } from "@/dashboard/pages/lead-ops-demo-page";
 import { MarketingSocialMockPage } from "@/dashboard/pages/marketing-social-mock-page";
 import { MissedRevenueDemoPage } from "@/dashboard/pages/missed-revenue-demo-page";
+import { RealAgentRunsPage } from "@/dashboard/pages/real-agent-runs-page";
+import { RealApprovalsPage } from "@/dashboard/pages/real-approvals-page";
+import { RealBookingsPage } from "@/dashboard/pages/real-bookings-page";
+import { RealLeadOpsPage } from "@/dashboard/pages/real-lead-ops-page";
+import { RealMissedRevenuePage } from "@/dashboard/pages/real-missed-revenue-page";
+import { RealTasksPage } from "@/dashboard/pages/real-tasks-page";
+import { RealToolCallsPage } from "@/dashboard/pages/real-tool-calls-page";
 
 export function DashboardApp() {
   return (
@@ -28,6 +35,13 @@ export function DashboardApp() {
             <Route path="missed-revenue-demo" element={<MissedRevenueDemoPage />} />
             <Route path="approvals-demo" element={<ApprovalsDemoPage />} />
             <Route path="marketing-social-demo" element={<MarketingSocialMockPage />} />
+            <Route path="ops/leads" element={<RealLeadOpsPage />} />
+            <Route path="ops/agent-runs" element={<RealAgentRunsPage />} />
+            <Route path="ops/tool-calls" element={<RealToolCallsPage />} />
+            <Route path="ops/bookings" element={<RealBookingsPage />} />
+            <Route path="ops/tasks" element={<RealTasksPage />} />
+            <Route path="ops/approvals" element={<RealApprovalsPage />} />
+            <Route path="ops/missed-revenue" element={<RealMissedRevenuePage />} />
             <Route path="leads" element={<LeadsPage />} />
             <Route path="leads/:id" element={<LeadDetailPage />} />
             <Route path="conversations" element={<ConversationsPage />} />
