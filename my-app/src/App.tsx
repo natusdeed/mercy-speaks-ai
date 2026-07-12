@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { Routes, Route, Outlet } from 'react-router-dom';
+import { Navigate, Routes, Route, Outlet } from 'react-router-dom';
 import { Header } from '@/components/navigation/header';
 import { Footer } from '@/components/navigation/footer';
 import { ClientErrorHandler } from '@/components/debug/ClientErrorHandler';
@@ -16,7 +16,6 @@ import Portfolio from './app/portfolio/page';
 import Pricing from './app/pricing/page';
 import BookDemo from './app/book-demo/page';
 import Services from './pages/Services';
-import Solutions from './app/solutions/page';
 import Results from './app/results/page';
 import TestimonialsPage from './app/testimonials/page';
 import AiEmployeeSystemPage from './app/ai-employee-system/page';
@@ -123,7 +122,7 @@ function App() {
           <Route path="/book-demo" element={<BookDemo />} />
           <Route path="/ai-employee-system" element={<AiEmployeeSystemPage />} />
           <Route path="/services" element={<Services />} />
-          <Route path="/solutions" element={<Solutions />} />
+          <Route path="/solutions" element={<Navigate to="/services" replace />} />
           <Route path="/roofing" element={<RoofingPage />} />
           <Route path="/hvac" element={<HvacPage />} />
           <Route path="/plumbing" element={<PlumbingPage />} />

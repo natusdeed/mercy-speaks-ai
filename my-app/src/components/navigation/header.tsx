@@ -30,7 +30,6 @@ const serviceLinks = [
 
 const navLinksAfterIndustries = [
   { name: "Websites", href: "/services/website-design" },
-  { name: "Solutions", href: "/solutions" },
   { name: "Pricing", href: "/pricing" },
   { name: "Results", href: "/results" },
   { name: "Testimonials", href: "/testimonials" },
@@ -44,7 +43,6 @@ function isIndustryPath(pathname: string): boolean {
 
 function isActivePath(href: string, pathname: string): boolean {
   if (href === "/") return pathname === "/";
-  if (href === "/solutions") return pathname === "/solutions" || pathname.startsWith("/solutions/");
   if (href === "/services/website-design")
     return pathname === "/services/website-design" || pathname.startsWith("/services/website-design/");
   if (href === "/services") return pathname === "/services" || pathname.startsWith("/services/");

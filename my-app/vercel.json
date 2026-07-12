@@ -4,6 +4,11 @@
       "source": "/services/reputation-management",
       "destination": "/services/review-generation",
       "permanent": true
+    },
+    {
+      "source": "/solutions",
+      "destination": "/services",
+      "permanent": true
     }
   ],
   "toolbar": {

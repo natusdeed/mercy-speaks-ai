@@ -17,11 +17,10 @@ import { BookingLink } from "@/components/cta/booking-link";
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
-  // Matches header nav: Solutions, Pricing, Results, About + Book Demo. v1 proof page is /results.
+  // Matches header nav: Services, Pricing, Results, About + Book Demo. v1 proof page is /results.
   const navigationLinks = [
     { name: "Services", href: "/services" },
     { name: "Website Design", href: "/services/website-design" },
-    { name: "Solutions", href: "/solutions" },
     { name: "Pricing", href: "/pricing" },
     { name: "Results", href: "/results" },
     { name: "About", href: "/about" },
@@ -113,7 +112,7 @@ export function Footer() {
             </p>
           </motion.div>
 
-          {/* Nav links – matches header: Solutions, Pricing, Results, About, Book Demo */}
+          {/* Nav links – matches header: Services, Pricing, Results, About, Book Demo */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
