@@ -72,7 +72,6 @@ export const NAV_PATHS = {
   reputationManagement: "/services/reputation-management",
   voiceAgents: "/services/voice-agents",
   ragData: "/services/rag-data",
-  solutions: "/solutions",
   pricing: "/pricing",
   results: "/results",
   about: "/about",

@@ -26,7 +26,7 @@ export const PRERENDER_PATHS: string[] = [
   "/book-demo",
   "/ai-employee-system",
   "/services",
-  "/solutions",
+  "/solutions", // legacy alias — client Navigate → /services; also 301 in vercel.json
   "/roofing",
   "/hvac",
   "/plumbing",
