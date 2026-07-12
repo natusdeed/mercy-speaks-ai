@@ -119,7 +119,7 @@ export function PortfolioGallery({
           <p
             className={cn(
               "text-xs font-semibold uppercase tracking-widest mb-3",
-              isShowcase ? "text-amber-400/90" : "text-slate-500"
+              isShowcase ? "text-amber-400/90" : "text-slate-400"
             )}
           >
             {eyebrow}
@@ -267,7 +267,7 @@ export function PortfolioGallery({
                     {item.category}
                   </span>
                   {item.industryTag && (
-                    <span className="text-xs text-slate-500 font-medium">
+                    <span className="text-xs text-slate-400 font-medium">
                       {item.industryTag}
                     </span>
                   )}
@@ -291,7 +291,7 @@ export function PortfolioGallery({
                 {/* Outcome */}
                 {item.outcome && (
                   <p className="text-slate-300 text-sm leading-relaxed mb-4">
-                    <span className="text-slate-500 font-medium">Outcome: </span>
+                    <span className="text-slate-400 font-medium">Outcome: </span>
                     {item.outcome}
                   </p>
                 )}

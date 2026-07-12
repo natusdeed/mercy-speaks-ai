@@ -3,7 +3,64 @@
   "outputDirectory": "my-app/dist",
   "installCommand": "npm install",
   "framework": null,
+  "redirects": [
+    {
+      "source": "/services/reputation-management",
+      "destination": "/services/review-generation",
+      "permanent": true
+    },
+    {
+      "source": "/solutions",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/hvac",
+      "destination": "/industries/hvac",
+      "permanent": true
+    },
+    {
+      "source": "/plumbing",
+      "destination": "/industries/plumbing",
+      "permanent": true
+    }
+  ],
   "headers": [
+    {
+      "source": "/llms.txt",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
+      ]
+    },
+    {
+      "source": "/llms-full.txt",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
+      ]
+    },
+    {
+      "source": "/robots.txt",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        }
+      ]
+    },
     {
       "source": "/(.*)",
       "headers": [
@@ -32,6 +89,9 @@
   ],
   "rewrites": [
     { "source": "/api/:path*", "destination": "/api/:path*" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/dashboard", "destination": "/index.html" },
+    { "source": "/dashboard/:path*", "destination": "/index.html" },
+    { "source": "/admin", "destination": "/index.html" },
+    { "source": "/admin/:path*", "destination": "/index.html" }
   ]
 }

@@ -1,81 +1,8 @@
-"use client";
-
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
-
-const TIERS = [
-  {
-    name: "Mercy Starter",
-    price: 197,
-    setup: "$997 setup",
-    description: "AI receptionist, lead capture, GBP audit, missed-call text-back.",
-    highlight: false,
-  },
-  {
-    name: "Mercy Growth",
-    price: 397,
-    setup: "$2,500 setup",
-    description: "Full website + AI receptionist + SMS automation + booking system.",
-    highlight: true,
-  },
-  {
-    name: "Mercy Pro",
-    price: 697,
-    setup: "$4,500 setup",
-    description: "Custom AI call flows, CRM, review generation, quarterly strategy.",
-    highlight: false,
-  },
-];
-
-const WEBSITE_TIERS = [
-  {
-    name: "Starter Website",
-    priceLabel: "Starting at $997",
-    audience:
-      "Perfect for new or local businesses that need a clean, trustworthy website fast.",
-    included: [
-      "Premium 1–3 page site (home + core pages)",
-      "Mobile-first design + fast performance",
-      "Conversion-ready contact/quote flow",
-      "Basic on-page SEO + analytics setup",
-    ],
-    cta: "Get a Website Quote",
-    href: "/contact",
-    popular: false,
-  },
-  {
-    name: "Business Website",
-    priceLabel: "Starting at $1,997",
-    audience:
-      "For established companies that need stronger messaging, structure, and lead capture.",
-    included: [
-      "Premium 5–8 page website",
-      "Service pages built for conversion",
-      "SEO-ready structure + technical cleanup",
-      "Integrations (forms, email, booking, CRM-ready)",
-    ],
-    cta: "Book Website Call",
-    href: "/book-demo",
-    popular: true,
-  },
-  {
-    name: "Premium / Custom Website",
-    priceLabel: "Custom quote",
-    audience:
-      "For high-growth brands that need custom UI, advanced sections, and tailored strategy.",
-    included: [
-      "Custom UX + design system direction",
-      "Advanced sections (case studies, portals, calculators)",
-      "Performance + SEO optimization",
-      "Ongoing iteration and launch support",
-    ],
-    cta: "Request Custom Quote",
-    href: "/contact",
-    popular: false,
-  },
-] as const;
+import { AI_RECEPTIONIST_TIERS, WEBSITE_TIERS } from "@/content/pricing-tiers";
 
 export function PricingPreview() {
   return (
@@ -103,37 +30,31 @@ export function PricingPreview() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-          {TIERS.map((tier, index) => (
+          {AI_RECEPTIONIST_TIERS.map((tier, index) => (
             <motion.div
               key={tier.name}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.08 }}
-              className={`card flex flex-col ${tier.highlight ? "bg-slate-900/40" : ""}`}
+              className={`card flex flex-col ${tier.popular ? "bg-slate-900/40" : ""}`}
             >
-              {tier.highlight && (
+              {tier.popular && (
                 <span className="text-xs font-semibold text-electric-purple uppercase tracking-wider mb-3">
                   Most popular
                 </span>
               )}
-              <h3 className="card-title text-slate-50 mb-1">
-                {tier.name}
-              </h3>
+              <h3 className="card-title text-slate-50 mb-1">{tier.name}</h3>
               <p className="text-2xl font-bold text-slate-50 mb-2">
                 ${tier.price}
-                <span className="text-sm font-normal text-slate-400">
-                  /month
-                </span>
+                <span className="text-sm font-normal text-slate-400">/month</span>
               </p>
               <p className="text-xs text-neon-cyan mt-1">
-                {tier.setup}
+                {tier.setup.replace("one-time ", "")}
               </p>
-              <p className="card-body text-slate-400 mb-5">
-                {tier.description}
-              </p>
+              <p className="card-body text-slate-400 mb-5">{tier.previewDescription}</p>
               <Button
-                variant={tier.highlight ? "primary" : "outline"}
+                variant={tier.popular ? "primary" : "outline"}
                 size="default"
                 asChild
                 className="mt-auto w-full"
@@ -144,7 +65,6 @@ export function PricingPreview() {
           ))}
         </div>
 
-        {/* Website Development Pricing (added section) */}
         <div className="mt-12 md:mt-16">
           <motion.div
             initial={{ opacity: 0, y: 8 }}
@@ -153,12 +73,12 @@ export function PricingPreview() {
             transition={{ duration: 0.4 }}
             className="text-center mb-6 md:mb-8"
           >
-            <h3 className="text-2xl md:text-3xl font-bold text-slate-50 mb-2">
+            <h2 className="text-2xl md:text-3xl font-bold text-slate-50 mb-2">
               Website Development
-            </h3>
+            </h2>
             <p className="text-slate-400 max-w-2xl mx-auto text-sm md:text-base">
-              Premium, mobile-first websites built for trust and conversion. Choose a tier for
-              a starting point—final pricing depends on pages, content, and integrations.
+              Premium, mobile-first websites built for trust and conversion. Choose a tier for a
+              starting point—final pricing depends on pages, content, and integrations.
             </p>
           </motion.div>
 
@@ -182,22 +102,12 @@ export function PricingPreview() {
                   </div>
                 )}
 
-                <div
-                  className={`flex flex-col flex-1 p-7 ${
-                    tier.popular ? "pt-12" : ""
-                  }`}
-                >
-                  <h4 className="text-xl font-bold text-slate-50 mb-2">
-                    {tier.name}
-                  </h4>
-                  <p className="text-slate-400 text-sm leading-relaxed mb-5">
-                    {tier.audience}
-                  </p>
+                <div className={`flex flex-col flex-1 p-7 ${tier.popular ? "pt-12" : ""}`}>
+                  <h3 className="text-xl font-bold text-slate-50 mb-2">{tier.name}</h3>
+                  <p className="text-slate-400 text-sm leading-relaxed mb-5">{tier.audience}</p>
 
                   <div className="mb-6">
-                    <span className="text-3xl font-bold text-slate-50">
-                      {tier.priceLabel}
-                    </span>
+                    <span className="text-3xl font-bold text-slate-50">{tier.priceLabel}</span>
                   </div>
 
                   <ul className="space-y-2.5 mb-8 flex-1">
@@ -218,10 +128,7 @@ export function PricingPreview() {
                     className="w-full"
                     asChild
                   >
-                    <Link
-                      to={tier.href}
-                      className="flex items-center justify-center gap-2"
-                    >
+                    <Link to={tier.href} className="flex items-center justify-center gap-2">
                       {tier.cta}
                       <ArrowRight className="w-4 h-4" />
                     </Link>

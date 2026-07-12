@@ -4,6 +4,21 @@
       "source": "/services/reputation-management",
       "destination": "/services/review-generation",
       "permanent": true
+    },
+    {
+      "source": "/solutions",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/hvac",
+      "destination": "/industries/hvac",
+      "permanent": true
+    },
+    {
+      "source": "/plumbing",
+      "destination": "/industries/plumbing",
+      "permanent": true
     }
   ],
   "toolbar": {

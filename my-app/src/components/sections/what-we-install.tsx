@@ -4,13 +4,14 @@ import { motion } from "framer-motion";
 import { Phone, MessageCircle, BarChart3 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { BookingLink } from "@/components/cta/booking-link";
+import { NAV_PATHS } from "@/lib/site-config";
 
 const INSTALLS = [
   {
     icon: Phone,
     title: "AI Receptionist",
     description: "24/7 phone answering: qualify leads, book appointments, take messages. Never miss a call.",
-    href: "/services/ai-phone-receptionist",
+    href: NAV_PATHS.aiReceptionist,
     color: "neon-cyan",
     useBookingLink: false,
   },
@@ -18,9 +19,9 @@ const INSTALLS = [
     icon: MessageCircle,
     title: "Missed-Call Text Back",
     description: "Automatically text callers who don't reach you. Re-engage leads before they go to a competitor.",
-    href: "/book-demo",
+    href: NAV_PATHS.missedCallTextBack,
     color: "electric-purple",
-    useBookingLink: true,
+    useBookingLink: false,
   },
   {
     icon: BarChart3,

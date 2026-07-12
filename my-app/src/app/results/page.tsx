@@ -9,8 +9,8 @@ import { Link } from "react-router-dom";
 import { BookingLink } from "@/components/cta/booking-link";
 import { SeoHead } from "@/components/seo/seo-head";
 import { JsonLd } from "@/components/seo/json-ld";
-import { BRAND_TAGLINE } from "@/lib/site-config";
-import { breadcrumbSchema, organizationSchema, webPageSchema } from "@/lib/schema";
+import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
+import { DAVITA_AUTO_LOGISTICS_URL } from "@/lib/site-config";
 
 const fadeUp = {
   initial: { opacity: 0, y: 16 },
@@ -66,24 +66,25 @@ const PORTFOLIO_ITEMS: PortfolioItem[] = [
   {
     id: "mercyspeaks-ai",
     title: "Mercy Speaks Digital",
-    url: "https://mercyspeaks.ai",
+    url: "https://www.mercyspeaksdigital.com",
     category: "Websites",
     description: "Agency website with clear positioning, premium UI, and conversion-focused inquiry flow.",
     stack: ["Next.js", "Tailwind"],
     thumbnail: "/portfolio/mercyspeaks-ai.png",
-    liveUrl: "https://mercyspeaks.ai",
+    liveUrl: "https://www.mercyspeaksdigital.com",
     ctaLabel: "View Site",
     featured: true,
   },
   {
     id: "widget-install",
     title: "Chat Widget Install Experience",
-    url: "https://mercyspeaks.ai/widget/install",
+    // Marketing/portfolio link uses the canonical site; widget allowlists may still accept mercyspeaks.ai.
+    url: "https://www.mercyspeaksdigital.com/widget/install",
     category: "Automation",
     description: "Self-serve install flow for embedding a branded website chat widget—clear steps + copy-paste snippet.",
     stack: ["Next.js", "TypeScript"],
     thumbnail: "/portfolio/widget-install.png",
-    liveUrl: "https://mercyspeaks.ai/widget/install",
+    liveUrl: "https://www.mercyspeaksdigital.com/widget/install",
     ctaLabel: "View Install Flow",
   },
   {
@@ -103,31 +104,31 @@ const PORTFOLIO_ITEMS: PortfolioItem[] = [
   {
     id: "davita-auto-logistics",
     title: "Davita Auto Logistics",
-    url: "https://davita-auto-logistics.vercel.app/",
+    url: DAVITA_AUTO_LOGISTICS_URL,
     category: "Websites",
-    industryTag: "Logistics / Solar Supply",
+    industryTag: "Demo build",
     description:
       "Clean-energy logistics brand: Tier-1 solar supply, luxury auto transport, Texas-based coordination, and global shipping lanes.",
     outcome:
       "Conversion-ready site with product proof points, gallery, regional shipping copy, and quote flows for export buyers.",
     stack: ["Next.js", "Tailwind", "Vercel"],
     thumbnail: "/portfolio/davita-auto-logistics.png",
-    liveUrl: "https://davita-auto-logistics.vercel.app/",
-    ctaLabel: "View Live Site",
+    liveUrl: DAVITA_AUTO_LOGISTICS_URL,
+    ctaLabel: "View Demo Build",
     featured: true,
   },
 ];
 
 export default function ResultsPage() {
-  const description = `Results and illustrative outcomes: ${BRAND_TAGLINE}`;
+  const description =
+    "See real website launches and illustrative AI outcomes—how Mercy Speaks Digital helps small businesses capture leads, book jobs, and look premium online.";
 
   return (
     <PageShell className="min-h-screen bg-slate-950">
-      <SeoHead path="/results" title="Results & proof" description={description} />
+      <SeoHead path="/results" title="Results & Proof" description={description} />
       <JsonLd
         data={[
-          organizationSchema(),
-          webPageSchema({ name: "Results & proof", description, path: "/results" }),
+          webPageSchema({ name: "Results & Proof", description, path: "/results" }),
           breadcrumbSchema([
             { name: "Home", path: "/" },
             { name: "Results", path: "/results" },
@@ -157,8 +158,14 @@ export default function ResultsPage() {
         </section>
 
         {/* 3 featured case studies — scannable, premium */}
-        <section className="section" aria-label="Featured case studies">
+        <section className="section" aria-labelledby="case-studies-title">
           <div className="section-inner max-w-5xl mx-auto">
+            <h2
+              id="case-studies-title"
+              className="text-2xl md:text-3xl font-bold text-slate-50 mb-6 md:mb-8 text-center"
+            >
+              Featured case studies
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
               {CASE_STUDIES.map((study, index) => (
                 <motion.article
@@ -169,9 +176,9 @@ export default function ResultsPage() {
                   <p className="text-xs font-semibold text-neon-cyan uppercase tracking-wider mb-3">
                     {study.industry}
                   </p>
-                  <h2 className="text-xl font-bold text-slate-50 mb-3">
+                  <h3 className="text-xl font-bold text-slate-50 mb-3">
                     {study.industry}
-                  </h2>
+                  </h3>
                   <p className="text-slate-300 text-sm leading-relaxed mb-4">
                     {study.situation}
                   </p>

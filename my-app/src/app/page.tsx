@@ -7,6 +7,7 @@ import { WhatWeInstall } from "@/components/sections/what-we-install";
 import { HowItWorks } from "@/components/sections/how-it-works";
 import { WebsiteServicesHome } from "@/components/sections/website-services-home";
 import { Results } from "@/components/sections/results";
+import { LiveDemo } from "@/components/sections/live-demo";
 import { LiveDemoHome } from "@/components/sections/live-demo-home";
 import { PricingPreview } from "@/components/sections/pricing-preview";
 import { FAQ } from "@/components/sections/faq";
@@ -14,12 +15,11 @@ import { FinalCTA } from "@/components/sections/final-cta";
 import { PortfolioGallery, type PortfolioItem } from "@/components/sections/portfolio-gallery";
 import { Testimonials } from "@/components/sections/testimonials";
 import { Proof } from "@/components/sections/proof";
-import { ClientLogos } from "@/components/sections/ClientLogos";
 import { SeoHead } from "@/components/seo/seo-head";
 import { JsonLd } from "@/components/seo/json-ld";
-import { BRAND_TAGLINE } from "@/lib/site-config";
-import { faqPageSchema, organizationSchema, websiteSchema } from "@/lib/schema";
+import { faqPageSchema, websiteSchema } from "@/lib/schema";
 import { HOME_PAGE_FAQS } from "@/content/home-faqs";
+import { DAVITA_AUTO_LOGISTICS_URL } from "@/lib/site-config";
 
 export default function Home() {
   const portfolioItems: PortfolioItem[] = [
@@ -57,17 +57,17 @@ export default function Home() {
     {
       id: "davita-auto-logistics",
       title: "Davita Auto Logistics",
-      url: "https://davita-auto-logistics.vercel.app/",
+      url: DAVITA_AUTO_LOGISTICS_URL,
       category: "Websites",
-      industryTag: "Logistics / Solar Supply",
+      industryTag: "Demo build",
       description:
         "Clean-energy logistics brand: Tier-1 solar supply, luxury auto transport, Texas-based coordination, and global shipping stories.",
       outcome:
         "High-trust marketing site with product tiers, gallery, shipping lanes, and quote capture for export-heavy buyers.",
       stack: ["Next.js", "Tailwind", "Vercel"],
       thumbnail: "/portfolio/davita-auto-logistics.png",
-      liveUrl: "https://davita-auto-logistics.vercel.app/",
-      ctaLabel: "View Live Site",
+      liveUrl: DAVITA_AUTO_LOGISTICS_URL,
+      ctaLabel: "View Demo Build",
       featured: true,
     },
     {
@@ -107,15 +107,18 @@ export default function Home() {
     <PageShell className="min-h-screen bg-slate-950 w-full">
       <SeoHead
         path="/"
-        title="Mercy Speaks Digital"
-        description={BRAND_TAGLINE}
+        title="AI Receptionists & Websites | Mercy Speaks Digital"
+        description="24/7 AI phone receptionists, premium websites, and automation that capture leads and book appointments. Houston-based, serving businesses nationwide."
       />
       <JsonLd
-        data={[organizationSchema(), websiteSchema(), faqPageSchema(faqsForSchema)]}
+        data={[websiteSchema(), faqPageSchema(faqsForSchema)]}
       />
       <main className="w-full">
         {/* 1) Minimal Hero */}
         <Hero />
+
+        {/* 1.25) Call the AI — live demo line (or sample-call fallback) */}
+        <LiveDemo location="home" />
 
         <EntitySummaryStrip />
 
@@ -151,11 +154,10 @@ export default function Home() {
         {/* 5.75) Website testimonials (placeholder-safe; no fabricated feedback) */}
         <Testimonials />
 
-        {/* 5.85) Quantified proof + trusted-by strip */}
+        {/* 5.85) Honest proof policy (no fabricated metrics or client names) */}
         <Proof />
-        <ClientLogos />
 
-        {/* 6) Live Demo — id="live-demo" (audio + short video placeholder + 3 screenshots placeholder) */}
+        {/* 6) Live Demo — gated by siteContent.demoMedia (hidden until audio/video URLs are set) */}
         <LiveDemoHome />
 
         {/* 7) Pricing preview (3 tiers summary + link to /pricing) */}

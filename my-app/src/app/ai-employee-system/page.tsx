@@ -23,7 +23,7 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { SeoHead } from "@/components/seo/seo-head";
 import { Button } from "@/components/ui/button";
 import { PageShell } from "@/components/ui/page-shell";
-import { breadcrumbSchema, organizationSchema, webPageSchema } from "@/lib/schema";
+import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
 
 const fadeUp = {
   initial: { opacity: 0, y: 16 },
@@ -114,7 +114,7 @@ const showDevCommandCenter = viteEnv?.DEV === true;
 
 export default function AiEmployeeSystemPage() {
   const description =
-    "Mercy AI Staff and Revora AI Employee: a 24/7 AI team for lead capture, bookings, follow-up, handoffs, missed revenue visibility, and marketing support—built for local service businesses.";
+    "Mercy AI Staff and Revora AI Employee: a 24/7 AI team for lead capture, bookings, follow-up, handoffs, missed-revenue visibility, and marketing support.";
   const path = "/ai-employee-system";
 
   return (
@@ -122,7 +122,6 @@ export default function AiEmployeeSystemPage() {
       <SeoHead path={path} title="AI Employee System" description={description} />
       <JsonLd
         data={[
-          organizationSchema(),
           webPageSchema({ name: "AI Employee System", description, path }),
           breadcrumbSchema([
             { name: "Home", path: "/" },

@@ -11,6 +11,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { z } from "zod";
+import { telHref } from "@/lib/site-config";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -126,7 +127,7 @@ export default function ContactPage() {
                   <Phone className="w-8 h-8 text-neon-cyan mb-4" />
                   <h3 className="text-xl md:text-2xl font-semibold text-slate-50 mb-2">Phone</h3>
                   <a
-                    href="tel:7033325956"
+                    href={telHref()}
                     className="text-xl md:text-2xl text-slate-300 hover:text-neon-cyan transition-colors"
                   >
                     (703) 332-5956

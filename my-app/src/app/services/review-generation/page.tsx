@@ -9,10 +9,9 @@ import { SeoHead } from "@/components/seo/seo-head";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import { Accordion, type AccordionItemData } from "@/components/ui/Accordion";
+import { BookingLink } from "@/components/cta/booking-link";
 import { NAV_PATHS } from "@/lib/site-config";
-import { breadcrumbSchema, serviceSchema, webPageSchema } from "@/lib/schema";
-
-const CAL_LINK = "https://cal.com/natusdeed/free-ai-receptionist-demo";
+import { breadcrumbSchema, faqPageSchema, serviceSchema, webPageSchema } from "@/lib/schema";
 
 const fadeUp = {
   initial: { opacity: 0, y: 16 },
@@ -73,13 +72,15 @@ const faqItems: AccordionItemData[] = [
 
 export default function ReviewGenerationPage() {
   const description =
-    "Automatically collect more 5-star Google reviews after every job. Mercy Speaks Digital's reputation management service monitors, alerts, and grows your online reputation for local businesses in Houston.";
+    "Automatically collect more 5-star Google reviews after every job. We monitor, alert, and grow your online reputation for local service businesses.";
+  const intro =
+    "93% of consumers read online reviews before hiring a local service business. We automate review requests, monitor your reputation across platforms, and help you respond professionally — so your stars keep rising.";
 
   return (
     <PageShell className="min-h-screen bg-slate-950">
       <SeoHead
         path={NAV_PATHS.reviewGeneration}
-        title="Reputation Management & Google Review Automation | Mercy Speaks Digital"
+        title="Google Review Automation | Mercy Speaks Digital"
         description={description}
       />
       <JsonLd
@@ -91,7 +92,7 @@ export default function ReviewGenerationPage() {
           }),
           serviceSchema({
             name: "Reputation Management",
-            description,
+            description: intro,
             path: NAV_PATHS.reviewGeneration,
             serviceType: "Reputation management",
           }),
@@ -100,6 +101,9 @@ export default function ReviewGenerationPage() {
             { name: "Services", path: NAV_PATHS.services },
             { name: "Reputation management", path: NAV_PATHS.reviewGeneration },
           ]),
+          faqPageSchema(
+            faqItems.map((f) => ({ question: f.question, answer: f.answer }))
+          ),
         ]}
       />
       <main>
@@ -123,16 +127,14 @@ export default function ReviewGenerationPage() {
                 Your Reputation Is Your Most Valuable Business Asset. We Protect and Grow It.
               </h1>
               <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-3xl mx-auto mb-7">
-                93% of consumers read online reviews before hiring a local service business. We automate review
-                requests, monitor your reputation across platforms, and help you respond professionally — so your stars
-                keep rising.
+                {intro}
               </p>
               <div className="mt-7 flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center justify-center">
                 <Button variant="primary" size="lg" asChild className="rounded-xl">
-                  <a href={CAL_LINK} className="flex items-center justify-center gap-2">
+                  <BookingLink kind="generalStrategyCall" className="flex items-center justify-center gap-2">
                     Get More 5-Star Reviews
                     <ArrowRight className="w-5 h-5" />
-                  </a>
+                  </BookingLink>
                 </Button>
                 <Button variant="outline" size="lg" asChild className="rounded-xl">
                   <a href="#how-it-works" className="flex items-center justify-center gap-2">
@@ -262,7 +264,7 @@ export default function ReviewGenerationPage() {
                   ))}
                 </ul>
                 <Button variant="outline" size="default" className="w-full" asChild>
-                  <a href={CAL_LINK}>Get Started</a>
+                  <BookingLink kind="generalStrategyCall">Get Started</BookingLink>
                 </Button>
               </motion.article>
 
@@ -297,7 +299,7 @@ export default function ReviewGenerationPage() {
                     ))}
                   </ul>
                   <Button variant="primary" size="default" className="w-full" asChild>
-                    <a href={CAL_LINK}>Get Started</a>
+                    <BookingLink kind="generalStrategyCall">Get Started</BookingLink>
                   </Button>
                 </div>
               </motion.article>
@@ -323,10 +325,10 @@ export default function ReviewGenerationPage() {
                 explain exactly how our system works.
               </p>
               <Button variant="primary" size="lg" asChild className="rounded-xl">
-                <a href={CAL_LINK} className="flex items-center justify-center gap-2">
+                <BookingLink kind="generalStrategyCall" className="flex items-center justify-center gap-2">
                   Book Free Reputation Audit
                   <ArrowRight className="w-5 h-5" />
-                </a>
+                </BookingLink>
               </Button>
             </motion.div>
           </div>

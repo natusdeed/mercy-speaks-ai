@@ -1,23 +1,21 @@
-/** Primary booking: Cal.com. Override with VITE_BOOKING_URL (client) or BOOKING_URL (build). */
-const DEFAULT_CAL_COM_URL = "https://cal.com/natusdeed/free-ai-receptionist-demo";
+import {
+  BOOKING_LINKS,
+  CAL_COM_EMBED,
+  type BookingLinkKey,
+} from "@/lib/site-config";
 
-function normalizeEnvValue(value: unknown): string | null {
-  if (typeof value !== "string") return null;
-  const trimmed = value.trim();
-  return trimmed.length ? trimmed : null;
+export { BOOKING_LINKS, CAL_COM_EMBED, type BookingLinkKey };
+
+/** Resolve a semantic booking CTA to its configured path/URL. */
+export function getBookingUrl(kind: BookingLinkKey = "generalStrategyCall"): string {
+  return BOOKING_LINKS[kind];
 }
 
-export function getBookingUrl(): string {
-  const candidate =
-    normalizeEnvValue((import.meta as any).env?.VITE_BOOKING_URL) ??
-    normalizeEnvValue((import.meta as any).env?.BOOKING_URL) ??
-    normalizeEnvValue((import.meta as any).env?.VITE_BOOKING_LINK) ??
-    normalizeEnvValue((import.meta as any).env?.BOOKING_LINK);
-
-  return candidate ?? DEFAULT_CAL_COM_URL;
-}
-
-export function isExternalBookingUrl(url: string = getBookingUrl()): boolean {
+export function isExternalBookingUrl(url: string): boolean {
   return /^https?:\/\//i.test(url);
 }
 
+/** Full Cal.com URL for the /book-demo embed fallback link. */
+export function getCalEmbedUrl(): string {
+  return CAL_COM_EMBED.url;
+}

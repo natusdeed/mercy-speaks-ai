@@ -7,8 +7,8 @@ export default function ServiceWorkflowAutomation() {
   return (
     <ServiceMarketingPage
       path={NAV_PATHS.workflowAutomation}
-      seoTitle="Business workflow automation"
-      seoDescription="Automate follow-ups, handoffs, and repetitive tasks between your website, AI receptionist, CRM, and inbox—Mercy Speaks Digital."
+      seoTitle="Business Workflow Automation"
+      seoDescription="Automate follow-ups, handoffs, and repetitive tasks between your website, AI receptionist, CRM, and inbox—so leads move faster without extra headcount."
       icon={Workflow}
       h1="Workflow automation"
       intro="Connect the tools you already use so leads progress automatically—less copy-paste, fewer dropped handoffs, faster responses."

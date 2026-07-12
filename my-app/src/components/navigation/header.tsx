@@ -4,11 +4,16 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Menu, Phone, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { BookingLink } from "@/components/cta/booking-link";
+import { getAllIndustryPages } from "@/content/industry-pages";
+import { NAV_PATHS } from "@/lib/site-config";
 
+/** Always in the DOM (crawlable <a> via Link) — do not conditionally mount. */
 const industryLinks = [
-  { name: "Roofing", href: "/roofing" },
-  { name: "HVAC", href: "/hvac" },
-  { name: "Plumbing", href: "/plumbing" },
+  { name: "All industries", href: NAV_PATHS.industries },
+  ...getAllIndustryPages().map((ind) => ({
+    name: ind.navLabel,
+    href: ind.path,
+  })),
 ] as const;
 
 const navLinksBeforeIndustries = [
@@ -17,6 +22,7 @@ const navLinksBeforeIndustries = [
 
 const serviceLinks = [
   { name: "AI Phone Receptionist", href: "/services/ai-phone-receptionist" },
+  { name: "Missed-Call Text Back", href: "/services/missed-call-text-back" },
   { name: "Website Design & Development", href: "/services/website-design" },
   { name: "Website Chat That Books", href: "/services/website-chatbot" },
   { name: "Workflow Automation", href: "/services/workflow-automation" },
@@ -30,7 +36,6 @@ const serviceLinks = [
 
 const navLinksAfterIndustries = [
   { name: "Websites", href: "/services/website-design" },
-  { name: "Solutions", href: "/solutions" },
   { name: "Pricing", href: "/pricing" },
   { name: "Results", href: "/results" },
   { name: "Testimonials", href: "/testimonials" },
@@ -39,12 +44,15 @@ const navLinksAfterIndustries = [
 ] as const;
 
 function isIndustryPath(pathname: string): boolean {
-  return industryLinks.some((l) => l.href === pathname);
+  return (
+    pathname === NAV_PATHS.industries ||
+    pathname.startsWith("/industries/") ||
+    pathname === "/roofing"
+  );
 }
 
 function isActivePath(href: string, pathname: string): boolean {
   if (href === "/") return pathname === "/";
-  if (href === "/solutions") return pathname === "/solutions" || pathname.startsWith("/solutions/");
   if (href === "/services/website-design")
     return pathname === "/services/website-design" || pathname.startsWith("/services/website-design/");
   if (href === "/services") return pathname === "/services" || pathname.startsWith("/services/");
@@ -203,34 +211,35 @@ export function Header() {
                   aria-hidden
                 />
               </button>
-              {desktopIndustriesOpen ? (
-                <div
-                  id="industries-desktop-menu"
-                  role="menu"
-                  aria-labelledby="industries-desktop-button"
-                  className="absolute left-0 top-full z-50 mt-2 min-w-50 rounded-xl border border-slate-800/60 bg-slate-900/98 py-2 shadow-xl backdrop-blur-xl"
-                >
-                  {industryLinks.map((link) => {
-                    const active = pathname === link.href;
-                    return (
-                      <Link
-                        key={link.href}
-                        role="menuitem"
-                        to={link.href}
-                        onClick={() => setDesktopIndustriesOpen(false)}
-                        className={cn(
-                          "block px-4 py-2.5 text-sm font-medium transition-colors",
-                          active
-                            ? "bg-electric-purple/15 text-electric-purple"
-                            : "text-slate-300 hover:bg-slate-800/80 hover:text-slate-50"
-                        )}
-                      >
-                        {link.name}
-                      </Link>
-                    );
-                  })}
-                </div>
-              ) : null}
+              {/* Always mounted so prerender HTML contains crawlable industry <a> links */}
+              <div
+                id="industries-desktop-menu"
+                role="menu"
+                aria-labelledby="industries-desktop-button"
+                hidden={!desktopIndustriesOpen}
+                className="absolute left-0 top-full z-50 mt-2 min-w-50 rounded-xl border border-slate-800/60 bg-slate-900/98 py-2 shadow-xl backdrop-blur-xl"
+              >
+                {industryLinks.map((link) => {
+                  const active = pathname === link.href;
+                  return (
+                    <Link
+                      key={link.href}
+                      role="menuitem"
+                      to={link.href}
+                      tabIndex={desktopIndustriesOpen ? 0 : -1}
+                      onClick={() => setDesktopIndustriesOpen(false)}
+                      className={cn(
+                        "block px-4 py-2.5 text-sm font-medium transition-colors",
+                        active
+                          ? "bg-electric-purple/15 text-electric-purple"
+                          : "text-slate-300 hover:bg-slate-800/80 hover:text-slate-50"
+                      )}
+                    >
+                      {link.name}
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
 
             {navLinksAfterIndustries.map((link) => {
@@ -249,7 +258,7 @@ export function Header() {
               );
             })}
             <Button variant="primary" size="default" asChild className="shrink-0 ml-2">
-              <BookingLink className="flex items-center gap-2">
+              <BookingLink kind="generalStrategyCall" className="flex items-center gap-2">
                 <Phone className="w-4 h-4" />
                 Book Demo
               </BookingLink>
@@ -259,7 +268,7 @@ export function Header() {
           {/* Mobile: hamburger + Book Demo */}
           <div className="flex md:hidden items-center gap-2">
             <Button variant="primary" size="default" asChild>
-              <BookingLink className="flex items-center gap-1.5">
+              <BookingLink kind="generalStrategyCall" className="flex items-center gap-1.5">
                 <Phone className="w-4 h-4" />
                 Book Demo
               </BookingLink>
@@ -387,35 +396,36 @@ export function Header() {
                     aria-hidden
                   />
                 </button>
-                {mobileIndustriesOpen ? (
-                  <div
-                    className="border-t border-slate-800/60 px-2 py-2 space-y-0.5"
-                    role="group"
-                    aria-label="Industry pages"
-                  >
-                    {industryLinks.map((link) => {
-                      const active = pathname === link.href;
-                      return (
-                        <Link
-                          key={link.href}
-                          to={link.href}
-                          onClick={() => {
-                            setMobileOpen(false);
-                            setMobileIndustriesOpen(false);
-                          }}
-                          className={cn(
-                            "block rounded-lg px-4 py-3 text-base font-medium transition-colors",
-                            active
-                              ? "text-electric-purple bg-electric-purple/15 border border-electric-purple/30"
-                              : "text-slate-300 hover:bg-slate-800/80 hover:text-slate-50"
-                          )}
-                        >
-                          {link.name}
-                        </Link>
-                      );
-                    })}
-                  </div>
-                ) : null}
+                {/* Always mounted for crawlable industry links in prerendered HTML */}
+                <div
+                  className="border-t border-slate-800/60 px-2 py-2 space-y-0.5"
+                  role="group"
+                  aria-label="Industry pages"
+                  hidden={!mobileIndustriesOpen}
+                >
+                  {industryLinks.map((link) => {
+                    const active = pathname === link.href;
+                    return (
+                      <Link
+                        key={link.href}
+                        to={link.href}
+                        tabIndex={mobileIndustriesOpen ? 0 : -1}
+                        onClick={() => {
+                          setMobileOpen(false);
+                          setMobileIndustriesOpen(false);
+                        }}
+                        className={cn(
+                          "block rounded-lg px-4 py-3 text-base font-medium transition-colors",
+                          active
+                            ? "text-electric-purple bg-electric-purple/15 border border-electric-purple/30"
+                            : "text-slate-300 hover:bg-slate-800/80 hover:text-slate-50"
+                        )}
+                      >
+                        {link.name}
+                      </Link>
+                    );
+                  })}
+                </div>
               </div>
 
               {navLinksAfterIndustries.map((link) => {
@@ -439,7 +449,7 @@ export function Header() {
             </div>
             <div className="pt-4 mt-2 border-t border-slate-800/50">
               <Button variant="primary" size="default" asChild className="w-full">
-                <BookingLink onClick={() => setMobileOpen(false)} className="flex items-center justify-center gap-2">
+                <BookingLink kind="generalStrategyCall" onClick={() => setMobileOpen(false)} className="flex items-center justify-center gap-2">
                   <Phone className="w-4 h-4" />
                   Book Demo
                 </BookingLink>

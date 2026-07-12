@@ -68,7 +68,7 @@ These six tool flows are verified at the employee / orchestration layer.
 
 ## 4. Demo links
 
-Replace `{ORIGIN}` with your deployed host (e.g. `https://mercyspeaks.ai`).
+Replace `{ORIGIN}` with your deployed host (e.g. `https://www.mercyspeaksdigital.com`).
 
 | Route | Purpose | Verified |
 | --- | --- | --- |

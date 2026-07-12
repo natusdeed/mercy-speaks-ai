@@ -268,14 +268,15 @@ export default function CookieConsent() {
               type="button"
               onClick={handleRejectNonEssential}
               style={{
-                background: "transparent",
-                border: "1px solid #1e293b",
-                color: "#6b7280",
+                background: "#1e293b",
+                border: "1px solid #64748b",
+                color: "#e2e8f0",
                 padding: "10px 20px",
                 borderRadius: "6px",
                 cursor: "pointer",
                 fontSize: "12px",
                 letterSpacing: "1.5px",
+                minHeight: "44px",
               }}
             >
               REJECT NON-ESSENTIAL

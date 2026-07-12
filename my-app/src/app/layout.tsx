@@ -1,14 +1,11 @@
 import type { ReactNode } from "react";
-import { AnimatedWidgetWrapper } from "@/components/AnimatedWidgetWrapper";
-import { ElevenLabsWidget } from "@/components/ElevenLabsWidget";
+import { SiteChatWidget } from "@/components/SiteChatWidget";
 
 export function RootLayout({ children }: { children: ReactNode }) {
   return (
     <>
       {children}
-      <AnimatedWidgetWrapper>
-        <ElevenLabsWidget />
-      </AnimatedWidgetWrapper>
+      <SiteChatWidget />
     </>
   );
 }

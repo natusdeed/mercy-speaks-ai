@@ -9,6 +9,7 @@ import type { ComponentType } from "react";
 import React from "react";
 import { renderToString } from "react-dom/server";
 import { HelmetProvider } from "@/lib/react-helmet-compat";
+import { getPrerenderPaths } from "@/lib/public-routes";
 import { StaticRouter } from "react-router-dom/server";
 import { loadEnv } from "vite";
 
@@ -16,35 +17,11 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const rootDir = join(__dirname, "..");
 const distDir = join(rootDir, "dist");
 
-/** Paths aligned with sitemap + /portfolio; excludes /dashboard (SPA). */
-export const PRERENDER_PATHS: string[] = [
-  "/",
-  "/about",
-  "/contact",
-  "/portfolio",
-  "/pricing",
-  "/book-demo",
-  "/ai-employee-system",
-  "/services",
-  "/solutions",
-  "/roofing",
-  "/hvac",
-  "/plumbing",
-  "/results",
-  "/testimonials",
-  "/services/ai-phone-receptionist",
-  "/services/appointment-automation",
-  "/services/rag-data",
-  "/services/review-generation",
-  "/services/reputation-management",
-  "/services/social-media-management",
-  "/services/voice-agents",
-  "/services/website-chatbot",
-  "/services/website-design",
-  "/services/workflow-automation",
-  "/widget/frame",
-  "/widget/install",
-];
+/** Derived from `src/lib/public-routes.ts` (excludes /dashboard, /api, admin). */
+export const PRERENDER_PATHS: string[] = getPrerenderPaths();
+
+/** Unmatched path used only to render the catch-all NotFound into dist/404.html */
+const NOT_FOUND_PRERENDER_PATH = "/__not_found__";
 
 const PRERENDER_HEAD_REGION =
   /<!--\s*vite-prerender-head:begin\s*-->[\s\S]*?<!--\s*vite-prerender-head:end\s*-->/;
@@ -52,9 +29,13 @@ const PRERENDER_HEAD_REGION =
 /**
  * React 19 emits <title>/<meta>/<link> in document order; they appear as a contiguous prefix before real UI
  * (e.g. skip-link). Consume every consecutive head-eligible tag so nothing invalid stays inside #root.
+ * JSON-LD scripts are also head-eligible (Google + Rich Results expect them in <head> or early body).
  */
 const HEAD_TAG_CHUNK =
-  /^(<title\b[\s\S]*?<\/title>|<meta\b[\s\S]*?>|<link\b[\s\S]*?>|<base\b[\s\S]*?>)/i;
+  /^(<title\b[\s\S]*?<\/title>|<meta\b[\s\S]*?>|<link\b[\s\S]*?>|<base\b[\s\S]*?>|<script\b[^>]*\btype=["']application\/ld\+json["'][^>]*>[\s\S]*?<\/script>)/i;
+
+const LD_JSON_SCRIPT =
+  /<script\b[^>]*\btype=["']application\/ld\+json["'][^>]*>[\s\S]*?<\/script>/gi;
 
 function splitHoistedHead(html: string): { headInner: string; bodyHtml: string } {
   let s = html.trimStart();
@@ -65,7 +46,13 @@ function splitHoistedHead(html: string): { headInner: string; bodyHtml: string }
     chunks.push(m[1]);
     s = s.slice(m[1].length).trimStart();
   }
-  return { headInner: chunks.join(""), bodyHtml: s };
+  // Safety net: move any remaining JSON-LD scripts out of the body into <head>
+  const bodyLd: string[] = [];
+  s = s.replace(LD_JSON_SCRIPT, (match) => {
+    bodyLd.push(match);
+    return "";
+  });
+  return { headInner: chunks.concat(bodyLd).join(""), bodyHtml: s };
 }
 
 function injectPrerenderedHead(template: string, headInner: string): string {
@@ -83,8 +70,15 @@ function injectBody(template: string, innerHtml: string): string {
   return template.replace('<div id="root"></div>', `<div id="root">${innerHtml}</div>`);
 }
 
+type HelmetServerState = {
+  script?: { toString(): string };
+  title?: { toString(): string };
+  meta?: { toString(): string };
+  link?: { toString(): string };
+};
+
 function renderRoute(App: ComponentType, pathname: string): { headInner: string; bodyHtml: string } {
-  const helmetContext: { helmet?: unknown } = {};
+  const helmetContext: { helmet?: HelmetServerState } = {};
   const app = (
     <HelmetProvider context={helmetContext}>
       <StaticRouter location={pathname}>
@@ -93,7 +87,14 @@ function renderRoute(App: ComponentType, pathname: string): { headInner: string;
     </HelmetProvider>
   );
   const raw = renderToString(app);
-  return splitHoistedHead(raw);
+  const { headInner, bodyHtml } = splitHoistedHead(raw);
+  const helmet = helmetContext.helmet;
+  // react-helmet-async may collect <script> tags into context instead of the render string
+  const helmetScripts = helmet?.script?.toString?.() ?? "";
+  return {
+    headInner: `${headInner}${helmetScripts}`,
+    bodyHtml,
+  };
 }
 
 function outputPathForRoute(pathname: string): string {
@@ -125,7 +126,18 @@ async function main() {
     console.log("prerender", path, "->", out.replace(distDir, "dist"));
   }
 
-  console.log(`Prerendered ${PRERENDER_PATHS.length} routes. Set VITE_SITE_URL in build env for canonicals.`);
+  // Vercel serves dist/404.html with HTTP 404 when no static file or rewrite matches.
+  {
+    const { headInner, bodyHtml } = renderRoute(App, NOT_FOUND_PRERENDER_PATH);
+    const html = injectBody(injectPrerenderedHead(templateBase, headInner), bodyHtml);
+    const out = join(distDir, "404.html");
+    writeFileSync(out, html, "utf8");
+    console.log("prerender", NOT_FOUND_PRERENDER_PATH, "-> dist/404.html");
+  }
+
+  console.log(
+    `Prerendered ${PRERENDER_PATHS.length} routes + 404.html. Set VITE_SITE_URL in build env for canonicals.`
+  );
 }
 
 void main();

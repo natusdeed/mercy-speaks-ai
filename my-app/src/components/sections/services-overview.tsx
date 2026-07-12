@@ -51,7 +51,7 @@ const SERVICES = [
     description:
       "Modern storefronts and product pages designed to build trust, increase conversions, and simplify checkout.",
     bullets: ["Product-focused storefronts", "Conversion-ready PDPs", "Checkout optimization", "Modern shopping UX"],
-    href: "/contact",
+    href: "/book-demo",
     cta: "Get an E-commerce Quote",
     accent: "electric-purple",
     kind: "booking" as const,
@@ -146,7 +146,7 @@ export function ServicesOverview() {
                 <div className="flex flex-wrap gap-2">
                   <Button variant="outline" size="sm" asChild className="w-full sm:w-auto">
                     {service.kind === "booking" ? (
-                      <BookingLink className="flex items-center justify-center gap-2">
+                      <BookingLink kind="ecommerceQuote" className="flex items-center justify-center gap-2">
                         {service.cta}
                         <ArrowRight className="w-4 h-4" />
                       </BookingLink>

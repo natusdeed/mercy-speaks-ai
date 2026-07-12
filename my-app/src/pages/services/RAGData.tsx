@@ -6,8 +6,8 @@ export default function ServiceRAGData() {
   return (
     <ServiceMarketingPage
       path={NAV_PATHS.ragData}
-      seoTitle="Knowledge bases & RAG for AI assistants"
-      seoDescription="Ground your website chat or phone AI in real documents and FAQs—accurate answers, fewer hallucinations. Mercy Speaks Digital."
+      seoTitle="Knowledge Bases & RAG for AI"
+      seoDescription="Ground your website chat or phone AI in real documents and FAQs—accurate answers, fewer hallucinations, and content your team can update safely."
       icon={Database}
       h1="Knowledge & RAG data"
       intro="Give your assistants the same facts your best employee would use—organized, versioned, and easy to update."

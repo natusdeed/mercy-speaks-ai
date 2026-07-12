@@ -102,7 +102,7 @@ export function WebsiteServicesHome() {
                 </ul>
                 <Button variant="primary" size="sm" asChild className="w-full">
                   {offer.ctaKind === "booking" ? (
-                    <BookingLink className="flex items-center justify-center gap-2">
+                    <BookingLink kind="websiteQuote" className="flex items-center justify-center gap-2">
                       {offer.cta}
                       <ArrowRight className="w-4 h-4" />
                     </BookingLink>
@@ -135,10 +135,10 @@ export function WebsiteServicesHome() {
               </p>
               <div className="mt-4">
                 <Button variant="outline" size="sm" asChild className="rounded-xl">
-                  <Link to="/contact" className="inline-flex items-center gap-2">
+                  <BookingLink kind="websiteQuote" className="inline-flex items-center gap-2">
                     Get a Website Quote
                     <ArrowRight className="w-4 h-4" />
-                  </Link>
+                  </BookingLink>
                 </Button>
               </div>
             </div>

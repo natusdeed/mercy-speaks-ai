@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && tsx --tsconfig tsconfig.prerender.json scripts/prerender.tsx",
+    "generate:blog": "tsx --tsconfig tsconfig.prerender.json scripts/generate-blog.ts",
+    "generate:sitemap": "tsx --tsconfig tsconfig.prerender.json scripts/generate-sitemap.ts",
+    "build": "npm run generate:blog && npm run generate:sitemap && vite build && tsx --tsconfig tsconfig.prerender.json scripts/prerender.tsx && npm run generate:blog && npm run generate:sitemap",
     "start": "vite preview",
     "preview": "vite preview",
     "lint": "eslint",

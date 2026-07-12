@@ -6,8 +6,8 @@ export default function ServiceAppointmentAutomation() {
   return (
     <ServiceMarketingPage
       path={NAV_PATHS.appointmentAutomation}
-      seoTitle="Appointment automation"
-      seoDescription="Automation for scheduling, reminders, and handoffs—fewer no-shows and less phone tag. Mercy Speaks Digital."
+      seoTitle="Appointment Automation"
+      seoDescription="Appointment automation for scheduling, reminders, and handoffs—fewer no-shows, less phone tag, and clearer calendars for your team and customers."
       icon={CalendarClock}
       h1="Appointment automation"
       intro="Make booking and reminders reliable: fewer empty slots, less back-and-forth, clearer expectations for customers and staff."

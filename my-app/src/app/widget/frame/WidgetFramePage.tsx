@@ -127,7 +127,7 @@ export default function WidgetFramePage() {
       <>
         {head}
         <div className="min-h-screen flex items-center justify-center bg-slate-950 text-slate-300 p-4">
-          <p>{error}</p>
+          <h1 className="text-base font-medium text-slate-300">{error}</h1>
         </div>
       </>
     );
@@ -138,7 +138,7 @@ export default function WidgetFramePage() {
       <>
         {head}
         <div className="min-h-screen flex items-center justify-center bg-slate-950 text-slate-300 p-4">
-          <p>Loading…</p>
+          <h1 className="text-base font-medium text-slate-300">Loading chat…</h1>
         </div>
       </>
     );
@@ -153,7 +153,7 @@ export default function WidgetFramePage() {
         className="flex items-center justify-between shrink-0 px-4 py-3 text-white"
         style={{ backgroundColor: primaryColor }}
       >
-        <span className="font-semibold">{config.companyName}</span>
+        <h1 className="text-sm font-semibold">{config.companyName}</h1>
       </header>
 
       {/* Messages */}

@@ -6,7 +6,24 @@
 import type { Tenant, WidgetConfigResponse } from "./widget-types";
 
 const FALLBACK_GREETING =
-  "Hi! I'm here to help. Ask about pricing, booking a demo, or anything else.";
+  "Hi! I'm Mercy's assistant — ask about AI receptionists, websites, or pricing";
+
+const FALLBACK_QUICK_REPLIES = [
+  "Pricing",
+  "How the AI receptionist works",
+  "Book a demo",
+];
+
+/** Pipe-separated override, e.g. `Pricing|Book a demo|Talk to sales`. */
+function getQuickRepliesFromEnv(): string[] {
+  const raw = process.env.MERCY_WIDGET_QUICK_REPLIES?.trim();
+  if (!raw) return FALLBACK_QUICK_REPLIES;
+  const parts = raw
+    .split("|")
+    .map((s) => s.trim())
+    .filter(Boolean);
+  return parts.length > 0 ? parts : FALLBACK_QUICK_REPLIES;
+}
 
 function getOriginFromRequest(request: Request): string | null {
   const origin = request.headers.get("origin");
@@ -78,18 +95,24 @@ function getFallbackTenant(tenantId: string): Tenant | null {
   if (tenantId === "demo") {
     return {
       id: "demo",
-      name: "Mercy AI",
-      domains: ["localhost", "127.0.0.1", "*.vercel.app", "mercyspeaksdigital.com"],
+      name: "Mercy Speaks Digital",
+      domains: [
+        "localhost",
+        "127.0.0.1",
+        "*.vercel.app",
+        "mercyspeaksdigital.com",
+        "mercyspeaks.ai",
+      ],
       public_key: "demo_public_key",
       branding: {
-        companyName: "Mercy AI",
+        companyName: "Mercy Speaks Digital",
         primaryColor: "#06b6d4",
         accentColor: "#8b5cf6",
         logoUrl: "/images/Mercy-avatar.png",
       },
-      booking_url: process.env.BOOKING_URL ?? null,
-      system_prompt: null,
-      greeting: FALLBACK_GREETING,
+      booking_url: process.env.BOOKING_URL ?? process.env.MERCY_BOOKING_URL ?? null,
+      system_prompt: process.env.MERCY_WIDGET_SYSTEM_PROMPT ?? null,
+      greeting: process.env.MERCY_WIDGET_GREETING ?? FALLBACK_GREETING,
     };
   }
 
@@ -171,7 +194,7 @@ export async function getWidgetConfig(
       logoUrl: branding.logoUrl,
     },
     allowed: true,
-    quickReplies: ["What can you help with?", "Book a demo", "Pricing"],
+    quickReplies: getQuickRepliesFromEnv(),
   };
   return { allowed: true, config };
 }

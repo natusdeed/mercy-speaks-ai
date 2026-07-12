@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Phone, Play, Pause, MessageSquare, Volume2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { BUSINESS, telHref } from "@/lib/site-config";
 
 export function ProminentCTA() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -10,9 +11,8 @@ export function ProminentCTA() {
   const [duration, setDuration] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  // Replace with your actual phone number
-  const phoneNumber = "(703) 332-5956";
-  const phoneLink = `tel:7033325956`;
+  const phoneNumber = BUSINESS.phoneDisplay;
+  const phoneLink = telHref();
 
   // Replace with your actual audio file URL
   const audioUrl = "/audio/sample-call.mp3"; // Place your audio file in public/audio/

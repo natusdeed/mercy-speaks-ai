@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mercy Speaks Digital Blog</title>
+    <link>https://www.mercyspeaksdigital.com/blog</link>
+    <description>AI receptionists, websites, and automation insights for small businesses.</description>
+    <language>en-us</language>
+    <atom:link href="https://www.mercyspeaksdigital.com/blog/rss.xml" rel="self" type="application/rss+xml" />
+  <item>
+    <title>AI Receptionist vs. Human Answering Service: Which Should Your Business Use?</title>
+    <link>https://www.mercyspeaksdigital.com/blog/ai-receptionist-vs-answering-service</link>
+    <guid isPermaLink="true">https://www.mercyspeaksdigital.com/blog/ai-receptionist-vs-answering-service</guid>
+    <pubDate>Sat, 11 Jul 2026 00:00:00 GMT</pubDate>
+    <description>Compare AI receptionists vs human answering services on cost, availability, consistency, complex calls, and scale—plus when hybrid handoff wins.</description>
+  </item>
+  <item>
+    <title>DIY AI Receptionist Tools vs. Done-for-You Setup: An Honest Comparison</title>
+    <link>https://www.mercyspeaksdigital.com/blog/diy-ai-receptionist-vs-done-for-you</link>
+    <guid isPermaLink="true">https://www.mercyspeaksdigital.com/blog/diy-ai-receptionist-vs-done-for-you</guid>
+    <pubDate>Sat, 11 Jul 2026 00:00:00 GMT</pubDate>
+    <description>Honest DIY vs done-for-you AI receptionist comparison: Goodcall, My AI Front Desk, and agency setup—time, skill, integrations, monitoring, TCO.</description>
+  </item>
+  <item>
+    <title>How Much Does an AI Receptionist Cost in 2026?</title>
+    <link>https://www.mercyspeaksdigital.com/blog/how-much-does-an-ai-receptionist-cost</link>
+    <guid isPermaLink="true">https://www.mercyspeaksdigital.com/blog/how-much-does-an-ai-receptionist-cost</guid>
+    <pubDate>Sat, 11 Jul 2026 00:00:00 GMT</pubDate>
+    <description>AI receptionist pricing in 2026: DIY tools ~$50–100/mo, hybrid services ~$95–300/mo, done-for-you agencies $197–$697/mo plus setup. See what drives cost.</description>
+  </item>
+  <item>
+    <title>What Is Missed-Call Text Back (and How Much Revenue Are You Losing Without It)?</title>
+    <link>https://www.mercyspeaksdigital.com/blog/what-is-missed-call-text-back</link>
+    <guid isPermaLink="true">https://www.mercyspeaksdigital.com/blog/what-is-missed-call-text-back</guid>
+    <pubDate>Sat, 11 Jul 2026 00:00:00 GMT</pubDate>
+    <description>Missed-call text-back texts callers within seconds when you don’t answer. How it works, industry scripts, TCPA notes, and what’s included.</description>
+  </item>
+  </channel>
+</rss>

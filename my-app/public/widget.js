@@ -6,8 +6,14 @@
 (function () {
   "use strict";
 
-  var script = document.currentScript;
+  // document.currentScript is null for dynamically injected scripts (deferred dogfood load).
+  var script =
+    document.currentScript ||
+    document.querySelector("script[data-mercy-widget-embed][data-tenant]");
   if (!script) return;
+
+  // Avoid double-init if the script tag is evaluated more than once.
+  if (document.querySelector('[data-mercy-widget="root"]')) return;
 
   var tenantId = (script.getAttribute("data-tenant") || "").trim();
   var publicKey = (script.getAttribute("data-key") || "").trim();
@@ -15,7 +21,7 @@
   if (!baseUrl) {
     var src = script.getAttribute("src") || "";
     try {
-      baseUrl = new URL(src).origin;
+      baseUrl = new URL(src, window.location.href).origin;
     } catch (e) {
       return;
     }

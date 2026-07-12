@@ -9,10 +9,9 @@ import { SeoHead } from "@/components/seo/seo-head";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import { Accordion, type AccordionItemData } from "@/components/ui/Accordion";
+import { BookingLink } from "@/components/cta/booking-link";
 import { NAV_PATHS } from "@/lib/site-config";
-import { breadcrumbSchema, serviceSchema, webPageSchema } from "@/lib/schema";
-
-const CAL_LINK = "https://cal.com/natusdeed/free-ai-receptionist-demo";
+import { breadcrumbSchema, faqPageSchema, serviceSchema, webPageSchema } from "@/lib/schema";
 
 const fadeUp = {
   initial: { opacity: 0, y: 16 },
@@ -99,13 +98,15 @@ const faqItems: AccordionItemData[] = [
 
 export default function SocialMediaManagementPage() {
   const description =
-    "Mercy Speaks Digital manages your social media end-to-end — branded posts, scheduling, review automation, and monthly reporting. Built for contractors and local service businesses in Houston.";
+    "End-to-end social media management for contractors—branded posts, scheduling, captions, and monthly reporting so you stay visible without posting yourself.";
+  const intro =
+    "We handle everything — content creation, post scheduling, caption writing, and review automation — so local business owners can stay focused on the work, not the feed.";
 
   return (
     <PageShell className="min-h-screen bg-slate-950">
       <SeoHead
         path={NAV_PATHS.socialMediaManagement}
-        title="Social Media Management for Contractors & Local Businesses | Mercy Speaks Digital"
+        title="Social Media Management | Mercy Speaks Digital"
         description={description}
       />
       <JsonLd
@@ -117,7 +118,7 @@ export default function SocialMediaManagementPage() {
           }),
           serviceSchema({
             name: "Social Media Management",
-            description,
+            description: intro,
             path: NAV_PATHS.socialMediaManagement,
             serviceType: "Social media management",
           }),
@@ -126,6 +127,9 @@ export default function SocialMediaManagementPage() {
             { name: "Services", path: NAV_PATHS.services },
             { name: "Social media management", path: NAV_PATHS.socialMediaManagement },
           ]),
+          faqPageSchema(
+            faqItems.map((f) => ({ question: f.question, answer: f.answer }))
+          ),
         ]}
       />
       <main>
@@ -149,15 +153,14 @@ export default function SocialMediaManagementPage() {
                 Your Business Deserves a Social Media Presence That Never Goes Quiet
               </h1>
               <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-3xl mx-auto mb-7">
-                We handle everything — content creation, post scheduling, caption writing, and review automation — so
-                local business owners can stay focused on the work, not the feed.
+                {intro}
               </p>
               <div className="mt-7 flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center justify-center">
                 <Button variant="primary" size="lg" asChild className="rounded-xl">
-                  <a href={CAL_LINK} className="flex items-center justify-center gap-2">
+                  <BookingLink kind="generalStrategyCall" className="flex items-center justify-center gap-2">
                     Book a Free Strategy Call
                     <ArrowRight className="w-5 h-5" />
-                  </a>
+                  </BookingLink>
                 </Button>
                 <Button variant="outline" size="lg" asChild className="rounded-xl">
                   <a href="#pricing" className="flex items-center justify-center gap-2">
@@ -280,7 +283,7 @@ export default function SocialMediaManagementPage() {
                   ))}
                 </ul>
                 <Button variant="outline" size="default" className="w-full" asChild>
-                  <a href={CAL_LINK}>Get Started</a>
+                  <BookingLink kind="generalStrategyCall">Get Started</BookingLink>
                 </Button>
               </motion.article>
 
@@ -312,7 +315,7 @@ export default function SocialMediaManagementPage() {
                     ))}
                   </ul>
                   <Button variant="primary" size="default" className="w-full" asChild>
-                    <a href={CAL_LINK}>Get Started</a>
+                    <BookingLink kind="generalStrategyCall">Get Started</BookingLink>
                   </Button>
                 </div>
               </motion.article>
@@ -367,10 +370,10 @@ export default function SocialMediaManagementPage() {
                 we'd do for your business.
               </p>
               <Button variant="primary" size="lg" asChild className="rounded-xl">
-                <a href={CAL_LINK} className="flex items-center justify-center gap-2">
+                <BookingLink kind="generalStrategyCall" className="flex items-center justify-center gap-2">
                   Book a Free Strategy Call
                   <ArrowRight className="w-5 h-5" />
-                </a>
+                </BookingLink>
               </Button>
               <p className="mt-4 text-sm text-slate-500">No credit card required  •  No pressure  •  Just clarity</p>
             </motion.div>

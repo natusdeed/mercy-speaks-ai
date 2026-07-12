@@ -1,5 +1,23 @@
 import { motion } from "framer-motion";
-import { Phone, BarChart3, Globe, MessageSquare, Star, ArrowRight, Bot, Workflow, CalendarClock, Database, Megaphone, Shield } from "lucide-react";
+import {
+  Phone,
+  BarChart3,
+  Globe,
+  MessageSquare,
+  MessageCircle,
+  Star,
+  ArrowRight,
+  Bot,
+  Workflow,
+  CalendarClock,
+  CalendarCheck,
+  Database,
+  Megaphone,
+  Shield,
+  Users,
+  Zap,
+  type LucideIcon,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { BookingLink } from "@/components/cta/booking-link";
@@ -10,7 +28,6 @@ import { BRAND_TAGLINE, NAV_PATHS } from "@/lib/site-config";
 import {
   breadcrumbSchema,
   itemListSchema,
-  organizationSchema,
   webPageSchema,
   serviceSchema,
 } from "@/lib/schema";
@@ -28,8 +45,22 @@ const fadeUpInView = {
   transition: { duration: 0.45 },
 };
 
-const serviceLinks = [
+type ServiceLink = {
+  to: string;
+  label: string;
+  icon: LucideIcon;
+  description?: string;
+};
+
+const serviceLinks: ServiceLink[] = [
   { to: NAV_PATHS.aiReceptionist, label: "AI phone receptionist", icon: Phone },
+  {
+    to: NAV_PATHS.missedCallTextBack,
+    label: "Missed-Call Text Back",
+    icon: MessageCircle,
+    description:
+      "Auto-text callers within seconds of a missed call—keep your number and win leads back before they dial a competitor.",
+  },
   { to: NAV_PATHS.websiteDesign, label: "Website design & development", icon: Globe },
   { to: NAV_PATHS.websiteChatbot, label: "Website chat that books", icon: MessageSquare },
   { to: NAV_PATHS.workflowAutomation, label: "Workflow automation", icon: Workflow },
@@ -51,16 +82,23 @@ const serviceLinks = [
   },
   { to: NAV_PATHS.voiceAgents, label: "Voice agents", icon: Bot },
   { to: NAV_PATHS.ragData, label: "Knowledge & RAG data", icon: Database },
+];
+
+const flagshipOutcomes = [
+  { icon: Phone, text: "Calls answered 24/7—every call, no voicemail jail." },
+  { icon: Users, text: "Leads captured with qualification and contact details." },
+  { icon: CalendarCheck, text: "Appointments booked and synced to your calendar." },
+  { icon: Zap, text: "Instant follow-up: texts and emails while the lead is hot." },
+  { icon: BarChart3, text: "Reporting and missed-revenue dashboard in real time." },
 ] as const;
 
 export default function ServicesPage() {
   const hubDescription =
-    "Explore AI receptionists, conversion websites, chat, and automation—one hub for services from Mercy Speaks Digital.";
+    "Explore AI phone receptionists, conversion websites, chatbots, and automation—one hub for Mercy Speaks Digital services that capture leads and book work.";
 
   const directoryItems = serviceLinks.map(({ to, label }) => ({ name: label, path: to }));
 
   const ld = [
-    organizationSchema(),
     webPageSchema({
       name: "AI receptionists, websites & automation services",
       description: hubDescription,
@@ -152,9 +190,9 @@ export default function ServicesPage() {
               ))}
             </ul>
             <p className="mt-6 text-sm text-slate-500">
-              Prefer the narrative overview?{" "}
-              <Link to="/solutions" className="text-neon-cyan hover:underline">
-                View solutions
+              Ready to compare packages?{" "}
+              <Link to={NAV_PATHS.pricing} className="text-neon-cyan hover:underline">
+                View pricing
               </Link>{" "}
               or{" "}
               <Link to="/contact" className="text-neon-cyan hover:underline">
@@ -187,15 +225,15 @@ export default function ServicesPage() {
                 Answer and qualify calls around the clock, book onto your calendar, and see missed-call patterns in one
                 place—paired with follow-up workflows when you need them.
               </p>
-              <ul className="space-y-1.5 text-sm text-slate-300 mb-8">
-                <li className="flex items-center gap-2">
-                  <BarChart3 className="w-4 h-4 text-neon-cyan shrink-0" />
-                  Reporting oriented around calls, leads, and booking outcomes
-                </li>
-                <li className="flex items-center gap-2">
-                  <Phone className="w-4 h-4 text-neon-cyan shrink-0" />
-                  Built to work with your phone line and scheduling tools
-                </li>
+              <ul className="space-y-3 text-sm sm:text-base text-slate-300 mb-8">
+                {flagshipOutcomes.map(({ icon: Icon, text }) => (
+                  <li key={text} className="flex items-start gap-3">
+                    <span className="mt-0.5 p-1.5 rounded-lg bg-neon-cyan/10 shrink-0">
+                      <Icon className="w-4 h-4 text-neon-cyan" aria-hidden />
+                    </span>
+                    <span>{text}</span>
+                  </li>
+                ))}
               </ul>
               <div className="flex flex-col sm:flex-row gap-3">
                 <Button variant="primary" size="lg" asChild>

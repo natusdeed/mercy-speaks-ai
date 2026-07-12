@@ -16,8 +16,8 @@ import {
 } from "lucide-react";
 import { SeoHead } from "@/components/seo/seo-head";
 import { JsonLd } from "@/components/seo/json-ld";
-import { BRAND_TAGLINE } from "@/lib/site-config";
-import { breadcrumbSchema, contactPageSchema, organizationSchema, webPageSchema } from "@/lib/schema";
+import { BRAND_TAGLINE, telHref } from "@/lib/site-config";
+import { breadcrumbSchema, contactPageSchema, webPageSchema } from "@/lib/schema";
 
 const API_CONTACT = "/api/contact";
 
@@ -47,12 +47,11 @@ export default function ContactPage() {
     <PageShell className="min-h-screen bg-slate-950">
       <SeoHead
         path="/contact"
-        title="Contact"
-        description="Contact Mercy Speaks Digital for websites, AI receptionists, and business automation. Email, phone, or send a message—we reply to real inquiries."
+        title="Contact Mercy Speaks Digital | Websites & AI Automation"
+        description="Contact Mercy Speaks Digital for websites, AI receptionists, and automation. Email, call, or send a message—we reply to real business inquiries promptly."
       />
       <JsonLd
         data={[
-          organizationSchema(),
           webPageSchema({
             name: "Contact Mercy Speaks Digital",
             description: BRAND_TAGLINE,
@@ -95,9 +94,10 @@ export default function ContactPage() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="space-y-3 sm:space-y-4 order-2 lg:order-1"
               >
+                <h2 className="sr-only">Contact details</h2>
                 <div className="card">
                   <MapPin className="w-7 h-7 sm:w-8 sm:h-8 text-electric-purple mb-4" />
-                  <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-50 mb-2">Location</h2>
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-50 mb-2">Location</h3>
                   <p className="text-base sm:text-lg md:text-xl text-slate-300">
                     Richmond, Texas 77407
                     <br />
@@ -106,9 +106,9 @@ export default function ContactPage() {
                 </div>
                 <div className="card">
                   <Phone className="w-7 h-7 sm:w-8 sm:h-8 text-neon-cyan mb-4" />
-                  <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-50 mb-2">Phone</h2>
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-50 mb-2">Phone</h3>
                   <a
-                    href="tel:7033325956"
+                    href={telHref()}
                     className="text-base sm:text-lg md:text-xl text-slate-300 hover:text-neon-cyan transition-colors"
                   >
                     (703) 332-5956
@@ -116,7 +116,7 @@ export default function ContactPage() {
                 </div>
                 <div className="card">
                   <Mail className="w-7 h-7 sm:w-8 sm:h-8 text-electric-purple mb-4" />
-                  <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-50 mb-2">Email</h2>
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-50 mb-2">Email</h3>
                   <a
                     href="mailto:don@mercyspeaksdigital.com"
                     className="text-base sm:text-lg md:text-xl text-slate-300 hover:text-neon-cyan transition-colors break-all"
@@ -126,7 +126,7 @@ export default function ContactPage() {
                 </div>
                 <div className="card">
                   <Clock className="w-7 h-7 sm:w-8 sm:h-8 text-neon-cyan mb-4" />
-                  <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-50 mb-2">Business Hours</h2>
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-50 mb-2">Business Hours</h3>
                   <p className="text-base sm:text-lg md:text-xl text-slate-300">
                     Monday - Friday: 9:00 AM - 6:00 PM CST
                     <br />

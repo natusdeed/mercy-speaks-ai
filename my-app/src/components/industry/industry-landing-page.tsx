@@ -8,9 +8,9 @@ import { BookingLink } from "@/components/cta/booking-link";
 import { SeoHead } from "@/components/seo/seo-head";
 import { JsonLd } from "@/components/seo/json-ld";
 import { BRAND_TAGLINE } from "@/lib/site-config";
-import { breadcrumbSchema, organizationSchema, webPageSchema } from "@/lib/schema";
+import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
 import { FinalCTA } from "@/components/sections/final-cta";
-import { Testimonials } from "@/components/sections/testimonials";
+import { Proof } from "@/components/sections/proof";
 import type { IndustryLandingConfig } from "@/content/industry-landings";
 
 const fadeUp = {
@@ -31,15 +31,13 @@ export interface IndustryLandingPageProps {
 }
 
 export function IndustryLandingPage({ config }: IndustryLandingPageProps) {
-  const breadcrumbName =
-    config.slug === "hvac" ? "HVAC" : config.slug.charAt(0).toUpperCase() + config.slug.slice(1);
+  const breadcrumbName = config.slug.charAt(0).toUpperCase() + config.slug.slice(1);
 
   return (
     <PageShell className="min-h-screen bg-slate-950">
       <SeoHead path={config.path} title={config.seoTitle} description={config.seoDescription} />
       <JsonLd
         data={[
-          organizationSchema(),
           webPageSchema({
             name: config.seoTitle,
             description: config.seoDescription,
@@ -149,13 +147,7 @@ export function IndustryLandingPage({ config }: IndustryLandingPageProps) {
           </div>
         </section>
 
-        <Testimonials
-          items={[config.testimonial]}
-          title="Proof from real businesses"
-          description="We only publish verified quotes tied to real engagements. References are available on request."
-          primaryCtaOnly
-          singleCardLayout
-        />
+        <Proof />
 
         <FinalCTA title={config.finalCtaTitle} description={config.finalCtaDescription} />
       </main>

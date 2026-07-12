@@ -1,0 +1,227 @@
+# Mercy Speaks Digital — Full Site Summary
+
+> Mercy Speaks Digital is a U.S. digital agency based in Richmond, TX (Houston metro), serving businesses nationwide. We build conversion-focused websites and e-commerce storefronts, install 24/7 AI phone receptionists, and set up automation (missed-call text-back, review generation, CRM follow-up) so small businesses stop missing leads.
+
+Key facts: AI receptionist plans from $197/mo (Starter, ~500 calls), $397/mo (Growth, ~1,200 calls), $697/mo (Pro, ~3,000+ calls), each with one-time setup fees ($997/$2,500/$4,500). Websites from $997 (Starter), $1,997 (Business), custom for Premium. Typical AI receptionist go-live: 48–72 hours after onboarding. Contact: don@mercyspeaksdigital.com · (703) 332-5956 · https://www.mercyspeaksdigital.com
+
+For a short index, see https://www.mercyspeaksdigital.com/llms.txt
+
+## Services (summaries)
+
+### AI Phone Receptionist
+https://www.mercyspeaksdigital.com/services/ai-phone-receptionist
+
+Answer more calls, capture cleaner leads, and book appointments—even when your team is busy or the business is closed. Mercy Speaks Digital designs and installs an AI-powered phone receptionist that follows scripts you approve: greet callers, answer common questions, qualify intent, and route or book against your calendar. It complements—not replaces—your team for high-touch moments, while making sure routine calls still convert. Outcomes we design for: fewer abandoned calls, faster response to new inquiries, cleaner handoffs, and calendar slots filled without phone tag.
+
+### Website Design & Development
+https://www.mercyspeaksdigital.com/services/website-design
+
+We design premium, mobile-first websites that make your business look credible, explain your services clearly, and convert visitors into inquiries and booked customers. Packages cover brand-aligned layout, service and offer pages, strong calls-to-action, lead capture, and performance-minded implementation. Pair a conversion site with an AI receptionist so web and phone channels work together.
+
+### Voice Agents
+https://www.mercyspeaksdigital.com/services/voice-agents
+
+Beyond a single receptionist line: specialized voice flows for routing, reminders, and light outbound when it fits your compliance posture. Voice agents are purpose-built conversational layers for telephony—qualification trees, status updates, or scripted assistance that hands off cleanly to humans. We scope what is safe and effective for your industry, then deploy with testing and monitoring.
+
+### Website Chatbot
+https://www.mercyspeaksdigital.com/services/website-chatbot
+
+Give every visitor a fast path to answers and next steps—without making them hunt for a form or phone number. We implement on-site chat wired to your services, FAQs, and booking or lead capture endpoints. The assistant stays on-message, escalates when needed, and hands structured data to your team instead of vague alerts.
+
+### Workflow Automation
+https://www.mercyspeaksdigital.com/services/workflow-automation
+
+Connect the tools you already use so leads progress automatically—less copy-paste, fewer dropped handoffs, faster responses. We map how work should move (new lead → qualify → notify → book or nurture), then implement automations that respect your rules. Typical use cases: instant lead notifications, appointment reminders, missed-call texts, CRM hygiene, review requests, and nurture sequences.
+
+### Review Generation / Reputation Management
+https://www.mercyspeaksdigital.com/services/review-generation
+
+93% of consumers read online reviews before hiring a local service business. We automate review requests after completed jobs, monitor reputation across Google Business Profile, Facebook, and Yelp, and help you respond professionally so your stars keep rising. Standalone reputation management is available; review automation is also bundled in higher social and AI plans.
+
+### Social Media Management
+https://www.mercyspeaksdigital.com/services/social-media-management
+
+We handle content creation, post scheduling, caption writing, and review automation so local business owners can stay focused on the work, not the feed. Built for contractors and local service businesses: branded posts, monthly content calendars, scheduling, and performance reporting. Month-to-month after the first 30 days.
+
+## Pricing (full tier details)
+
+Source: https://www.mercyspeaksdigital.com/pricing
+
+### AI receptionist plans
+
+**Mercy Starter — $197/mo**
+- One-time setup: $997
+- Call volume: up to ~500 calls/month
+- Best for: churches, solo contractors, cleaning companies
+- Included: 24/7 AI receptionist; appointment scheduling; lead capture & qualification; missed-call text-back automation; Google Business Profile audit; email notifications; guided onboarding
+
+**Mercy Growth — $397/mo** (most popular)
+- One-time setup: $2,500
+- Call volume: up to ~1,200 calls/month
+- Best for: HVAC, plumbing, roofing, electrical
+- Included: everything in Starter; full website redesign (up to 10 pages); SMS & email follow-up automation; booking system integration; advanced CRM sync; monthly performance report; priority support
+
+**Mercy Pro — $697/mo**
+- One-time setup: $4,500
+- Call volume: ~3,000+ calls/month
+- Best for: dental offices, multi-location contractors, med spas
+- Included: everything in Growth; custom AI call flows & Mercy training; CRM integration; review generation system; SMS/email nurture sequences; quarterly strategy call; dedicated account manager
+
+Notes: Guided setup—timeline confirmed on your call. Works with your current number. Flexible plans—terms reviewed before you start. If you exceed call volume, you are notified before the limit; additional calls are billed as add-ons; you can upgrade anytime.
+
+### Website packages
+
+**Starter Website — starting at $997**
+- Premium 1–3 page site (home + core pages)
+- Mobile-first design + fast performance
+- Conversion-ready contact/quote flow
+- Basic on-page SEO + analytics setup
+- Audience: new or local businesses that need a clean, trustworthy site fast
+
+**Business Website — starting at $1,997**
+- Premium 5–8 page website
+- Service pages built for conversion
+- SEO-ready structure + technical cleanup
+- Integrations (forms, email, booking, CRM-ready)
+- Audience: established companies that need stronger messaging and lead capture
+
+**Premium / Custom Website — custom quote**
+- Custom UX + design system direction
+- Advanced sections (case studies, portals, calculators)
+- Performance + SEO optimization
+- Ongoing iteration and launch support
+- Audience: high-growth brands needing custom UI and tailored strategy
+
+### Social media & reputation add-ons
+
+**Social Media Management**
+- Starter: $397/mo — 12 posts, Facebook + Instagram, content calendar, basic report
+- Growth: $697/mo — 20 posts, all platforms, Stories/Reels, review automation, strategy call
+- Onboarding fee: $197 one-time
+
+**Reputation Management**
+- Standalone: $197/mo — review automation, monitoring, alerts, monthly report
+- Bundled: included in SMM Growth at $697/mo
+
+Public pricing is a starting point; a strategy call confirms scope, integrations, timelines, and support before a final quote.
+
+## FAQ — Homepage
+
+Q: What is an AI receptionist?
+A: An AI receptionist is an automated phone assistant that can answer calls, gather caller details, answer common questions, and route or book appointments based on rules you approve. It is built to reduce missed calls and keep momentum when your team is busy or after hours.
+
+Q: What does Mercy Speaks Digital do?
+A: We build premium websites and storefronts, then layer in AI receptionist systems and automation so your business captures more leads, follows up faster, and converts more visitors into booked appointments.
+
+Q: Who is Mercy Speaks Digital best for?
+A: Growing businesses that depend on phone calls, form fills, or bookings—and want a modern site plus communication systems that work together. We work with teams across the U.S.; we are based in the Houston metro area.
+
+Q: How can we get started or book a demo?
+A: Use the Book Demo or strategy call link on this site to share your business details. We will confirm fit, walk through options, and outline next steps before anything goes live.
+
+Q: Do you only build websites, or do you also install AI and automation?
+A: Both. Many clients start with a conversion-focused website or redesign, then add an AI receptionist, website chat, or workflow automation so inbound leads do not stall.
+
+Q: What is included in website design and development?
+A: A structured scope typically covers brand-aligned layout, mobile-first UX, service and offer pages, strong calls-to-action, lead or contact capture, and performance-minded implementation. Book a call to align on your exact pages, integrations, and timeline.
+
+Q: What does the Missed Revenue Dashboard refer to?
+A: It is the reporting view we pair with the receptionist offering so you can see missed-call activity and lead outcomes in one place—so you can tune scripts, routing, and follow-up with clarity.
+
+Q: Do you serve businesses outside the Houston area?
+A: Yes. We are based in the Houston metro and work with clients nationwide. Onboarding and support are handled remotely.
+
+Q: Are the prices listed on the website final?
+A: Public pricing is a starting point so you can understand tiers and direction. Your strategy call confirms scope, integrations, timelines, and support—then you receive a quote that matches what you actually need.
+
+Q: What should I prepare for a strategy call?
+A: Share how leads reach you today (calls, forms, ads, referrals), which tools you already use, and what “success” looks like in plain terms. That helps us recommend a realistic website and automation setup without over-building.
+
+## FAQ — AI Phone Receptionist
+
+Q: How quickly can the AI receptionist be set up?
+A: Most clients are live within 48–72 hours of onboarding.
+
+Q: Will it sound robotic to my customers?
+A: No. Our AI voices are indistinguishable from a real receptionist in most cases.
+
+Q: What happens if a caller asks something complex?
+A: The AI captures their information and flags it for your team to follow up — no call goes unanswered.
+
+Q: Does it work after business hours?
+A: Yes, 24/7 including weekends and holidays.
+
+## FAQ — Workflow Automation
+
+Q: What tasks can you automate for my business?
+A: Lead follow-up, appointment reminders, missed-call texts, review requests, and more.
+
+Q: Do I need to be tech-savvy to use this?
+A: Not at all. We handle the entire setup and train your team on what to expect.
+
+Q: Will automation replace my staff?
+A: No. It handles the repetitive tasks so your team can focus on revenue-generating work.
+
+## FAQ — Review Generation / Reputation Management
+
+Q: Which review platforms do you monitor?
+A: Google Business Profile, Facebook, and Yelp. Google is the priority — it directly impacts your local search ranking.
+
+Q: What if a customer leaves a negative review?
+A: We alert you immediately and provide a professionally written response template. We can also respond on your behalf if you prefer (included in Growth plan).
+
+Q: Do I need a Google Business Profile?
+A: Yes — and if you don't have one, we'll set it up for you as part of onboarding at no extra charge.
+
+Q: How many review requests does it send per month?
+A: As many as jobs you complete. Every completed job triggers one request. There's no cap.
+
+Q: Can I customize the review request message?
+A: Absolutely. We write the initial message for you during onboarding and you approve it before it goes live.
+
+Q: Does this work with my existing CRM?
+A: We integrate with most major CRMs via Make.com. If yours isn't supported, we'll find a workaround during onboarding.
+
+## FAQ — Social Media Management
+
+Q: Do I have to sign a long contract?
+A: No. After your first 30 days, we're month-to-month. Cancel anytime with 30 days' written notice.
+
+Q: What platforms do you manage?
+A: Starter covers Facebook and Instagram. Growth adds Google Business Profile. Additional platforms available as add-ons.
+
+Q: Do I need to provide content or photos?
+A: Not required — we create everything. But if you have job site photos or team photos, we'd love to use them. Real photos outperform graphics every time.
+
+Q: How does the content approval process work?
+A: We deliver your monthly content calendar 5 days before the month starts. You review and give feedback. We incorporate changes and publish. Simple.
+
+Q: How long does onboarding take?
+A: From signing to first post live: 10–13 days. We move fast.
+
+Q: What if I already have social media accounts?
+A: Great — we take over management of your existing accounts. No need to start fresh.
+
+## FAQ — Pricing page
+
+Q: What if I exceed my call volume?
+A: We notify you before you hit your limit. Additional calls are billed as add-ons—rates vary by plan. You can upgrade anytime.
+
+Q: How long does setup take?
+A: It depends on your phone setup, calendar tools, and how complex your call flows are. After a strategy call we give you a written onboarding sequence with milestones—many teams move quickly once requirements are locked.
+
+Q: Can I cancel?
+A: Billing and commitment details are shown before you start. Ask on a strategy call so we can match you to the right plan.
+
+## Company links
+
+- [Home](https://www.mercyspeaksdigital.com/)
+- [About](https://www.mercyspeaksdigital.com/about)
+- [Results](https://www.mercyspeaksdigital.com/results)
+- [Testimonials](https://www.mercyspeaksdigital.com/testimonials)
+- [Contact](https://www.mercyspeaksdigital.com/contact)
+- [Book a demo](https://www.mercyspeaksdigital.com/book-demo)
+- [Pricing](https://www.mercyspeaksdigital.com/pricing)
+- [Industry: Roofing](https://www.mercyspeaksdigital.com/roofing)
+- [Industry: HVAC](https://www.mercyspeaksdigital.com/hvac)
+- [Industry: Plumbing](https://www.mercyspeaksdigital.com/plumbing)

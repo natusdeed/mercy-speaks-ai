@@ -83,7 +83,9 @@ export function Testimonials({
                       {t.imageUrl ? (
                         <img
                           src={t.imageUrl}
-                          alt={`${t.clientName} avatar`}
+                          alt={`${t.clientName}${t.businessName ? ` of ${t.businessName}` : ""} — client photo`}
+                          width={40}
+                          height={40}
                           className="h-full w-full object-cover rounded-xl"
                           loading="lazy"
                           decoding="async"

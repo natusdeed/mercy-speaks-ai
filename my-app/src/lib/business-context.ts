@@ -3,16 +3,17 @@
  * so the assistant never invents facts. If something is not here, the assistant
  * should suggest booking a demo.
  */
-const DEFAULT_CAL_COM_URL = "https://cal.com/natusdeed/free-ai-receptionist-demo";
-const BOOKING_URL = process.env.BOOKING_URL ?? process.env.VITE_BOOKING_URL ?? DEFAULT_CAL_COM_URL;
+import { absoluteUrl, BOOKING_LINKS, BUSINESS } from "@/lib/site-config";
+
+const BOOKING_PAGE_URL = absoluteUrl(BOOKING_LINKS.generalStrategyCall);
 
 export const BUSINESS_CONTEXT = {
-  companyName: "Mercy Speaks Digital",
+  companyName: BUSINESS.name,
   tagline: "AI automation and digital marketing company",
   contact: {
-    phone: "(703) 332-5956",
-    email: "don@mercyspeaksdigital.com",
-    bookingLink: BOOKING_URL,
+    phone: BUSINESS.phoneDisplay,
+    email: BUSINESS.email,
+    bookingLink: BOOKING_PAGE_URL,
     contactLink: "/contact",
   },
   services: [
@@ -24,7 +25,7 @@ export const BUSINESS_CONTEXT = {
   ],
   pricing: {
     note: "Pricing is customized based on business size and needs. We do not publish fixed tiers publicly.",
-    guidance: "Suggest booking a demo or calling (703) 332-5956 for a tailored quote.",
+    guidance: `Suggest booking a demo or calling ${BUSINESS.phoneDisplay} for a tailored quote.`,
   },
   setupTimeline: "Typically 1–2 weeks from kickoff to go-live for most solutions; complex integrations may take longer. We'll provide a timeline during the demo.",
   coverage: "We serve businesses nationwide (US).",

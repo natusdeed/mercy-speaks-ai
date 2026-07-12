@@ -28,7 +28,7 @@ export function Hero() {
           transition={{ duration: 0.5 }}
           className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-slate-50 tracking-tight leading-[1.12] mb-5"
         >
-          Premium Websites, E-commerce, AI Receptionists & Automation for Growing Businesses
+          Websites and 24/7 AI Receptionists That Turn Missed Calls Into Booked Jobs
         </motion.h1>
 
         <motion.p
@@ -37,7 +37,7 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-base sm:text-lg md:text-xl text-slate-400 leading-relaxed max-w-2xl mx-auto mb-6 px-1"
         >
-          We build premium websites and storefronts, then add AI and automation that capture leads and follow up fast—so more visitors become booked customers.
+          From premium websites and e-commerce storefronts to AI receptionists and automation—we build the full stack that captures leads, follows up fast, and turns more visitors into booked customers.
         </motion.p>
 
         <motion.div

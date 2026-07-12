@@ -1,55 +1,57 @@
 import { motion } from "framer-motion";
 import { Check, ArrowRight, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { BookingLink } from "@/components/cta/booking-link";
 
+/**
+ * Legacy unused page (router uses app/portfolio → /results).
+ * Scenarios are illustrative composites only — no invented business names.
+ */
 interface CaseStudy {
   id: string;
   industry: string;
   situation: string;
   installed: string;
   outcomes: [string, string, string];
-  testimonial: string;
+  note: string;
 }
-
-import { BookingLink } from "@/components/cta/booking-link";
 
 const CASE_STUDIES: CaseStudy[] = [
   {
-    id: "martinez-hvac",
+    id: "hvac-after-hours",
     industry: "HVAC / Plumbing",
-    situation: "Missing 40% of after-hours emergency calls; $8K+ lost monthly.",
+    situation: "Missing a large share of after-hours emergency calls; revenue leaking monthly.",
     installed: "24/7 AI Phone Receptionist + Missed Revenue Dashboard.",
     outcomes: [
-      "Captured 100% of after-hours calls",
-      "Bookings up 180%; $4,200/mo saved on staffing",
-      "Customer satisfaction up 45%",
+      "Captured after-hours calls that previously went to voicemail",
+      "Bookings and staffing load improved during peak season",
+      "Clearer visibility into missed-call patterns",
     ],
-    testimonial: "We went from missing calls to capturing every opportunity. The AI handles everything perfectly.",
+    note: "Illustrative scenario. References available on request.",
   },
   {
-    id: "elite-dental",
+    id: "dental-scheduling",
     industry: "Dental / Med Spa",
-    situation: "35% no-show rate; staff buried in phone scheduling.",
+    situation: "High no-show rate; staff buried in phone scheduling.",
     installed: "AI Phone Receptionist + Automated Appointment Reminders.",
     outcomes: [
-      "No-shows reduced by 60%",
-      "20 hours/week freed for patient care",
-      "Appointment bookings up 150%",
+      "No-shows reduced with automated reminders",
+      "Front-desk time freed for in-person care",
+      "Appointment bookings improved with 24/7 coverage",
     ],
-    testimonial: "Our no-show rate dropped dramatically. Our team focuses on patients, not scheduling. Game changer.",
+    note: "Illustrative scenario. References available on request.",
   },
   {
-    id: "bayou-auto",
+    id: "auto-repair-intake",
     industry: "Auto Repair",
     situation: "Long wait times, no quick quotes; losing customers to competitors.",
     installed: "AI Phone Receptionist for instant quotes, scheduling, and FAQs 24/7.",
     outcomes: [
-      "500+ calls/month handled automatically",
-      "Wait times down 80%; retention up 40%",
-      "$12K+ additional revenue captured",
+      "High call volume handled without adding headcount",
+      "Wait times down; retention improved",
+      "Additional revenue captured from after-hours inquiries",
     ],
-    testimonial: "Customers love the instant service. We're booking more and our team isn't overwhelmed anymore.",
+    note: "Illustrative scenario. References available on request.",
   },
 ];
 
@@ -89,9 +91,9 @@ function CaseStudyCard({ study, index }: { study: CaseStudy; index: number }) {
         ))}
       </ul>
 
-      <blockquote className="text-slate-400 text-sm italic border-l-2 border-slate-700 pl-4 mb-6 flex-1">
-        &ldquo;{study.testimonial}&rdquo;
-      </blockquote>
+      <p className="text-slate-500 text-sm border-l-2 border-slate-700 pl-4 mb-6 flex-1">
+        {study.note}
+      </p>
 
       <Button variant="outline" size="default" asChild className="w-fit mt-auto">
         <BookingLink className="flex items-center gap-2">
@@ -107,16 +109,15 @@ export default function Portfolio() {
   return (
     <div className="min-h-screen bg-slate-950">
       <main className="w-full">
-        {/* Hero */}
         <section className="section section-hero">
           <div className="section-inner max-w-3xl mx-auto text-center">
             <motion.h1
               {...fadeUp}
               className="text-4xl md:text-5xl font-bold text-slate-50 tracking-tight mb-4"
             >
-              Results from{" "}
+              Results &amp;{" "}
               <span className="bg-linear-to-r from-electric-purple to-neon-cyan bg-clip-text text-transparent">
-                Real Businesses
+                labeled scenarios
               </span>
             </motion.h1>
             <motion.p
@@ -124,7 +125,7 @@ export default function Portfolio() {
               transition={{ delay: 0.06 }}
               className="text-lg text-slate-400 mb-6"
             >
-              How we helped local businesses capture lost revenue and run smoother with AI.
+              How AI reception and automation can capture lost revenue—shown as illustrative composites.
             </motion.p>
             <motion.p
               {...fadeUp}
@@ -136,7 +137,6 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* 3 featured case studies */}
         <section className="section border-t border-slate-800/50" aria-labelledby="case-studies-heading">
           <div className="section-inner">
             <h2 id="case-studies-heading" className="sr-only">
@@ -150,7 +150,6 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* CTA */}
         <section className="section border-t border-slate-800/40 pb-20 md:pb-28">
           <div className="section-inner max-w-2xl mx-auto text-center">
             <motion.p
@@ -159,7 +158,7 @@ export default function Portfolio() {
               viewport={{ once: true }}
               className="text-slate-400 mb-6"
             >
-              Want results like these? Book a demo and we’ll show you what’s possible for your business.
+              Want to see what&apos;s possible for your business? Book a demo.
             </motion.p>
             <Button variant="primary" size="lg" asChild>
               <BookingLink className="flex items-center gap-2">

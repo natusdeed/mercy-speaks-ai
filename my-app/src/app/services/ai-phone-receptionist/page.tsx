@@ -121,7 +121,7 @@ export default function AIPhoneReceptionistPage() {
               </ServicePairCallout>
               <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
                 <Button variant="primary" size="lg" asChild>
-                  <BookingLink>Schedule a Demo</BookingLink>
+                  <BookingLink kind="aiReceptionistDemo">Schedule a Demo</BookingLink>
                 </Button>
                 <Button variant="outline" size="lg" asChild>
                   <Link to="/pricing">View Pricing</Link>
@@ -251,7 +251,7 @@ export default function AIPhoneReceptionistPage() {
                   Book a strategy call to confirm scope, onboarding steps, and plan terms before you commit.
                 </p>
                 <Button variant="primary" size="lg" asChild>
-                  <BookingLink>
+                  <BookingLink kind="aiReceptionistDemo">
                     Schedule a Demo
                   </BookingLink>
                 </Button>

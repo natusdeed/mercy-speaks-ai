@@ -12,7 +12,7 @@ const STATUS_COLORS = {
   "New Lead":"#00d4ff","Contacted":"#f59e0b","Follow-Up":"#a78bfa",
   "Demo Booked":"#34d399","Closed":"#10b981","Not Interested":"#6b7280"
 };
-const CAL_LINK = "https://cal.com/natusdeed/free-ai-receptionist-demo";
+const CAL_LINK = "https://www.mercyspeaksdigital.com/book-demo";
 const AVG_JOB_VALUES = {
   "HVAC":850,"Plumbing":650,"Roofing":8500,"Electrical":750,
   "Landscaping":400,"General Contractor":4500,"Pest Control":250,

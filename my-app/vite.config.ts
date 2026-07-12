@@ -1,5 +1,6 @@
 import { Socket } from 'node:net';
-import { defineConfig, loadEnv, type UserConfig } from 'vite';
+import fs from 'node:fs';
+import { defineConfig, loadEnv, type UserConfig, type ViteDevServer } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 
@@ -8,6 +9,16 @@ const mode = process.env.MODE || process.env.NODE_ENV || 'development';
 const cwd = process.cwd();
 const parentDir = path.resolve(cwd, '..');
 Object.assign(process.env, loadEnv(mode, parentDir, ''), loadEnv(mode, cwd, ''));
+
+/**
+ * Load app modules via Vite SSR (aliases + TS). Never use bare `import('./src/...')` in this
+ * file — Vite's config bundler inlines those and leaves unresolved `@/` package imports.
+ */
+function ssrLoad(server: ViteDevServer, relFromConfig: string) {
+  const abs = path.resolve(__dirname, relFromConfig);
+  const id = '/' + path.relative(server.config.root, abs).split(path.sep).join('/');
+  return server.ssrLoadModule(id);
+}
 
 /**
  * True if something already accepts TCP on this port on loopback (checks both IPv4 and IPv6).
@@ -63,6 +74,62 @@ export default defineConfig(async (): Promise<UserConfig> => {
   root: path.resolve(__dirname),
   plugins: [
     {
+      name: 'preview-prerender-clean-urls',
+      /**
+       * Vite preview SPA fallback serves `/pricing` as root index.html.
+       * Prerendered pages live at `dist/<path>/index.html` — serve those (and 404.html)
+       * before the SPA fallback so local QA matches Vercel static hosting.
+       */
+      configurePreviewServer(server) {
+        server.middlewares.use((req, res, next) => {
+          if (req.method !== 'GET' && req.method !== 'HEAD') {
+            next();
+            return;
+          }
+          const raw = req.url?.split('?')[0] ?? '/';
+          // Leave real assets / extensioned files to Vite
+          if (raw.includes('.') && !raw.endsWith('.html')) {
+            next();
+            return;
+          }
+          const clean = decodeURIComponent(raw.replace(/\/$/, '') || '/');
+          // Client-only apps: keep SPA fallback
+          if (
+            clean === '/dashboard' ||
+            clean.startsWith('/dashboard/') ||
+            clean === '/admin' ||
+            clean.startsWith('/admin/') ||
+            clean.startsWith('/demo/')
+          ) {
+            next();
+            return;
+          }
+          if (clean === '/') {
+            next();
+            return;
+          }
+
+          const distRoot = path.resolve(__dirname, 'dist');
+          const pageFile = path.join(distRoot, clean.slice(1), 'index.html');
+          if (fs.existsSync(pageFile)) {
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'text/html; charset=utf-8');
+            fs.createReadStream(pageFile).pipe(res);
+            return;
+          }
+
+          const notFound = path.join(distRoot, '404.html');
+          if (fs.existsSync(notFound)) {
+            res.statusCode = 404;
+            res.setHeader('Content-Type', 'text/html; charset=utf-8');
+            fs.createReadStream(notFound).pipe(res);
+            return;
+          }
+          next();
+        });
+      },
+    },
+    {
       name: 'dev-fallback-port-hint',
       configureServer(server) {
         server.httpServer?.once('listening', () => {
@@ -75,6 +142,26 @@ export default defineConfig(async (): Promise<UserConfig> => {
             );
           }
         });
+      },
+    },
+    {
+      name: 'warn-pricing-placeholders',
+      buildStart() {
+        // Scan source (avoid importing @/-aliased modules from Node).
+        const pricingPath = path.resolve(__dirname, 'src/content/pricing-tiers.ts');
+        const src = fs.readFileSync(pricingPath, 'utf8');
+        const rateHits = [...src.matchAll(/overagePerCallUsd:\s*NEEDS_REAL_RATES/g)];
+        if (rateHits.length > 0) {
+          console.warn(
+            `[pricing-tiers] NEEDS_REAL_RATES: ${rateHits.length} overage rate(s) still placeholders. UI shows “Published overage rates coming soon — ask on your call” until you set numbers in PLAN_OVERAGE_ROWS.`,
+          );
+        }
+        const termHits = [...src.matchAll(/:\s*NEEDS_REAL_TERMS/g)];
+        if (termHits.length > 0) {
+          console.warn(
+            `[pricing-tiers] NEEDS_REAL_TERMS: ${termHits.length} billing term(s) still placeholders. UI shows honest “ask on your strategy call” copy until you fill BILLING_TERMS.`,
+          );
+        }
       },
     },
     react(),
@@ -155,7 +242,7 @@ export default defineConfig(async (): Promise<UserConfig> => {
             (async () => {
               try {
                 const fakeRequest = new Request(`http://localhost${req.url}`, { method: 'GET', headers: forwardHeaders });
-                const { GET } = await import('./src/app/api-handlers/widget/config/route');
+                const { GET } = await ssrLoad(server, 'src/app/api-handlers/widget/config/route.ts');
                 const response = await GET(fakeRequest);
                 res.statusCode = response.status;
                 response.headers.forEach((v, k) => res.setHeader(k, v));
@@ -183,7 +270,10 @@ export default defineConfig(async (): Promise<UserConfig> => {
                   body: bodyStr,
                 });
                 if (isWidgetChat) {
-                  const { handleWidgetChatRequest } = await import('./src/app/api-handlers/widget/chat-handler');
+                  const { handleWidgetChatRequest } = await ssrLoad(
+                    server,
+                    'src/app/api-handlers/widget/chat-handler.ts',
+                  );
                   const response = await handleWidgetChatRequest(fakeRequest);
                   res.statusCode = response.status;
                   response.headers.forEach((v, k) => res.setHeader(k, v));
@@ -191,7 +281,10 @@ export default defineConfig(async (): Promise<UserConfig> => {
                   res.setHeader('Content-Type', 'application/json');
                   res.end(JSON.stringify(data));
                 } else {
-                  const { handleWidgetLeadRequest } = await import('./src/app/api-handlers/widget/lead/route');
+                  const { handleWidgetLeadRequest } = await ssrLoad(
+                    server,
+                    'src/app/api-handlers/widget/lead/route.ts',
+                  );
                   const response = await handleWidgetLeadRequest(fakeRequest);
                   res.statusCode = response.status;
                   response.headers.forEach((v, k) => res.setHeader(k, v));
@@ -242,7 +335,10 @@ export default defineConfig(async (): Promise<UserConfig> => {
                   headers: { 'Content-Type': 'application/json' },
                   body: bodyStr,
                 });
-                const { handleChatLeadRequest } = await import('./src/app/api-handlers/chat/lead-route');
+                const { handleChatLeadRequest } = await ssrLoad(
+                  server,
+                  'src/app/api-handlers/chat/lead-route.ts',
+                );
                 const response = await handleChatLeadRequest(fakeRequest);
                 res.statusCode = response.status;
                 response.headers.forEach((v, k) => res.setHeader(k, v));
@@ -265,7 +361,10 @@ export default defineConfig(async (): Promise<UserConfig> => {
                   headers: { 'Content-Type': 'application/json', ...Object.fromEntries(Object.entries(req.headers).filter(([, v]) => v != null).map(([k, v]) => [k.toLowerCase(), Array.isArray(v) ? v.join(', ') : String(v)])) },
                   body: bodyStr,
                 });
-                const { handleChatRequest } = await import('./src/app/api-handlers/chat/chat-handler');
+                const { handleChatRequest } = await ssrLoad(
+                  server,
+                  'src/app/api-handlers/chat/chat-handler.ts',
+                );
                 const response = await handleChatRequest(fakeRequest);
                 res.statusCode = response.status;
                 response.headers.forEach((v, k) => res.setHeader(k, v));
@@ -298,7 +397,7 @@ export default defineConfig(async (): Promise<UserConfig> => {
                 }
                 if (isBookDemo) {
                   try {
-                    const { POST } = await import('./src/app/api-handlers/book-demo/route');
+                    const { POST } = await ssrLoad(server, 'src/app/api-handlers/book-demo/route.ts');
                     const fakeReq = new Request(`http://localhost${req.url}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: bodyStr });
                     const response = await POST(fakeReq);
                     res.statusCode = response.status;
@@ -312,7 +411,7 @@ export default defineConfig(async (): Promise<UserConfig> => {
                     res.end(JSON.stringify({ error: 'Internal server error', message: e instanceof Error ? e.message : 'Submission failed. Please try again.' }));
                   }
                 } else {
-                  const { POST } = await import('./src/app/api-handlers/contact/route');
+                  const { POST } = await ssrLoad(server, 'src/app/api-handlers/contact/route.ts');
                   const fakeReq = new Request(`http://localhost${req.url}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: bodyStr });
                   const response = await POST(fakeReq);
                   res.statusCode = response.status;
@@ -357,8 +456,8 @@ export default defineConfig(async (): Promise<UserConfig> => {
                 body: bodyStr,
               });
               const { POST } = isLogin
-                ? await import('./src/app/api-handlers/dashboard/login/route')
-                : await import('./src/app/api-handlers/dashboard/verify/route');
+                ? await ssrLoad(server, 'src/app/api-handlers/dashboard/login/route.ts')
+                : await ssrLoad(server, 'src/app/api-handlers/dashboard/verify/route.ts');
               const response = await POST(fakeRequest);
               res.statusCode = response.status;
               response.headers.forEach((v, k) => res.setHeader(k, v));
@@ -427,12 +526,12 @@ export default defineConfig(async (): Promise<UserConfig> => {
               });
               const response =
                 isList && req.method === 'GET'
-                  ? await (await import('./src/app/api-handlers/dashboard/leads/route')).GET(fakeRequest)
+                  ? await (await ssrLoad(server, 'src/app/api-handlers/dashboard/leads/route.ts')).GET(fakeRequest)
                   : isList && req.method === 'POST'
-                    ? await (await import('./src/app/api-handlers/dashboard/leads/route')).POST(fakeRequest)
+                    ? await (await ssrLoad(server, 'src/app/api-handlers/dashboard/leads/route.ts')).POST(fakeRequest)
                     : idMatch && req.method === 'GET'
-                      ? await (await import('./src/app/api-handlers/dashboard/leads/[id]/route')).GET(fakeRequest)
-                      : await (await import('./src/app/api-handlers/dashboard/leads/[id]/route')).PATCH(fakeRequest);
+                      ? await (await ssrLoad(server, 'src/app/api-handlers/dashboard/leads/[id]/route.ts')).GET(fakeRequest)
+                      : await (await ssrLoad(server, 'src/app/api-handlers/dashboard/leads/[id]/route.ts')).PATCH(fakeRequest);
               res.statusCode = response.status;
               response.headers.forEach((v, k) => res.setHeader(k, v));
               const buf = Buffer.from(await response.arrayBuffer());
@@ -499,10 +598,10 @@ export default defineConfig(async (): Promise<UserConfig> => {
               });
               const response =
                 isList && req.method === 'GET'
-                  ? await (await import('./src/app/api-handlers/dashboard/conversations/route')).GET(fakeRequest)
+                  ? await (await ssrLoad(server, 'src/app/api-handlers/dashboard/conversations/route.ts')).GET(fakeRequest)
                   : idMatch && req.method === 'GET'
-                    ? await (await import('./src/app/api-handlers/dashboard/conversations/[id]/route')).GET(fakeRequest)
-                    : await (await import('./src/app/api-handlers/dashboard/conversations/[id]/route')).PATCH(fakeRequest);
+                    ? await (await ssrLoad(server, 'src/app/api-handlers/dashboard/conversations/[id]/route.ts')).GET(fakeRequest)
+                    : await (await ssrLoad(server, 'src/app/api-handlers/dashboard/conversations/[id]/route.ts')).PATCH(fakeRequest);
               res.statusCode = response.status;
               response.headers.forEach((v, k) => res.setHeader(k, v));
               const buf = Buffer.from(await response.arrayBuffer());
@@ -578,13 +677,17 @@ export default defineConfig(async (): Promise<UserConfig> => {
     },
   ],
   resolve: {
-    // Order matters: `@` must not steal `@/lib/react-helmet-compat` (object keys are not ordered reliably).
+    // Regex aliases: string find "@/lib/..." can make Vite's config bundler try to resolve `@/lib` as a package.
+    // Helmet compat must win over the general `@/` → src mapping.
     alias: [
       {
-        find: "@/lib/react-helmet-compat",
+        find: /^@\/lib\/react-helmet-compat$/,
         replacement: path.resolve(__dirname, "./src/lib/react-helmet-compat.browser.tsx"),
       },
-      { find: "@", replacement: path.resolve(__dirname, "./src") },
+      {
+        find: /^@\//,
+        replacement: `${path.resolve(__dirname, "./src")}/`,
+      },
     ],
   },
   server: {

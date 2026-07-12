@@ -9,8 +9,8 @@ import { Testimonials } from "@/components/sections/testimonials";
 import { ALL_SITE_TESTIMONIALS } from "@/content/all-testimonials";
 import { SeoHead } from "@/components/seo/seo-head";
 import { JsonLd } from "@/components/seo/json-ld";
-import { BRAND_TAGLINE } from "@/lib/site-config";
-import { breadcrumbSchema, organizationSchema, webPageSchema } from "@/lib/schema";
+import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
+import { BookingLink } from "@/components/cta/booking-link";
 
 const fadeUp = {
   initial: { opacity: 0, y: 16 },
@@ -18,17 +18,15 @@ const fadeUp = {
   transition: { duration: 0.45 },
 };
 
-const CAL_DEMO_URL = "https://cal.com/natusdeed/free-ai-receptionist-demo";
-
 export default function TestimonialsPage() {
-  const description = `Client testimonials and verified feedback from Houston-area businesses: ${BRAND_TAGLINE}`;
+  const description =
+    "Read client testimonials and verified feedback from Houston-area businesses using Mercy Speaks Digital websites, AI receptionists, and automation.";
 
   return (
     <PageShell className="min-h-screen bg-slate-950">
       <SeoHead path="/testimonials" title="Testimonials" description={description} />
       <JsonLd
         data={[
-          organizationSchema(),
           webPageSchema({ name: "Testimonials", description, path: "/testimonials" }),
           breadcrumbSchema([
             { name: "Home", path: "/" },
@@ -47,10 +45,11 @@ export default function TestimonialsPage() {
                 id="testimonials-page-title"
                 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-50 tracking-tight mb-4"
               >
-                Real results from real Houston businesses
+                Client testimonials
               </h1>
               <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-                We only publish real testimonials. References are available on request when disclosure allows.
+                We only publish verified, permissioned feedback. References are available on request
+                when disclosure allows.
               </p>
             </motion.div>
           </div>
@@ -74,7 +73,7 @@ export default function TestimonialsPage() {
         <Testimonials
           items={ALL_SITE_TESTIMONIALS}
           title="What operators are saying"
-          description="HVAC, automotive, and dental-adjacent scenarios—aligned with the same proof points we highlight on the homepage and industry pages."
+          description="Verified quotes appear here once clients approve publication. Until then, see labeled illustrative scenarios on Results."
           hideFooterCta
           singleCardLayout={false}
         />
@@ -83,18 +82,13 @@ export default function TestimonialsPage() {
           <div className="section-inner max-w-2xl mx-auto text-center">
             <motion.div {...fadeUp}>
               <p className="text-slate-300 text-lg mb-6">
-                Ready to get results like these? Book your free demo →
+                Want to see how this works for your business? Book your free demo →
               </p>
               <Button variant="primary" size="lg" asChild>
-                <a
-                  href={CAL_DEMO_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2"
-                >
+                <BookingLink kind="generalStrategyCall" className="flex items-center justify-center gap-2">
                   Book your free demo
                   <ArrowRight className="w-5 h-5" aria-hidden />
-                </a>
+                </BookingLink>
               </Button>
               <p className="mt-6 text-sm text-slate-500">
                 Prefer to browse proof first?{" "}

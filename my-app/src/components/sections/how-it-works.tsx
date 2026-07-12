@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Phone, Bot, BarChart3, Play } from "lucide-react";
 import { BookingLink } from "@/components/cta/booking-link";
+import { siteContent } from "@/lib/site-config";
 
 const STEPS = [
   {
@@ -26,6 +27,8 @@ const STEPS = [
 ];
 
 export function HowItWorks() {
+  const demoVideoUrl = siteContent.demoMedia.videoUrl;
+
   return (
     <section
       className="section bg-slate-950"
@@ -63,9 +66,12 @@ export function HowItWorks() {
                 className="relative text-center"
               >
                 <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-slate-800/60 text-neon-cyan mb-4">
-                  <Icon className="w-7 h-7" />
+                  <Icon className="w-7 h-7" aria-hidden />
                 </div>
-                <span className="absolute top-0 right-1/2 translate-x-12 -translate-y-1 text-5xl font-bold text-slate-800/70">
+                <span
+                  className="absolute top-0 right-1/2 translate-x-12 -translate-y-1 text-5xl font-bold text-slate-800/70"
+                  aria-hidden
+                >
                   {step.number}
                 </span>
                 <h3 className="text-xl md:text-2xl font-bold text-slate-50 mb-3">
@@ -84,29 +90,47 @@ export function HowItWorks() {
           })}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mt-10 md:mt-14 max-w-4xl mx-auto w-full"
-        >
-          {/* TODO: Replace with real Loom/YouTube embed URL. */}
-          <div className="rounded-xl overflow-hidden border border-slate-800/60 bg-slate-900/90 shadow-lg shadow-black/20">
-            <div
-              className="aspect-video flex items-center justify-center bg-slate-950"
-              role="img"
-              aria-label="Video preview placeholder"
-            >
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-slate-800/90 ring-2 ring-neon-cyan/30">
-                <Play className="h-8 w-8 translate-x-0.5 text-neon-cyan" aria-hidden />
+        {demoVideoUrl ? (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="mt-10 md:mt-14 max-w-4xl mx-auto w-full"
+          >
+            <div className="rounded-xl overflow-hidden border border-slate-800/60 bg-slate-900/90 shadow-lg shadow-black/20">
+              <div className="aspect-video bg-slate-950">
+                <iframe
+                  src={demoVideoUrl}
+                  title="AI receptionist handling a real inbound call"
+                  className="h-full w-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  loading="lazy"
+                />
               </div>
+              <p className="px-4 py-3 text-center text-sm text-slate-400">
+                Watch: AI Receptionist handling a real inbound call.
+              </p>
             </div>
-            <p className="px-4 py-3 text-center text-sm text-slate-400">
-              Watch: AI Receptionist handling a real inbound call.
+          </motion.div>
+        ) : (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="mt-10 md:mt-14 max-w-xl mx-auto text-center"
+          >
+            <p className="text-slate-400 text-sm mb-4">
+              Prefer a live walkthrough? Book a demo and we will play a real inbound call together.
             </p>
-          </div>
-        </motion.div>
+            <BookingLink className="inline-flex items-center gap-2 text-sm font-semibold text-neon-cyan hover:text-neon-cyan/80 transition-colors">
+              <Play className="h-4 w-4" aria-hidden />
+              Book a live demo
+            </BookingLink>
+          </motion.div>
+        )}
       </div>
     </section>
   );

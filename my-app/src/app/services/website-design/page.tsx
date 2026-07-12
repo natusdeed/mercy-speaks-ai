@@ -23,11 +23,10 @@ import { BookingLink } from "@/components/cta/booking-link";
 import { SeoHead } from "@/components/seo/seo-head";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
-import { BRAND_TAGLINE, NAV_PATHS } from "@/lib/site-config";
+import { BRAND_TAGLINE, DAVITA_AUTO_LOGISTICS_URL, NAV_PATHS } from "@/lib/site-config";
 import { ServicePairCallout } from "@/components/marketing/service-pair-callout";
 import {
   breadcrumbSchema,
-  organizationSchema,
   serviceSchema,
   webPageSchema,
 } from "@/lib/schema";
@@ -128,17 +127,17 @@ const portfolioItems: PortfolioItem[] = [
   {
     id: "davita-auto-logistics",
     title: "Davita Auto Logistics",
-    url: "https://davita-auto-logistics.vercel.app/",
+    url: DAVITA_AUTO_LOGISTICS_URL,
     category: "Websites",
-    industryTag: "Logistics / Solar Supply",
+    industryTag: "Demo build",
     description:
       "Clean-energy logistics brand: Tier-1 solar supply, luxury auto transport, Texas-based coordination, and global shipping stories—messaged for export-heavy buyers.",
     outcome:
       "High-trust marketing site with product tiers, gallery, shipping lanes, and quote capture for export-heavy buyers.",
     stack: ["Next.js", "Tailwind", "Vercel"],
     thumbnail: "/portfolio/davita-auto-logistics.png",
-    liveUrl: "https://davita-auto-logistics.vercel.app/",
-    ctaLabel: "View Live Site",
+    liveUrl: DAVITA_AUTO_LOGISTICS_URL,
+    ctaLabel: "View Demo Build",
     featured: true,
   },
   {
@@ -159,26 +158,27 @@ const portfolioItems: PortfolioItem[] = [
 
 export default function WebsiteDesignPage() {
   const seoDescription =
-    "Premium website design, redesigns, and landing pages built for trust and conversion—mobile-first, fast, and SEO-aware. Mercy Speaks Digital.";
+    "Premium website design and development for small businesses—mobile-first, fast, and built to convert visitors into calls, quotes, and booked appointments.";
+  const intro =
+    "We design premium, mobile-first websites that make your business look credible, explain your services clearly, and convert visitors into inquiries and booked customers.";
 
   return (
     <PageShell className="min-h-screen bg-slate-950">
       <SeoHead
         path={NAV_PATHS.websiteDesign}
-        title="Website design & development"
+        title="Website Design & Development | Mercy Speaks Digital"
         description={seoDescription}
       />
       <JsonLd
         data={[
-          organizationSchema(),
           webPageSchema({
-            name: "Website design & development",
+            name: "Website Design & Development for Small Business",
             description: seoDescription,
             path: NAV_PATHS.websiteDesign,
           }),
           serviceSchema({
             name: "Website design & development",
-            description: seoDescription,
+            description: intro,
             path: NAV_PATHS.websiteDesign,
             serviceType: "Web design",
           }),
@@ -221,8 +221,7 @@ export default function WebsiteDesignPage() {
                 </h1>
 
                 <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl mb-7">
-                  We design premium, mobile-first websites that make your business look credible, explain your
-                  services clearly, and convert visitors into inquiries and booked customers.
+                  {intro}
                 </p>
 
                 <ServicePairCallout>
@@ -238,7 +237,7 @@ export default function WebsiteDesignPage() {
 
                 <div className="mt-7 flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center">
                   <Button variant="primary" size="lg" asChild className="rounded-xl">
-                    <BookingLink className="flex items-center justify-center gap-2">
+                    <BookingLink kind="websiteQuote" className="flex items-center justify-center gap-2">
                       Book a Website Strategy Call
                       <ArrowRight className="w-5 h-5" />
                     </BookingLink>
@@ -469,16 +468,16 @@ export default function WebsiteDesignPage() {
 
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Button variant="primary" size="default" asChild className="rounded-xl">
-                    <BookingLink className="flex items-center justify-center gap-2">
+                    <BookingLink kind="websiteQuote" className="flex items-center justify-center gap-2">
                       Book Demo
                       <ArrowRight className="w-4 h-4" />
                     </BookingLink>
                   </Button>
                   <Button variant="outline" size="default" asChild className="rounded-xl">
-                    <Link to="/contact" className="flex items-center justify-center gap-2">
+                    <BookingLink kind="websiteQuote" className="flex items-center justify-center gap-2">
                       Get a Website Quote
                       <ArrowRight className="w-4 h-4" />
-                    </Link>
+                    </BookingLink>
                   </Button>
                 </div>
               </div>
@@ -500,16 +499,16 @@ export default function WebsiteDesignPage() {
 
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Button variant="primary" size="lg" asChild className="rounded-xl">
-                  <BookingLink className="flex items-center justify-center gap-2">
+                  <BookingLink kind="websiteQuote" className="flex items-center justify-center gap-2">
                     Book a Website Strategy Call
                     <ArrowRight className="w-5 h-5" />
                   </BookingLink>
                 </Button>
                 <Button variant="outline" size="lg" asChild className="rounded-xl">
-                  <Link to="/contact" className="flex items-center justify-center gap-2">
+                  <BookingLink kind="websiteQuote" className="flex items-center justify-center gap-2">
                     Get a Website Quote
                     <ArrowRight className="w-5 h-5" />
-                  </Link>
+                  </BookingLink>
                 </Button>
               </div>
 

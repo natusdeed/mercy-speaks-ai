@@ -3,7 +3,7 @@ import { ShieldCheck, BarChart3, Megaphone, SlidersHorizontal, Cookie, Mail } fr
 import { Link } from "react-router-dom";
 import { SeoHead } from "@/components/seo/seo-head";
 import { JsonLd } from "@/components/seo/json-ld";
-import { breadcrumbSchema, organizationSchema, webPageSchema } from "@/lib/schema";
+import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
 
 const cookieCategories = [
   {
@@ -64,13 +64,12 @@ export default function CookiePolicy() {
   return (
     <div className="min-h-screen bg-slate-950">
       <SeoHead
-        title="Cookie Policy | Mercy Speaks Digital LLC"
-        description="Cookie policy for Mercy Speaks Digital LLC, including cookie categories, third-party providers, and visitor controls."
+        title="Cookie Policy | Mercy Speaks Digital"
+        description="Cookie policy for Mercy Speaks Digital—cookie categories, third-party providers, retention details, and how visitors can control preferences on this site."
         path="/cookie-policy"
       />
       <JsonLd
         data={[
-          organizationSchema(),
           webPageSchema({
             name: "Cookie Policy",
             description:

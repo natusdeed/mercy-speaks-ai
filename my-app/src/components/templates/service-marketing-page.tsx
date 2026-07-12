@@ -1,4 +1,5 @@
 import type { LucideIcon } from "lucide-react";
+import type { ReactNode } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { PageShell } from "@/components/ui/page-shell";
@@ -14,10 +15,23 @@ import { Accordion, type AccordionItemData } from "@/components/ui/Accordion";
 
 export type ServiceSection = {
   title: string;
-  body: string;
+  /** Plain string or JSX (e.g. inline internal links). */
+  body: ReactNode;
 };
 
 export type RelatedLink = { to: string; label: string };
+
+export type ServiceComparisonTable = {
+  title: string;
+  /** Column headers after the row-label column (e.g. Voicemail, Human answering, AI receptionist). */
+  columns: string[];
+  rows: Array<{ feature: string; values: string[] }>;
+};
+
+export type ServiceComplianceBlock = {
+  title?: string;
+  body: string;
+};
 
 export type ServiceMarketingPageProps = {
   seoTitle: string;
@@ -26,13 +40,21 @@ export type ServiceMarketingPageProps = {
   icon: LucideIcon;
   h1: string;
   intro: string;
+  /** Optional note under the intro (links, product differentiation). */
+  introNote?: ReactNode;
   /** Plain-language block for users and answer engines */
   atAGlance: string;
   sections: ServiceSection[];
+  /** Optional comparison table (rendered after detail sections). */
+  comparison?: ServiceComparisonTable;
+  /** Optional compliance & trust block (rendered before FAQs). */
+  compliance?: ServiceComplianceBlock;
   related?: RelatedLink[];
   serviceType?: string;
   /** Optional per-service FAQ (collapsible accordion). */
   faqs?: AccordionItemData[];
+  /** Optional block rendered directly under the hero (e.g. LiveDemo). */
+  afterHero?: ReactNode;
 };
 
 export function ServiceMarketingPage({
@@ -42,11 +64,15 @@ export function ServiceMarketingPage({
   icon: Icon,
   h1,
   intro,
+  introNote,
   atAGlance,
   sections,
+  comparison,
+  compliance,
   related = [],
   serviceType,
   faqs,
+  afterHero,
 }: ServiceMarketingPageProps) {
   const crumbs = [
     { name: "Services", path: NAV_PATHS.services },
@@ -57,7 +83,7 @@ export function ServiceMarketingPage({
     webPageSchema({ name: seoTitle, description: seoDescription, path }),
     serviceSchema({
       name: h1,
-      description: seoDescription,
+      description: intro,
       path,
       serviceType: serviceType ?? h1,
     }),
@@ -96,7 +122,18 @@ export function ServiceMarketingPage({
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-slate-50 mb-4 title-3d px-1 [overflow-wrap:anywhere]">
                 {h1}
               </h1>
-              <p className="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto mb-8 px-1">{intro}</p>
+              <p
+                className={`text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto px-1 ${
+                  introNote ? "mb-4" : "mb-8"
+                }`}
+              >
+                {intro}
+              </p>
+              {introNote ? (
+                <div className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto mb-8 px-1 leading-relaxed [&_a]:text-neon-cyan [&_a]:underline [&_a]:underline-offset-2">
+                  {introNote}
+                </div>
+              ) : null}
               <div className="flex flex-col sm:flex-row gap-3 justify-center items-stretch sm:items-center">
                 <Button variant="primary" size="lg" asChild className="w-full sm:w-auto">
                   <BookingLink className="flex items-center justify-center gap-2">
@@ -113,6 +150,8 @@ export function ServiceMarketingPage({
             </motion.div>
           </div>
         </section>
+
+        {afterHero}
 
         <section className="section" aria-labelledby="at-a-glance">
           <div className="section-inner max-w-3xl mx-auto">
@@ -138,11 +177,87 @@ export function ServiceMarketingPage({
                 className="border-b border-slate-800/50 pb-10 last:border-0 last:pb-0"
               >
                 <h2 className="text-xl sm:text-2xl font-bold text-slate-50 mb-3">{s.title}</h2>
-                <p className="text-slate-400 text-base sm:text-lg leading-relaxed whitespace-pre-line">{s.body}</p>
+                <div className="text-slate-400 text-base sm:text-lg leading-relaxed whitespace-pre-line [&_a]:text-neon-cyan [&_a]:underline [&_a]:underline-offset-2">
+                  {typeof s.body === "string" ? <p>{s.body}</p> : s.body}
+                </div>
               </motion.article>
             ))}
           </div>
         </section>
+
+        {comparison && comparison.rows.length > 0 && (
+          <section className="section pt-0" aria-labelledby="service-comparison-heading">
+            <div className="section-inner max-w-4xl mx-auto">
+              <h2
+                id="service-comparison-heading"
+                className="text-xl sm:text-2xl font-bold text-slate-50 mb-6 text-center"
+              >
+                {comparison.title}
+              </h2>
+              <div className="overflow-x-auto rounded-2xl border border-slate-800/60 bg-slate-900/30 backdrop-blur-sm">
+                <table className="w-full min-w-[36rem] text-left text-sm sm:text-base">
+                  <thead>
+                    <tr className="border-b border-slate-800/60">
+                      <th scope="col" className="px-4 py-3 font-semibold text-slate-300">
+                        Capability
+                      </th>
+                      {comparison.columns.map((col) => (
+                        <th
+                          key={col}
+                          scope="col"
+                          className="px-4 py-3 font-semibold text-slate-300"
+                        >
+                          {col}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {comparison.rows.map((row) => (
+                      <tr
+                        key={row.feature}
+                        className="border-b border-slate-800/40 last:border-0"
+                      >
+                        <th
+                          scope="row"
+                          className="px-4 py-3 font-medium text-slate-200 align-top"
+                        >
+                          {row.feature}
+                        </th>
+                        {row.values.map((value, i) => (
+                          <td
+                            key={`${row.feature}-${comparison.columns[i] ?? i}`}
+                            className="px-4 py-3 text-slate-400 align-top"
+                          >
+                            {value}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {compliance && (
+          <section className="section pt-0" aria-labelledby="compliance-trust-heading">
+            <div className="section-inner max-w-3xl mx-auto">
+              <div className="rounded-2xl border border-slate-800/60 bg-slate-900/30 p-6 sm:p-8 backdrop-blur-sm">
+                <h2
+                  id="compliance-trust-heading"
+                  className="text-xl sm:text-2xl font-bold text-slate-50 mb-3"
+                >
+                  {compliance.title ?? "Compliance & trust"}
+                </h2>
+                <p className="text-slate-400 text-base sm:text-lg leading-relaxed whitespace-pre-line">
+                  {compliance.body}
+                </p>
+              </div>
+            </div>
+          </section>
+        )}
 
         {faqs && faqs.length > 0 && (
           <section

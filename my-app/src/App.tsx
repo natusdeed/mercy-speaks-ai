@@ -1,9 +1,11 @@
 import { lazy, Suspense } from 'react';
-import { Routes, Route, Outlet } from 'react-router-dom';
+import { Navigate, Routes, Route, Outlet } from 'react-router-dom';
 import { Header } from '@/components/navigation/header';
 import { Footer } from '@/components/navigation/footer';
 import { ClientErrorHandler } from '@/components/debug/ClientErrorHandler';
 import CookieConsent from './components/cookies/CookieConsent';
+import { JsonLd } from '@/components/seo/json-ld';
+import { organizationSchema } from '@/lib/schema';
 
 /**
  * Eager imports: required for `renderToString` prerender (React.lazy + Suspense only renders fallback in SSR).
@@ -16,7 +18,6 @@ import Portfolio from './app/portfolio/page';
 import Pricing from './app/pricing/page';
 import BookDemo from './app/book-demo/page';
 import Services from './pages/Services';
-import Solutions from './app/solutions/page';
 import Results from './app/results/page';
 import TestimonialsPage from './app/testimonials/page';
 import AiEmployeeSystemPage from './app/ai-employee-system/page';
@@ -29,13 +30,19 @@ import ServiceVoiceAgents from './pages/services/VoiceAgents';
 import ServiceWebsiteChatbot from './pages/services/WebsiteChatbot';
 import ServiceWebsiteDesign from './app/services/website-design/page';
 import ServiceWorkflowAutomation from './pages/services/WorkflowAutomation';
+import ServiceMissedCallTextBack from './pages/services/MissedCallTextBack';
 import WidgetFramePage from './app/widget/frame/page';
 import WidgetInstallPage from './app/widget/install/page';
 import RoofingPage from './app/roofing/page';
-import HvacPage from './app/hvac/page';
-import PlumbingPage from './app/plumbing/page';
+import IndustriesIndexPage from './app/industries/page';
+import IndustrySlugPage from './app/industries/[slug]/page';
+import BlogIndexPage from './app/blog/page';
+import BlogSlugPage from './app/blog/[slug]/page';
+import HoustonPage from './app/houston/page';
+import RichmondTxPage from './app/richmond-tx/page';
 import AdminProspecting from './pages/AdminProspecting';
 import CookiePolicy from './pages/CookiePolicy';
+import NotFound from './pages/NotFound';
 
 /** Code-split below-the-fold / secondary dashboards later without breaking prerender. */
 const LazyDashboardApp = lazy(() =>
@@ -69,6 +76,8 @@ function DevDemoRouteFallback() {
 function PublicChrome() {
   return (
     <>
+      {/* Site-wide Organization / ProfessionalService — one config, every public page */}
+      <JsonLd data={organizationSchema()} />
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-100 focus:rounded-lg focus:bg-slate-900 focus:px-4 focus:py-3 focus:text-sm focus:font-medium focus:text-slate-50 focus:ring-2 focus:ring-neon-cyan focus:outline-none"
@@ -114,6 +123,10 @@ function App() {
             }
           />
         ) : null}
+        {/*
+          Public paths must stay in sync with `src/lib/public-routes.ts`
+          (sitemap + prerender). Do not add indexable routes only here.
+        */}
         <Route element={<PublicChrome />}>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -123,13 +136,20 @@ function App() {
           <Route path="/book-demo" element={<BookDemo />} />
           <Route path="/ai-employee-system" element={<AiEmployeeSystemPage />} />
           <Route path="/services" element={<Services />} />
-          <Route path="/solutions" element={<Solutions />} />
+          <Route path="/solutions" element={<Navigate to="/services" replace />} />
+          <Route path="/industries" element={<IndustriesIndexPage />} />
+          <Route path="/industries/:slug" element={<IndustrySlugPage />} />
+          <Route path="/blog" element={<BlogIndexPage />} />
+          <Route path="/blog/:slug" element={<BlogSlugPage />} />
           <Route path="/roofing" element={<RoofingPage />} />
-          <Route path="/hvac" element={<HvacPage />} />
-          <Route path="/plumbing" element={<PlumbingPage />} />
+          <Route path="/hvac" element={<Navigate to="/industries/hvac" replace />} />
+          <Route path="/plumbing" element={<Navigate to="/industries/plumbing" replace />} />
+          <Route path="/houston" element={<HoustonPage />} />
+          <Route path="/richmond-tx" element={<RichmondTxPage />} />
           <Route path="/results" element={<Results />} />
           <Route path="/testimonials" element={<TestimonialsPage />} />
           <Route path="/services/ai-phone-receptionist" element={<ServiceAIPhoneReceptionist />} />
+          <Route path="/services/missed-call-text-back" element={<ServiceMissedCallTextBack />} />
           <Route path="/services/appointment-automation" element={<ServiceAppointmentAutomation />} />
           <Route path="/services/rag-data" element={<ServiceRAGData />} />
           <Route path="/services/review-generation" element={<ServiceReviewGeneration />} />
@@ -142,6 +162,8 @@ function App() {
           <Route path="/widget/frame" element={<WidgetFramePage />} />
           <Route path="/widget/install" element={<WidgetInstallPage />} />
           <Route path="/cookie-policy" element={<CookiePolicy />} />
+          {/* Catch-all: client nav + prerender source for dist/404.html — never in sitemap */}
+          <Route path="*" element={<NotFound />} />
         </Route>
         <Route path="/admin/prospecting" element={<AdminProspecting />} />
       </Routes>

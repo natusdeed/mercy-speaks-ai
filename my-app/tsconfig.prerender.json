@@ -3,5 +3,11 @@
   "compilerOptions": {
     "jsx": "react-jsx"
   },
-  "include": ["scripts/prerender.tsx", "src/**/*.ts", "src/**/*.tsx"]
+  "include": [
+    "scripts/prerender.tsx",
+    "scripts/generate-sitemap.ts",
+    "scripts/generate-blog.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ]
 }

@@ -14,8 +14,22 @@ import { Link } from "react-router-dom";
 import { BookingLink } from "@/components/cta/booking-link";
 import { SeoHead } from "@/components/seo/seo-head";
 import { JsonLd } from "@/components/seo/json-ld";
-import { BRAND_TAGLINE } from "@/lib/site-config";
-import { breadcrumbSchema, faqPageSchema, organizationSchema, webPageSchema } from "@/lib/schema";
+import {
+  breadcrumbSchema,
+  faqPageSchema,
+  offerCatalogSchema,
+  webPageSchema,
+} from "@/lib/schema";
+import {
+  AI_RECEPTIONIST_TIERS,
+  getCancelFaqStructure,
+  isOverageRatePublished,
+  MARKET_COMPARISON,
+  OVERAGE_PENDING_UI,
+  PLAN_OVERAGE_ROWS,
+  PRICING_FAQ_ITEMS,
+  WEBSITE_TIERS,
+} from "@/content/pricing-tiers";
 
 const fadeUp = {
   initial: { opacity: 0, y: 16 },
@@ -30,124 +44,14 @@ const fadeUpInView = {
   transition: { duration: 0.45 },
 };
 
-const TIERS = [
-  {
-    name: "Mercy Starter",
-    price: 197,
-    setup: "$997 one-time setup",
-    callVolume: "Up to ~500 calls/month",
-    bestFor: "Churches, solo contractors, cleaning companies",
-    included: [
-      "24/7 AI receptionist",
-      "Appointment scheduling",
-      "Lead capture & qualification",
-      "Missed-call text-back automation",
-      "Google Business Profile audit",
-      "Email notifications",
-      "Guided onboarding",
-    ],
-    popular: false,
-  },
-  {
-    name: "Mercy Growth",
-    price: 397,
-    setup: "$2,500 one-time setup",
-    callVolume: "Up to ~1,200 calls/month",
-    bestFor: "HVAC, Plumbing, Roofing, Electrical",
-    included: [
-      "Everything in Mercy Starter",
-      "Full website redesign (up to 10 pages)",
-      "SMS & email follow-up automation",
-      "Booking system integration",
-      "Advanced CRM sync",
-      "Monthly performance report",
-      "Priority support",
-    ],
-    popular: true,
-  },
-  {
-    name: "Mercy Pro",
-    price: 697,
-    setup: "$4,500 one-time setup",
-    callVolume: "~3,000+ calls/month",
-    bestFor: "Dental offices, multi-location contractors, med spas",
-    included: [
-      "Everything in Mercy Growth",
-      "Custom AI call flows & Mercy training",
-      "CRM integration",
-      "Review generation system",
-      "SMS/email nurture sequences",
-      "Quarterly strategy call",
-      "Dedicated account manager",
-    ],
-    popular: false,
-  },
-];
-
-const WEBSITE_TIERS = [
-  {
-    name: "Starter Website",
-    priceLabel: "Starting at $997",
-    audience: "Perfect for new or local businesses that need a clean, trustworthy website fast.",
-    included: [
-      "Premium 1–3 page site (home + core pages)",
-      "Mobile-first design + fast performance",
-      "Conversion-ready contact/quote flow",
-      "Basic on-page SEO + analytics setup",
-    ],
-    cta: "Get a Website Quote",
-    href: "/contact",
-    popular: false,
-  },
-  {
-    name: "Business Website",
-    priceLabel: "Starting at $1,997",
-    audience: "For established companies that need stronger messaging, structure, and lead capture.",
-    included: [
-      "Premium 5–8 page website",
-      "Service pages built for conversion",
-      "SEO-ready structure + technical cleanup",
-      "Integrations (forms, email, booking, CRM-ready)",
-    ],
-    cta: "Book Website Call",
-    href: "/book-demo",
-    popular: true,
-  },
-  {
-    name: "Premium / Custom Website",
-    priceLabel: "Custom quote",
-    audience: "For high-growth brands that need custom UI, advanced sections, and tailored strategy.",
-    included: [
-      "Custom UX + design system direction",
-      "Advanced sections (case studies, portals, calculators)",
-      "Performance + SEO optimization",
-      "Ongoing iteration and launch support",
-    ],
-    cta: "Request Custom Quote",
-    href: "/contact",
-    popular: false,
-  },
-] as const;
+const TIERS = AI_RECEPTIONIST_TIERS;
+const STARTER_PRICE = AI_RECEPTIONIST_TIERS[0]?.price ?? 197;
+const CANCEL_FAQ_STRUCTURE = getCancelFaqStructure();
 
 const TRUST_NOTES = [
   { icon: Clock, text: "Guided setup—timeline confirmed on your call" },
   { icon: Smartphone, text: "Works with your current number" },
   { icon: RotateCcw, text: "Flexible plans—terms reviewed before you start" },
-];
-
-const FAQ_ITEMS = [
-  {
-    q: "What if I exceed my call volume?",
-    a: "We notify you before you hit your limit. Additional calls are billed as add-ons—rates vary by plan. You can upgrade anytime.",
-  },
-  {
-    q: "How long does setup take?",
-    a: "It depends on your phone setup, calendar tools, and how complex your call flows are. After a strategy call we give you a written onboarding sequence with milestones—many teams move quickly once requirements are locked.",
-  },
-  {
-    q: "Can I cancel?",
-    a: "Billing and commitment details are shown before you start. Ask on a strategy call so we can match you to the right plan.",
-  },
 ];
 
 const SOCIAL_AND_REPUTATION_PRICING = [
@@ -169,16 +73,22 @@ const SOCIAL_AND_REPUTATION_PRICING = [
 ] as const;
 
 export default function PricingPage() {
-  const description = `Transparent pricing for AI receptionist and website packages. ${BRAND_TAGLINE}`;
+  const description =
+    "AI receptionist plans from $197/mo and premium websites from $997. Transparent pricing with guided onboarding. See what's included.";
 
   return (
     <PageShell className="min-h-screen bg-slate-950">
       <SeoHead path="/pricing" title="Pricing" description={description} />
       <JsonLd
         data={[
-          organizationSchema(),
           webPageSchema({ name: "Pricing", description, path: "/pricing" }),
-          faqPageSchema(FAQ_ITEMS.map((x) => ({ question: x.q, answer: x.a }))),
+          offerCatalogSchema({
+            aiTiers: AI_RECEPTIONIST_TIERS,
+            websiteTiers: WEBSITE_TIERS,
+          }),
+          faqPageSchema(
+            PRICING_FAQ_ITEMS.map((x) => ({ question: x.question, answer: x.answer }))
+          ),
           breadcrumbSchema([
             { name: "Home", path: "/" },
             { name: "Pricing", path: "/pricing" },
@@ -198,6 +108,27 @@ export default function PricingPage() {
               </h1>
               <p className="text-lg text-slate-400 max-w-2xl mx-auto">
                 Choose the plan that fits your call volume. All plans include 24/7 AI receptionist and missed-revenue visibility.
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Market comparison strip */}
+        <section className="section pt-0" aria-labelledby="market-comparison-title">
+          <div className="section-inner max-w-4xl mx-auto">
+            <motion.div {...fadeUpInView} className="text-center">
+              <h2 id="market-comparison-title" className="sr-only">
+                Cost comparison
+              </h2>
+              <p className="text-sm md:text-base text-slate-300 leading-relaxed">
+                Typical human receptionist: {MARKET_COMPARISON.humanReceptionist}
+                {" · "}
+                Answering service: {MARKET_COMPARISON.answeringService}
+                {" · "}
+                Mercy Starter: ${STARTER_PRICE}/mo
+              </p>
+              <p className="mt-2 text-xs text-slate-500 max-w-2xl mx-auto leading-relaxed">
+                {MARKET_COMPARISON.footnote}
               </p>
             </motion.div>
           </div>
@@ -252,10 +183,16 @@ export default function PricingPage() {
         </section>
 
         {/* 3-tier pricing */}
-        <section className="section" aria-label="Plans">
+        <section className="section" aria-labelledby="ai-receptionist-plans-title">
           <div className="section-inner max-w-5xl mx-auto">
+            <h2
+              id="ai-receptionist-plans-title"
+              className="text-2xl md:text-3xl font-bold text-slate-50 mb-6 md:mb-8 text-center"
+            >
+              AI receptionist plans
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-              {TIERS.map((tier, index) => (
+              {TIERS.map((tier) => (
                 <motion.div
                   key={tier.name}
                   {...fadeUpInView}
@@ -273,9 +210,9 @@ export default function PricingPage() {
                   <div
                     className={`flex flex-col flex-1 p-7 ${tier.popular ? "pt-12" : ""}`}
                   >
-                    <h2 className="text-xl font-bold text-slate-50 mb-1">
+                    <h3 className="text-xl font-bold text-slate-50 mb-1">
                       {tier.name}
-                    </h2>
+                    </h3>
                     <p className="text-slate-400 text-xs italic mb-2">
                       Best for: {tier.bestFor}
                     </p>
@@ -290,11 +227,8 @@ export default function PricingPage() {
                         /month
                       </span>
                     </div>
-                    <p className="text-neon-cyan text-xs mb-5">
+                    <p className="text-neon-cyan text-xs mb-6">
                       Setup: {tier.setup}
-                    </p>
-                    <p className="text-xs text-slate-500 mb-6">
-                      Additional calls billed as add-on. Ask for rates.
                     </p>
                     <ul className="space-y-2.5 mb-8 flex-1">
                       {tier.included.map((item, i) => (
@@ -313,7 +247,7 @@ export default function PricingPage() {
                       className="w-full"
                       asChild
                     >
-                      <BookingLink className="flex items-center justify-center gap-2">
+                      <BookingLink kind="aiReceptionistDemo" className="flex items-center justify-center gap-2">
                         Book Demo
                         <ArrowRight className="w-4 h-4" />
                       </BookingLink>
@@ -322,6 +256,70 @@ export default function PricingPage() {
                 </motion.div>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* Overage & billing clarity */}
+        <section className="section pt-0" aria-labelledby="overage-billing-title">
+          <div className="section-inner max-w-5xl mx-auto">
+            <motion.div
+              {...fadeUpInView}
+              className="rounded-2xl border border-slate-800/60 bg-slate-900/10 backdrop-blur-md p-6 md:p-8"
+            >
+              <h2
+                id="overage-billing-title"
+                className="text-2xl md:text-3xl font-bold text-slate-50 mb-2"
+              >
+                Overage &amp; billing clarity
+              </h2>
+              <p className="text-slate-400 text-sm md:text-base mb-6 max-w-3xl">
+                We notify you before you hit your included call volume. Extra calls are billed as
+                add-ons by plan—rates below when published.
+              </p>
+
+              <div className="overflow-x-auto">
+                <table className="w-full min-w-[32rem] text-left text-sm">
+                  <thead>
+                    <tr className="border-b border-slate-800/80 text-slate-400">
+                      <th scope="col" className="py-3 pr-4 font-medium">
+                        Plan
+                      </th>
+                      <th scope="col" className="py-3 pr-4 font-medium">
+                        Included volume
+                      </th>
+                      <th scope="col" className="py-3 font-medium">
+                        Overage (per additional call)
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {PLAN_OVERAGE_ROWS.map((row) => (
+                      <tr
+                        key={row.planName}
+                        className="border-b border-slate-800/40 last:border-0"
+                      >
+                        <th
+                          scope="row"
+                          className="py-3.5 pr-4 font-semibold text-slate-50 align-top"
+                        >
+                          {row.planName}
+                        </th>
+                        <td className="py-3.5 pr-4 text-slate-300 align-top">
+                          {row.includedVolume}
+                        </td>
+                        <td className="py-3.5 text-slate-300 align-top">
+                          {isOverageRatePublished(row.overagePerCallUsd) ? (
+                            <span>${row.overagePerCallUsd.toFixed(2)}</span>
+                          ) : (
+                            <span className="text-slate-500 italic">{OVERAGE_PENDING_UI}</span>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </motion.div>
           </div>
         </section>
 
@@ -412,18 +410,29 @@ export default function PricingPage() {
               Frequently asked
             </motion.h2>
             <div className="space-y-4">
-              {FAQ_ITEMS.map((faq, idx) => (
+              {PRICING_FAQ_ITEMS.map((faq) => (
                 <motion.div
-                  key={idx}
+                  key={faq.question}
                   {...fadeUpInView}
                   className="rounded-2xl bg-slate-900/20 p-7 shadow-sm"
                 >
                   <h3 className="text-base font-semibold text-slate-50 mb-2">
-                    {faq.q}
+                    {faq.question}
                   </h3>
-                  <p className="text-sm text-slate-400 leading-relaxed">
-                    {faq.a}
-                  </p>
+                  {faq.question === "Can I cancel?" ? (
+                    <dl className="space-y-3">
+                      {CANCEL_FAQ_STRUCTURE.map((item) => (
+                        <div key={item.label}>
+                          <dt className="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-1">
+                            {item.label}
+                          </dt>
+                          <dd className="text-sm text-slate-400 leading-relaxed">{item.value}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                  ) : (
+                    <p className="text-sm text-slate-400 leading-relaxed">{faq.answer}</p>
+                  )}
                 </motion.div>
               ))}
             </div>
@@ -438,7 +447,7 @@ export default function PricingPage() {
                 Not sure which plan? We’ll recommend one during your demo.
               </p>
               <Button variant="primary" size="lg" asChild>
-                <BookingLink className="flex items-center justify-center gap-2">
+                <BookingLink kind="generalStrategyCall" className="flex items-center justify-center gap-2">
                   Book Demo
                   <ArrowRight className="w-5 h-5" />
                 </BookingLink>

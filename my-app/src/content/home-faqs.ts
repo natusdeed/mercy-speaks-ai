@@ -53,3 +53,10 @@ export const HOME_PAGE_FAQS = [
       "Share how leads reach you today (calls, forms, ads, referrals), which tools you already use, and what “success” looks like in plain terms. That helps us recommend a realistic website and automation setup without over-building.",
   },
 ] as const;
+
+/** Checklist on /book-demo — derived from the strategy-call FAQ answer above. */
+export const STRATEGY_CALL_PREPARE_ITEMS = [
+  "How leads reach you today (calls, forms, ads, referrals)",
+  "Which tools you already use (phone, CRM, calendar, website)",
+  "What “success” looks like in plain terms for the next 90 days",
+] as const;

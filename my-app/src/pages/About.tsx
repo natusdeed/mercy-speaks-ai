@@ -14,12 +14,11 @@ import {
   Phone,
   Mail,
 } from "lucide-react";
-import { Link } from "react-router-dom";
 import { BookingLink } from "@/components/cta/booking-link";
 import { SeoHead } from "@/components/seo/seo-head";
 import { JsonLd } from "@/components/seo/json-ld";
-import { BRAND_TAGLINE } from "@/lib/site-config";
-import { breadcrumbSchema, organizationSchema, webPageSchema } from "@/lib/schema";
+import { BRAND_TAGLINE, BUSINESS, telHref } from "@/lib/site-config";
+import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
 
 export default function AboutPage() {
   const values = [
@@ -52,22 +51,42 @@ export default function AboutPage() {
   const differentiators = [
     "Based in Richmond, Texas—Houston metro area",
     "Specialized focus on websites for small businesses, local businesses, and churches",
-    "Modern AI tools (like Cursor AI) for faster, smarter development",
-    "High-quality websites without high agency costs",
+    "Modern AI-assisted development workflow—faster delivery and more iteration at the same quality bar",
+    "Premium creative and systems built for how local owners actually operate",
     "Simple, business-owner-friendly approach—no tech jargon",
     "Results-driven: we focus on outcomes like more customers and growth",
+  ];
+
+  const howWeWork = [
+    {
+      step: "01",
+      title: "Strategy call",
+      description:
+        "We map your goals, current systems, and must-haves—so the build starts from a clear plan, not guesswork.",
+    },
+    {
+      step: "02",
+      title: "Build & install",
+      description:
+        "We design, build, and install your website and/or AI systems, wired into the tools your team already uses.",
+    },
+    {
+      step: "03",
+      title: "Iterate with reporting",
+      description:
+        "After launch we refine from real usage and share clear reporting—so improvements stay tied to outcomes.",
+    },
   ];
 
   return (
     <PageShell className="min-h-screen bg-slate-950">
       <SeoHead
         path="/about"
-        title="About Mercy Speaks Digital"
-        description={`${BRAND_TAGLINE} Learn who we are, how we work, and who we partner with.`}
+        title="About Mercy Speaks Digital | Houston-Area Web & AI Agency"
+        description="Houston-area web and AI agency building premium websites, AI receptionists, and automation for small businesses nationwide. See how we partner and deliver."
       />
       <JsonLd
         data={[
-          organizationSchema(),
           webPageSchema({
             name: "About Mercy Speaks Digital",
             description: BRAND_TAGLINE,
@@ -99,9 +118,10 @@ export default function AboutPage() {
                 </span>
               </h1>
               <p className="text-lg md:text-xl leading-relaxed text-slate-300 max-w-3xl mx-auto mb-8">
-                We're Mercy Speaks Digital—your partner for modern websites and AI-powered tools. 
-                Based in Richmond, Texas, we help small businesses, local businesses, and churches 
-                build their online presence using smart, modern technology.
+                We're Mercy Speaks Digital—your partner for modern websites and AI-powered systems.
+                Based in Richmond, Texas (Houston metro), we help small businesses, local service
+                companies, and churches build a credible online presence and communication stack
+                that actually gets used.
               </p>
             </motion.div>
 
@@ -115,46 +135,93 @@ export default function AboutPage() {
               <h2 className="text-4xl md:text-5xl font-bold text-slate-50 mb-6">Our Story</h2>
               <div className="space-y-6 text-lg md:text-xl text-slate-300 leading-relaxed">
                 <p>
-                  Founded in the heart of the Houston metro area, Mercy Speaks Digital was born from
-                  a simple realization: small businesses, local businesses, and churches deserve 
-                  high-quality websites and digital tools without the high agency costs.
+                  Founded in Richmond, Texas—in the heart of the Houston metro—Mercy Speaks Digital
+                  was built for small businesses, local service companies, and churches that need
+                  premium websites and AI systems tailored to how they actually operate day to day.
                 </p>
                 <p>
-                  We saw a better way. Using modern AI tools like Cursor AI, we can build websites 
-                  faster, smarter, and more affordably—delivering professional results that help 
-                  businesses compete and grow. We're not just another agency; we're your partners 
-                  in building a strong online presence.
+                  Our modern AI-assisted development workflow lets us deliver faster and iterate
+                  more—at the same quality bar. We're not just another agency; we're partners in
+                  building a strong online presence for owners across Fort Bend, the greater Houston
+                  area, and nationwide.
                 </p>
                 <p>
-                  Today, we help businesses across industries get modern websites, automate their 
-                  phone systems, improve customer service, and streamline operations—all while keeping 
-                  costs reasonable and results exceptional. We believe every business, no matter the 
-                  size, deserves access to the same quality tools that big companies use.
+                  Today we help clients ship modern websites, automate phone systems, improve
+                  customer follow-up, and streamline operations. Every project is built for real
+                  business owners: clearer positioning, fewer missed leads, and systems your team
+                  can run with confidence.
                 </p>
                 <p>
-                  Our approach is simple: smart, modern, trustworthy, and results-driven. We use 
-                  cutting-edge AI tools to work efficiently, but we never forget that behind every 
-                  website is a real business owner trying to grow. That's why we focus on outcomes: 
-                  more customers, better image, growth, and credibility.
+                  Our approach is simple: smart, modern, trustworthy, and results-driven. Behind
+                  every site and AI install is a local owner trying to grow—so we focus on outcomes:
+                  more customers, stronger credibility, and measurable growth.
                 </p>
               </div>
             </motion.div>
 
+            {/* How we work */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.25 }}
+              className="glass rounded-2xl p-8 md:p-12 mb-16"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold text-slate-50 mb-4 text-center">
+                How we work
+              </h2>
+              <p className="text-lg md:text-xl text-slate-300 leading-relaxed text-center max-w-2xl mx-auto mb-10">
+                A clear path from first conversation to live systems—then ongoing refinement with
+                reporting you can act on.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+                {howWeWork.map((item, idx) => (
+                  <motion.div
+                    key={item.step}
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.3 + idx * 0.08 }}
+                    className="text-center md:text-left"
+                  >
+                    <div className="text-sm font-semibold text-neon-cyan mb-2">{item.step}</div>
+                    <h3 className="text-2xl md:text-3xl font-semibold text-slate-50 mb-3">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm md:text-base text-slate-400 leading-relaxed">
+                      {item.description}
+                    </p>
+                  </motion.div>
+                ))}
+              </div>
+              <div className="flex justify-center">
+                <Button variant="primary" size="lg" asChild className="px-8 py-4 text-lg font-bold">
+                  <BookingLink kind="generalStrategyCall">
+                    Book a strategy call
+                    <ArrowRight className="w-5 h-5 ml-2" />
+                  </BookingLink>
+                </Button>
+              </div>
+            </motion.div>
+
             {/* Values Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-16">
-              {values.map((value, idx) => (
-                <motion.div
-                  key={value.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 + idx * 0.1 }}
-                  className="glass rounded-xl p-8 md:p-10 hover:border-electric-purple/50 hover:scale-105 transition-all"
-                >
-                  <value.icon className="w-8 h-8 text-electric-purple mb-4" />
-                  <h3 className="text-2xl md:text-3xl font-semibold text-slate-50 mb-2">{value.title}</h3>
-                  <p className="text-sm text-slate-400">{value.description}</p>
-                </motion.div>
-              ))}
+            <div className="mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-50 mb-8 text-center">
+                What we stand for
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
+                {values.map((value, idx) => (
+                  <motion.div
+                    key={value.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.3 + idx * 0.1 }}
+                    className="glass rounded-xl p-8 md:p-10 hover:border-electric-purple/50 hover:scale-105 transition-all"
+                  >
+                    <value.icon className="w-8 h-8 text-electric-purple mb-4" />
+                    <h3 className="text-2xl md:text-3xl font-semibold text-slate-50 mb-2">{value.title}</h3>
+                    <p className="text-sm text-slate-400">{value.description}</p>
+                  </motion.div>
+                ))}
+              </div>
             </div>
 
             {/* Focus — outcomes without unverified metrics */}
@@ -224,20 +291,20 @@ export default function AboutPage() {
                   <Phone className="w-10 h-10 text-neon-cyan mb-4" />
                   <h3 className="text-2xl md:text-3xl font-semibold text-slate-50 mb-2">Phone</h3>
                   <a
-                    href="tel:7033325956"
+                    href={telHref()}
                     className="text-xl md:text-2xl text-slate-300 hover:text-neon-cyan transition-colors"
                   >
-                    (703) 332-5956
+                    {BUSINESS.phoneDisplay}
                   </a>
                 </div>
                 <div className="flex flex-col items-center text-center">
                   <Mail className="w-10 h-10 text-electric-purple mb-4" />
                   <h3 className="text-2xl md:text-3xl font-semibold text-slate-50 mb-2">Email</h3>
                   <a
-                    href="mailto:don@mercyspeaksdigital.com"
+                    href={`mailto:${BUSINESS.email}`}
                     className="text-xl md:text-2xl text-slate-300 hover:text-neon-cyan transition-colors break-all"
                   >
-                    don@mercyspeaksdigital.com
+                    {BUSINESS.email}
                   </a>
                 </div>
               </div>
