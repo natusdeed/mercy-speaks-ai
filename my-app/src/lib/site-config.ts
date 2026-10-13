@@ -152,9 +152,9 @@ export const BUSINESS = {
   name: "Mercy Speaks Digital",
   legalName: "Mercy Speaks LLC",
   email: "don@mercyspeaksdigital.com",
-  phoneDisplay: "(703) 332-5956",
+  phoneDisplay: "(832) 981-3123",
   /** E.164 for tel: and schema */
-  telephone: "+17033325956",
+  telephone: "+18329813123",
   /** NAP: aligned with contact page */
   address: {
     streetAddress: undefined as string | undefined,
