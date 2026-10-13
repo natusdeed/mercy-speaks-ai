@@ -1,13 +1,13 @@
 /**
  * Bundles the Vercel /api/* entry (api-src/entry.ts) and all LOCAL imports into one
- * server-side ESM file: api/[...path].mjs. npm packages stay external (resolved from
+ * server-side ESM file: api/index.mjs. npm packages stay external (resolved from
  * node_modules by Vercel's file tracing). Run: npm run build:api
  */
 import { build } from "esbuild";
 
 await build({
   entryPoints: ["api-src/entry.ts"],
-  outfile: "api/[...path].mjs",
+  outfile: "api/index.mjs",
   bundle: true,
   platform: "node",
   format: "esm",

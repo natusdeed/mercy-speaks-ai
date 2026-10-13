@@ -1940,6 +1940,7 @@ async function handleWidgetChatRequest(request) {
 
 // lib/widget-lead-handler.ts
 init_save_lead();
+var WIDGET_LEAD_FAILURE = "We couldn't send your message right now. Please try again, or email don@mercyspeaksdigital.com.";
 function errorCategory(e) {
   const code = e && typeof e === "object" ? e.code : void 0;
   if (typeof code === "string" && /^[A-Za-z0-9_.-]{1,32}$/.test(code)) return code;
@@ -2005,6 +2006,7 @@ async function handleWidgetLeadRequest(request) {
   }
   const supabaseUrl = process.env.SUPABASE_URL;
   const supabaseKey = process.env.SUPABASE_SERVICE_KEY;
+  let persisted = false;
   if (supabaseUrl && supabaseKey) {
     try {
       const { createClient: createClient2 } = await import("@supabase/supabase-js");
@@ -2024,6 +2026,7 @@ async function handleWidgetLeadRequest(request) {
         logEvent("widget_lead_save_failed", { operation: "supabase.leads.insert", category: errorCategory(error) });
         return Response.json({ error: "Failed to save lead" }, { status: 500 });
       }
+      persisted = true;
     } catch (e) {
       logEvent("widget_lead_save_failed", { operation: "supabase.leads.insert", category: errorCategory(e) });
       return Response.json({ error: "Failed to save lead" }, { status: 500 });
@@ -2039,8 +2042,11 @@ async function handleWidgetLeadRequest(request) {
     businessType: "Widget",
     message: typeof body.message === "string" ? body.message.trim() : void 0
   });
-  if (!result.ok) {
-    return Response.json({ error: result.error ?? "Failed to save lead" }, { status: 500 });
+  if (!result.delivered) {
+    logEvent("widget_lead_delivery_failed", { persisted });
+    if (!persisted) {
+      return Response.json({ error: WIDGET_LEAD_FAILURE }, { status: 503 });
+    }
   }
   return Response.json({ success: true });
 }
@@ -3691,9 +3697,19 @@ async function dispatchVercelApi(request) {
 }
 
 // api-src/entry.ts
+function restoreOriginalPath(request) {
+  const url = new URL(request.url);
+  const original = url.searchParams.get("__path");
+  if (original === null) return request;
+  url.searchParams.delete("__path");
+  if (url.pathname === "/api/index" || url.pathname === "/api/index.mjs" || url.pathname === "/api") {
+    url.pathname = "/api/" + original.replace(/^\/+/, "");
+  }
+  return new Request(url.toString(), request);
+}
 var entry_default = {
   async fetch(request) {
-    return dispatchVercelApi(request);
+    return dispatchVercelApi(restoreOriginalPath(request));
   }
 };
 export {

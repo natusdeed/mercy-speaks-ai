@@ -5,6 +5,9 @@ import { getTenant } from "../my-app/src/lib/widget-tenant";
 import type { WidgetLeadBody } from "../my-app/src/lib/widget-types";
 import { logEvent } from "../my-app/src/lib/save-lead";
 
+const WIDGET_LEAD_FAILURE =
+  "We couldn't send your message right now. Please try again, or email don@mercyspeaksdigital.com.";
+
 /** Non-sensitive error category: only a short code string, never message/details/hint. */
 function errorCategory(e: unknown): string {
   const code = e && typeof e === "object" ? (e as { code?: unknown }).code : undefined;
@@ -81,8 +84,18 @@ export async function handleWidgetLeadRequest(request: Request): Promise<Respons
     return Response.json({ error: "Domain not allowed" }, { status: 403 });
   }
 
+  /*
+   * SUCCESS CONDITION: {"success":true} is returned ONLY when the lead was durably accepted:
+   *   (a) Supabase is configured AND the leads insert succeeded (the durable record), or
+   *   (b) Supabase is not configured AND the Resend notification email was accepted
+   *       (saveLead().delivered === true), the email being the only record of the lead.
+   * If Supabase saved the lead but the email failed, the lead is still durably stored, so
+   * success is returned and only a non-sensitive widget_lead_delivery_failed event is logged.
+   * If neither path accepted the lead, a generic 503 is returned (no provider details).
+   */
   const supabaseUrl = process.env.SUPABASE_URL;
   const supabaseKey = process.env.SUPABASE_SERVICE_KEY;
+  let persisted = false;
   if (supabaseUrl && supabaseKey) {
     try {
       const { createClient } = await import("@supabase/supabase-js");
@@ -102,6 +115,7 @@ export async function handleWidgetLeadRequest(request: Request): Promise<Respons
         logEvent("widget_lead_save_failed", { operation: "supabase.leads.insert", category: errorCategory(error) });
         return Response.json({ error: "Failed to save lead" }, { status: 500 });
       }
+      persisted = true;
     } catch (e) {
       logEvent("widget_lead_save_failed", { operation: "supabase.leads.insert", category: errorCategory(e) });
       return Response.json({ error: "Failed to save lead" }, { status: 500 });
@@ -118,8 +132,11 @@ export async function handleWidgetLeadRequest(request: Request): Promise<Respons
     businessType: "Widget",
     message: typeof body.message === "string" ? body.message.trim() : undefined,
   });
-  if (!result.ok) {
-    return Response.json({ error: result.error ?? "Failed to save lead" }, { status: 500 });
+  if (!result.delivered) {
+    logEvent("widget_lead_delivery_failed", { persisted });
+    if (!persisted) {
+      return Response.json({ error: WIDGET_LEAD_FAILURE }, { status: 503 });
+    }
   }
 
   return Response.json({ success: true });
