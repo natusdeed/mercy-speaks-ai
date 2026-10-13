@@ -136,9 +136,9 @@ var BUSINESS = {
   name: "Mercy Speaks Digital",
   legalName: "Mercy Speaks LLC",
   email: "don@mercyspeaksdigital.com",
-  phoneDisplay: "(703) 332-5956",
+  phoneDisplay: "(832) 981-3123",
   /** E.164 for tel: and schema */
-  telephone: "+17033325956",
+  telephone: "+18329813123",
   /** NAP: aligned with contact page */
   address: {
     streetAddress: void 0,
@@ -241,7 +241,7 @@ var MAX_MESSAGE_LENGTH = 2e3;
 var RATE_LIMIT_WINDOW_MS = 6e4;
 var RATE_LIMIT_MAX_REQUESTS = 20;
 var REQUEST_TIMEOUT_MS = 2e4;
-var FALLBACK_MESSAGE = "I'm having trouble connecting right now. Please call us at (703) 332-5956 or email don@mercyspeaksdigital.com and we'll help you right away! \u{1F4DE}";
+var FALLBACK_MESSAGE = "I'm having trouble connecting right now. Please call us at (832) 981-3123 or email don@mercyspeaksdigital.com and we'll help you right away! \u{1F4DE}";
 function generateRequestId() {
   return `req_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 9)}`;
 }

@@ -12,7 +12,7 @@ const RATE_LIMIT_WINDOW_MS = 60_000; // 1 minute
 const RATE_LIMIT_MAX_REQUESTS = 20;
 export const REQUEST_TIMEOUT_MS = 20_000; // 20s
 export const FALLBACK_MESSAGE =
-  "I'm having trouble connecting right now. Please call us at (703) 332-5956 or email don@mercyspeaksdigital.com and we'll help you right away! 📞";
+  "I'm having trouble connecting right now. Please call us at (832) 981-3123 or email don@mercyspeaksdigital.com and we'll help you right away! 📞";
 
 /** Generate a short request id for tracing (server logs only). */
 function generateRequestId(): string {
