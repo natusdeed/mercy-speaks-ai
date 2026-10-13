@@ -203,7 +203,7 @@ export default function CookieConsent() {
   return (
     <>
       {showBanner ? (
-        <div
+        <aside aria-label="Cookie preferences"
           style={{
             position: "fixed",
             bottom: 0,
@@ -282,7 +282,7 @@ export default function CookieConsent() {
               REJECT NON-ESSENTIAL
             </button>
           </div>
-        </div>
+        </aside>
       ) : null}
 
       {showModal ? (

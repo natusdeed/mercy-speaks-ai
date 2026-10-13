@@ -41,7 +41,7 @@ export default function AiPilotPage() {
                 small number of businesses by invitation, with scope and terms set individually. In the pilot, the AI
                 receptionist can answer your business line during the hours you set, take messages, and capture service
                 requests. It records booking requests for your team to confirm; it does not book appointments itself. Any
-                call it transfers is flagged as an unverified handoff. It is not a 24/7 service.
+                call it transfers is flagged as an unverified handoff.
               </p>
             </div>
             <div>
