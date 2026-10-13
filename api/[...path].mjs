@@ -14,6 +14,7 @@ var save_lead_exports = {};
 __export(save_lead_exports, {
   buildLeadBody: () => buildLeadBody,
   buildLeadSubject: () => buildLeadSubject,
+  logEvent: () => logEvent,
   safeReplyTo: () => safeReplyTo,
   saveLead: () => saveLead
 });
@@ -1938,6 +1939,13 @@ async function handleWidgetChatRequest(request) {
 }
 
 // lib/widget-lead-handler.ts
+init_save_lead();
+function errorCategory(e) {
+  const code = e && typeof e === "object" ? e.code : void 0;
+  if (typeof code === "string" && /^[A-Za-z0-9_.-]{1,32}$/.test(code)) return code;
+  if (e instanceof Error && /^[A-Za-z]{1,40}$/.test(e.name)) return e.name;
+  return "unknown";
+}
 function getOriginHost2(request) {
   const origin = request.headers.get("origin");
   if (origin) {
@@ -2013,11 +2021,11 @@ async function handleWidgetLeadRequest(request) {
         metadata: {}
       });
       if (error) {
-        console.error("[widget-lead] Supabase error:", error);
+        logEvent("widget_lead_save_failed", { operation: "supabase.leads.insert", category: errorCategory(error) });
         return Response.json({ error: "Failed to save lead" }, { status: 500 });
       }
     } catch (e) {
-      console.error("[widget-lead] Error:", e);
+      logEvent("widget_lead_save_failed", { operation: "supabase.leads.insert", category: errorCategory(e) });
       return Response.json({ error: "Failed to save lead" }, { status: 500 });
     }
   }
