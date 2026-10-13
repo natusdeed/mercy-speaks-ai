@@ -3,6 +3,7 @@ import { PageShell } from "@/components/ui/page-shell";
 import { SeoHead } from "@/components/seo/seo-head";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/schema";
+import { BrandAnimation } from "@/components/home-v3/brand-animation";
 import { body, divided, h2, inner, MAILING_ADDRESS, PageHero, primaryBtn, QuietList, section } from "@/components/home-v3/v3-ui";
 
 /**
@@ -29,6 +30,11 @@ export default function AboutPage() {
           title="About Mercy Speaks Digital"
           intro="Mercy Speaks Digital builds the digital front door for growing businesses: fast, modern conversion websites, ongoing care, and AI communication tools offered as a limited pilot."
         />
+        <section className={`${section} ${divided}`}>
+          <div className={inner}>
+            <BrandAnimation />
+          </div>
+        </section>
         <section className={`${section} ${divided}`}>
           <div className={`${inner} grid gap-10 md:grid-cols-[1fr_2fr] md:gap-x-16 md:gap-y-16`}>
             <h2 className={h2}>Founder</h2>
