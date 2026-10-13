@@ -4,6 +4,7 @@
  */
 
 import type { Tenant, WidgetConfigResponse } from "./widget-types";
+import { isWidgetRequestOriginAllowed } from "./widget-origin";
 
 const FALLBACK_GREETING =
   "Hi! I'm Mercy's assistant — ask about AI receptionists, websites, or pricing";
@@ -25,40 +26,6 @@ function getQuickRepliesFromEnv(): string[] {
   return parts.length > 0 ? parts : FALLBACK_QUICK_REPLIES;
 }
 
-function getOriginFromRequest(request: Request): string | null {
-  const origin = request.headers.get("origin");
-  if (origin) {
-    try {
-      return new URL(origin).hostname;
-    } catch {
-      return null;
-    }
-  }
-  const referer = request.headers.get("referer");
-  if (referer) {
-    try {
-      return new URL(referer).hostname;
-    } catch {
-      return null;
-    }
-  }
-  return null;
-}
-
-function isDomainAllowed(tenant: Tenant, hostname: string): boolean {
-  const normalized = hostname.toLowerCase().replace(/^www\./, "");
-  return tenant.domains.some((d) => {
-    const rule = d.toLowerCase().trim().replace(/^www\./, "");
-    if (!rule) return false;
-    if (rule === normalized) return true;
-    // Support simple wildcard patterns like "*.vercel.app"
-    if (rule.startsWith("*.")) {
-      const suffix = rule.slice(1); // ".vercel.app"
-      return normalized.endsWith(suffix) && normalized.length > suffix.length;
-    }
-    return false;
-  });
-}
 
 /** Fetch tenant from Supabase by id. */
 async function getTenantFromSupabase(tenantId: string): Promise<Tenant | null> {
@@ -89,6 +56,18 @@ async function getTenantFromSupabase(tenantId: string): Promise<Tenant | null> {
   };
 }
 
+/**
+ * Approved pilot embed domains for the built-in demo tenant. Also the source of the static
+ * /widget/frame frame-ancestors header in vercel.json (verified by scripts/test-widget-origin.mjs).
+ * Preview deployments are covered by the same-origin rule in widget-origin.ts, not a *.vercel.app wildcard.
+ */
+export const DEMO_TENANT_DOMAINS: readonly string[] = [
+  "localhost",
+  "127.0.0.1",
+  "mercyspeaksdigital.com",
+  "mercyspeaks.ai",
+];
+
 /** Fallback when no DB: single tenant from env (e.g. MERCY_TENANT_ID + MERCY_*). */
 function getFallbackTenant(tenantId: string): Tenant | null {
   // Built-in "demo" tenant for local/dev MVP. Works even when DB isn't configured.
@@ -96,13 +75,7 @@ function getFallbackTenant(tenantId: string): Tenant | null {
     return {
       id: "demo",
       name: "Mercy Speaks Digital",
-      domains: [
-        "localhost",
-        "127.0.0.1",
-        "*.vercel.app",
-        "mercyspeaksdigital.com",
-        "mercyspeaks.ai",
-      ],
+      domains: [...DEMO_TENANT_DOMAINS],
       public_key: "demo_public_key",
       branding: {
         companyName: "Mercy Speaks Digital",
@@ -172,12 +145,7 @@ export async function getWidgetConfig(
     return { allowed: false };
   }
 
-  const originHost = getOriginFromRequest(request);
-  if (!originHost) {
-    return { allowed: false };
-  }
-
-  if (!isDomainAllowed(tenant, originHost)) {
+  if (!isWidgetRequestOriginAllowed(request, tenant.domains)) {
     return { allowed: false };
   }
 

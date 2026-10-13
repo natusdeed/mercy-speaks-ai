@@ -62,7 +62,7 @@
       ]
     },
     {
-      "source": "/(.*)",
+      "source": "/((?!widget/frame).*)",
       "headers": [
         {
           "key": "Permissions-Policy",
@@ -83,6 +83,31 @@
         {
           "key": "Referrer-Policy",
           "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    },
+    {
+      "source": "/widget/frame(.*)",
+      "headers": [
+        {
+          "key": "Permissions-Policy",
+          "value": "microphone=*, camera=(), geolocation=()"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "frame-ancestors 'self' http://localhost:* http://127.0.0.1:* https://mercyspeaksdigital.com https://www.mercyspeaksdigital.com https://mercyspeaks.ai https://www.mercyspeaks.ai"
         }
       ]
     }

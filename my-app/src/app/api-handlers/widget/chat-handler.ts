@@ -3,6 +3,7 @@
  */
 
 import { getTenant, validateTenantKey } from "../../../lib/widget-tenant";
+import { isWidgetRequestOriginAllowed } from "../../../lib/widget-origin";
 import type { WidgetChatBody } from "../../../lib/widget-types";
 
 const MAX_MESSAGE_LENGTH = 2000;
@@ -12,30 +13,6 @@ const REQUEST_TIMEOUT_MS = 20_000;
 const FALLBACK_MESSAGE =
   "I'm having trouble connecting right now. Please try again or use the booking link to get in touch.";
 
-function getOriginHost(request: Request): string | null {
-  const origin = request.headers.get("origin");
-  if (origin) {
-    try {
-      return new URL(origin).hostname;
-    } catch {
-      return null;
-    }
-  }
-  const referer = request.headers.get("referer");
-  if (referer) {
-    try {
-      return new URL(referer).hostname;
-    } catch {
-      return null;
-    }
-  }
-  return null;
-}
-
-function isDomainAllowed(domains: string[], hostname: string): boolean {
-  const normalized = hostname.toLowerCase().replace(/^www\./, "");
-  return domains.some((d) => d.toLowerCase().replace(/^www\./, "") === normalized);
-}
 
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
 
@@ -127,8 +104,7 @@ export async function handleWidgetChatRequest(request: Request): Promise<Respons
     return Response.json({ error: "Invalid key" }, { status: 403 });
   }
 
-  const originHost = getOriginHost(request);
-  if (!originHost || !isDomainAllowed(tenant.domains, originHost)) {
+  if (!isWidgetRequestOriginAllowed(request, tenant.domains)) {
     return Response.json({ error: "Domain not allowed" }, { status: 403 });
   }
 

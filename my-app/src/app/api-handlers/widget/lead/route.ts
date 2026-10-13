@@ -4,6 +4,7 @@
  */
 
 import { getTenant, validateTenantKey } from "../../../../lib/widget-tenant";
+import { isWidgetRequestOriginAllowed } from "../../../../lib/widget-origin";
 import type { WidgetLeadBody } from "../../../../lib/widget-types";
 import { saveLead } from "../../../../lib/save-lead";
 
@@ -11,30 +12,6 @@ const RATE_LIMIT_WINDOW_MS = 60_000;
 const RATE_LIMIT_MAX_LEADS = 10;
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
 
-function getOriginHost(request: Request): string | null {
-  const origin = request.headers.get("origin");
-  if (origin) {
-    try {
-      return new URL(origin).hostname;
-    } catch {
-      return null;
-    }
-  }
-  const referer = request.headers.get("referer");
-  if (referer) {
-    try {
-      return new URL(referer).hostname;
-    } catch {
-      return null;
-    }
-  }
-  return null;
-}
-
-function isDomainAllowed(domains: string[], hostname: string): boolean {
-  const n = hostname.toLowerCase().replace(/^www\./, "");
-  return domains.some((d) => d.toLowerCase().replace(/^www\./, "") === n);
-}
 
 function getClientIp(headers: Headers): string {
   return (
@@ -107,8 +84,7 @@ export async function handleWidgetLeadRequest(request: Request): Promise<Respons
     return Response.json({ error: "Invalid key" }, { status: 403 });
   }
 
-  const originHost = getOriginHost(request);
-  if (!originHost || !isDomainAllowed(tenant.domains, originHost)) {
+  if (!isWidgetRequestOriginAllowed(request, tenant.domains)) {
     return Response.json({ error: "Domain not allowed" }, { status: 403 });
   }
 

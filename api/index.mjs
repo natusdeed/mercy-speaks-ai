@@ -1615,6 +1615,53 @@ async function GET11(request) {
   return Response.json(parsed.data);
 }
 
+// my-app/src/lib/widget-origin.ts
+function normalizeHost(host) {
+  return host.toLowerCase().trim().replace(/\.$/, "").replace(/^www\./, "");
+}
+function getRequestOriginHost(request) {
+  for (const name of ["origin", "referer"]) {
+    const v = request.headers.get(name);
+    if (v && v !== "null") {
+      try {
+        return new URL(v).hostname || null;
+      } catch {
+        return null;
+      }
+    }
+  }
+  return null;
+}
+function isHostAllowedByDomains(domains, hostname) {
+  const h = normalizeHost(hostname);
+  if (!h) return false;
+  return domains.some((d) => {
+    if (typeof d !== "string") return false;
+    const rule = normalizeHost(d);
+    if (!rule || rule === "*" || rule.includes("/")) return false;
+    if (rule.startsWith("*.")) {
+      const suffix = rule.slice(1);
+      if (!suffix.slice(1).includes(".")) return false;
+      return h.endsWith(suffix) && h.length > suffix.length;
+    }
+    return rule === h;
+  });
+}
+function requestOwnHost(request) {
+  try {
+    return new URL(request.url).hostname || null;
+  } catch {
+    return null;
+  }
+}
+function isWidgetRequestOriginAllowed(request, domains) {
+  const originHost = getRequestOriginHost(request);
+  if (!originHost) return false;
+  const own = requestOwnHost(request);
+  if (own && normalizeHost(own) === normalizeHost(originHost)) return true;
+  return isHostAllowedByDomains(domains, originHost);
+}
+
 // my-app/src/lib/widget-tenant.ts
 var FALLBACK_GREETING = "Hi! I'm Mercy's assistant \u2014 ask about AI receptionists, websites, or pricing";
 var FALLBACK_QUICK_REPLIES = [
@@ -1627,38 +1674,6 @@ function getQuickRepliesFromEnv() {
   if (!raw) return FALLBACK_QUICK_REPLIES;
   const parts = raw.split("|").map((s) => s.trim()).filter(Boolean);
   return parts.length > 0 ? parts : FALLBACK_QUICK_REPLIES;
-}
-function getOriginFromRequest(request) {
-  const origin = request.headers.get("origin");
-  if (origin) {
-    try {
-      return new URL(origin).hostname;
-    } catch {
-      return null;
-    }
-  }
-  const referer = request.headers.get("referer");
-  if (referer) {
-    try {
-      return new URL(referer).hostname;
-    } catch {
-      return null;
-    }
-  }
-  return null;
-}
-function isDomainAllowed(tenant, hostname) {
-  const normalized = hostname.toLowerCase().replace(/^www\./, "");
-  return tenant.domains.some((d) => {
-    const rule = d.toLowerCase().trim().replace(/^www\./, "");
-    if (!rule) return false;
-    if (rule === normalized) return true;
-    if (rule.startsWith("*.")) {
-      const suffix = rule.slice(1);
-      return normalized.endsWith(suffix) && normalized.length > suffix.length;
-    }
-    return false;
-  });
 }
 async function getTenantFromSupabase(tenantId) {
   const url = process.env.SUPABASE_URL;
@@ -1681,18 +1696,18 @@ async function getTenantFromSupabase(tenantId) {
     updated_at: data.updated_at
   };
 }
+var DEMO_TENANT_DOMAINS = [
+  "localhost",
+  "127.0.0.1",
+  "mercyspeaksdigital.com",
+  "mercyspeaks.ai"
+];
 function getFallbackTenant(tenantId) {
   if (tenantId === "demo") {
     return {
       id: "demo",
       name: "Mercy Speaks Digital",
-      domains: [
-        "localhost",
-        "127.0.0.1",
-        "*.vercel.app",
-        "mercyspeaksdigital.com",
-        "mercyspeaks.ai"
-      ],
+      domains: [...DEMO_TENANT_DOMAINS],
       public_key: "demo_public_key",
       branding: {
         companyName: "Mercy Speaks Digital",
@@ -1745,11 +1760,7 @@ async function getWidgetConfig(request, tenantId, key) {
   if (!validateTenantKey(tenant, key)) {
     return { allowed: false };
   }
-  const originHost = getOriginFromRequest(request);
-  if (!originHost) {
-    return { allowed: false };
-  }
-  if (!isDomainAllowed(tenant, originHost)) {
+  if (!isWidgetRequestOriginAllowed(request, tenant.domains)) {
     return { allowed: false };
   }
   const branding = tenant.branding && typeof tenant.branding === "object" ? tenant.branding : {};
@@ -1776,29 +1787,6 @@ var RATE_LIMIT_WINDOW_MS2 = 6e4;
 var RATE_LIMIT_MAX_REQUESTS2 = 20;
 var REQUEST_TIMEOUT_MS2 = 2e4;
 var FALLBACK_MESSAGE2 = "I'm having trouble connecting right now. Please try again or use the booking link to get in touch.";
-function getOriginHost(request) {
-  const origin = request.headers.get("origin");
-  if (origin) {
-    try {
-      return new URL(origin).hostname;
-    } catch {
-      return null;
-    }
-  }
-  const referer = request.headers.get("referer");
-  if (referer) {
-    try {
-      return new URL(referer).hostname;
-    } catch {
-      return null;
-    }
-  }
-  return null;
-}
-function isDomainAllowed2(domains, hostname) {
-  const normalized = hostname.toLowerCase().replace(/^www\./, "");
-  return domains.some((d) => d.toLowerCase().replace(/^www\./, "") === normalized);
-}
 var rateLimitMap2 = /* @__PURE__ */ new Map();
 function getClientIp2(headers) {
   return headers.get("x-forwarded-for")?.split(",")[0]?.trim() || headers.get("x-real-ip") || "unknown";
@@ -1883,8 +1871,7 @@ async function handleWidgetChatRequest(request) {
   if (!validateTenantKey(tenant, body.key)) {
     return Response.json({ error: "Invalid key" }, { status: 403 });
   }
-  const originHost = getOriginHost(request);
-  if (!originHost || !isDomainAllowed2(tenant.domains, originHost)) {
+  if (!isWidgetRequestOriginAllowed(request, tenant.domains)) {
     return Response.json({ error: "Domain not allowed" }, { status: 403 });
   }
   const history = Array.isArray(body.conversationHistory) ? body.conversationHistory.filter(
@@ -1947,29 +1934,6 @@ function errorCategory(e) {
   if (e instanceof Error && /^[A-Za-z]{1,40}$/.test(e.name)) return e.name;
   return "unknown";
 }
-function getOriginHost2(request) {
-  const origin = request.headers.get("origin");
-  if (origin) {
-    try {
-      return new URL(origin).hostname;
-    } catch {
-      return null;
-    }
-  }
-  const referer = request.headers.get("referer");
-  if (referer) {
-    try {
-      return new URL(referer).hostname;
-    } catch {
-      return null;
-    }
-  }
-  return null;
-}
-function isDomainAllowed3(domains, hostname) {
-  const normalized = hostname.toLowerCase().replace(/^www\./, "");
-  return domains.some((d) => d.toLowerCase().replace(/^www\./, "") === normalized);
-}
 async function handleWidgetLeadRequest(request) {
   if (request.method !== "POST") {
     return Response.json({ error: "Method not allowed" }, { status: 405 });
@@ -2000,8 +1964,7 @@ async function handleWidgetLeadRequest(request) {
   if (!tenant) {
     return Response.json({ error: "Tenant not found" }, { status: 404 });
   }
-  const originHost = getOriginHost2(request);
-  if (!originHost || !isDomainAllowed3(tenant.domains, originHost)) {
+  if (!isWidgetRequestOriginAllowed(request, tenant.domains)) {
     return Response.json({ error: "Domain not allowed" }, { status: 403 });
   }
   const supabaseUrl = process.env.SUPABASE_URL;

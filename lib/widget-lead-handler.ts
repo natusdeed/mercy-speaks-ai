@@ -2,6 +2,7 @@
  * Shared handler for POST /api/widget/lead (used by Vercel catch-all API).
  */
 import { getTenant } from "../my-app/src/lib/widget-tenant";
+import { isWidgetRequestOriginAllowed } from "../my-app/src/lib/widget-origin";
 import type { WidgetLeadBody } from "../my-app/src/lib/widget-types";
 import { logEvent } from "../my-app/src/lib/save-lead";
 
@@ -16,30 +17,6 @@ function errorCategory(e: unknown): string {
   return "unknown";
 }
 
-function getOriginHost(request: Request): string | null {
-  const origin = request.headers.get("origin");
-  if (origin) {
-    try {
-      return new URL(origin).hostname;
-    } catch {
-      return null;
-    }
-  }
-  const referer = request.headers.get("referer");
-  if (referer) {
-    try {
-      return new URL(referer).hostname;
-    } catch {
-      return null;
-    }
-  }
-  return null;
-}
-
-function isDomainAllowed(domains: string[], hostname: string): boolean {
-  const normalized = hostname.toLowerCase().replace(/^www\./, "");
-  return domains.some((d) => d.toLowerCase().replace(/^www\./, "") === normalized);
-}
 
 export async function handleWidgetLeadRequest(request: Request): Promise<Response> {
   if (request.method !== "POST") {
@@ -79,8 +56,7 @@ export async function handleWidgetLeadRequest(request: Request): Promise<Respons
     return Response.json({ error: "Tenant not found" }, { status: 404 });
   }
 
-  const originHost = getOriginHost(request);
-  if (!originHost || !isDomainAllowed(tenant.domains, originHost)) {
+  if (!isWidgetRequestOriginAllowed(request, tenant.domains)) {
     return Response.json({ error: "Domain not allowed" }, { status: 403 });
   }
 
