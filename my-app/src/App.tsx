@@ -13,7 +13,11 @@ import { organizationSchema } from '@/lib/schema';
  * Route-level chunks still come from `manualChunks` + dynamic import() inside pages where safe.
  */
 import Home from './app/page';
-import About from './pages/About';
+import About from './app/v3/about';
+import WebsitesPage from './app/v3/websites';
+import WebsiteCarePage from './app/v3/website-care';
+import AiPilotPage from './app/v3/ai-pilot';
+import { PrivacyPage, TermsPage } from './app/v3/legal-pending';
 import Contact from './app/contact/page';
 import Portfolio from './app/portfolio/page';
 import Pricing from './app/pricing/page';
@@ -73,9 +77,11 @@ function DevDemoRouteFallback() {
   );
 }
 
+const V3_FOOTER_PATHS = new Set(["/", "/websites", "/website-care", "/ai-pilot", "/about", "/contact", "/privacy", "/terms"]);
+
 function PublicChrome() {
-  // Homepage V3 uses its own CEO-locked footer; other pages keep the shared footer.
-  const isHome = useLocation().pathname === "/";
+  // Project #001 V3 pages use the CEO-locked V3 footer; other pages keep the shared footer.
+  const isHome = V3_FOOTER_PATHS.has(useLocation().pathname.replace(/\/$/, "") || "/");
   return (
     <>
       {/* Site-wide Organization / ProfessionalService — one config, every public page */}
@@ -132,6 +138,11 @@ function App() {
         <Route element={<PublicChrome />}>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/websites" element={<WebsitesPage />} />
+          <Route path="/website-care" element={<WebsiteCarePage />} />
+          <Route path="/ai-pilot" element={<AiPilotPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/pricing" element={<Pricing />} />

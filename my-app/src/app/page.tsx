@@ -3,23 +3,13 @@ import { PageShell } from "@/components/ui/page-shell";
 import { SeoHead } from "@/components/seo/seo-head";
 import { JsonLd } from "@/components/seo/json-ld";
 import { faqPageSchema, websiteSchema } from "@/lib/schema";
+import { primaryBtn, secondaryBtn, textLink, section, inner, h2, smallPrint, FaqList } from "@/components/home-v3/v3-ui";
 
 /**
  * Homepage V3 (Project #001, CEO-locked copy 2026-10-13).
  * Copy source: /workspace/mercy-speaks/project-001/homepage-copy-v3.md — do not edit copy here without CEO approval.
  * Static markup only (no Framer Motion / no demo widgets) to keep first paint light (QA P1: homepage LCP/TBT).
  */
-
-const primaryBtn =
-  "inline-flex min-h-12 w-full sm:w-auto items-center justify-center rounded-xl bg-violet-700 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-electric-purple/25 transition-colors hover:bg-violet-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950";
-const secondaryBtn =
-  "inline-flex min-h-12 w-full sm:w-auto items-center justify-center rounded-xl border border-slate-600 px-6 py-3 text-base font-semibold text-slate-100 transition-colors hover:border-slate-400 hover:bg-slate-800/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950";
-const textLink =
-  "inline-flex min-h-11 items-center font-medium text-neon-cyan underline underline-offset-4 hover:text-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan rounded";
-const section = "px-4 sm:px-6 lg:px-8 py-14 md:py-20";
-const inner = "mx-auto w-full max-w-6xl";
-const h2 = "text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-slate-50";
-const smallPrint = "text-sm leading-relaxed text-slate-400";
 
 const PACKAGES = [
   {
@@ -45,7 +35,7 @@ const PACKAGES = [
 const STEPS = [
   { title: "Quote", body: "tell us about your business; we send a written quote, valid 30 calendar days." },
   { title: "Kickoff", body: "you pay 50% and send the required assets, content, and access." },
-  { title: "Build", body: "10–15 business days of active production time, including your revision rounds." },
+  { title: "Build", body: "10–15 business days of active Mercy Speaks production time." },
   { title: "Launch", body: "you pay the final 50%; we launch on hosting and a domain you own, with delegated access for us." },
   { title: "Support", body: "14 calendar days of bug fixes for defects in delivered work, then an optional care plan." },
 ] as const;
@@ -68,7 +58,7 @@ export const HOME_V3_FAQS = [
   {
     question: "How long does a website take?",
     answer:
-      "10–15 business days of active production time, starting after we receive the 50% payment and all required assets and access. Client delays pause the clock.",
+      "10–15 business days of active Mercy Speaks production time after the initial payment and all required starting assets are received. The delivery clock pauses while Mercy Speaks is waiting for client content, assets, credentials/access, feedback, revisions, or approvals.",
   },
   {
     question: "What's included?",
@@ -217,8 +207,9 @@ export default function Home() {
               ))}
             </ol>
             <p className={`${smallPrint} mt-6 text-center`}>
-              The clock starts once the 50% payment and all required starting assets, content, and access are received.
-              Client delays pause the clock.
+              10–15 business days of active Mercy Speaks production time after the initial payment and all required
+              starting assets are received. The delivery clock pauses while Mercy Speaks is waiting for client content,
+              assets, credentials/access, feedback, revisions, or approvals.
             </p>
           </div>
         </section>
@@ -277,19 +268,7 @@ export default function Home() {
             <h2 id="faq-heading" className={`${h2} mb-8 text-center`}>
               FAQ
             </h2>
-            <div className="space-y-3">
-              {HOME_V3_FAQS.map((f) => (
-                <details key={f.question} className="group rounded-xl border border-slate-700 bg-slate-900/60">
-                  <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 rounded-xl px-5 py-3 text-base font-semibold text-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan md:text-lg">
-                    <span>{f.question}</span>
-                    <span aria-hidden className="text-xl text-neon-cyan transition-transform group-open:rotate-45">
-                      +
-                    </span>
-                  </summary>
-                  <p className="px-5 pb-5 text-base leading-relaxed text-slate-300">{f.answer}</p>
-                </details>
-              ))}
-            </div>
+            <FaqList faqs={HOME_V3_FAQS} />
           </div>
         </section>
 

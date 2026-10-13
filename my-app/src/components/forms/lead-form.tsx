@@ -225,7 +225,7 @@ export function LeadForm({
 
       <div className="space-y-1.5">
         <label htmlFor="lead-message" className="block text-sm font-medium text-slate-300">
-          Message <span className="text-slate-500 font-normal">(optional)</span>
+          Message <span className="text-slate-400 font-normal">(optional)</span>
         </label>
         <textarea
           id="lead-message"
@@ -263,7 +263,7 @@ export function LeadForm({
             submitLabel
           )}
         </Button>
-        <p className="text-center text-sm text-slate-500">
+        <p className="text-center text-sm text-slate-400">
           We respond within 2 business hours. No spam.
         </p>
       </div>

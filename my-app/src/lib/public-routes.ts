@@ -59,6 +59,13 @@ export const PUBLIC_ROUTES: readonly PublicRouteDef[] = [
   { path: "/results", sitemap: true, prerender: true },
   { path: "/testimonials", sitemap: true, prerender: true },
   { path: "/about", sitemap: true, prerender: true },
+  // Project #001 V3 pages
+  { path: "/websites", sitemap: true, prerender: true },
+  { path: "/website-care", sitemap: true, prerender: true },
+  { path: "/ai-pilot", sitemap: true, prerender: true },
+  // Legal pages: heading-only placeholders pending counsel (noindex) — omit from sitemap
+  { path: "/privacy", sitemap: false, prerender: true },
+  { path: "/terms", sitemap: false, prerender: true },
   { path: "/blog", sitemap: true, prerender: true },
   { path: "/contact", sitemap: true, prerender: true },
   { path: "/book-demo", sitemap: true, prerender: true },

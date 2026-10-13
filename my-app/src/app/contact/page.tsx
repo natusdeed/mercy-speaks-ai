@@ -10,8 +10,6 @@ import {
   Phone,
   MapPin,
   Send,
-  Clock,
-  MessageSquare,
   CheckCircle2,
 } from "lucide-react";
 import { SeoHead } from "@/components/seo/seo-head";
@@ -55,8 +53,8 @@ export default function ContactPage() {
     <PageShell className="min-h-screen bg-slate-950">
       <SeoHead
         path="/contact"
-        title="Contact Mercy Speaks Digital | Websites & AI Automation"
-        description="Contact Mercy Speaks Digital for websites, AI receptionists, and automation. Email, call, or send a message—we reply to real business inquiries promptly."
+        title="Get a Website Quote | Mercy Speaks Digital"
+        description="Tell us about your business and we'll send a written quote, valid for 30 calendar days."
       />
       <JsonLd
         data={[
@@ -81,17 +79,11 @@ export default function ContactPage() {
               transition={{ duration: 0.6 }}
               className="text-center mb-8 md:mb-10"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-cyan/20 mb-4">
-                <MessageSquare className="w-4 h-4 text-neon-cyan" />
-                <span className="text-sm text-neon-cyan font-medium">Get in Touch</span>
-              </div>
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-slate-50 mb-3 md:mb-4 title-3d">
-                Let&apos;s{" "}
-                <span className="text-neon-cyan">Talk</span>
+                Get a Website Quote
               </h1>
               <p className="text-lg sm:text-xl leading-relaxed text-slate-300 max-w-3xl mx-auto px-1">
-                Questions about a website build, AI receptionist, or automation roadmap? Send a note—we reply to real
-                business inquiries, fast.
+                Tell us about your business and we&apos;ll send a written quote, valid for 30 calendar days.
               </p>
             </motion.div>
 
@@ -102,43 +94,32 @@ export default function ContactPage() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="space-y-3 sm:space-y-4 order-2 lg:order-1"
               >
-                <h2 className="sr-only">Contact details</h2>
+                <h2 className="text-xl sm:text-2xl font-semibold text-slate-50">Other ways to reach us</h2>
                 <div className="card">
-                  <MapPin className="w-7 h-7 sm:w-8 sm:h-8 text-electric-purple mb-4" />
-                  <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-50 mb-2">Location</h3>
-                  <p className="text-base sm:text-lg md:text-xl text-slate-300">
-                    Richmond, Texas 77407
-                    <br />
-                    Houston Metro Area
-                  </p>
-                </div>
-                <div className="card">
-                  <Phone className="w-7 h-7 sm:w-8 sm:h-8 text-neon-cyan mb-4" />
-                  <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-50 mb-2">Phone</h3>
+                  <Phone className="w-7 h-7 sm:w-8 sm:h-8 text-neon-cyan mb-4" aria-hidden />
+                  <h3 className="text-lg sm:text-xl font-semibold text-slate-50 mb-2">Phone</h3>
                   <a
                     href={telHref()}
-                    className="text-base sm:text-lg md:text-xl text-slate-300 hover:text-neon-cyan transition-colors"
+                    className="inline-flex min-h-11 items-center text-base sm:text-lg text-slate-300 underline underline-offset-4 hover:text-neon-cyan transition-colors"
                   >
                     (832) 981-3123
                   </a>
                 </div>
                 <div className="card">
-                  <Mail className="w-7 h-7 sm:w-8 sm:h-8 text-electric-purple mb-4" />
-                  <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-50 mb-2">Email</h3>
+                  <Mail className="w-7 h-7 sm:w-8 sm:h-8 text-electric-purple mb-4" aria-hidden />
+                  <h3 className="text-lg sm:text-xl font-semibold text-slate-50 mb-2">Email</h3>
                   <a
                     href="mailto:don@mercyspeaksdigital.com"
-                    className="text-base sm:text-lg md:text-xl text-slate-300 hover:text-neon-cyan transition-colors break-all"
+                    className="inline-flex min-h-11 items-center text-base sm:text-lg text-slate-300 underline underline-offset-4 hover:text-neon-cyan transition-colors break-all"
                   >
                     don@mercyspeaksdigital.com
                   </a>
                 </div>
                 <div className="card">
-                  <Clock className="w-7 h-7 sm:w-8 sm:h-8 text-neon-cyan mb-4" />
-                  <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-50 mb-2">Business Hours</h3>
-                  <p className="text-base sm:text-lg md:text-xl text-slate-300">
-                    Monday - Friday: 9:00 AM - 6:00 PM CST
-                    <br />
-                    Saturday - Sunday: By Appointment
+                  <MapPin className="w-7 h-7 sm:w-8 sm:h-8 text-electric-purple mb-4" aria-hidden />
+                  <h3 className="text-lg sm:text-xl font-semibold text-slate-50 mb-2">Mailing address</h3>
+                  <p className="text-base sm:text-lg text-slate-300">
+                    Mercy Speaks Digital, 5554 S Peek Road, PMB #2144, Katy, TX 77450
                   </p>
                 </div>
               </motion.div>
@@ -191,7 +172,7 @@ export default function ContactPage() {
                         <input ref={honeypotRef} id="contact-website" name="website" type="text" tabIndex={-1} autoComplete="off" defaultValue="" />
                       </div>
                       <LeadForm
-                        submitLabel="Send Message"
+                        submitLabel="Get a Website Quote"
                         submittingLabel="Sending..."
                         submitIcon={<Send className="w-5 h-5" />}
                         onSubmit={handleSubmit}
