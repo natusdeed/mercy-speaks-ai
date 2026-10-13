@@ -22,7 +22,8 @@
     "my-app/src/**/*.ts",
     "my-app/src/**/*.tsx",
     "lib/**/*.ts",
-    "api/**/*.ts"
+    "api/**/*.ts",
+    "api-src/**/*.ts"
   ],
   "exclude": ["node_modules", "my-app/node_modules"]
 }
