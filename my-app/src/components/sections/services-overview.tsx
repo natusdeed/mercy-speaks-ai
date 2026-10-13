@@ -27,7 +27,7 @@ const SERVICES = [
     icon: Phone,
     title: "AI Receptionists",
     description:
-      "Answer calls 24/7, capture and qualify leads, and book appointments—without hiring more staff.",
+      "Answer calls, capture and qualify leads, and book appointments. AI receptionist services are currently in pilot testing.",
     bullets: ["Inbound call handling", "Lead capture & qualification", "Appointment booking", "Missed-call follow-up"],
     href: "/services/ai-phone-receptionist",
     cta: "See AI Receptionist",

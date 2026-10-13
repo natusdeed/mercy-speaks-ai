@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
-import { AI_RECEPTIONIST_TIERS, WEBSITE_TIERS } from "@/content/pricing-tiers";
+import { WEBSITE_TIERS } from "@/content/pricing-tiers";
 
 export function PricingPreview() {
   return (
@@ -25,45 +25,14 @@ export function PricingPreview() {
             Pricing Preview
           </h2>
           <p className="text-slate-400 max-w-2xl mx-auto">
-            Plans that scale. Timelines confirmed on your strategy call. Terms reviewed before you start.
+            Website packages with timelines confirmed on your strategy call. Terms reviewed before you start.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-          {AI_RECEPTIONIST_TIERS.map((tier, index) => (
-            <motion.div
-              key={tier.name}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.08 }}
-              className={`card flex flex-col ${tier.popular ? "bg-slate-900/40" : ""}`}
-            >
-              {tier.popular && (
-                <span className="text-xs font-semibold text-electric-purple uppercase tracking-wider mb-3">
-                  Most popular
-                </span>
-              )}
-              <h3 className="card-title text-slate-50 mb-1">{tier.name}</h3>
-              <p className="text-2xl font-bold text-slate-50 mb-2">
-                ${tier.price}
-                <span className="text-sm font-normal text-slate-400">/month</span>
-              </p>
-              <p className="text-xs text-neon-cyan mt-1">
-                {tier.setup.replace("one-time ", "")}
-              </p>
-              <p className="card-body text-slate-400 mb-5">{tier.previewDescription}</p>
-              <Button
-                variant={tier.popular ? "primary" : "outline"}
-                size="default"
-                asChild
-                className="mt-auto w-full"
-              >
-                <Link to="/pricing">View plan</Link>
-              </Button>
-            </motion.div>
-          ))}
-        </div>
+        {/* P0 hotfix: AI receptionist plan cards/pricing removed while in pilot. */}
+        <p className="text-center text-slate-300 max-w-2xl mx-auto">
+          AI receptionist services are currently in pilot testing.
+        </p>
 
         <div className="mt-12 md:mt-16">
           <motion.div

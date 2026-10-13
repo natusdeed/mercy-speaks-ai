@@ -12,13 +12,13 @@ ctaDescription: "Play the live demo, then book a short call if you want to compa
 useLiveDemoCta: true
 ---
 
-Choose an **AI receptionist** when you need 24/7 coverage, consistent scripts, booking into your calendar, and predictable software-style pricing. Choose a **human answering service** when empathy, judgment on messy conversations, or regulated wording must stay with a live agent. Many growing businesses use **both**: AI for routine volume and after-hours, humans for escalations—or AI that hands off when a call gets hard.
+Choose an **AI receptionist** when you need after-hours coverage, consistent scripts, booking into your calendar, and predictable software-style pricing. Choose a **human answering service** when empathy, judgment on messy conversations, or regulated wording must stay with a live agent. Many growing businesses use **both**: AI for routine volume and after-hours, humans for escalations—or AI that hands off when a call gets hard.
 
 ## What each option actually is
 
 ### AI receptionist
 
-An AI receptionist answers your business line with a trained voice agent. It can greet callers, ask qualification questions, book appointments, capture leads, send confirmations, and (with the right setup) text back missed callers. Mercy Speaks Digital installs this as a done-for-you system—see [AI phone receptionist](/services/ai-phone-receptionist)—with plans from **$197 to $697/month** plus setup on [pricing](/pricing).
+An AI receptionist answers your business line with a trained voice agent. It can greet callers, ask qualification questions, book appointments, capture leads, send confirmations, and (with the right setup) text back missed callers. Mercy Speaks Digital installs this as a done-for-you system—see [AI phone receptionist](/services/ai-phone-receptionist). AI receptionist services are currently in pilot testing.
 
 ### Human answering service
 
@@ -30,7 +30,7 @@ Neither option magically “sounds like your best employee on their best day” 
 
 | Factor | AI receptionist | Human answering service |
 |--------|-----------------|-------------------------|
-| **Cost shape** | Software/retainer + setup; often $197–$697/mo done-for-you, or DIY tools lower | Monthly minimums + per-minute/call; hybrid AI+human often ~$95–$300/mo and up |
+| **Cost shape** | Software/retainer + setup; varies by vendor and scope | Monthly minimums + per-minute/call; hybrid AI+human often ~$95–$300/mo and up |
 | **Availability** | Always on—nights, weekends, holidays | Shift-based; after-hours tiers cost more |
 | **Consistency** | Same script, same questions, same CRM fields every time | Varies by agent, fatigue, and call volume |
 | **Complex / emotional calls** | Weak alone; needs clear handoff rules | Stronger when trained; still uneven across agents |
@@ -42,7 +42,7 @@ Neither option magically “sounds like your best employee on their best day” 
 
 Answering services sell **labor minutes**. Busy seasons, storms, and marketing campaigns push your bill up—or push callers into longer holds. AI sell **system capacity**: a published call band, integrations, and monitoring.
 
-For a transparent agency example, Mercy Starter is **$197/month** (~500 calls), Growth **$397** (~1,200), Pro **$697** (~3,000+), with setup from **$997–$4,500**. That is a different cost curve than “$1.25 per minute after 100 minutes,” and it is easier to compare against the cost of missing jobs.
+Done-for-you AI pricing is usually a monthly retainer plus setup—a different cost curve than “$1.25 per minute after 100 minutes,” and easier to compare against the cost of missing jobs. AI receptionist services are currently in pilot testing.
 
 If your current answering invoice already sits in the mid-hundreds monthly *and* you still lose after-hours bookings because agents only take messages, the ROI question is not “AI vs. free”—it is “AI vs. message-taking that does not book.”
 
@@ -50,7 +50,7 @@ If your current answering invoice already sits in the mid-hundreds monthly *and*
 
 Callers do not care that your office closed at 5. They care whether someone—or something—picks up before they tap the next Google result.
 
-AI wins on **raw availability**: every ring can get an answer. Human services can also cover 24/7, but you usually pay for that tier, and quality still depends on who is on shift at 2 a.m.
+AI wins on **raw availability**: every ring can get an answer. Human services can also cover nights and weekends, but you usually pay for that tier, and quality still depends on who is on shift at 2 a.m.
 
 Speed-to-lead still matters when a call is missed entirely. Pairing an AI receptionist with [missed-call text-back](/services/missed-call-text-back) covers the edge cases—busy lines, simultaneous rings, or a caller who hangs up mid-ring.
 
@@ -83,7 +83,7 @@ A practical handoff design:
 3. Escalation triggers—keywords, sentiment, “I need a person,” emergency flags—warm-transfer or create a priority callback.
 4. Your team (or a partner answering service) receives context, not a blank “someone called.”
 
-Mercy Pro is built for deeper custom call flows and training when those rules get industry-specific. Growth is often enough when the goal is book-the-job plus follow-up SMS. Start from [pricing](/pricing) and a [demo](/book-demo) rather than guessing the tier from a blog post.
+Deeper custom call flows and training matter when those rules get industry-specific. AI receptionist services are currently in pilot testing.
 
 ## Scalability when marketing works
 
@@ -113,11 +113,11 @@ Use this as a filter—not a forever rule.
 
 ### Solo operators and cleaners
 
-**AI or DIY AI**, depending on time. If you are on jobs all day, done-for-you AI at Starter pricing often beats hoping callers leave voicemails. If you love tinkering and volume is low, a DIY tool can be enough—see our comparison of [DIY vs done-for-you](/blog/diy-ai-receptionist-vs-done-for-you).
+**AI or DIY AI**, depending on time. If you are on jobs all day, done-for-you AI often beats hoping callers leave voicemails. If you love tinkering and volume is low, a DIY tool can be enough—see our comparison of [DIY vs done-for-you](/blog/diy-ai-receptionist-vs-done-for-you).
 
 ### Multi-location operators
 
-**AI with Pro-level flows.** You need consistent intake across locations, CRM discipline, and reporting. Human services struggle to keep every site’s scripts straight at scale.
+**AI with deeper custom flows.** You need consistent intake across locations, CRM discipline, and reporting. Human services struggle to keep every site’s scripts straight at scale.
 
 ## A simple way to choose this week
 
@@ -135,7 +135,7 @@ When you want to hear the AI path live, use the demo on our [AI receptionist pag
 
 ### Is an AI receptionist better than a human answering service?
 
-It is better for 24/7 availability, consistent intake, and automation into calendars and CRM. Humans are better for empathy and complex or regulated conversations. Many businesses should use AI for volume and humans for escalations.
+It is better for round-the-clock availability, consistent intake, and automation into calendars and CRM. Humans are better for empathy and complex or regulated conversations. Many businesses should use AI for volume and humans for escalations.
 
 ### Can an AI receptionist transfer to a real person?
 
@@ -143,7 +143,7 @@ Yes—when handoff is designed into the call flow. The AI can warm-transfer, cre
 
 ### What does a done-for-you AI receptionist cost?
 
-Mercy Speaks Digital plans run **$197, $397, and $697 per month** with one-time setup from **$997 to $4,500**, depending on call volume and integrations. See [pricing](/pricing) for the current tier table.
+AI receptionist services are currently in pilot testing. We do not publish AI receptionist pricing at this time.
 
 ### Should dental or legal businesses use AI on the phone?
 

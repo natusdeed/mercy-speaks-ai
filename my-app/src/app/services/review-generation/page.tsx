@@ -74,7 +74,7 @@ export default function ReviewGenerationPage() {
   const description =
     "Automatically collect more 5-star Google reviews after every job. We monitor, alert, and grow your online reputation for local service businesses.";
   const intro =
-    "93% of consumers read online reviews before hiring a local service business. We automate review requests, monitor your reputation across platforms, and help you respond professionally — so your stars keep rising.";
+    "We automate review requests, monitor your reputation across platforms, and help you respond professionally — so your stars keep rising.";
 
   return (
     <PageShell className="min-h-screen bg-slate-950">
@@ -160,22 +160,11 @@ export default function ReviewGenerationPage() {
           <div className="section-inner max-w-6xl mx-auto">
             <motion.div {...fadeUpInView} className="card-premium rounded-2xl">
               <h2 className="text-2xl md:text-3xl font-bold text-slate-50 mb-4">The Real Cost of Too Few Reviews</h2>
-              <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-amber-200 text-sm md:text-base mb-6">
-                "A contractor with 4 reviews and a 4.2-star rating loses to a competitor with 47 reviews and 4.8 stars
-                — every single time. Reviews aren't vanity. They're revenue."
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {[
-                  ["93%", "of consumers read reviews before hiring a local business"],
-                  ["4.2+", "star rating threshold (below this and prospects skip you)"],
-                  ["10x", "more likely to convert when you have 50+ recent reviews"],
-                ].map(([stat, body]) => (
-                  <div key={stat} className="rounded-2xl bg-slate-900/20 border border-slate-800/60 p-5">
-                    <p className="text-3xl font-bold text-neon-cyan mb-2">{stat}</p>
-                    <p className="text-sm text-slate-300">{body}</p>
-                  </div>
-                ))}
-              </div>
+              {/* P0 hotfix: unsourced statistics and comparison quote removed. */}
+              <p className="text-slate-300 text-sm md:text-base">
+                Prospects compare reviews before they call. A thin or stale review profile can cost you jobs to
+                competitors with more recent, visible feedback.
+              </p>
             </motion.div>
           </div>
         </section>

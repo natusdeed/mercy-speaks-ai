@@ -47,7 +47,7 @@ export default function ServiceMissedCallTextBack() {
             <>
               Text-back covers the calls you cannot take. Pair it with our{" "}
               <Link to={NAV_PATHS.aiReceptionist}>AI phone receptionist</Link>{" "}
-              so fewer calls miss in the first place: the AI answers 24/7, qualifies, and books, while text-back still catches edge cases—busy lines, after-hours overflows, or moments your team steps away. Together they close the loop from ring to reply to calendar.
+              so fewer calls miss in the first place: the AI answers, qualifies, and books, while text-back still catches edge cases—busy lines, after-hours overflows, or moments your team steps away. Together they close the loop from ring to reply to calendar.
             </>
           ),
         },

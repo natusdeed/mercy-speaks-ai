@@ -101,7 +101,7 @@ export const INDUSTRY_PAGES: Record<IndustryPageSlug, IndustryPageConfig> = {
     ],
     installTitle: "What we install",
     installLead:
-      "A 24/7 AI receptionist trained on your service menu, travel radius, membership rules, and urgency cues—plus automations that keep overflow from becoming voicemail.",
+      "An AI receptionist trained on your service menu, travel radius, membership rules, and urgency cues—plus automations that keep overflow from becoming voicemail.",
     installItems: [
       {
         title: "AI phone receptionist",
@@ -165,7 +165,7 @@ export const INDUSTRY_PAGES: Record<IndustryPageSlug, IndustryPageConfig> = {
         id: "hvac-pricing-fit",
         question: "Which plan do most HVAC companies choose?",
         answer:
-          "Most land on Mercy Growth for peak volume, SMS automation, and booking sync. Multi-location shops often move to Pro.",
+          "AI receptionist services are currently in pilot testing.",
       },
       {
         id: "hvac-sounds-robot",
@@ -193,7 +193,7 @@ export const INDUSTRY_PAGES: Record<IndustryPageSlug, IndustryPageConfig> = {
     audience: "Plumbing and drain companies",
     seoTitle: "AI Receptionist for Plumbing | Mercy Speaks Digital",
     seoDescription:
-      "AI receptionist for plumbing companies—answer burst-pipe and weekend emergencies 24/7, triage shutoffs, and book jobs before callers dial the next plumber.",
+      "AI receptionist for plumbing companies—answer burst-pipe and weekend emergency calls, triage shutoffs, and book jobs before callers dial the next plumber.",
     h1: "AI Receptionist & Missed-Call Text Back for Plumbing Companies",
     heroPain:
       "Water does not wait for Monday. A burst supply line at Saturday brunch or a sewer backup on a holiday weekend will go to whichever plumber answers first—and that is rarely the shop still finishing a slab leak across town.",
@@ -272,7 +272,7 @@ export const INDUSTRY_PAGES: Record<IndustryPageSlug, IndustryPageConfig> = {
         id: "plumb-tier",
         question: "What pricing tier fits most plumbing shops?",
         answer:
-          "Most choose Mercy Growth for volume, SMS automation, and booking. Solo operators sometimes start on Starter and upgrade when nights stay busy.",
+          "AI receptionist services are currently in pilot testing.",
       },
       {
         id: "plumb-integrate",
@@ -385,7 +385,7 @@ export const INDUSTRY_PAGES: Record<IndustryPageSlug, IndustryPageConfig> = {
         id: "dental-tier",
         question: "Which plan fits dental practices?",
         answer:
-          "Most choose Mercy Pro for custom flows, higher volume, and recall/reminder automation. Smaller offices sometimes start on Growth after scoping.",
+          "AI receptionist services are currently in pilot testing.",
       },
       {
         id: "dental-pms",
@@ -500,7 +500,7 @@ export const INDUSTRY_PAGES: Record<IndustryPageSlug, IndustryPageConfig> = {
         id: "legal-tier",
         question: "Which pricing tier fits most firms?",
         answer:
-          "Many firms choose Mercy Growth for after-hours intake and booking. High-volume or multi-office firms often need Pro.",
+          "AI receptionist services are currently in pilot testing.",
       },
     ],
     pricing: {
@@ -607,7 +607,7 @@ export const INDUSTRY_PAGES: Record<IndustryPageSlug, IndustryPageConfig> = {
         id: "church-tier",
         question: "Which plan do churches usually pick?",
         answer:
-          "Most fit Mercy Starter. Larger multi-campus ministries may need Growth.",
+          "AI receptionist services are currently in pilot testing.",
       },
     ],
     pricing: {
@@ -720,7 +720,7 @@ export const INDUSTRY_PAGES: Record<IndustryPageSlug, IndustryPageConfig> = {
         id: "auto-tier",
         question: "Which plan fits most auto shops?",
         answer:
-          "Most multi-bay shops choose Mercy Growth. Single-bay shops sometimes start on Starter.",
+          "AI receptionist services are currently in pilot testing.",
       },
     ],
     pricing: {

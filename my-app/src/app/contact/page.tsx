@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { PageShell } from "@/components/ui/page-shell";
@@ -20,10 +20,15 @@ import { BRAND_TAGLINE, telHref } from "@/lib/site-config";
 import { breadcrumbSchema, contactPageSchema, webPageSchema } from "@/lib/schema";
 
 const API_CONTACT = "/api/contact";
+const CONTACT_FALLBACK_EMAIL = "don@mercyspeaksdigital.com";
+const RETRY_MESSAGE =
+  "We couldn't send your message. Please try again in a moment, or email us directly.";
 
 export default function ContactPage() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+
+  const honeypotRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = async (data: LeadFormData) => {
     setSubmitError(null);
@@ -31,15 +36,18 @@ export default function ContactPage() {
       const res = await fetch(API_CONTACT, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, website: honeypotRef.current?.value ?? "" }),
       });
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        throw new Error(err.message ?? "Submission failed. Please try again.");
+      const json = (await res.json().catch(() => null)) as { success?: boolean; message?: string } | null;
+      // Only show success when the server explicitly confirms acceptance.
+      if (res.ok && json?.success === true) {
+        setIsSubmitted(true);
+        return;
       }
-      setIsSubmitted(true);
-    } catch (e) {
-      setSubmitError(e instanceof Error ? e.message : "Something went wrong. Please try again.");
+      // Show validation messages (400) from our own API; generic retry for everything else.
+      setSubmitError(res.status === 400 && json?.message ? json.message : RETRY_MESSAGE);
+    } catch {
+      setSubmitError(RETRY_MESSAGE);
     }
   };
 
@@ -167,8 +175,21 @@ export default function ContactPage() {
                       {submitError && (
                         <p className="mb-4 p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-sm" role="alert">
                           {submitError}
+                          {submitError === RETRY_MESSAGE && (<>{" "}
+                          <a href={`mailto:${CONTACT_FALLBACK_EMAIL}`} className="underline font-medium">
+                            {CONTACT_FALLBACK_EMAIL}
+                          </a>{" "}
+                          or call{" "}
+                          <a href={telHref()} className="underline font-medium">
+                            (703) 332-5956
+                          </a>
+                          .</>)}
                         </p>
                       )}
+                      <div aria-hidden="true" style={{ position: "absolute", left: "-10000px", width: 1, height: 1, overflow: "hidden" }}>
+                        <label htmlFor="contact-website">Leave this field empty</label>
+                        <input ref={honeypotRef} id="contact-website" name="website" type="text" tabIndex={-1} autoComplete="off" defaultValue="" />
+                      </div>
                       <LeadForm
                         submitLabel="Send Message"
                         submittingLabel="Sending..."

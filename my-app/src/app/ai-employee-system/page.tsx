@@ -114,7 +114,7 @@ const showDevCommandCenter = viteEnv?.DEV === true;
 
 export default function AiEmployeeSystemPage() {
   const description =
-    "Mercy AI Staff and Revora AI Employee: a 24/7 AI team for lead capture, bookings, follow-up, handoffs, missed-revenue visibility, and marketing support.";
+    "Mercy AI Staff and Revora AI Employee: an AI team for lead capture, bookings, follow-up, handoffs, missed-revenue visibility, and marketing support.";
   const path = "/ai-employee-system";
 
   return (
@@ -144,7 +144,7 @@ export default function AiEmployeeSystemPage() {
               {...fadeUp}
               className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-50 tracking-tight mb-6 md:mb-8 leading-tight"
             >
-              Your 24/7 AI Employee Team for Leads, Bookings, Follow-Up, and Growth
+              Your AI Employee Team for Leads, Bookings, Follow-Up, and Growth
             </motion.h1>
             <motion.p
               {...fadeUp}
@@ -311,7 +311,7 @@ export default function AiEmployeeSystemPage() {
                 <p className="text-slate-400 leading-relaxed mb-4">
                   Outbound emails, SMS, calendar bookings, and social posts can all sit behind human approval. The AI
                   proposes drafts and next steps—you decide what actually goes out under your brand. That keeps quality
-                  high and surprises low while you still get 24/7 capture and qualification.
+                  high and surprises low while you still get lead capture and qualification.
                 </p>
                 <p className="text-slate-500 text-sm leading-relaxed">
                   Rollout is staged: we tune tone, escalation rules, and approval gates with you before anything

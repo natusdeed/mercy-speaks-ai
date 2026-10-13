@@ -12,8 +12,8 @@ export default function ServiceAIPhoneReceptionist() {
   return (
     <ServiceMarketingPage
       path={NAV_PATHS.aiReceptionist}
-      seoTitle="24/7 AI Phone Receptionist | Mercy Speaks Digital"
-      seoDescription="Never miss a call. Our AI receptionist answers 24/7, qualifies leads, and books appointments. Live in 48–72 hours. Plans from $197/mo."
+      seoTitle="AI Phone Receptionist | Mercy Speaks Digital"
+      seoDescription="An AI receptionist that answers calls, qualifies leads, and books appointments. AI receptionist services are currently in pilot testing."
       icon={Phone}
       h1="AI phone receptionist"
       intro="Our flagship inbound product for small businesses: answer every call, qualify the lead, and book the appointment—even when your team is busy or the business is closed."
@@ -26,7 +26,7 @@ export default function ServiceAIPhoneReceptionist() {
           .
         </>
       }
-      atAGlance="Mercy Speaks Digital designs and installs an AI-powered phone receptionist that follows scripts you approve: greet callers, answer common questions, qualify intent, and route or book against your calendar. Most teams are live in 48–72 hours. It complements—not replaces—your team for high-touch moments, while making sure routine calls still convert."
+      atAGlance="Mercy Speaks Digital designs and installs an AI-powered phone receptionist that follows scripts you approve: greet callers, answer common questions, qualify intent, and route or book against your calendar. Fast implementation after your setup and requirements are confirmed. It complements—not replaces—your team for high-touch moments, while making sure routine calls still convert."
       serviceType="AI receptionist"
       sections={[
         {
@@ -42,8 +42,8 @@ export default function ServiceAIPhoneReceptionist() {
           body: "We connect to the tools you already use: keep your existing business number, sync with Google Calendar or Outlook, book through cal.com when that is your scheduler, and push lead details into your CRM. You review routing and handoffs before traffic goes live.",
         },
         {
-          title: "Live in 48–72 hours",
-          body: "After a strategy call to map call types, scripts, and calendars, most clients are live within 48–72 hours of onboarding. We implement routing, notifications, and escalation paths; you approve before we point calls at the agent.",
+          title: "Implementation",
+          body: "After a strategy call to map call types, scripts, and calendars, we confirm your setup and requirements, then implement. AI receptionist services are currently in pilot testing. We implement routing, notifications, and escalation paths; you approve before we point calls at the agent.",
         },
         {
           title: "Outcomes we design for",
@@ -59,7 +59,7 @@ export default function ServiceAIPhoneReceptionist() {
             values: [
               "No — caller leaves a message (if they bother)",
               "Yes, when an agent is available",
-              "Yes — 24/7, no hold music queue",
+              "Yes — no hold music queue",
             ],
           },
           {
@@ -83,7 +83,7 @@ export default function ServiceAIPhoneReceptionist() {
             values: [
               "“Free,” but you pay in lost leads",
               "High monthly + per-minute fees",
-              "Plans from $197/mo",
+              "AI receptionist services are currently in pilot testing.",
             ],
           },
           {

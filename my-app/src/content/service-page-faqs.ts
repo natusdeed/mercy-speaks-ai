@@ -5,24 +5,24 @@ export const AI_RECEPTIONIST_SERVICE_FAQS: AccordionItemData[] = [
   {
     id: "ai-receptionist-setup-time",
     question: "How quickly can the AI receptionist be set up?",
-    answer: "Most clients are live within 48–72 hours of onboarding.",
+    answer: "Fast implementation after your setup and requirements are confirmed. AI receptionist services are currently in pilot testing.",
   },
   {
     id: "ai-receptionist-robotic",
     question: "Will it sound robotic to my customers?",
     answer:
-      "No. Our AI voices are indistinguishable from a real receptionist in most cases.",
+      "We use natural-sounding AI voices and scripts you approve before any calls go live.",
   },
   {
     id: "ai-receptionist-complex",
     question: "What happens if a caller asks something complex?",
     answer:
-      "The AI captures their information and flags it for your team to follow up — no call goes unanswered.",
+      "The AI captures their information and flags it for your team to follow up.",
   },
   {
     id: "ai-receptionist-after-hours",
     question: "Does it work after business hours?",
-    answer: "Yes, 24/7 including weekends and holidays.",
+    answer: "It can be configured to answer outside business hours, including weekends. AI receptionist services are currently in pilot testing.",
   },
 ];
 
@@ -32,7 +32,7 @@ export const VOICE_AGENTS_SERVICE_FAQS: AccordionItemData[] = [
     id: "voice-agents-vs-receptionist",
     question: "What's the difference between a voice agent and an AI receptionist?",
     answer:
-      "The AI Phone Receptionist is our flagship inbound product: answer calls 24/7, qualify leads, and book appointments—ideal for small businesses that need a reliable front desk on the phone. Voice agents are for advanced/custom telephony: multi-step qualification trees, dispatch triage, reminder calls, light outbound, and deeper branching beyond a standard receptionist flow. If you just need inbound answered and booked, start with the AI Phone Receptionist.",
+      "The AI Phone Receptionist is our flagship inbound product: answer calls, qualify leads, and book appointments—ideal for small businesses that need a reliable front desk on the phone. Voice agents are for advanced/custom telephony: multi-step qualification trees, dispatch triage, reminder calls, light outbound, and deeper branching beyond a standard receptionist flow. If you just need inbound answered and booked, start with the AI Phone Receptionist.",
   },
   {
     id: "voice-agents-outbound",

@@ -12,7 +12,7 @@ ctaDescription: "Book a no-pressure demo. If DIY is the better call for you, we 
 useLiveDemoCta: true
 ---
 
-**DIY AI receptionist tools** are the right call when you have time, enjoy configuring software, and can own testing and fixes yourself—often at roughly **$50–$100/month** in software fees. **Done-for-you setup** (like Mercy Speaks Digital at **$197–$697/month** plus setup) is the better fit when you need call flows, calendar/CRM wiring, missed-call text-back, and monitoring handled for you. The honest deciding factor is total cost of ownership: subscription price plus *your* hours and the cost of downtime when something breaks.
+**DIY AI receptionist tools** are the right call when you have time, enjoy configuring software, and can own testing and fixes yourself—often at roughly **$50–$100/month** in software fees. **Done-for-you setup** (a monthly retainer plus setup) is the better fit when you need call flows, calendar/CRM wiring, missed-call text-back, and monitoring handled for you. The honest deciding factor is total cost of ownership: subscription price plus *your* hours and the cost of downtime when something breaks.
 
 ## Two paths that get marketed as the same product
 
@@ -35,19 +35,17 @@ Feature sets, pricing, and integrations change; always verify on the vendor’s 
 
 An agency install means someone else designs the conversation, connects your tools, tests edge cases, and stays accountable after launch. Our [AI phone receptionist](/services/ai-phone-receptionist) offering is priced transparently:
 
-- **Mercy Starter** — **$197/mo**, **$997** setup, ~500 calls/month  
-- **Mercy Growth** — **$397/mo**, **$2,500** setup, ~1,200 calls/month  
-- **Mercy Pro** — **$697/mo**, **$4,500** setup, ~3,000+ calls/month  
+AI receptionist services are currently in pilot testing. We do not publish AI receptionist pricing at this time.
 
-Missed-call [text-back](/services/missed-call-text-back), scheduling, and lead capture start on Starter; Growth and Pro add website, deeper automation, custom flows, and account management. See [pricing](/pricing) for the live table.
+Missed-call [text-back](/services/missed-call-text-back), scheduling, and lead capture are typical parts of a done-for-you setup.
 
 ## Comparison table: DIY vs. done-for-you
 
 | Dimension | DIY tools (e.g. Goodcall, My AI Front Desk) | Done-for-you (Mercy Speaks) |
 |-----------|---------------------------------------------|-----------------------------|
-| **Cash cost** | Often ~$50–$100/mo software (varies by vendor/tier) | $197–$697/mo + $997–$4,500 setup |
+| **Cash cost** | Often ~$50–$100/mo software (varies by vendor/tier) | Monthly retainer + one-time setup (varies by scope) |
 | **Time to useful** | Fast login; quality depends on your configuration hours | Longer calendar time, less of *your* nights spent prompting |
-| **Prompt / flow skill** | You (or a staffer) must learn good conversation design | Included in setup; Pro adds deeper custom training |
+| **Prompt / flow skill** | You (or a staffer) must learn good conversation design | Included in setup |
 | **Integrations** | You wire calendars, CRMs, webhooks; debug yourself | Scoped and tested during onboarding |
 | **Monitoring** | You notice breakage (missed bookings, dead SMS) | Agency monitoring + support; higher tiers add reporting/AM |
 | **Missed-call SMS** | Depends on tool/plan; you configure compliance copy | Included on all Mercy tiers with setup review |
@@ -82,7 +80,7 @@ Common DIY failure modes we see in the wild (no vendor singled out):
 - Booking links that ignore real capacity
 - After-hours rules that promise dispatch you cannot honor
 
-Agencies that install AI receptionists for a living build those paths repeatedly across industries—HVAC triage, dental new-patient intake, church office FAQs. That repetition is what you buy at $197–$697/month, not a mystical model.
+Agencies that install AI receptionists for a living build those paths repeatedly across industries—HVAC triage, dental new-patient intake, church office FAQs. That repetition is what you buy, not a mystical model.
 
 ## Integration debugging
 
@@ -103,13 +101,9 @@ Compare twelve months honestly.
 - One painful outage week (lost jobs): highly variable—often larger than the software bill
 - **Directional total:** often **$3,500+** in year one before counting mistakes
 
-**Done-for-you illustrative TCO (Mercy)**
+**Done-for-you TCO**
 
-- Starter: $197 × 12 + $997 setup ≈ **$3,361** year one  
-- Growth: $397 × 12 + $2,500 ≈ **$7,264**  
-- Pro: $697 × 12 + $4,500 ≈ **$12,864**
-
-Growth looks “more expensive” until you remember it can include a full website redesign (up to 10 pages) plus automation—work you might otherwise buy separately. Compare packages on [pricing](/pricing), not monthly stickers alone.
+Add the monthly retainer and one-time setup, then compare against your own time and the cost of missed jobs. AI receptionist services are currently in pilot testing.
 
 TCO favors DIY when your time is cheap *and* your workflow is simple. TCO favors done-for-you when your time is expensive, call volume is real, or the website-plus-phone system is part of one revenue rebuild.
 
@@ -159,7 +153,7 @@ No. They are legitimate self-serve platforms. They work well when you have time 
 
 ### Why is done-for-you more expensive per month?
 
-You are paying for call-flow design, integrations, testing, missed-call text-back setup, and support—not only model access. Mercy plans run **$197–$697/month** plus setup because someone is accountable after go-live.
+You are paying for call-flow design, integrations, testing, missed-call text-back setup, and support—not only model access. Done-for-you plans include setup and ongoing support because someone is accountable after go-live.
 
 ### Can I start DIY and switch to done-for-you later?
 
@@ -167,4 +161,4 @@ Yes. Many owners validate demand on a DIY tool, then hire an agency when volume 
 
 ### Which Mercy plan matches a DIY replacement?
 
-Solo operators often land on **Starter ($197/mo)**. Trades that also need a stronger website and CRM/SMS usually need **Growth ($397/mo)**. Complex multi-location or clinical-adjacent flows trend toward **Pro ($697/mo)**. Confirm on [pricing](/pricing) or a [demo](/book-demo).
+It depends on call volume, integrations, and how custom the call flows need to be. AI receptionist services are currently in pilot testing. [Contact us](/contact) if you want to discuss it.

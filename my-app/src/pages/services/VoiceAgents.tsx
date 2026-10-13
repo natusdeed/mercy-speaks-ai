@@ -18,7 +18,7 @@ export default function ServiceVoiceAgents() {
       intro="Advanced, custom telephony for teams that need more than a front-desk answer-and-book flow—qualification trees, dispatch triage, reminders, and light outbound with compliance framing."
       introNote={
         <>
-          If you just need inbound calls answered and booked 24/7, start with our{" "}
+          If you just need inbound calls answered and booked, start with our{" "}
           <Link to={NAV_PATHS.aiReceptionist}>AI Phone Receptionist</Link>. Voice
           agents are for teams that need custom call workflows beyond a receptionist.
         </>
@@ -32,7 +32,7 @@ export default function ServiceVoiceAgents() {
         },
         {
           title: "When it fits",
-          body: "High call volume with repetitive but branching questions, after-hours coverage that needs more than FAQs, field-service dispatch triage, appointment reminder calls, or outbound follow-ups that require verbal confirmation. If your need is simply “answer and book inbound 24/7,” use the AI Phone Receptionist instead—and graduate here when workflows get custom.",
+          body: "High call volume with repetitive but branching questions, after-hours coverage that needs more than FAQs, field-service dispatch triage, appointment reminder calls, or outbound follow-ups that require verbal confirmation. If your need is simply “answer and book inbound calls,” use the AI Phone Receptionist instead—and graduate here when workflows get custom.",
         },
         {
           title: "What we deliver",
@@ -50,7 +50,7 @@ export default function ServiceVoiceAgents() {
       related={[
         {
           to: NAV_PATHS.aiReceptionist,
-          label: "AI Phone Receptionist for 24/7 inbound answering & booking",
+          label: "AI Phone Receptionist for inbound answering & booking",
         },
         { to: NAV_PATHS.workflowAutomation, label: "Workflow automation" },
         { to: NAV_PATHS.services, label: "All services" },

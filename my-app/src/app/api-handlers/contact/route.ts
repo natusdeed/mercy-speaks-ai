@@ -1,46 +1,78 @@
 /**
  * POST /api/contact — receives contact form payload.
- * Stores via saveLead (Resend if configured, else console log).
+ *
+ * Success (2xx) is returned ONLY when the existing delivery mechanism (Resend)
+ * accepted the message. If email delivery is not configured or fails, a generic
+ * 503 is returned so the UI can show a retry / direct-contact fallback.
+ * Never returns provider errors, stack traces, or configuration details.
  */
 import { saveLead } from "../../../lib/save-lead";
 
+const GENERIC_FAILURE =
+  "We couldn't send your message right now. Please try again, or email don@mercyspeaksdigital.com.";
+
+const LIMITS = { name: 100, email: 254, phone: 30, businessType: 100, message: 5000 } as const;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+function str(v: unknown): string {
+  return typeof v === "string" ? v.trim() : "";
+}
+
+function bad(message: string, status = 400) {
+  return Response.json({ ok: false, message }, { status });
+}
+
 export async function POST(request: Request) {
+  let body: Record<string, unknown>;
   try {
-    const body = (await request.json()) as Record<string, unknown>;
-    const name = typeof body.name === "string" ? body.name.trim() : "";
-    const email = typeof body.email === "string" ? body.email.trim() : "";
-    const phone = typeof body.phone === "string" ? body.phone.trim() : "";
-    const businessType = typeof body.businessType === "string" ? body.businessType.trim() : "";
-    const message = typeof body.message === "string" ? body.message.trim() : undefined;
-
-    if (!name || !email || !phone || !businessType) {
-      return Response.json(
-        { message: "Name, email, phone, and business type are required." },
-        { status: 400 }
-      );
+    const parsed = (await request.json()) as unknown;
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+      return bad("Invalid request.");
     }
+    body = parsed as Record<string, unknown>;
+  } catch {
+    return bad("Invalid request.");
+  }
 
-    const result = await saveLead({
-      source: "contact",
-      name,
-      email,
-      phone,
-      businessType,
-      message,
-    });
+  // Honeypot: real users never fill this hidden field. Accept silently, send nothing.
+  if (str(body.website) || str(body.company_website)) {
+    return Response.json({ success: true });
+  }
 
-    if (!result.ok) {
-      return Response.json(
-        { message: result.error ?? "Submission failed. Please try again." },
-        { status: 500 }
-      );
+  const name = str(body.name);
+  const email = str(body.email);
+  const phone = str(body.phone);
+  const businessType = str(body.businessType);
+  const message = str(body.message) || undefined;
+
+  if (!name || !email || !phone || !businessType) {
+    return bad("Name, email, phone, and business type are required.");
+  }
+  if (
+    name.length > LIMITS.name ||
+    email.length > LIMITS.email ||
+    phone.length > LIMITS.phone ||
+    businessType.length > LIMITS.businessType ||
+    (message?.length ?? 0) > LIMITS.message
+  ) {
+    return bad("One or more fields are too long.");
+  }
+  if (!EMAIL_RE.test(email)) {
+    return bad("Please enter a valid email address.");
+  }
+  if (phone.replace(/\D/g, "").length < 10) {
+    return bad("Please enter a valid phone number.");
+  }
+
+  try {
+    const result = await saveLead({ source: "contact", name, email, phone, businessType, message });
+    if (!result.ok || !result.delivered) {
+      console.error("[api/contact] lead not delivered", { ok: result.ok, delivered: result.delivered });
+      return bad(GENERIC_FAILURE, 503);
     }
-
     return Response.json({ success: true });
   } catch {
-    return Response.json(
-      { message: "Invalid request body." },
-      { status: 400 }
-    );
+    console.error("[api/contact] unexpected failure");
+    return bad(GENERIC_FAILURE, 503);
   }
 }

@@ -1,8 +1,8 @@
 # Mercy Speaks Digital — Full Site Summary
 
-> Mercy Speaks Digital is a U.S. digital agency based in Richmond, TX (Houston metro), serving businesses nationwide. We build conversion-focused websites and e-commerce storefronts, install 24/7 AI phone receptionists, and set up automation (missed-call text-back, review generation, CRM follow-up) so small businesses stop missing leads.
+> Mercy Speaks Digital is a U.S. digital agency based in Richmond, TX (Houston metro), serving businesses nationwide. We build conversion-focused websites and e-commerce storefronts, offer AI phone receptionists (currently in pilot testing), and set up automation (missed-call text-back, review generation, CRM follow-up) so small businesses stop missing leads.
 
-Key facts: AI receptionist plans from $197/mo (Starter, ~500 calls), $397/mo (Growth, ~1,200 calls), $697/mo (Pro, ~3,000+ calls), each with one-time setup fees ($997/$2,500/$4,500). Websites from $997 (Starter), $1,997 (Business), custom for Premium. Typical AI receptionist go-live: 48–72 hours after onboarding. Contact: don@mercyspeaksdigital.com · (703) 332-5956 · https://www.mercyspeaksdigital.com
+Key facts: AI receptionist services are currently in pilot testing. AI receptionist pricing is not published. Websites from $997 (Starter), $1,997 (Business), custom for Premium. Contact: don@mercyspeaksdigital.com · (703) 332-5956 · https://www.mercyspeaksdigital.com
 
 For a short index, see https://www.mercyspeaksdigital.com/llms.txt
 
@@ -36,7 +36,7 @@ Connect the tools you already use so leads progress automatically—less copy-pa
 ### Review Generation / Reputation Management
 https://www.mercyspeaksdigital.com/services/review-generation
 
-93% of consumers read online reviews before hiring a local service business. We automate review requests after completed jobs, monitor reputation across Google Business Profile, Facebook, and Yelp, and help you respond professionally so your stars keep rising. Standalone reputation management is available; review automation is also bundled in higher social and AI plans.
+We automate review requests after completed jobs, monitor reputation across Google Business Profile, Facebook, and Yelp, and help you respond professionally so your stars keep rising. Standalone reputation management is available; review automation is also bundled in higher social and AI plans.
 
 ### Social Media Management
 https://www.mercyspeaksdigital.com/services/social-media-management
@@ -47,27 +47,9 @@ We handle content creation, post scheduling, caption writing, and review automat
 
 Source: https://www.mercyspeaksdigital.com/pricing
 
-### AI receptionist plans
+### AI receptionist
 
-**Mercy Starter — $197/mo**
-- One-time setup: $997
-- Call volume: up to ~500 calls/month
-- Best for: churches, solo contractors, cleaning companies
-- Included: 24/7 AI receptionist; appointment scheduling; lead capture & qualification; missed-call text-back automation; Google Business Profile audit; email notifications; guided onboarding
-
-**Mercy Growth — $397/mo** (most popular)
-- One-time setup: $2,500
-- Call volume: up to ~1,200 calls/month
-- Best for: HVAC, plumbing, roofing, electrical
-- Included: everything in Starter; full website redesign (up to 10 pages); SMS & email follow-up automation; booking system integration; advanced CRM sync; monthly performance report; priority support
-
-**Mercy Pro — $697/mo**
-- One-time setup: $4,500
-- Call volume: ~3,000+ calls/month
-- Best for: dental offices, multi-location contractors, med spas
-- Included: everything in Growth; custom AI call flows & Mercy training; CRM integration; review generation system; SMS/email nurture sequences; quarterly strategy call; dedicated account manager
-
-Notes: Guided setup—timeline confirmed on your call. Works with your current number. Flexible plans—terms reviewed before you start. If you exceed call volume, you are notified before the limit; additional calls are billed as add-ons; you can upgrade anytime.
+AI receptionist services are currently in pilot testing. AI receptionist pricing is not published.
 
 ### Website packages
 
@@ -140,16 +122,16 @@ A: Share how leads reach you today (calls, forms, ads, referrals), which tools y
 ## FAQ — AI Phone Receptionist
 
 Q: How quickly can the AI receptionist be set up?
-A: Most clients are live within 48–72 hours of onboarding.
+A: Fast implementation after your setup and requirements are confirmed. AI receptionist services are currently in pilot testing.
 
 Q: Will it sound robotic to my customers?
-A: No. Our AI voices are indistinguishable from a real receptionist in most cases.
+A: We use natural-sounding AI voices and scripts you approve before any calls go live.
 
 Q: What happens if a caller asks something complex?
-A: The AI captures their information and flags it for your team to follow up — no call goes unanswered.
+A: The AI captures their information and flags it for your team to follow up.
 
 Q: Does it work after business hours?
-A: Yes, 24/7 including weekends and holidays.
+A: It can be configured to answer outside business hours, including weekends. AI receptionist services are currently in pilot testing.
 
 ## FAQ — Workflow Automation
 
@@ -203,9 +185,6 @@ Q: What if I already have social media accounts?
 A: Great — we take over management of your existing accounts. No need to start fresh.
 
 ## FAQ — Pricing page
-
-Q: What if I exceed my call volume?
-A: We notify you before you hit your limit. Additional calls are billed as add-ons—rates vary by plan. You can upgrade anytime.
 
 Q: How long does setup take?
 A: It depends on your phone setup, calendar tools, and how complex your call flows are. After a strategy call we give you a written onboarding sequence with milestones—many teams move quickly once requirements are locked.

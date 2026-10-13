@@ -40,7 +40,6 @@ import BlogIndexPage from './app/blog/page';
 import BlogSlugPage from './app/blog/[slug]/page';
 import HoustonPage from './app/houston/page';
 import RichmondTxPage from './app/richmond-tx/page';
-import AdminProspecting from './pages/AdminProspecting';
 import CookiePolicy from './pages/CookiePolicy';
 import NotFound from './pages/NotFound';
 
@@ -165,7 +164,6 @@ function App() {
           {/* Catch-all: client nav + prerender source for dist/404.html — never in sitemap */}
           <Route path="*" element={<NotFound />} />
         </Route>
-        <Route path="/admin/prospecting" element={<AdminProspecting />} />
       </Routes>
     </>
   );

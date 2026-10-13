@@ -26,7 +26,7 @@ It is **not**:
 
 It **is** a recovery layer: the digital equivalent of jogging to the door after the doorbell rang once. Full product detail lives on our [missed-call text-back service page](/services/missed-call-text-back).
 
-At Mercy Speaks Digital, text-back ships on **every plan**—Starter, Growth, and Pro—so you are not paying a separate add-on just to stop leaking callers. Compare what else is included on [pricing](/pricing).
+At Mercy Speaks Digital, text-back is designed as part of the AI receptionist setup rather than a separate add-on. AI receptionist services are currently in pilot testing.
 
 ## How the mechanism works
 
@@ -45,7 +45,7 @@ You do not need a fabricated study to understand the behavior: when someone need
 
 In sales and service operations, it is general knowledge that **response speed correlates with connect rates**—the first business to reply often wins the job, especially on mobile search. Missed-call text-back compresses your response from “whenever someone checks voicemail” to “seconds after the miss.”
 
-Think in job value, not vanity metrics. If even a handful of recovered conversations per month turn into paid work, the feature usually pays for itself inside a plan you may already want for 24/7 answering.
+Think in job value, not vanity metrics. If even a handful of recovered conversations per month turn into paid work, the feature usually pays for itself inside a plan you may already want for after-hours answering.
 
 We will not invent a “you are losing $X,000/month” number for your business. Run your own napkin math: missed calls per week × your close rate on outbound follow-up × average job value. That estimate is more honest than a blog’s fake statistic.
 
@@ -101,15 +101,7 @@ Our implementation approach for missed-call text-back:
 
 ## How it fits with Mercy Speaks pricing
 
-Missed-call text-back is included from **Mercy Starter at $197/month** (plus **$997** setup) upward through Growth (**$397/mo**, **$2,500** setup) and Pro (**$697/mo**, **$4,500** setup). You are not nickel-and-dimed for the recovery layer that protects every other dollar you spend on ads and Google ranking.
-
-| Plan | Monthly | Setup | Text-back | Typical focus |
-|------|---------|-------|-----------|---------------|
-| Mercy Starter | $197 | $997 | Included | AI receptionist + lead capture + text-back |
-| Mercy Growth | $397 | $2,500 | Included | Adds website, SMS/email follow-up, booking/CRM depth |
-| Mercy Pro | $697 | $4,500 | Included | Custom flows, reviews, nurture, dedicated manager |
-
-Details stay current on [pricing](/pricing). For the phone product that answers more calls before they become misses, see [AI phone receptionist](/services/ai-phone-receptionist).
+AI receptionist services are currently in pilot testing. We do not publish AI receptionist pricing at this time. For the phone product that answers more calls before they become misses, see [AI phone receptionist](/services/ai-phone-receptionist).
 
 ## When text-back alone is enough—and when it is not
 
@@ -137,4 +129,4 @@ We design it with TCPA-aware practices—messages tied to an inbound call, clear
 
 ### Is text-back included in Mercy Speaks plans?
 
-Yes. It is included on Starter, Growth, and Pro. See [pricing](/pricing) and the [missed-call text-back](/services/missed-call-text-back) page for what ships with each tier.
+It is designed as part of the AI receptionist setup. AI receptionist services are currently in pilot testing. See the [missed-call text-back](/services/missed-call-text-back) page for details.
