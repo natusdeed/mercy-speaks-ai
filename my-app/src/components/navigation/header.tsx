@@ -30,7 +30,7 @@ export function Header() {
     <header className="fixed left-0 right-0 top-0 z-50 border-b border-slate-800 bg-slate-950/95 backdrop-blur">
       <nav aria-label="Main" className="mx-auto w-full max-w-5xl px-5 sm:px-8">
         <div className="flex h-16 items-center justify-between gap-4">
-          <Link to="/" className={cn("shrink-0 rounded text-base font-semibold tracking-tight text-white sm:text-lg", focus)}>
+          <Link to="/" className={cn("inline-flex min-h-11 shrink-0 items-center rounded text-base font-semibold tracking-tight text-white sm:text-lg", focus)}>
             Mercy Speaks Digital
           </Link>
 
@@ -44,7 +44,7 @@ export function Header() {
                       to={l.href}
                       aria-current={active ? "page" : undefined}
                       className={cn(
-                        "rounded text-sm transition-colors",
+                        "inline-flex min-h-11 min-w-11 items-center justify-center rounded text-sm transition-colors",
                         active ? "text-white" : "text-slate-300 hover:text-white",
                         focus
                       )}
@@ -58,7 +58,7 @@ export function Header() {
             <Link
               to="/contact"
               className={cn(
-                "inline-flex min-h-10 items-center rounded-lg border border-slate-600 px-4 text-sm font-medium text-white transition-colors hover:border-slate-400",
+                "inline-flex min-h-11 items-center rounded-lg border border-slate-600 px-4 text-sm font-medium text-white transition-colors hover:border-slate-400",
                 focus
               )}
             >

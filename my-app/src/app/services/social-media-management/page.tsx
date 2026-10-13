@@ -243,110 +243,12 @@ export default function SocialMediaManagementPage() {
 
         <section id="pricing" className="section pt-0">
           <div className="section-inner max-w-6xl mx-auto">
-            <motion.div {...fadeUpInView} className="mb-7">
-              <h2 className="text-2xl md:text-3xl font-bold text-slate-50 mb-3">
-                Simple, Flat-Rate Pricing. No Surprises.
-              </h2>
-              <p className="text-slate-400 text-base md:text-lg">
-                One-time onboarding fee of $197 covers brand kit setup, account configuration, and strategy session.
-                Month-to-month after your first 30 days.
-              </p>
-            </motion.div>
-
-            <div className="rounded-2xl border border-neon-cyan/30 bg-neon-cyan/10 p-4 mb-5 text-sm text-neon-cyan">
-              Want reviews too? Our Growth plan includes{" "}
-              <Link to={NAV_PATHS.reviewGeneration} className="underline underline-offset-2 hover:text-slate-50">
-                Reputation Management.
-              </Link>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <motion.article {...fadeUpInView} className="card-premium rounded-2xl">
-                <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">Starter</p>
-                <h3 className="text-3xl font-bold text-slate-50 mb-1">$397 / month</h3>
-                <p className="text-sm text-slate-400 mb-6">Perfect for businesses getting consistent online</p>
-                <ul className="space-y-2.5 mb-7">
-                  {[
-                    "12 branded posts / month",
-                    "Facebook + Instagram management",
-                    "Custom captions for every post",
-                    "Monthly content calendar",
-                    "Post scheduling & publishing",
-                    "Basic monthly performance report",
-                    "1 revision round per content batch",
-                    "Email support (48hr response)",
-                  ].map((item) => (
-                    <li key={item} className="flex items-start gap-2 text-sm text-slate-300">
-                      <CheckCircle2 className="w-4 h-4 text-neon-cyan shrink-0 mt-0.5" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Button variant="outline" size="default" className="w-full" asChild>
-                  <BookingLink kind="generalStrategyCall">Get Started</BookingLink>
-                </Button>
-              </motion.article>
-
-              <motion.article {...fadeUpInView} className="relative rounded-2xl overflow-hidden bg-slate-900/50 shadow-lg shadow-electric-purple/5 p-7">
-                <div className="absolute top-0 left-0 right-0 py-2 text-center text-xs font-semibold text-slate-950 bg-electric-purple">
-                  Most Popular
-                </div>
-                <div className="pt-7">
-                  <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">Growth</p>
-                  <h3 className="text-3xl font-bold text-slate-50 mb-1">$697 / month</h3>
-                  <p className="text-sm text-slate-400 mb-6">For businesses ready to dominate their local market</p>
-                  <ul className="space-y-2.5 mb-7">
-                    {[
-                      "20 branded posts / month",
-                      "Facebook + Instagram + Google Business Profile",
-                      "Custom captions + hashtag strategy",
-                      "Content calendar + strategy session",
-                      "Post scheduling & publishing",
-                      "Stories / Reels (4x per month)",
-                      "Review request automation included",
-                      "Full monthly report + strategy call",
-                      "Priority support",
-                      "Quarterly strategy review",
-                    ].map((item) => (
-                      <li key={item} className="flex items-start gap-2 text-sm text-slate-300">
-                        <CheckCircle2 className="w-4 h-4 text-neon-cyan shrink-0 mt-0.5" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Button variant="primary" size="default" className="w-full" asChild>
-                    <BookingLink kind="generalStrategyCall">Get Started</BookingLink>
-                  </Button>
-                </div>
-              </motion.article>
-            </div>
-
-            <motion.div {...fadeUpInView} className="card-premium rounded-2xl overflow-x-auto">
-              <table className="w-full min-w-[720px]">
-                <thead>
-                  <tr className="border-b border-slate-800/60">
-                    <th className="text-left text-sm text-slate-300 px-4 py-3">Add-On Service</th>
-                    <th className="text-left text-sm text-slate-300 px-4 py-3">Starter</th>
-                    <th className="text-left text-sm text-slate-300 px-4 py-3">Growth</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {[
-                    ["Extra 8 posts / month", "+$147/mo", "Included"],
-                    ["Google Business posting (4x/month)", "+$97/mo", "Included"],
-                    ["Facebook/Instagram paid ad management", "+$297/mo", "+$297/mo"],
-                    ["Review response management", "+$97/mo", "+$97/mo"],
-                    ["Reels / Short-form video (4x/month)", "+$197/mo", "Included"],
-                  ].map(([name, starter, growth]) => (
-                    <tr key={name} className="border-b border-slate-800/40 last:border-0">
-                      <td className="px-4 py-3 text-sm text-slate-200">{name}</td>
-                      <td className="px-4 py-3 text-sm text-slate-300">{starter}</td>
-                      <td className="px-4 py-3 text-sm text-slate-300">{growth}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </motion.div>
+            <Link
+              to="/contact"
+              className="inline-flex min-h-11 items-center text-neon-cyan underline underline-offset-2 hover:text-slate-50"
+            >
+              Contact us about this service
+            </Link>
           </div>
         </section>
 

@@ -227,7 +227,7 @@ export default function ReviewGenerationPage() {
             <div className="rounded-2xl border border-neon-cyan/30 bg-neon-cyan/10 p-4 mb-5 text-sm text-neon-cyan">
               Bundle with{" "}
               <Link to={NAV_PATHS.socialMediaManagement} className="underline underline-offset-2 hover:text-slate-50">
-                Social Media Management for $697/mo — our most popular plan.
+                Social Media Management
               </Link>
             </div>
 
@@ -268,7 +268,6 @@ export default function ReviewGenerationPage() {
                   <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">
                     Bundled in SMM Growth
                   </p>
-                  <h3 className="text-3xl font-bold text-slate-50 mb-1">$697 / month</h3>
                   <p className="text-sm text-slate-400 mb-6">
                     Reputation management + full social media — best value
                   </p>

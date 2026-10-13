@@ -53,18 +53,9 @@ const TRUST_NOTES = [
 
 const SOCIAL_AND_REPUTATION_PRICING = [
   {
-    title: "Social Media Management",
-    items: [
-      "Starter: $397/mo — 12 posts, Facebook + Instagram, content calendar, basic report",
-      "Growth: $697/mo — 20 posts, all platforms, Stories/Reels, review automation, strategy call",
-      "Onboarding fee: $197 one-time",
-    ],
-  },
-  {
     title: "Reputation Management",
     items: [
       "Standalone: $197/mo — review automation, monitoring, alerts, monthly report",
-      "Bundled: Included in SMM Growth at $697/mo",
     ],
   },
 ] as const;
