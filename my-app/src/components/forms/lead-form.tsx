@@ -25,8 +25,8 @@ export const BUSINESS_TYPES = [
 ] as const;
 
 const inputBase =
-  "w-full min-h-11 px-4 rounded-xl border bg-slate-900/60 border-slate-600/80 text-slate-50 placeholder:text-slate-500 focus:outline-none transition-all duration-200 text-base touch-manipulation";
-const inputFocus = "focus:border-neon-cyan focus:ring-2 focus:ring-neon-cyan/20 focus:ring-offset-0 focus:ring-offset-transparent";
+  "w-full min-h-12 px-4 rounded-lg border bg-transparent border-slate-700 text-white placeholder:text-slate-500 focus:outline-none transition-colors duration-150 text-base touch-manipulation";
+const inputFocus = "focus:border-slate-300 focus:ring-2 focus:ring-violet-300/30 focus:ring-offset-0 focus:ring-offset-transparent";
 const inputError = "border-amber-500/70 focus:border-amber-500 focus:ring-amber-500/20";
 
 export interface LeadFormProps {
@@ -251,7 +251,7 @@ export function LeadForm({
           variant="primary"
           size="lg"
           disabled={isSubmitting}
-          className="w-full"
+          className="w-full rounded-lg bg-white text-slate-950 shadow-none hover:bg-slate-200 hover:shadow-none active:bg-slate-300 focus-visible:ring-violet-300"
         >
           {isSubmitting ? (
             submittingLabel

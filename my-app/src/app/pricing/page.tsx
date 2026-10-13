@@ -207,7 +207,7 @@ export default function PricingPage() {
                       Most Popular
                     </div>
                   )}
-                  <div className={`flex flex-col flex-1 p-7 ${tier.popular ? "pt-12" : ""}`}>
+                  <div className={`flex flex-col flex-1 ${tier.popular ? "p-7 pt-12" : "p-0"}`}>
                     <h3 className="text-xl font-bold text-slate-50 mb-2">{tier.name}</h3>
                     <p className="text-slate-400 text-sm leading-relaxed mb-5">{tier.audience}</p>
                     <div className="mb-6">

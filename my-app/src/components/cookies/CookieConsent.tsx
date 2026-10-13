@@ -101,8 +101,8 @@ function ToggleRow({
           width: "46px",
           height: "26px",
           borderRadius: "999px",
-          border: disabled ? "1px solid #334155" : "1px solid #00d4ff40",
-          background: checked ? "linear-gradient(135deg, #00d4ff, #0ea5e9)" : "#0b1220",
+          border: disabled ? "1px solid #334155" : "1px solid #475569",
+          background: checked ? "#ffffff" : "#0b1220",
           position: "relative",
           cursor: disabled ? "not-allowed" : "pointer",
           opacity: disabled ? 0.7 : 1,
@@ -210,9 +210,9 @@ export default function CookieConsent() {
             left: 0,
             right: 0,
             zIndex: 9999,
-            background: "#0d1117",
-            borderTop: "2px solid #00d4ff",
-            padding: "20px 32px",
+            background: "#020617",
+            borderTop: "1px solid #1e293b",
+            padding: "20px",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
@@ -233,16 +233,15 @@ export default function CookieConsent() {
               type="button"
               onClick={handleAcceptAll}
               style={{
-                background: "linear-gradient(135deg, #00d4ff, #0ea5e9)",
+                background: "#ffffff",
                 color: "#0a0a0f",
-                fontWeight: 800,
+                fontWeight: 600,
                 padding: "10px 24px",
                 border: "none",
                 borderRadius: "6px",
                 cursor: "pointer",
-                fontSize: "12px",
-                letterSpacing: "2px",
-                fontFamily: "Space Mono, monospace",
+                fontSize: "14px",
+                minHeight: "44px",
               }}
             >
               ACCEPT ALL
@@ -252,14 +251,13 @@ export default function CookieConsent() {
               onClick={handleOpenManagePreferences}
               style={{
                 background: "transparent",
-                border: "1px solid #00d4ff40",
-                color: "#00d4ff",
+                border: "1px solid #334155",
+                color: "#e2e8f0",
                 padding: "10px 20px",
                 borderRadius: "6px",
                 cursor: "pointer",
-                fontSize: "12px",
-                letterSpacing: "1.5px",
-                fontFamily: "Space Mono, monospace",
+                fontSize: "14px",
+                minHeight: "44px",
               }}
             >
               MANAGE PREFERENCES
@@ -268,14 +266,13 @@ export default function CookieConsent() {
               type="button"
               onClick={handleRejectNonEssential}
               style={{
-                background: "#1e293b",
-                border: "1px solid #64748b",
+                background: "transparent",
+                border: "1px solid #334155",
                 color: "#e2e8f0",
                 padding: "10px 20px",
                 borderRadius: "6px",
                 cursor: "pointer",
-                fontSize: "12px",
-                letterSpacing: "1.5px",
+                fontSize: "14px",
                 minHeight: "44px",
               }}
             >
@@ -304,7 +301,7 @@ export default function CookieConsent() {
         >
           <div
             style={{
-              background: "#0d1117",
+              background: "#020617",
               border: "1px solid #1e293b",
               borderRadius: "12px",
               padding: "32px",
@@ -370,14 +367,13 @@ export default function CookieConsent() {
                 onClick={() => saveConsent(preferences)}
                 style={{
                   background: "transparent",
-                  border: "1px solid #00d4ff40",
-                  color: "#00d4ff",
+                  border: "1px solid #334155",
+                  color: "#e2e8f0",
                   padding: "10px 20px",
                   borderRadius: "6px",
                   cursor: "pointer",
-                  fontSize: "12px",
-                  letterSpacing: "1.5px",
-                  fontFamily: "Space Mono, monospace",
+                  fontSize: "14px",
+                minHeight: "44px",
                 }}
               >
                 SAVE PREFERENCES
@@ -386,16 +382,15 @@ export default function CookieConsent() {
                 type="button"
                 onClick={handleAcceptAll}
                 style={{
-                  background: "linear-gradient(135deg, #00d4ff, #0ea5e9)",
+                  background: "#ffffff",
                   color: "#0a0a0f",
-                  fontWeight: 800,
+                  fontWeight: 600,
                   padding: "10px 24px",
                   border: "none",
                   borderRadius: "6px",
                   cursor: "pointer",
-                  fontSize: "12px",
-                  letterSpacing: "2px",
-                  fontFamily: "Space Mono, monospace",
+                  fontSize: "14px",
+                minHeight: "44px",
                 }}
               >
                 ACCEPT ALL
