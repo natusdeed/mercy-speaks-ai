@@ -88,7 +88,7 @@
     }
   ],
   "rewrites": [
-    { "source": "/api/:path*", "destination": "/api/:path*" },
+    { "source": "/api/(.*)", "destination": "/api/index?__path=$1" },
     { "source": "/dashboard", "destination": "/index.html" },
     { "source": "/dashboard/:path*", "destination": "/index.html" },
     { "source": "/admin", "destination": "/index.html" },
