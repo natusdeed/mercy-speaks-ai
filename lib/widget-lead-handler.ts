@@ -3,6 +3,15 @@
  */
 import { getTenant } from "../my-app/src/lib/widget-tenant";
 import type { WidgetLeadBody } from "../my-app/src/lib/widget-types";
+import { logEvent } from "../my-app/src/lib/save-lead";
+
+/** Non-sensitive error category: only a short code string, never message/details/hint. */
+function errorCategory(e: unknown): string {
+  const code = e && typeof e === "object" ? (e as { code?: unknown }).code : undefined;
+  if (typeof code === "string" && /^[A-Za-z0-9_.-]{1,32}$/.test(code)) return code;
+  if (e instanceof Error && /^[A-Za-z]{1,40}$/.test(e.name)) return e.name;
+  return "unknown";
+}
 
 function getOriginHost(request: Request): string | null {
   const origin = request.headers.get("origin");
@@ -90,11 +99,11 @@ export async function handleWidgetLeadRequest(request: Request): Promise<Respons
         metadata: {},
       });
       if (error) {
-        console.error("[widget-lead] Supabase error:", error);
+        logEvent("widget_lead_save_failed", { operation: "supabase.leads.insert", category: errorCategory(error) });
         return Response.json({ error: "Failed to save lead" }, { status: 500 });
       }
     } catch (e) {
-      console.error("[widget-lead] Error:", e);
+      logEvent("widget_lead_save_failed", { operation: "supabase.leads.insert", category: errorCategory(e) });
       return Response.json({ error: "Failed to save lead" }, { status: 500 });
     }
   }
