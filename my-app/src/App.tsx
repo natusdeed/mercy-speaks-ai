@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { Navigate, Routes, Route, Outlet } from 'react-router-dom';
+import { Navigate, Routes, Route, Outlet, useLocation } from 'react-router-dom';
 import { Header } from '@/components/navigation/header';
 import { Footer } from '@/components/navigation/footer';
 import { ClientErrorHandler } from '@/components/debug/ClientErrorHandler';
@@ -99,9 +99,12 @@ function PublicChrome() {
 }
 
 function App() {
+  const { pathname } = useLocation();
+  // Embedded widget iframe: standalone, no site chrome or cookie UI (issue #12).
+  const isWidgetFrame = pathname === '/widget/frame' || pathname.startsWith('/widget/frame/');
   return (
     <>
-      <CookieConsent />
+      {isWidgetFrame ? null : <CookieConsent />}
       <ClientErrorHandler />
       <Routes>
         <Route
@@ -126,6 +129,8 @@ function App() {
           Public paths must stay in sync with `src/lib/public-routes.ts`
           (sitemap + prerender). Do not add indexable routes only here.
         */}
+        {/* Standalone embed frame — intentionally outside PublicChrome (no header/footer). */}
+        <Route path="/widget/frame" element={<WidgetFramePage />} />
         <Route element={<PublicChrome />}>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -158,7 +163,6 @@ function App() {
           <Route path="/services/website-chatbot" element={<ServiceWebsiteChatbot />} />
           <Route path="/services/website-design" element={<ServiceWebsiteDesign />} />
           <Route path="/services/workflow-automation" element={<ServiceWorkflowAutomation />} />
-          <Route path="/widget/frame" element={<WidgetFramePage />} />
           <Route path="/widget/install" element={<WidgetInstallPage />} />
           <Route path="/cookie-policy" element={<CookiePolicy />} />
           {/* Catch-all: client nav + prerender source for dist/404.html — never in sitemap */}
