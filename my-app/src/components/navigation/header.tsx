@@ -125,7 +125,7 @@ export function Header() {
                   to={link.href}
                   className={cn(
                     "text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
-                    active ? "text-electric-purple" : "text-slate-300 hover:text-slate-50"
+                    active ? "text-violet-400" : "text-slate-300 hover:text-slate-50"
                   )}
                 >
                   {link.name}

@@ -1,7 +1,8 @@
 import { lazy, Suspense } from 'react';
-import { Navigate, Routes, Route, Outlet } from 'react-router-dom';
+import { Navigate, Routes, Route, Outlet, useLocation } from 'react-router-dom';
 import { Header } from '@/components/navigation/header';
 import { Footer } from '@/components/navigation/footer';
+import { HomeFooterV3 } from '@/components/home-v3/home-footer';
 import { ClientErrorHandler } from '@/components/debug/ClientErrorHandler';
 import CookieConsent from './components/cookies/CookieConsent';
 import { JsonLd } from '@/components/seo/json-ld';
@@ -73,6 +74,8 @@ function DevDemoRouteFallback() {
 }
 
 function PublicChrome() {
+  // Homepage V3 uses its own CEO-locked footer; other pages keep the shared footer.
+  const isHome = useLocation().pathname === "/";
   return (
     <>
       {/* Site-wide Organization / ProfessionalService — one config, every public page */}
@@ -92,7 +95,7 @@ function PublicChrome() {
         <div id="main-content" tabIndex={-1} className="flex-1 public-main w-full outline-none">
           <Outlet />
         </div>
-        <Footer />
+        {isHome ? <HomeFooterV3 /> : <Footer />}
       </div>
     </>
   );
