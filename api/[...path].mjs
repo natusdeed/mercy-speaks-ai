@@ -12,20 +12,58 @@ var __export = (target, all) => {
 // my-app/src/lib/save-lead.ts
 var save_lead_exports = {};
 __export(save_lead_exports, {
+  buildLeadBody: () => buildLeadBody,
+  buildLeadSubject: () => buildLeadSubject,
+  safeReplyTo: () => safeReplyTo,
   saveLead: () => saveLead
 });
+function safeReplyTo(raw) {
+  if (typeof raw !== "string") return void 0;
+  const email = raw.trim();
+  if (!email || email.length > 254) return void 0;
+  if (/[\r\n,;<>\s]/.test(email)) return void 0;
+  if (!SAFE_EMAIL_RE.test(email)) return void 0;
+  return email;
+}
+function cleanHeaderText(v, max) {
+  if (typeof v !== "string") return "";
+  const s = v.replace(/[\u0000-\u001F\u007F-\u009F]/g, " ").replace(/\s+/g, " ").trim();
+  return s.length > max ? s.slice(0, max - 1).trimEnd() + "\u2026" : s;
+}
+function buildLeadSubject(name, businessName) {
+  const base = "New Website Lead";
+  const label = cleanHeaderText(businessName, 200) || cleanHeaderText(name, 200);
+  if (!label) return base;
+  const prefix = `${base} \u2014 `;
+  return prefix + cleanHeaderText(label, 80 - prefix.length);
+}
+function escapeHtml(s) {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+}
+function buildLeadBody(p) {
+  const rows = [
+    ["Source", p.source],
+    ["Name", p.name],
+    ...p.businessName ? [["Business", p.businessName]] : [],
+    ["Email", p.email],
+    ["Phone", p.phone],
+    ...p.businessType ? [["Type", p.businessType]] : [],
+    ...p.message ? [["Message", p.message]] : []
+  ];
+  const text = rows.map(([k, v]) => `${k}: ${v}`).join("\n");
+  const html = '<!doctype html><html><body><table cellpadding="4">' + rows.map(
+    ([k, v]) => `<tr><td valign="top"><strong>${escapeHtml(k)}</strong></td><td>${escapeHtml(v).replace(/\r?\n/g, "<br>")}</td></tr>`
+  ).join("") + "</table></body></html>";
+  return { text, html };
+}
+function logEvent(event, extra = {}) {
+  const line = JSON.stringify({ event, ts: (/* @__PURE__ */ new Date()).toISOString(), ...extra });
+  if (event.endsWith("failed")) console.error("[lead]", line);
+  else console.log("[lead]", line);
+}
 async function saveLead(payload) {
-  const { source, name, email, phone, businessName, businessType, message } = payload;
-  console.log("[lead]", JSON.stringify({
-    ts: (/* @__PURE__ */ new Date()).toISOString(),
-    source,
-    name,
-    email,
-    phone,
-    businessName: businessName ?? null,
-    businessType: businessType ?? null,
-    messageLength: message?.length ?? 0
-  }));
+  const { source } = payload;
+  logEvent("submission_received", { source });
   const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.EMAIL_FROM ?? "onboarding@resend.dev";
   if (apiKey) {
@@ -33,38 +71,37 @@ async function saveLead(payload) {
       const { Resend } = await import("resend");
       const resend = new Resend(apiKey);
       const to = process.env.LEAD_NOTIFICATION_EMAIL ?? "don@mercyspeaksdigital.com";
-      const subject = `[${source}] Lead: ${name}`;
-      const text = [
-        `Source: ${source}`,
-        `Name: ${name}`,
-        `Email: ${email}`,
-        `Phone: ${phone}`,
-        businessName ? `Business: ${businessName}` : null,
-        businessType ? `Type: ${businessType}` : null,
-        message ? `Message: ${message}` : null
-      ].filter(Boolean).join("\n");
-      const { error } = await resend.emails.send({
+      const subject = buildLeadSubject(payload.name, payload.businessName);
+      const { text, html } = buildLeadBody(payload);
+      const replyTo = safeReplyTo(payload.email);
+      const { data, error } = await resend.emails.send({
         from,
         to: [to],
         subject,
-        text
+        text,
+        html,
+        ...replyTo ? { replyTo } : {}
       });
       if (error) {
-        console.error("[lead] Resend rejected the send");
+        logEvent("delivery_failed", { source, category: "provider_rejected", provider: error.name ?? null });
         return { ok: false, error: error.message, delivered: false };
       }
+      logEvent("delivery_accepted", { source, id: data?.id ?? null, replyTo: replyTo ? "set" : "omitted" });
       return { ok: true, delivered: true };
     } catch (e) {
       const err = e instanceof Error ? e.message : String(e);
-      console.error("[lead] Resend error:", err);
+      logEvent("delivery_failed", { source, category: e instanceof Error ? e.name : "unknown_error" });
       return { ok: false, error: err, delivered: false };
     }
   }
+  logEvent("delivery_failed", { source, category: "not_configured" });
   return { ok: true, delivered: false };
 }
+var SAFE_EMAIL_RE;
 var init_save_lead = __esm({
   "my-app/src/lib/save-lead.ts"() {
     "use strict";
+    SAFE_EMAIL_RE = /^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)+$/;
   }
 });
 
@@ -582,12 +619,12 @@ async function POST(request) {
   try {
     const result = await saveLead({ source: "contact", name, email, phone, businessType, message });
     if (!result.ok || !result.delivered) {
-      console.error("[api/contact] lead not delivered", { ok: result.ok, delivered: result.delivered });
+      console.error("[api/contact]", JSON.stringify({ event: "lead_not_delivered", ts: (/* @__PURE__ */ new Date()).toISOString(), category: result.ok ? "not_configured" : "delivery_failed" }));
       return bad(GENERIC_FAILURE, 503);
     }
     return Response.json({ success: true });
   } catch {
-    console.error("[api/contact] unexpected failure");
+    console.error("[api/contact]", JSON.stringify({ event: "unexpected_failure", ts: (/* @__PURE__ */ new Date()).toISOString() }));
     return bad(GENERIC_FAILURE, 503);
   }
 }

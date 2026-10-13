@@ -67,12 +67,12 @@ export async function POST(request: Request) {
   try {
     const result = await saveLead({ source: "contact", name, email, phone, businessType, message });
     if (!result.ok || !result.delivered) {
-      console.error("[api/contact] lead not delivered", { ok: result.ok, delivered: result.delivered });
+      console.error("[api/contact]", JSON.stringify({ event: "lead_not_delivered", ts: new Date().toISOString(), category: result.ok ? "not_configured" : "delivery_failed" }));
       return bad(GENERIC_FAILURE, 503);
     }
     return Response.json({ success: true });
   } catch {
-    console.error("[api/contact] unexpected failure");
+    console.error("[api/contact]", JSON.stringify({ event: "unexpected_failure", ts: new Date().toISOString() }));
     return bad(GENERIC_FAILURE, 503);
   }
 }
