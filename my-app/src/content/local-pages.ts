@@ -84,7 +84,7 @@ export const LOCAL_PAGES: Record<"houston" | "richmond-tx", LocalPageConfig> = {
       {
         label: "AI phone receptionist",
         href: "/services/ai-phone-receptionist",
-        blurb: "24/7 answering, lead capture, and missed-call text-back for busy desks.",
+        blurb: "Call answering, lead capture, and missed-call text-back for busy desks (in pilot testing).",
       },
       {
         label: "Appointment automation",
@@ -94,7 +94,7 @@ export const LOCAL_PAGES: Record<"houston" | "richmond-tx", LocalPageConfig> = {
       {
         label: "Pricing",
         href: "/pricing",
-        blurb: "Starter, Growth, and Pro plans—see which tier fits your call volume.",
+        blurb: "Website packages and pricing. AI receptionist services are currently in pilot testing.",
       },
     ],
     industryLinks: [

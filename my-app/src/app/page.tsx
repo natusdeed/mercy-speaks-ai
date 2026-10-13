@@ -108,7 +108,7 @@ export default function Home() {
       <SeoHead
         path="/"
         title="AI Receptionists & Websites | Mercy Speaks Digital"
-        description="24/7 AI phone receptionists, premium websites, and automation that capture leads and book appointments. Houston-based, serving businesses nationwide."
+        description="Premium websites, AI phone receptionists (in pilot testing), and automation that capture leads and book appointments. Houston-based, serving businesses nationwide."
       />
       <JsonLd
         data={[websiteSchema(), faqPageSchema(faqsForSchema)]}

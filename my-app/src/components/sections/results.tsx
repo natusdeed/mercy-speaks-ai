@@ -15,11 +15,6 @@ const PROOF_POLICY = [
     detail:
       "Portfolio cards link to real work (or real demos) and use real screenshots—so prospects can verify quality fast.",
   },
-  {
-    label: "References on request",
-    detail:
-      "If you need references for a similar project, book a call and we’ll share what we can for your niche and scope.",
-  },
 ] as const;
 
 export function Results() {
@@ -43,7 +38,7 @@ export function Results() {
             Social proof
           </h2>
           <p className="text-slate-400 max-w-2xl mx-auto">
-            Credibility only: verified proof, real screenshots, and references when appropriate.
+            Credibility only: verified proof and real screenshots.
           </p>
           <p className="mt-4">
             <Link

@@ -1,6 +1,5 @@
 "use client";
 
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   AlertCircle,
@@ -279,16 +278,10 @@ export function IndustryPage({ config }: IndustryPageProps) {
                 id="industry-pricing-title"
                 className="text-2xl md:text-3xl font-bold text-slate-50 mb-3"
               >
-                Which plan fits {config.navLabel.toLowerCase()}?
+                AI receptionist availability
               </h2>
-              <p className="text-neon-cyan font-semibold text-lg mb-4">{config.pricing.tierName}</p>
-              <p className="text-slate-400 leading-relaxed mb-6">{config.pricing.reason}</p>
-              <Button variant="outline" size="lg" asChild>
-                <Link to={NAV_PATHS.pricing} className="inline-flex items-center gap-2">
-                  See full pricing
-                  <ArrowRight className="w-5 h-5" />
-                </Link>
-              </Button>
+              {/* P0 hotfix: AI plan recommendation removed while AI receptionist is in pilot. */}
+              <p className="text-slate-300 leading-relaxed">AI receptionist services are currently in pilot testing.</p>
             </motion.div>
           </div>
         </section>

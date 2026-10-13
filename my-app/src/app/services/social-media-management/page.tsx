@@ -29,7 +29,7 @@ const fadeUpInView = {
 const trustBar = [
   "No Long Contracts",
   "Branded Content Monthly",
-  "24/7 Review Monitoring",
+  "Review Monitoring",
   "Houston-Based Team",
 ] as const;
 

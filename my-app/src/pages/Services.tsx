@@ -85,7 +85,7 @@ const serviceLinks: ServiceLink[] = [
 ];
 
 const flagshipOutcomes = [
-  { icon: Phone, text: "Calls answered 24/7—every call, no voicemail jail." },
+  { icon: Phone, text: "Calls answered and routed—less voicemail jail." },
   { icon: Users, text: "Leads captured with qualification and contact details." },
   { icon: CalendarCheck, text: "Appointments booked and synced to your calendar." },
   { icon: Zap, text: "Instant follow-up: texts and emails while the lead is hot." },
@@ -107,7 +107,7 @@ export default function ServicesPage() {
     serviceSchema({
       name: "AI receptionist & lead capture systems",
       description:
-        "24/7 AI receptionist with qualification, booking, and reporting—paired with websites and automation.",
+        "AI receptionist with qualification, booking, and reporting—paired with websites and automation. AI receptionist services are currently in pilot testing.",
       path: NAV_PATHS.services,
       serviceType: "AI receptionist",
     }),
@@ -219,7 +219,7 @@ export default function ServicesPage() {
                 </span>
               </div>
               <h2 id="flagship-heading" className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-50 mb-3">
-                24/7 AI receptionist + missed revenue visibility
+                AI receptionist (pilot) + missed revenue visibility
               </h2>
               <p className="text-slate-400 mb-6 text-base sm:text-lg">
                 Answer and qualify calls around the clock, book onto your calendar, and see missed-call patterns in one

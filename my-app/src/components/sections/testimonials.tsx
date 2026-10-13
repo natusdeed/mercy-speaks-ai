@@ -31,7 +31,7 @@ interface TestimonialsProps {
 export function Testimonials({
   items,
   title = "What clients say about our website work",
-  description = "We only publish real testimonials. References are available on request.",
+  description = "We only publish real testimonials.",
   primaryCtaOnly = false,
   singleCardLayout = false,
   hideFooterCta = false,
@@ -114,7 +114,7 @@ export function Testimonials({
         ) : (
           <div className="card-premium text-center max-w-3xl mx-auto">
             <p className="text-slate-300">
-              We don’t publish unverified quotes. If you want references for similar website projects, book a call and we’ll share them where appropriate.
+              We don’t publish unverified quotes.
             </p>
           </div>
         )}

@@ -66,6 +66,10 @@ export const OVERAGE_PENDING_UI =
 export const TERMS_PENDING_UI =
   "Confirmed in writing before you start — ask on your strategy call" as const;
 
+/**
+ * P0 hotfix: NOT PUBLISHED. AI receptionist services are in pilot testing; these tiers must not be
+ * rendered or emitted in schema until pricing is verified and approved.
+ */
 export const AI_RECEPTIONIST_TIERS: AiReceptionistTier[] = [
   {
     name: "Mercy Starter",
@@ -76,7 +80,7 @@ export const AI_RECEPTIONIST_TIERS: AiReceptionistTier[] = [
     bestFor: "Churches, solo contractors, cleaning companies",
     previewDescription: "AI receptionist, lead capture, GBP audit, missed-call text-back.",
     included: [
-      "24/7 AI receptionist",
+      "AI receptionist",
       "Appointment scheduling",
       "Lead capture & qualification",
       "Missed-call text-back automation",
@@ -208,14 +212,6 @@ export const BILLING_TERMS: BillingTerms = {
   cancellation: NEEDS_REAL_TERMS,
   numberAndData: NEEDS_REAL_TERMS,
 };
-
-/** Market comparison strip on /pricing — Mercy Starter price is derived from tiers. */
-export const MARKET_COMPARISON = {
-  humanReceptionist: "$2,900+/mo",
-  answeringService: "$250–500/mo",
-  footnote:
-    "Human receptionist and answering-service figures are market estimates, not Mercy Speaks Digital prices. Mercy Starter is our published list price.",
-} as const;
 
 export function isOverageRatePublished(
   value: PlanOverageRow["overagePerCallUsd"]

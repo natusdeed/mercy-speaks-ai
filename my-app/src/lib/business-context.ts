@@ -17,9 +17,9 @@ export const BUSINESS_CONTEXT = {
     contactLink: "/contact",
   },
   services: [
-    "AI phone receptionist — answers calls 24/7, takes messages, schedules callbacks",
+    "AI phone receptionist (currently in pilot testing) — answers calls, takes messages, schedules callbacks",
     "Website chatbots — answer questions and capture leads on your site",
-    "Appointment automation — accept bookings 24/7 via website, phone, or chatbot",
+    "Appointment automation — accept bookings via website, phone, or chatbot",
     "Workflow automation — streamline follow-up, CRM, and internal processes",
     "SEO and digital strategy",
   ],

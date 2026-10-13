@@ -28,7 +28,7 @@ export function Hero() {
           transition={{ duration: 0.5 }}
           className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-slate-50 tracking-tight leading-[1.12] mb-5"
         >
-          Websites and 24/7 AI Receptionists That Turn Missed Calls Into Booked Jobs
+          Websites and AI Receptionists That Turn Missed Calls Into Booked Jobs
         </motion.h1>
 
         <motion.p

@@ -7,7 +7,6 @@ import {
   CheckCircle2,
   ArrowRight,
   Clock,
-  Smartphone,
   RotateCcw,
 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -21,15 +20,16 @@ import {
   webPageSchema,
 } from "@/lib/schema";
 import {
-  AI_RECEPTIONIST_TIERS,
   getCancelFaqStructure,
-  isOverageRatePublished,
-  MARKET_COMPARISON,
-  OVERAGE_PENDING_UI,
-  PLAN_OVERAGE_ROWS,
   PRICING_FAQ_ITEMS,
   WEBSITE_TIERS,
 } from "@/content/pricing-tiers";
+
+const AI_PILOT_NOTICE = "AI receptionist services are currently in pilot testing.";
+// P0 hotfix: AI receptionist plan pricing / call-volume overage FAQ is not published while in pilot.
+const VISIBLE_FAQ_ITEMS = PRICING_FAQ_ITEMS.filter(
+  (x) => x.question !== "What if I exceed my call volume?"
+);
 
 const fadeUp = {
   initial: { opacity: 0, y: 16 },
@@ -44,14 +44,11 @@ const fadeUpInView = {
   transition: { duration: 0.45 },
 };
 
-const TIERS = AI_RECEPTIONIST_TIERS;
-const STARTER_PRICE = AI_RECEPTIONIST_TIERS[0]?.price ?? 197;
 const CANCEL_FAQ_STRUCTURE = getCancelFaqStructure();
 
 const TRUST_NOTES = [
   { icon: Clock, text: "Guided setup—timeline confirmed on your call" },
-  { icon: Smartphone, text: "Works with your current number" },
-  { icon: RotateCcw, text: "Flexible plans—terms reviewed before you start" },
+    { icon: RotateCcw, text: "Flexible plans—terms reviewed before you start" },
 ];
 
 const SOCIAL_AND_REPUTATION_PRICING = [
@@ -74,7 +71,7 @@ const SOCIAL_AND_REPUTATION_PRICING = [
 
 export default function PricingPage() {
   const description =
-    "AI receptionist plans from $197/mo and premium websites from $997. Transparent pricing with guided onboarding. See what's included.";
+    "Website packages from Mercy Speaks Digital with guided onboarding. AI receptionist services are currently in pilot testing.";
 
   return (
     <PageShell className="min-h-screen bg-slate-950">
@@ -83,11 +80,11 @@ export default function PricingPage() {
         data={[
           webPageSchema({ name: "Pricing", description, path: "/pricing" }),
           offerCatalogSchema({
-            aiTiers: AI_RECEPTIONIST_TIERS,
+            aiTiers: [],
             websiteTiers: WEBSITE_TIERS,
           }),
           faqPageSchema(
-            PRICING_FAQ_ITEMS.map((x) => ({ question: x.question, answer: x.answer }))
+            VISIBLE_FAQ_ITEMS.map((x) => ({ question: x.question, answer: x.answer }))
           ),
           breadcrumbSchema([
             { name: "Home", path: "/" },
@@ -107,28 +104,7 @@ export default function PricingPage() {
                 Simple, transparent pricing
               </h1>
               <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-                Choose the plan that fits your call volume. All plans include 24/7 AI receptionist and missed-revenue visibility.
-              </p>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Market comparison strip */}
-        <section className="section pt-0" aria-labelledby="market-comparison-title">
-          <div className="section-inner max-w-4xl mx-auto">
-            <motion.div {...fadeUpInView} className="text-center">
-              <h2 id="market-comparison-title" className="sr-only">
-                Cost comparison
-              </h2>
-              <p className="text-sm md:text-base text-slate-300 leading-relaxed">
-                Typical human receptionist: {MARKET_COMPARISON.humanReceptionist}
-                {" · "}
-                Answering service: {MARKET_COMPARISON.answeringService}
-                {" · "}
-                Mercy Starter: ${STARTER_PRICE}/mo
-              </p>
-              <p className="mt-2 text-xs text-slate-500 max-w-2xl mx-auto leading-relaxed">
-                {MARKET_COMPARISON.footnote}
+                Website packages with guided onboarding. AI receptionist services are currently in pilot testing.
               </p>
             </motion.div>
           </div>
@@ -182,144 +158,16 @@ export default function PricingPage() {
           </div>
         </section>
 
-        {/* 3-tier pricing */}
+        {/* AI receptionist: pilot notice only (P0 hotfix — no AI pricing published) */}
         <section className="section" aria-labelledby="ai-receptionist-plans-title">
-          <div className="section-inner max-w-5xl mx-auto">
+          <div className="section-inner max-w-3xl mx-auto text-center">
             <h2
               id="ai-receptionist-plans-title"
-              className="text-2xl md:text-3xl font-bold text-slate-50 mb-6 md:mb-8 text-center"
+              className="text-2xl md:text-3xl font-bold text-slate-50 mb-4"
             >
-              AI receptionist plans
+              AI receptionist
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-              {TIERS.map((tier) => (
-                <motion.div
-                  key={tier.name}
-                  {...fadeUpInView}
-                  className={`relative flex flex-col rounded-2xl overflow-hidden ${
-                    tier.popular
-                      ? "bg-slate-900/50 shadow-lg shadow-electric-purple/5"
-                      : "card-premium"
-                  }`}
-                >
-                  {tier.popular && (
-                    <div className="absolute top-0 left-0 right-0 py-2 text-center text-xs font-semibold text-slate-950 bg-electric-purple">
-                      Most Popular
-                    </div>
-                  )}
-                  <div
-                    className={`flex flex-col flex-1 p-7 ${tier.popular ? "pt-12" : ""}`}
-                  >
-                    <h3 className="text-xl font-bold text-slate-50 mb-1">
-                      {tier.name}
-                    </h3>
-                    <p className="text-slate-400 text-xs italic mb-2">
-                      Best for: {tier.bestFor}
-                    </p>
-                    <p className="text-slate-400 text-sm mb-5">
-                      {tier.callVolume}
-                    </p>
-                    <div className="mb-5">
-                      <span className="text-4xl font-bold text-slate-50">
-                        ${tier.price}
-                      </span>
-                      <span className="text-slate-400 ml-1 text-base">
-                        /month
-                      </span>
-                    </div>
-                    <p className="text-neon-cyan text-xs mb-6">
-                      Setup: {tier.setup}
-                    </p>
-                    <ul className="space-y-2.5 mb-8 flex-1">
-                      {tier.included.map((item, i) => (
-                        <li
-                          key={i}
-                          className="flex items-start gap-2 text-slate-300 text-sm leading-snug"
-                        >
-                          <CheckCircle2 className="w-4 h-4 text-neon-cyan shrink-0 mt-0.5" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                    <Button
-                      variant={tier.popular ? "primary" : "outline"}
-                      size="default"
-                      className="w-full"
-                      asChild
-                    >
-                      <BookingLink kind="aiReceptionistDemo" className="flex items-center justify-center gap-2">
-                        Book Demo
-                        <ArrowRight className="w-4 h-4" />
-                      </BookingLink>
-                    </Button>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Overage & billing clarity */}
-        <section className="section pt-0" aria-labelledby="overage-billing-title">
-          <div className="section-inner max-w-5xl mx-auto">
-            <motion.div
-              {...fadeUpInView}
-              className="rounded-2xl border border-slate-800/60 bg-slate-900/10 backdrop-blur-md p-6 md:p-8"
-            >
-              <h2
-                id="overage-billing-title"
-                className="text-2xl md:text-3xl font-bold text-slate-50 mb-2"
-              >
-                Overage &amp; billing clarity
-              </h2>
-              <p className="text-slate-400 text-sm md:text-base mb-6 max-w-3xl">
-                We notify you before you hit your included call volume. Extra calls are billed as
-                add-ons by plan—rates below when published.
-              </p>
-
-              <div className="overflow-x-auto">
-                <table className="w-full min-w-[32rem] text-left text-sm">
-                  <thead>
-                    <tr className="border-b border-slate-800/80 text-slate-400">
-                      <th scope="col" className="py-3 pr-4 font-medium">
-                        Plan
-                      </th>
-                      <th scope="col" className="py-3 pr-4 font-medium">
-                        Included volume
-                      </th>
-                      <th scope="col" className="py-3 font-medium">
-                        Overage (per additional call)
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {PLAN_OVERAGE_ROWS.map((row) => (
-                      <tr
-                        key={row.planName}
-                        className="border-b border-slate-800/40 last:border-0"
-                      >
-                        <th
-                          scope="row"
-                          className="py-3.5 pr-4 font-semibold text-slate-50 align-top"
-                        >
-                          {row.planName}
-                        </th>
-                        <td className="py-3.5 pr-4 text-slate-300 align-top">
-                          {row.includedVolume}
-                        </td>
-                        <td className="py-3.5 text-slate-300 align-top">
-                          {isOverageRatePublished(row.overagePerCallUsd) ? (
-                            <span>${row.overagePerCallUsd.toFixed(2)}</span>
-                          ) : (
-                            <span className="text-slate-500 italic">{OVERAGE_PENDING_UI}</span>
-                          )}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </motion.div>
+            <p className="text-slate-300">{AI_PILOT_NOTICE}</p>
           </div>
         </section>
 
@@ -410,7 +258,7 @@ export default function PricingPage() {
               Frequently asked
             </motion.h2>
             <div className="space-y-4">
-              {PRICING_FAQ_ITEMS.map((faq) => (
+              {VISIBLE_FAQ_ITEMS.map((faq) => (
                 <motion.div
                   key={faq.question}
                   {...fadeUpInView}

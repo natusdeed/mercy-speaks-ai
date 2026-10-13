@@ -273,7 +273,7 @@ export function LiveDemo({ location = "unknown" }: LiveDemoProps) {
             )}
 
             <p className="text-base sm:text-lg text-slate-400 max-w-xl mx-auto">
-              Ask it anything a customer would. It answers 24/7.
+              Ask it anything a customer would.
             </p>
 
             <p className="pt-1">

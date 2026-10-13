@@ -11,7 +11,7 @@ export type LeadPayload = {
   message?: string;
 };
 
-export async function saveLead(payload: LeadPayload): Promise<{ ok: boolean; error?: string }> {
+export async function saveLead(payload: LeadPayload): Promise<{ ok: boolean; error?: string; delivered: boolean }> {
   const { source, name, email, phone, businessName, businessType, message } = payload;
 
   // Always log for conversion measurement (optional DB table can consume this later)
@@ -53,13 +53,18 @@ export async function saveLead(payload: LeadPayload): Promise<{ ok: boolean; err
         subject,
         text,
       });
-      if (error) return { ok: false, error: error.message };
+      if (error) {
+        console.error("[lead] Resend rejected the send");
+        return { ok: false, error: error.message, delivered: false };
+      }
+      return { ok: true, delivered: true };
     } catch (e) {
       const err = e instanceof Error ? e.message : String(e);
       console.error("[lead] Resend error:", err);
-      return { ok: false, error: err };
+      return { ok: false, error: err, delivered: false };
     }
   }
 
-  return { ok: true };
+  // No delivery mechanism configured: logged only, NOT delivered.
+  return { ok: true, delivered: false };
 }

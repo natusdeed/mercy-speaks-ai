@@ -38,11 +38,11 @@ export const INDUSTRY_LANDING_CONFIG: Record<IndustrySlug, IndustryLandingConfig
     path: "/roofing",
     seoTitle: "AI Receptionist for Roofing | Mercy Speaks Digital",
     seoDescription:
-      "Capture storm and emergency roofing leads 24/7—AI answers calls, qualifies damage reports, and books inspections while your crews stay on the roof.",
+      "Capture storm and emergency roofing leads—AI answers calls, qualifies damage reports, and books inspections while your crews stay on the roof.",
     eyebrow: "Roofing contractors",
     headline: "Stop losing storm and emergency jobs to voicemail",
     lead:
-      "When hail hits or a leak turns urgent, homeowners call fast—and the first company that answers wins. We install a 24/7 AI receptionist that captures every lead, books inspections, and texts your team so nothing slips through.",
+      "When hail hits or a leak turns urgent, homeowners call fast—and the first company that answers wins. We install an AI receptionist that captures leads, books inspections, and texts your team so nothing slips through.",
     problems: [
       "After-hours storm calls go to voicemail while competitors book the job.",
       "Office staff can't triage emergencies during peak season—callbacks get slower.",
@@ -52,9 +52,9 @@ export const INDUSTRY_LANDING_CONFIG: Record<IndustrySlug, IndustryLandingConfig
     outcomes: [
       {
         icon: Phone,
-        title: "24/7 call capture",
+        title: "After-hours call capture",
         description:
-          "Every ring gets answered with your pricing rules, service area, and urgency cues—then booked or escalated with context.",
+          "Calls are answered with your pricing rules, service area, and urgency cues—then booked or escalated with context.",
       },
       {
         icon: CloudLightning,
