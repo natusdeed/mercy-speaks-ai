@@ -222,7 +222,8 @@ export async function dispatchVercelApi(request: Request): Promise<Response> {
     if (!tenantId) {
       return Response.json({ error: "tenant query is required" }, { status: 400 });
     }
-    const { allowed, config } = await getWidgetConfig(request, tenantId);
+    const key = url.searchParams.get("key")?.trim() || undefined;
+    const { allowed, config } = await getWidgetConfig(request, tenantId, key);
     if (!allowed || !config) {
       return Response.json(
         { error: "Tenant not found or domain not allowed", allowed: false },
