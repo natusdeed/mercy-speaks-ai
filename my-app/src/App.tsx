@@ -77,7 +77,7 @@ function DevDemoRouteFallback() {
   );
 }
 
-const V3_FOOTER_PATHS = new Set(["/", "/websites", "/website-care", "/ai-pilot", "/about", "/contact", "/privacy", "/terms"]);
+const V3_FOOTER_PATHS = new Set(["/", "/websites", "/website-care", "/ai-pilot", "/about", "/contact", "/privacy", "/terms", "/book-demo"]);
 
 function PublicChrome() {
   // Project #001 V3 pages use the CEO-locked V3 footer; other pages keep the shared footer.
