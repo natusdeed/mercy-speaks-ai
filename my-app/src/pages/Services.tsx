@@ -148,16 +148,16 @@ export default function ServicesPage() {
             <motion.p
               {...fadeUp}
               transition={{ delay: 0.12 }}
-              className="mt-4 text-sm sm:text-base text-slate-500 px-1 leading-relaxed max-w-2xl"
+              className="mt-4 text-sm sm:text-base text-slate-400 px-1 leading-relaxed max-w-2xl"
             >
               In plain terms: we build or upgrade your website, then connect phone and web experiences so new leads get
               answered, qualified, and booked—even when your team is busy. Pick a service page below for specifics, or
               start from the{" "}
-              <Link to={NAV_PATHS.aiReceptionist} className="text-neon-cyan hover:underline">
+              <Link to={NAV_PATHS.aiReceptionist} className="text-neon-cyan underline underline-offset-2">
                 AI receptionist
               </Link>{" "}
               or{" "}
-              <Link to={NAV_PATHS.websiteDesign} className="text-neon-cyan hover:underline">
+              <Link to={NAV_PATHS.websiteDesign} className="text-neon-cyan underline underline-offset-2">
                 website design
               </Link>{" "}
               overview.
@@ -189,13 +189,13 @@ export default function ServicesPage() {
                 </li>
               ))}
             </ul>
-            <p className="mt-6 text-sm text-slate-500">
+            <p className="mt-6 text-sm text-slate-400">
               Ready to compare packages?{" "}
-              <Link to={NAV_PATHS.pricing} className="text-neon-cyan hover:underline">
+              <Link to={NAV_PATHS.pricing} className="text-neon-cyan underline underline-offset-2">
                 View pricing
               </Link>{" "}
               or{" "}
-              <Link to="/contact" className="text-neon-cyan hover:underline">
+              <Link to="/contact" className="text-neon-cyan underline underline-offset-2">
                 contact us
               </Link>
               .

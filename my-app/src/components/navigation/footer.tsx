@@ -114,7 +114,7 @@ export function Footer() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="lg:col-span-1"
           >
-            <h3 className="text-lg font-semibold text-slate-50 mb-4">Explore</h3>
+            <h2 className="text-lg font-semibold text-slate-50 mb-4">Explore</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {exploreLinkColumns.map((columnLinks, columnIndex) => (
                 <div
@@ -147,7 +147,7 @@ export function Footer() {
             transition={{ duration: 0.6, delay: 0.15 }}
             className="lg:col-span-1"
           >
-            <h3 className="text-lg font-semibold text-slate-50 mb-4">Areas</h3>
+            <h2 className="text-lg font-semibold text-slate-50 mb-4">Areas</h2>
             <ul className="space-y-2 rounded-xl border border-slate-800/70 bg-slate-900/40 p-3 backdrop-blur-sm">
               {AREA_LINKS.map((link) => (
                 <li key={link.href}>
@@ -171,7 +171,7 @@ export function Footer() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="lg:col-span-1"
           >
-            <h3 className="text-lg font-semibold text-slate-50 mb-4">Contact</h3>
+            <h2 className="text-lg font-semibold text-slate-50 mb-4">Contact</h2>
             <ul className="space-y-3">
               {contactInfo.map((contact) => {
                 const Icon = contact.icon;
@@ -207,9 +207,9 @@ export function Footer() {
           className="border-t border-slate-800/30 pt-8 mt-8"
         >
           <div className="flex flex-col items-center gap-4 mb-8">
-            <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider">
+            <h2 className="text-sm font-semibold text-slate-400 uppercase tracking-wider">
               Follow Us
-            </h3>
+            </h2>
             <div className="flex items-center justify-center gap-4 flex-wrap">
               {socialLinks.length === 0 ? (
                 <p className="text-sm text-slate-500">Social profiles coming soon.</p>

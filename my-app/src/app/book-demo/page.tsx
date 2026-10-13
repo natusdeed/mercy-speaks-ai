@@ -43,7 +43,7 @@ export default function BookDemoPage() {
             >
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-electric-purple/20 mb-4">
                 <Calendar className="w-4 h-4 text-electric-purple" />
-                <span className="text-sm text-electric-purple font-medium">Book a Demo</span>
+                <span className="text-sm text-violet-300 font-medium">Book a Demo</span>
               </div>
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-50 mb-3 md:mb-4 title-3d">
                 Pick a time that{" "}
@@ -79,9 +79,9 @@ export default function BookDemoPage() {
                       </li>
                     ))}
                   </ul>
-                  <p className="mt-6 text-xs text-slate-500 leading-relaxed">
+                  <p className="mt-6 text-xs text-slate-400 leading-relaxed">
                     Prefer email first?{" "}
-                    <Link to="/contact" className="text-neon-cyan hover:underline">
+                    <Link to="/contact" className="text-neon-cyan underline underline-offset-2">
                       Contact us
                     </Link>
                     .
@@ -98,13 +98,13 @@ export default function BookDemoPage() {
                 <div className="rounded-2xl border border-slate-800/70 bg-slate-900/40 p-3 sm:p-4 backdrop-blur-md overflow-hidden">
                   <CalInlineEmbed />
                 </div>
-                <p className="mt-4 text-center text-sm text-slate-500">
+                <p className="mt-4 text-center text-sm text-slate-400">
                   Scheduler not loading?{" "}
                   <a
                     href={CAL_COM_EMBED.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-neon-cyan hover:underline"
+                    className="inline-flex items-center gap-1 text-neon-cyan underline underline-offset-2"
                   >
                     Open the booking page
                     <ExternalLink className="w-3.5 h-3.5" aria-hidden />

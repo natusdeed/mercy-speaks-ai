@@ -175,7 +175,7 @@ export default function PricingPage() {
         <section className="section pt-0" aria-labelledby="website-pricing-title">
           <div className="section-inner max-w-5xl mx-auto">
             <div className="rounded-2xl border border-slate-800/60 bg-slate-900/10 backdrop-blur-md p-6 md:p-8 mb-6 md:mb-8">
-              <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">
+              <p className="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-3">
                 Website Development
               </p>
               <h2
