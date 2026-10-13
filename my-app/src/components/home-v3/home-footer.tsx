@@ -14,14 +14,14 @@ const LINKS = [
 ] as const;
 
 const linkCls =
-  "inline-flex min-h-11 items-center text-slate-300 underline-offset-4 hover:text-slate-50 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan rounded";
+  "inline-flex min-h-11 items-center text-slate-300 underline-offset-4 hover:text-slate-50 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-300 rounded";
 
 export function HomeFooterV3() {
   return (
-    <footer id="site-footer" className="border-t border-slate-800 bg-slate-950 px-4 py-12 sm:px-6 lg:px-8">
-      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 md:grid-cols-2">
+    <footer id="site-footer" className="border-t border-slate-800 bg-slate-950 px-5 py-14 sm:px-8">
+      <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-2">
         <div>
-          <p className="text-lg font-semibold text-slate-50">Mercy Speaks Digital</p>
+          <p className="text-base font-semibold text-white">Mercy Speaks Digital</p>
           <address className="mt-4 space-y-2 not-italic text-base text-slate-300">
             <p>
               <span className="text-slate-400">Mailing address: </span>
@@ -53,7 +53,7 @@ export function HomeFooterV3() {
           </ul>
         </nav>
       </div>
-      <p className="mx-auto mt-10 max-w-6xl text-sm text-slate-400">© 2026 Mercy Speaks Digital. All rights reserved.</p>
+      <p className="mx-auto mt-10 max-w-5xl text-sm text-slate-400">© 2026 Mercy Speaks Digital. All rights reserved.</p>
     </footer>
   );
 }

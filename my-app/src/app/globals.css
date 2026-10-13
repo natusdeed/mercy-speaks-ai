@@ -85,11 +85,11 @@
   --sidebar-ring: oklch(0.704 0.04 256.788);
 
   /* Public layout: padding below fixed header (see App.tsx #public-layout) */
-  --header-offset: 5.75rem;
+  --header-offset: 4rem;
 }
 @media (min-width: 768px) {
   :root {
-    --header-offset: 7rem;
+    --header-offset: 4rem;
   }
 }
 
@@ -117,10 +117,13 @@
   --font-mono: var(--font-geist-mono);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* In @layer base so Tailwind spacing utilities (p-*, m-*) can override the reset. */
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 }
 
 html {
@@ -189,9 +192,12 @@ section {
 }
 
 /* Ensure max-w containers are centered */
-[class*="max-w"] {
-  margin-left: auto;
-  margin-right: auto;
+/* Zero-specificity + base layer: still centers by default, but margin utilities (e.g. mx-0) win. */
+@layer base {
+  :where([class*="max-w"]) {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 /* Premium design system: standardized vertical spacing (~40–50% reduced), fewer borders. */

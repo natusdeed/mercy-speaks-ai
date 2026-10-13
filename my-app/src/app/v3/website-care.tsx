@@ -3,7 +3,7 @@ import { PageShell } from "@/components/ui/page-shell";
 import { SeoHead } from "@/components/seo/seo-head";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/schema";
-import { body, card, h1, h2, inner, primaryBtn, secondaryBtn, section } from "@/components/home-v3/v3-ui";
+import { divided, h2, inner, PageHero, PriceColumns, primaryBtn, QuietList, section, textLink } from "@/components/home-v3/v3-ui";
 
 /** /website-care — copy: project-001/pages-copy-v3.md (CEO-locked). Do not edit copy. */
 const PLANS = [
@@ -43,47 +43,31 @@ export default function WebsiteCarePage() {
         ])}
       />
       <main className="w-full">
-        <section className={`${section} pt-16 md:pt-24`} aria-labelledby="care-heading">
-          <div className="mx-auto max-w-4xl text-center">
-            <h1 id="care-heading" className={h1}>
-              Website Care &amp; Optimization
-            </h1>
-            <p className={`${body} mx-auto max-w-2xl`}>
-              Keep your site up to date after launch with an optional monthly care plan.
-            </p>
+        <PageHero
+          title="Website Care & Optimization"
+          intro="Keep your site up to date after launch with an optional monthly care plan."
+        />
+        <section className={`${section} ${divided}`} aria-label="Care plans">
+          <div className={inner}>
+            <h2 className="sr-only">Care plans</h2>
+            <PriceColumns items={PLANS} cols={2} />
           </div>
         </section>
-        <section className={`${section} bg-slate-900/40`} aria-label="Care plans">
-          <ul className={`${inner} grid max-w-4xl grid-cols-1 gap-5 md:grid-cols-2`}>
-            {PLANS.map((p) => (
-              <li key={p.name} className={card}>
-                <h2 className="text-xl font-semibold text-slate-50">{p.name}</h2>
-                <p className="mt-2 text-2xl font-bold text-slate-50">{p.price}</p>
-                <p className="mt-3 text-base leading-relaxed text-slate-300">{p.details}</p>
-              </li>
-            ))}
-          </ul>
-        </section>
-        <section className={section} aria-labelledby="rules-heading">
-          <div className={`${inner} max-w-3xl`}>
-            <h2 id="rules-heading" className={`${h2} mb-5`}>
+        <section className={`${section} ${divided}`} aria-labelledby="rules-heading">
+          <div className={`${inner} grid gap-10 md:grid-cols-[1fr_2fr] md:gap-16`}>
+            <h2 id="rules-heading" className={h2}>
               Plan rules
             </h2>
-            <ul className="space-y-3">
-              {RULES.map((r) => (
-                <li key={r} className={`${body} flex gap-3`}>
-                  <span aria-hidden className="mt-2.5 h-2 w-2 shrink-0 rounded-full bg-neon-cyan" />
-                  <span>{r}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-10 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
-              <Link to="/contact" className={primaryBtn}>
-                Get a Website Quote
-              </Link>
-              <Link to="/contact" className={secondaryBtn}>
-                Ask about a care plan
-              </Link>
+            <div>
+              <QuietList items={RULES} />
+              <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-8">
+                <Link to="/contact" className={primaryBtn}>
+                  Get a Website Quote
+                </Link>
+                <Link to="/contact" className={textLink}>
+                  Ask about a care plan
+                </Link>
+              </div>
             </div>
           </div>
         </section>

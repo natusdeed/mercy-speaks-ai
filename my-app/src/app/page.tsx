@@ -3,12 +3,13 @@ import { PageShell } from "@/components/ui/page-shell";
 import { SeoHead } from "@/components/seo/seo-head";
 import { JsonLd } from "@/components/seo/json-ld";
 import { faqPageSchema, websiteSchema } from "@/lib/schema";
-import { primaryBtn, secondaryBtn, textLink, section, inner, h2, smallPrint, FaqList } from "@/components/home-v3/v3-ui";
+import { body, divided, eyebrow, FaqList, h1, h2, inner, narrow, PriceColumns, primaryBtn, section, secondaryBtn, smallPrint, textLink } from "@/components/home-v3/v3-ui";
 
 /**
  * Homepage V3 (Project #001, CEO-locked copy 2026-10-13).
  * Copy source: /workspace/mercy-speaks/project-001/homepage-copy-v3.md — do not edit copy here without CEO approval.
  * Static markup only (no Framer Motion / no demo widgets) to keep first paint light (QA P1: homepage LCP/TBT).
+ * Design: premium, quiet, conversion-focused (CEO principle) — see v3-ui.tsx.
  */
 
 const PACKAGES = [
@@ -95,20 +96,17 @@ export default function Home() {
       />
       <JsonLd data={[websiteSchema(), faqPageSchema(HOME_V3_FAQS.map((f) => ({ ...f })))]} />
       <main className="w-full">
-        {/* 1. Hero */}
-        <section className={`${section} pt-16 md:pt-24`} aria-labelledby="hero-heading">
-          <div className="mx-auto max-w-4xl text-center">
-            <h1
-              id="hero-heading"
-              className="mb-5 text-3xl font-bold leading-[1.12] tracking-tight text-slate-50 sm:text-4xl md:text-5xl lg:text-6xl"
-            >
+        {/* 1. Hero — the one primary CTA in the first view */}
+        <section className={`${section} pt-12 md:pt-24`} aria-labelledby="hero-heading">
+          <div className={inner}>
+            <h1 id="hero-heading" className={`${h1} max-w-3xl mx-0`}>
               The digital front door for growing businesses.
             </h1>
-            <p className="mx-auto mb-8 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg md:text-xl">
+            <p className={`${body} mt-6 max-w-2xl mx-0`}>
               Mercy Speaks Digital builds fast, modern conversion websites that make it easy for the people who find you
               to call, request a quote, or request an appointment. We keep your site up to date with optional care plans.
             </p>
-            <div className="flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Link to="/contact" className={primaryBtn}>
                 Get a Website Quote
               </Link>
@@ -120,68 +118,49 @@ export default function Home() {
         </section>
 
         {/* 2. The problem */}
-        <section className={`${section} bg-slate-900/40`} aria-labelledby="problem-heading">
-          <div className={`${inner} max-w-3xl`}>
-            <h2 id="problem-heading" className={`${h2} mb-5`}>
-              Your website should make it easy to choose you.
-            </h2>
-            <p className="mb-4 text-base leading-relaxed text-slate-300 md:text-lg">
-              Most visitors decide fast, usually on a phone. If your services are hard to find, your phone number is
-              buried, or the page loads slowly, they move on before they reach out.
-            </p>
-            <p className="mb-6 text-base leading-relaxed text-slate-300 md:text-lg">
-              We build websites with one job: help visitors understand what you do and contact you without friction.
-            </p>
-            <ul className="space-y-3 text-base text-slate-200 md:text-lg">
-              {[
-                "Clear services and pricing information you approve",
-                "Tap-to-call and quote-request forms placed where people look",
-                "Mobile-first design built to load quickly",
-              ].map((item) => (
-                <li key={item} className="flex gap-3">
-                  <span aria-hidden className="mt-2.5 h-2 w-2 shrink-0 rounded-full bg-neon-cyan" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
+        <section className={`${section} ${divided}`} aria-labelledby="problem-heading">
+          <div className={`${inner} grid gap-10 md:grid-cols-2 md:gap-16`}>
+            <div>
+              <h2 id="problem-heading" className={h2}>
+                Your website should make it easy to choose you.
+              </h2>
+            </div>
+            <div className="space-y-5">
+              <p className={body}>
+                Most visitors decide fast, usually on a phone. If your services are hard to find, your phone number is
+                buried, or the page loads slowly, they move on before they reach out.
+              </p>
+              <p className={body}>
+                We build websites with one job: help visitors understand what you do and contact you without friction.
+              </p>
+              <ul className="space-y-2 pt-2 text-base text-slate-200 md:text-lg">
+                {[
+                  "Clear services and pricing information you approve",
+                  "Tap-to-call and quote-request forms placed where people look",
+                  "Mobile-first design built to load quickly",
+                ].map((item) => (
+                  <li key={item} className="border-l border-slate-700 pl-4">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </section>
 
-        {/* 3. Website packages */}
-        <section id="packages" className={`${section} scroll-mt-24`} aria-labelledby="packages-heading">
+        {/* 3. Website packages — prices are the visual idea; no extra primary button here */}
+        <section id="packages" className={`${section} ${divided} scroll-mt-24`} aria-labelledby="packages-heading">
           <div className={inner}>
-            <h2 id="packages-heading" className={`${h2} mb-8 text-center`}>
+            <h2 id="packages-heading" className={`${h2} mb-10`}>
               Website packages
             </h2>
-            <ul className="grid grid-cols-1 gap-5 md:grid-cols-3">
-              {PACKAGES.map((p) => (
-                <li
-                  key={p.name}
-                  className={`flex flex-col rounded-2xl border p-6 ${
-                    p.recommended
-                      ? "border-electric-purple bg-electric-purple/10"
-                      : "border-slate-700 bg-slate-900/60"
-                  }`}
-                >
-                  <h3 className="text-xl font-semibold text-slate-50">
-                    {p.name}
-                    {p.recommended && (
-                      <span className="ml-2 inline-block rounded-full bg-violet-700 px-2.5 py-0.5 align-middle text-xs font-semibold text-white">
-                        Recommended
-                      </span>
-                    )}
-                  </h3>
-                  <p className="mt-2 text-3xl font-bold text-slate-50">{p.price}</p>
-                  <p className="mt-3 text-base leading-relaxed text-slate-300">{p.details}</p>
-                </li>
-              ))}
-            </ul>
-            <p className={`${smallPrint} mt-6 text-center`}>
+            <PriceColumns items={PACKAGES} />
+            <p className={`${smallPrint} mt-6`}>
               50% to begin, 50% before launch. Hosting and domain not included. Add-ons and full terms on the Websites
               page.
             </p>
-            <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-6">
-              <Link to="/contact" className={primaryBtn}>
+            <div className="mt-6 flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-8">
+              <Link to="/contact" className={textLink}>
                 Get a Website Quote
               </Link>
               <Link to="/websites" className={textLink}>
@@ -191,22 +170,22 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 4. How it works */}
-        <section className={`${section} bg-slate-900/40`} aria-labelledby="how-heading">
+        {/* 4. How it works — numbered list, not a card grid */}
+        <section className={`${section} ${divided}`} aria-labelledby="how-heading">
           <div className={inner}>
-            <h2 id="how-heading" className={`${h2} mb-8 text-center`}>
+            <h2 id="how-heading" className={`${h2} mb-10`}>
               How it works
             </h2>
-            <ol className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            <ol className="divide-y divide-slate-800 border-y border-slate-800">
               {STEPS.map((s, i) => (
-                <li key={s.title} className="rounded-2xl border border-slate-700 bg-slate-900/60 p-5">
-                  <p className="text-sm font-semibold text-neon-cyan">Step {i + 1}</p>
-                  <h3 className="mt-1 text-lg font-semibold text-slate-50">{s.title}</h3>
-                  <p className="mt-2 text-base leading-relaxed text-slate-300">{s.body}</p>
+                <li key={s.title} className="grid gap-1 py-5 sm:grid-cols-[4rem_10rem_1fr] sm:gap-4">
+                  <span className="text-sm tabular-nums text-slate-400">0{i + 1}</span>
+                  <h3 className="text-base font-semibold text-white md:text-lg">{s.title}</h3>
+                  <p className="text-base leading-relaxed text-slate-300">{s.body}</p>
                 </li>
               ))}
             </ol>
-            <p className={`${smallPrint} mt-6 text-center`}>
+            <p className={`${smallPrint} mt-6 max-w-3xl mx-0`}>
               10–15 business days of active Mercy Speaks production time after the initial payment and all required
               starting assets are received. The delivery clock pauses while Mercy Speaks is waiting for client content,
               assets, credentials/access, feedback, revisions, or approvals.
@@ -215,28 +194,18 @@ export default function Home() {
         </section>
 
         {/* 5. Website Care & Optimization */}
-        <section className={section} aria-labelledby="care-heading">
+        <section className={`${section} ${divided}`} aria-labelledby="care-heading">
           <div className={inner}>
-            <p className="mb-2 text-center text-sm font-semibold uppercase tracking-wider text-neon-cyan">
-              Website Care &amp; Optimization
-            </p>
-            <h2 id="care-heading" className={`${h2} mb-8 text-center`}>
+            <p className={eyebrow}>Website Care &amp; Optimization</p>
+            <h2 id="care-heading" className={`${h2} mb-10`}>
               Keep your site up to date after launch
             </h2>
-            <ul className="mx-auto grid max-w-4xl grid-cols-1 gap-5 md:grid-cols-2">
-              {CARE_PLANS.map((c) => (
-                <li key={c.name} className="rounded-2xl border border-slate-700 bg-slate-900/60 p-6">
-                  <h3 className="text-xl font-semibold text-slate-50">{c.name}</h3>
-                  <p className="mt-2 text-2xl font-bold text-slate-50">{c.price}</p>
-                  <p className="mt-3 text-base leading-relaxed text-slate-300">{c.details}</p>
-                </li>
-              ))}
-            </ul>
-            <p className={`${smallPrint} mt-6 text-center`}>
+            <PriceColumns items={CARE_PLANS} cols={2} />
+            <p className={`${smallPrint} mt-6`}>
               3-month minimum, then 30 days' written notice to cancel. Unused time does not roll over. Out-of-scope work
               requires approval and is $95/hour.
             </p>
-            <div className="mt-6 text-center">
+            <div className="mt-4">
               <Link to="/website-care" className={textLink}>
                 Learn about Website Care
               </Link>
@@ -244,28 +213,30 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 6. AI pilot strip */}
-        <section className="px-4 py-10 sm:px-6 lg:px-8" aria-labelledby="ai-pilot-heading">
-          <div className="mx-auto max-w-4xl rounded-2xl border border-slate-700 bg-slate-900/60 p-6 md:p-8">
-            <h2 id="ai-pilot-heading" className="text-xl font-semibold text-slate-50 md:text-2xl">
+        {/* 6. AI pilot — deliberately small and plain */}
+        <section className={`${section} ${divided} py-12 md:py-16`} aria-labelledby="ai-pilot-heading">
+          <div className={`${inner} grid gap-4 md:grid-cols-[1fr_2fr] md:gap-16`}>
+            <h2 id="ai-pilot-heading" className="text-lg font-semibold text-white">
               AI communication tools: limited pilot
             </h2>
-            <p className="mt-3 text-base leading-relaxed text-slate-300">
-              We're testing AI communication tools separately from our website services. The pilot has limited
-              availability and is not part of our website packages.
-            </p>
-            <div className="mt-4">
-              <Link to="/ai-pilot" className={textLink}>
-                Learn about the AI pilot
-              </Link>
+            <div>
+              <p className="text-base leading-relaxed text-slate-400">
+                We're testing AI communication tools separately from our website services. The pilot has limited
+                availability and is not part of our website packages.
+              </p>
+              <div className="mt-2">
+                <Link to="/ai-pilot" className={textLink}>
+                  Learn about the AI pilot
+                </Link>
+              </div>
             </div>
           </div>
         </section>
 
         {/* 7. FAQ */}
-        <section className={`${section} bg-slate-900/40`} aria-labelledby="faq-heading">
-          <div className={`${inner} max-w-3xl`}>
-            <h2 id="faq-heading" className={`${h2} mb-8 text-center`}>
+        <section className={`${section} ${divided}`} aria-labelledby="faq-heading">
+          <div className={narrow}>
+            <h2 id="faq-heading" className={`${h2} mb-8`}>
               FAQ
             </h2>
             <FaqList faqs={HOME_V3_FAQS} />
@@ -273,15 +244,13 @@ export default function Home() {
         </section>
 
         {/* 8. Final CTA */}
-        <section className={section} aria-labelledby="final-cta-heading">
-          <div className="mx-auto max-w-3xl text-center">
-            <h2 id="final-cta-heading" className={`${h2} mb-4`}>
+        <section className={`${section} ${divided}`} aria-labelledby="final-cta-heading">
+          <div className={inner}>
+            <h2 id="final-cta-heading" className={`${h2} max-w-2xl mx-0`}>
               Ready for a website that makes it easy to choose you?
             </h2>
-            <p className="mb-8 text-base text-slate-300 md:text-lg">
-              Tell us about your business and we'll send a written quote.
-            </p>
-            <div className="flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
+            <p className={`${body} mt-4`}>Tell us about your business and we'll send a written quote.</p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Link to="/contact" className={primaryBtn}>
                 Get a Website Quote
               </Link>

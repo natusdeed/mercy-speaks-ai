@@ -3,7 +3,7 @@ import { PageShell } from "@/components/ui/page-shell";
 import { SeoHead } from "@/components/seo/seo-head";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, faqPageSchema } from "@/lib/schema";
-import { body, card, cardRecommended, FaqList, h1, h2, inner, primaryBtn, RecommendedBadge, section } from "@/components/home-v3/v3-ui";
+import { body, divided, FaqList, h2, inlineLink, inner, narrow, PageHero, PriceColumns, primaryBtn, QuietList, section } from "@/components/home-v3/v3-ui";
 
 /** /websites — copy: project-001/pages-copy-v3.md (CEO-locked). Do not edit copy. */
 const PACKAGES = [
@@ -70,39 +70,22 @@ export default function WebsitesPage() {
         ]}
       />
       <main className="w-full">
-        <section className={`${section} pt-16 md:pt-24`} aria-labelledby="websites-heading">
-          <div className="mx-auto max-w-4xl text-center">
-            <h1 id="websites-heading" className={h1}>
-              Conversion websites for growing businesses
-            </h1>
-            <p className={`${body} mx-auto mb-8 max-w-2xl`}>
-              Fast, modern websites that make it easy for the people who find you to call, request a quote, or request an
-              appointment.
-            </p>
-            <Link to="/contact" className={primaryBtn}>
-              Get a Website Quote
-            </Link>
-          </div>
-        </section>
+        <PageHero
+          title="Conversion websites for growing businesses"
+          intro="Fast, modern websites that make it easy for the people who find you to call, request a quote, or request an appointment."
+        >
+          <Link to="/contact" className={primaryBtn}>
+            Get a Website Quote
+          </Link>
+        </PageHero>
 
-        <section className={`${section} bg-slate-900/40`} aria-labelledby="packages-heading">
+        <section className={`${section} ${divided}`} aria-labelledby="packages-heading">
           <div className={inner}>
-            <h2 id="packages-heading" className={`${h2} mb-8 text-center`}>
+            <h2 id="packages-heading" className={`${h2} mb-10`}>
               Packages
             </h2>
-            <ul className="grid grid-cols-1 gap-5 md:grid-cols-3">
-              {PACKAGES.map((p) => (
-                <li key={p.name} className={`flex flex-col ${p.recommended ? cardRecommended : card}`}>
-                  <h3 className="text-xl font-semibold text-slate-50">
-                    {p.name}
-                    {p.recommended && <RecommendedBadge />}
-                  </h3>
-                  <p className="mt-2 text-3xl font-bold text-slate-50">{p.price}</p>
-                  <p className="mt-3 text-base leading-relaxed text-slate-300">{p.details}</p>
-                </li>
-              ))}
-            </ul>
-            <div className="mx-auto mt-8 max-w-3xl space-y-4">
+            <PriceColumns items={PACKAGES} />
+            <div className="mt-10 max-w-3xl mx-0 space-y-5">
               <p className={body}>
                 Every package includes mobile-first design checked on phones and desktops, tap-to-call to your existing
                 number, a contact form, a Google Map embed or link, basic on-page SEO (page titles, meta descriptions,
@@ -119,61 +102,52 @@ export default function WebsitesPage() {
           </div>
         </section>
 
-        <section className={section}>
-          <div className={`${inner} max-w-3xl space-y-12`}>
-            <div>
-              <h2 className={`${h2} mb-5`}>Add-ons</h2>
-              <ul className="space-y-3">
-                {ADDONS.map((a) => (
-                  <li key={a} className={`${body} flex gap-3`}>
-                    <span aria-hidden className="mt-2.5 h-2 w-2 shrink-0 rounded-full bg-neon-cyan" />
-                    <span>{a}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h2 className={`${h2} mb-5`}>Payment</h2>
-              <p className={body}>50% to begin, 50% before launch. Quotes are valid for 30 calendar days.</p>
-            </div>
-            <div>
-              <h2 className={`${h2} mb-5`}>Timeline</h2>
-              <p className={body}>{TIMELINE}</p>
-            </div>
-            <div>
-              <h2 className={`${h2} mb-5`}>Hosting, domain, and ownership</h2>
-              <p className={`${body} mb-4`}>
+        <section className={`${section} ${divided}`}>
+          <div className={`${inner} grid gap-14 md:grid-cols-[1fr_2fr] md:gap-x-16`}>
+            <h2 className={h2}>Add-ons</h2>
+            <QuietList items={ADDONS} />
+
+            <h2 className={h2}>Payment</h2>
+            <p className={body}>50% to begin, 50% before launch. Quotes are valid for 30 calendar days.</p>
+
+            <h2 className={h2}>Timeline</h2>
+            <p className={body}>{TIMELINE}</p>
+
+            <h2 className={h2}>Hosting, domain, and ownership</h2>
+            <div className="space-y-5">
+              <p className={body}>
                 Hosting and domain are not included. You own both accounts, give us delegated access, and pay any
                 third-party costs.
               </p>
               <p className={body}>{OWNERSHIP}</p>
             </div>
-            <div>
-              <h2 className={`${h2} mb-5`}>After launch</h2>
-              <p className={body}>
-                14 calendar days of bug fixes for defects in delivered work, then an optional care plan (see{" "}
-                <Link to="/website-care" className="text-neon-cyan underline underline-offset-4 hover:text-slate-50">
-                  /website-care
-                </Link>
-                ).
-              </p>
-            </div>
+
+            <h2 className={h2}>After launch</h2>
+            <p className={body}>
+              14 calendar days of bug fixes for defects in delivered work, then an optional care plan (see{" "}
+              <Link to="/website-care" className={inlineLink}>
+                /website-care
+              </Link>
+              ).
+            </p>
           </div>
         </section>
 
-        <section className={`${section} bg-slate-900/40`} aria-labelledby="websites-faq-heading">
-          <div className={`${inner} max-w-3xl`}>
-            <h2 id="websites-faq-heading" className={`${h2} mb-8 text-center`}>
+        <section className={`${section} ${divided}`} aria-labelledby="websites-faq-heading">
+          <div className={narrow}>
+            <h2 id="websites-faq-heading" className={`${h2} mb-8`}>
               FAQ
             </h2>
             <FaqList faqs={FAQS} />
           </div>
         </section>
 
-        <section className={`${section} text-center`}>
-          <Link to="/contact" className={primaryBtn}>
-            Get a Website Quote
-          </Link>
+        <section className={`${section} ${divided}`}>
+          <div className={inner}>
+            <Link to="/contact" className={primaryBtn}>
+              Get a Website Quote
+            </Link>
+          </div>
         </section>
       </main>
     </PageShell>
