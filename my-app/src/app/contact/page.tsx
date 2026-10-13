@@ -138,9 +138,8 @@ export default function ContactPage() {
                       className="text-center py-10 sm:py-12"
                     >
                       <CheckCircle2 className="w-14 h-14 sm:w-16 sm:h-16 text-neon-cyan mx-auto mb-4" />
-                      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-50 mb-2">Message Sent!</h2>
-                      <p className="text-base sm:text-lg md:text-xl leading-relaxed text-slate-300 mb-6">
-                        We&apos;ll get back to you within 24 hours.
+                      <p role="status" className="text-lg sm:text-xl md:text-2xl font-semibold leading-relaxed text-slate-50 mb-6 max-w-xl mx-auto">
+                        {"Thanks — your request has been received. We'll review the details and follow up using the contact information you provided."}
                       </p>
                       <Button
                         variant="outline"

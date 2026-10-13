@@ -192,7 +192,7 @@ export default function ReviewGenerationPage() {
                 },
                 {
                   title: "We Monitor & Alert",
-                  body: "We monitor Google, Facebook, and Yelp for new reviews. You get notified of anything that needs attention within 24 hours.",
+                  body: "We monitor Google, Facebook, and Yelp for new reviews. You get notified of anything that needs attention.",
                 },
                 {
                   title: "Monthly Report",
@@ -242,7 +242,7 @@ export default function ReviewGenerationPage() {
                     "Automated email review requests post-job",
                     "Google Business Profile monitoring",
                     "Facebook + Yelp monitoring",
-                    "Same-day new review alerts",
+                    "New review alerts",
                     "Monthly reputation report",
                     "Response template library",
                   ].map((item) => (
@@ -279,7 +279,7 @@ export default function ReviewGenerationPage() {
                       "Facebook + Instagram + Google Business management",
                       "Stories / Reels (4x/month)",
                       "Monthly strategy call",
-                      "Priority support (24hr response)",
+                      "Priority support",
                     ].map((item) => (
                       <li key={item} className="flex items-start gap-2 text-sm text-slate-300">
                         <CheckCircle2 className="w-4 h-4 text-neon-cyan shrink-0 mt-0.5" />

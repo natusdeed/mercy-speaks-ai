@@ -305,7 +305,7 @@ export default function SocialMediaManagementPage() {
                       "Stories / Reels (4x per month)",
                       "Review request automation included",
                       "Full monthly report + strategy call",
-                      "Priority support (24hr response)",
+                      "Priority support",
                       "Quarterly strategy review",
                     ].map((item) => (
                       <li key={item} className="flex items-start gap-2 text-sm text-slate-300">

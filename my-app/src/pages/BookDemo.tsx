@@ -155,7 +155,7 @@ export default function BookDemoPage() {
                 <CheckCircle2 className="w-16 h-16 text-neon-cyan mx-auto mb-4" />
                 <h2 className="text-4xl md:text-5xl font-bold text-slate-50 mb-4">Callback requested</h2>
                 <p className="text-slate-400 mb-6">
-                  We&apos;ve received your callback request and will contact you within 2 business hours.
+                  We&apos;ve received your callback request and will contact you.
                   To pick a specific time now, use the Book Demo link in the header or footer to book on Cal.com.
                 </p>
                 <p className="text-slate-400 mb-8">

@@ -264,7 +264,7 @@ export function LeadForm({
           )}
         </Button>
         <p className="text-center text-sm text-slate-400">
-          We respond within 2 business hours. No spam.
+          No spam.
         </p>
       </div>
     </form>
