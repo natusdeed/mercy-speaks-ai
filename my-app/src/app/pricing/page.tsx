@@ -51,14 +51,6 @@ const TRUST_NOTES = [
     { icon: RotateCcw, text: "Flexible plans—terms reviewed before you start" },
 ];
 
-const SOCIAL_AND_REPUTATION_PRICING = [
-  {
-    title: "Reputation Management",
-    items: [
-      "Standalone: $197/mo — review automation, monitoring, alerts, monthly report",
-    ],
-  },
-] as const;
 
 export default function PricingPage() {
   const description =
@@ -113,21 +105,12 @@ export default function PricingPage() {
               >
                 Social media and reputation plans
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {SOCIAL_AND_REPUTATION_PRICING.map((entry) => (
-                  <div key={entry.title} className="rounded-2xl bg-slate-900/20 p-6">
-                    <h3 className="text-lg font-semibold text-slate-50 mb-3">{entry.title}</h3>
-                    <ul className="space-y-2.5">
-                      {entry.items.map((item) => (
-                        <li key={item} className="flex items-start gap-2 text-slate-300 text-sm leading-snug">
-                          <CheckCircle2 className="w-4 h-4 text-neon-cyan shrink-0 mt-0.5" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
+              <Link
+                to="/contact"
+                className="inline-flex min-h-11 items-center text-neon-cyan underline underline-offset-2 hover:text-slate-50"
+              >
+                Contact us about this service
+              </Link>
             </motion.div>
           </div>
         </section>

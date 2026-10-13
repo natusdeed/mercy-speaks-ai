@@ -83,7 +83,7 @@ export function ServiceMarketingPage({
     webPageSchema({ name: seoTitle, description: seoDescription, path }),
     serviceSchema({
       name: h1,
-      description: intro,
+      description: seoDescription,
       path,
       serviceType: serviceType ?? h1,
     }),
@@ -194,7 +194,7 @@ export function ServiceMarketingPage({
               >
                 {comparison.title}
               </h2>
-              <div className="overflow-x-auto rounded-2xl border border-slate-800/60 bg-slate-900/30 backdrop-blur-sm">
+              <div className="overflow-x-auto rounded-2xl border border-slate-800/60 bg-slate-900/30 backdrop-blur-sm" tabIndex={0} role="region" aria-label="Comparison table">
                 <table className="w-full min-w-[36rem] text-left text-sm sm:text-base">
                   <thead>
                     <tr className="border-b border-slate-800/60">

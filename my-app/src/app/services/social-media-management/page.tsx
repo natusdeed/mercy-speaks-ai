@@ -145,7 +145,7 @@ export default function SocialMediaManagementPage() {
             <motion.div {...fadeUp} className="text-center">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-electric-purple/15 border border-electric-purple/20 mb-5">
                 <Megaphone className="w-4 h-4 text-electric-purple" />
-                <span className="text-xs sm:text-sm text-electric-purple font-semibold tracking-wide">
+                <span className="text-xs sm:text-sm text-violet-300 font-semibold tracking-wide">
                   Social Media Management
                 </span>
               </div>
@@ -192,7 +192,7 @@ export default function SocialMediaManagementPage() {
                 Before a customer picks up the phone, they check you out online. Here's what an inconsistent social
                 presence costs you:
               </p>
-              <div className="overflow-x-auto rounded-2xl border border-slate-800/60">
+              <div className="overflow-x-auto rounded-2xl border border-slate-800/60" tabIndex={0} role="region" aria-label="Comparison table">
                 <table className="w-full min-w-[640px]">
                   <thead className="bg-slate-900/40">
                     <tr>

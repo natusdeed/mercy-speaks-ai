@@ -231,67 +231,12 @@ export default function ReviewGenerationPage() {
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <motion.article {...fadeUpInView} className="card-premium rounded-2xl">
-                <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">Standalone</p>
-                <h3 className="text-3xl font-bold text-slate-50 mb-1">$197 / month</h3>
-                <p className="text-sm text-slate-400 mb-6">Reputation management only — no long contracts</p>
-                <ul className="space-y-2.5 mb-7">
-                  {[
-                    "Automated SMS review requests post-job",
-                    "Automated email review requests post-job",
-                    "Google Business Profile monitoring",
-                    "Facebook + Yelp monitoring",
-                    "New review alerts",
-                    "Monthly reputation report",
-                    "Response template library",
-                  ].map((item) => (
-                    <li key={item} className="flex items-start gap-2 text-sm text-slate-300">
-                      <CheckCircle2 className="w-4 h-4 text-neon-cyan shrink-0 mt-0.5" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Button variant="outline" size="default" className="w-full" asChild>
-                  <BookingLink kind="generalStrategyCall">Get Started</BookingLink>
-                </Button>
-              </motion.article>
-
-              <motion.article
-                {...fadeUpInView}
-                className="relative rounded-2xl overflow-hidden bg-slate-900/50 shadow-lg shadow-electric-purple/5 p-7"
-              >
-                <div className="absolute top-0 left-0 right-0 py-2 text-center text-xs font-semibold text-slate-950 bg-electric-purple">
-                  Recommended
-                </div>
-                <div className="pt-7">
-                  <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">
-                    Bundled in SMM Growth
-                  </p>
-                  <p className="text-sm text-slate-400 mb-6">
-                    Reputation management + full social media — best value
-                  </p>
-                  <ul className="space-y-2.5 mb-7">
-                    {[
-                      "Everything in Standalone, plus:",
-                      "20 branded social posts / month",
-                      "Facebook + Instagram + Google Business management",
-                      "Stories / Reels (4x/month)",
-                      "Monthly strategy call",
-                      "Priority support",
-                    ].map((item) => (
-                      <li key={item} className="flex items-start gap-2 text-sm text-slate-300">
-                        <CheckCircle2 className="w-4 h-4 text-neon-cyan shrink-0 mt-0.5" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Button variant="primary" size="default" className="w-full" asChild>
-                    <BookingLink kind="generalStrategyCall">Get Started</BookingLink>
-                  </Button>
-                </div>
-              </motion.article>
-            </div>
+            <Link
+              to="/contact"
+              className="inline-flex min-h-11 items-center text-neon-cyan underline underline-offset-2 hover:text-slate-50"
+            >
+              Contact us about this service
+            </Link>
           </div>
         </section>
 

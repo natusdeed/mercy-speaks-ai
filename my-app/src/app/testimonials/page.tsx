@@ -20,7 +20,7 @@ const fadeUp = {
 
 export default function TestimonialsPage() {
   const description =
-    "Read client testimonials and verified feedback from Houston-area businesses using Mercy Speaks Digital websites, AI receptionists, and automation.";
+    "Read client testimonials and verified feedback from Houston-area businesses using Mercy Speaks Digital websites and automation.";
 
   return (
     <PageShell className="min-h-screen bg-slate-950">

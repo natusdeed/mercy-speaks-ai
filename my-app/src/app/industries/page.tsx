@@ -17,7 +17,7 @@ import { getAllIndustryPages } from "@/content/industry-pages";
 
 const SEO_TITLE = "Industries | Mercy Speaks Digital";
 const SEO_DESCRIPTION =
-  "AI receptionist and automation for HVAC, plumbing, dental, law firms, churches, and auto repair—industry pages with missed-call recovery and booking workflows.";
+  "Conversion websites and website care for HVAC, plumbing, dental, law firms, churches, and auto repair, with AI receptionist and missed-call workflows offered as a limited pilot.";
 
 export default function IndustriesIndexPage() {
   const industries = getAllIndustryPages();

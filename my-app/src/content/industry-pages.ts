@@ -84,9 +84,9 @@ export const INDUSTRY_PAGES: Record<IndustryPageSlug, IndustryPageConfig> = {
     indexBlurb:
       "After-hours emergencies, peak-season overflow, and dispatch triage so heat/AC calls become booked jobs.",
     audience: "HVAC companies and mechanical contractors",
-    seoTitle: "AI Receptionist for HVAC | Mercy Speaks Digital",
+    seoTitle: "HVAC Websites & AI Receptionist Pilot | Mercy Speaks Digital",
     seoDescription:
-      "AI receptionist and missed-call text-back for HVAC companies—capture after-hours emergencies and peak-season overflow without adding CSRs.",
+      "Conversion websites and website care for HVAC companies, plus an AI receptionist and missed-call text-back pilot for after-hours and peak-season calls.",
     h1: "AI Receptionist & Missed-Call Text Back for HVAC Companies",
     heroPain:
       "When a compressor dies at 9 p.m. or a heat wave triples your inbound volume, the shop that answers first wins the ticket. Voicemail is how your competitor steals the job while your techs are still in attics.",
@@ -191,9 +191,9 @@ export const INDUSTRY_PAGES: Record<IndustryPageSlug, IndustryPageConfig> = {
     indexBlurb:
       "Burst-pipe emergencies and weekend calls answered instantly—with triage that books the right tech before water damage spreads.",
     audience: "Plumbing and drain companies",
-    seoTitle: "AI Receptionist for Plumbing | Mercy Speaks Digital",
+    seoTitle: "Plumbing Websites & AI Receptionist Pilot | Mercy Speaks Digital",
     seoDescription:
-      "AI receptionist for plumbing companies—answer burst-pipe and weekend emergency calls, triage shutoffs, and book jobs before callers dial the next plumber.",
+      "Conversion websites and website care for plumbing companies, plus an AI receptionist pilot for burst-pipe and weekend emergency calls.",
     h1: "AI Receptionist & Missed-Call Text Back for Plumbing Companies",
     heroPain:
       "Water does not wait for Monday. A burst supply line at Saturday brunch or a sewer backup on a holiday weekend will go to whichever plumber answers first—and that is rarely the shop still finishing a slab leak across town.",
@@ -298,9 +298,9 @@ export const INDUSTRY_PAGES: Record<IndustryPageSlug, IndustryPageConfig> = {
     indexBlurb:
       "Front-desk overflow, recall reminders, and no-show reduction—with HIPAA-aware configuration scoped during onboarding.",
     audience: "Dental offices and group practices",
-    seoTitle: "AI Receptionist for Dental Offices | Mercy Speaks Digital",
+    seoTitle: "Dental Websites & AI Receptionist Pilot | Mercy Speaks Digital",
     seoDescription:
-      "AI receptionist for dental offices—cover front-desk overflow, automate recall reminders, and reduce no-shows with HIPAA-aware setup scoped at onboarding.",
+      "Conversion websites and website care for dental offices, plus an AI receptionist pilot for front-desk overflow and recall reminders, with HIPAA-aware setup scoped at onboarding.",
     h1: "AI Receptionist for Dental Offices",
     heroPain:
       "Your hygienists are fully booked and the front desk is juggling check-in, insurance questions, and a ringing multi-line. New patients who hear endless hold music book the practice that answered on the first ring—often across the street.",
@@ -413,9 +413,9 @@ export const INDUSTRY_PAGES: Record<IndustryPageSlug, IndustryPageConfig> = {
     indexBlurb:
       "After-hours intake, consultation booking, and conflict-check handoff to humans—so prospects never hit a dead line.",
     audience: "Law firms and legal practices",
-    seoTitle: "AI Receptionist for Law Firms | Mercy Speaks Digital",
+    seoTitle: "Law Firm Websites & AI Receptionist Pilot | Mercy Speaks Digital",
     seoDescription:
-      "AI receptionist for law firms—capture after-hours intake, book consultations, and hand conflict checks to humans so potential clients never hit voicemail.",
+      "Conversion websites and website care for law firms, plus an AI receptionist pilot for after-hours intake and consultation booking, with conflict checks handed to humans.",
     h1: "AI Receptionist for Law Firms",
     heroPain:
       "Someone searching for counsel at 10 p.m. after an arrest, an injury, or a business dispute will hire the firm that responds. An unanswered line is not neutral—it is a referral to whoever picks up next.",
@@ -520,9 +520,9 @@ export const INDUSTRY_PAGES: Record<IndustryPageSlug, IndustryPageConfig> = {
     indexBlurb:
       "Service times, event info, prayer-line routing—and church websites like our RCCG Shiloh Mega Parish build.",
     audience: "Churches and ministries",
-    seoTitle: "AI Receptionist for Churches | Mercy Speaks Digital",
+    seoTitle: "Church Websites & AI Receptionist Pilot | Mercy Speaks Digital",
     seoDescription:
-      "AI receptionist for churches—answer service times and event questions, route prayer-line calls, plus church websites like RCCG Shiloh Mega Parish.",
+      "Church websites like RCCG Shiloh Mega Parish and website care, plus an AI receptionist pilot for service-time and event questions and prayer-line routing.",
     h1: "AI Receptionist for Churches & Ministries",
     heroPain:
       "Visitors calling about service times, midweek events, or pastoral care should never land in a full mailbox. A warm, immediate answer is hospitality—and a missed call is a family that visits somewhere else on Sunday.",
@@ -633,9 +633,9 @@ export const INDUSTRY_PAGES: Record<IndustryPageSlug, IndustryPageConfig> = {
     indexBlurb:
       "Appointment booking, status-call deflection, and reminder automation so the service desk stays on the bays—not the phone.",
     audience: "Auto repair shops and service centers",
-    seoTitle: "AI Receptionist for Auto Repair | Mercy Speaks Digital",
+    seoTitle: "Auto Repair Websites & AI Receptionist Pilot | Mercy Speaks Digital",
     seoDescription:
-      "AI receptionist for auto repair shops—book appointments, deflect status-check calls, and automate reminders so advisors can stay on the bays.",
+      "Conversion websites and website care for auto repair shops, plus an AI receptionist pilot for appointments, status-check calls, and reminders.",
     h1: "AI Receptionist for Auto Repair Shops",
     heroPain:
       "Your advisors are writing estimates while the line lights up with “is my car done?” calls. Every status check that steals a bay conversation is a delayed RO—and every missed booking ring is a vehicle that goes to the shop down the road.",

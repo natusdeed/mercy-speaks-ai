@@ -130,7 +130,7 @@ export function contactPageSchema() {
     "@context": CONTEXT,
     "@type": "ContactPage",
     name: `Contact ${BUSINESS.name}`,
-    description: `Contact ${BUSINESS.name} for website, AI receptionist, and automation inquiries.`,
+    description: `Contact ${BUSINESS.name} for a conversion website quote or website care. AI communication tools are offered as a limited pilot.`,
     url: absoluteUrl("/contact"),
     mainEntity: { "@id": ORGANIZATION_ID },
   };
@@ -307,7 +307,7 @@ export function offerCatalogSchema(input: {
     "@context": CONTEXT,
     "@type": "OfferCatalog",
     name: `${BUSINESS.name} pricing`,
-    description: `AI receptionist plans and website packages from ${BUSINESS.name}.`,
+    description: `Website packages from ${BUSINESS.name}.`,
     url,
     itemListElement: [...aiOffers, ...websiteOffers].map((offer, i) => ({
       "@type": "ListItem",

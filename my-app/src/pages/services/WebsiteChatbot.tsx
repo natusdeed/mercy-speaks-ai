@@ -6,8 +6,8 @@ export default function ServiceWebsiteChatbot() {
   return (
     <ServiceMarketingPage
       path={NAV_PATHS.websiteChatbot}
-      seoTitle="Website Chat & Lead Capture"
-      seoDescription="Website chat that answers questions, qualifies visitors, and books appointments—capture leads the moment they are ready to buy or inquire with you."
+      seoTitle="Website Chat & Lead Capture (Pilot)"
+      seoDescription="Website chat that answers questions, qualifies visitors, and books appointments. Offered as a limited pilot."
       icon={MessageSquare}
       h1="Website chat that books"
       intro="Give every visitor a fast path to answers and next steps—without making them hunt for a form or phone number."

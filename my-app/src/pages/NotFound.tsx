@@ -23,7 +23,7 @@ export default function NotFound() {
       <SeoHead
         path="/404"
         title="Page Not Found"
-        description="That page does not exist. Browse Mercy Speaks Digital services, pricing, or book a demo for AI receptionists, websites, and automation."
+        description="That page does not exist. Browse Mercy Speaks Digital conversion websites, website care, and pricing, or get a website quote."
         noindex
         robots="noindex"
       />

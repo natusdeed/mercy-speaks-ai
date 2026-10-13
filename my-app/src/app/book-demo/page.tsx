@@ -18,17 +18,17 @@ import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
 
 export default function BookDemoPage() {
   const description =
-    "Book a strategy call or demo for websites, AI receptionists, and automation. See how Mercy Speaks Digital can capture leads and fill your calendar.";
+    "Book a call about a conversion website or a website care plan. AI communication tools are offered as a limited pilot.";
 
   return (
     <PageShell className="min-h-screen bg-slate-950">
-      <SeoHead path="/book-demo" title="Book a Demo" description={description} />
+      <SeoHead path="/book-demo" title="Book a Call" description={description} />
       <JsonLd
         data={[
-          webPageSchema({ name: "Book a Demo", description, path: "/book-demo" }),
+          webPageSchema({ name: "Book a Call", description, path: "/book-demo" }),
           breadcrumbSchema([
             { name: "Home", path: "/" },
-            { name: "Book a demo", path: "/book-demo" },
+            { name: "Book a call", path: "/book-demo" },
           ]),
         ]}
       />
@@ -43,15 +43,15 @@ export default function BookDemoPage() {
             >
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-electric-purple/20 mb-4">
                 <Calendar className="w-4 h-4 text-electric-purple" />
-                <span className="text-sm text-violet-300 font-medium">Book a Demo</span>
+                <span className="text-sm text-violet-300 font-medium">Book a Call</span>
               </div>
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-50 mb-3 md:mb-4 title-3d">
                 Pick a time that{" "}
                 <span className="text-neon-cyan">works for you</span>
               </h1>
               <p className="text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto px-1">
-                Schedule a personalized demo and see how websites, AI receptionists, and automation
-                capture leads and fill your calendar—without extra headcount.
+                Schedule a call about a conversion website or a website care plan. AI communication
+                tools are available as a limited pilot.
               </p>
             </motion.div>
 
@@ -104,7 +104,7 @@ export default function BookDemoPage() {
                     href={CAL_COM_EMBED.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-neon-cyan underline underline-offset-2"
+                    className="inline-flex min-h-11 items-center gap-1 text-neon-cyan underline underline-offset-2"
                   >
                     Open the booking page
                     <ExternalLink className="w-3.5 h-3.5" aria-hidden />

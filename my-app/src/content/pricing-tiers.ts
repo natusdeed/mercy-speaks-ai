@@ -70,65 +70,7 @@ export const TERMS_PENDING_UI =
  * P0 hotfix: NOT PUBLISHED. AI receptionist services are in pilot testing; these tiers must not be
  * rendered or emitted in schema until pricing is verified and approved.
  */
-export const AI_RECEPTIONIST_TIERS: AiReceptionistTier[] = [
-  {
-    name: "Mercy Starter",
-    price: 197,
-    priceCurrency: "USD",
-    setup: "$997 one-time setup",
-    callVolume: "Up to ~500 calls/month",
-    bestFor: "Churches, solo contractors, cleaning companies",
-    previewDescription: "AI receptionist, lead capture, GBP audit, missed-call text-back.",
-    included: [
-      "AI receptionist",
-      "Appointment scheduling",
-      "Lead capture & qualification",
-      "Missed-call text-back automation",
-      "Google Business Profile audit",
-      "Email notifications",
-      "Guided onboarding",
-    ],
-    popular: false,
-  },
-  {
-    name: "Mercy Growth",
-    price: 397,
-    priceCurrency: "USD",
-    setup: "$2,500 one-time setup",
-    callVolume: "Up to ~1,200 calls/month",
-    bestFor: "HVAC, Plumbing, Roofing, Electrical",
-    previewDescription: "Full website + AI receptionist + SMS automation + booking system.",
-    included: [
-      "Everything in Mercy Starter",
-      "Full website redesign (up to 10 pages)",
-      "SMS & email follow-up automation",
-      "Booking system integration",
-      "Advanced CRM sync",
-      "Monthly performance report",
-      "Priority support",
-    ],
-    popular: true,
-  },
-  {
-    name: "Mercy Pro",
-    price: 697,
-    priceCurrency: "USD",
-    setup: "$4,500 one-time setup",
-    callVolume: "~3,000+ calls/month",
-    bestFor: "Dental offices, multi-location contractors, med spas",
-    previewDescription: "Custom AI call flows, CRM, review generation, quarterly strategy.",
-    included: [
-      "Everything in Mercy Growth",
-      "Custom AI call flows & Mercy training",
-      "CRM integration",
-      "Review generation system",
-      "SMS/email nurture sequences",
-      "Quarterly strategy call",
-      "Dedicated account manager",
-    ],
-    popular: false,
-  },
-];
+export const AI_RECEPTIONIST_TIERS: AiReceptionistTier[] = [];
 
 export const WEBSITE_TIERS: WebsiteTier[] = [
   {

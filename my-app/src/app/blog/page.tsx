@@ -19,7 +19,7 @@ import {
 
 const SEO_TITLE = "Blog & Resources";
 const SEO_DESCRIPTION =
-  "Practical guides on AI receptionists, missed-call recovery, websites, and automation that help small businesses capture more leads.";
+  "Practical guides on websites, missed-call recovery, and automation that help small businesses capture more leads, plus AI receptionists, which we offer as a limited pilot.";
 
 export default function BlogIndexPage() {
   const posts = getPublishedBlogPosts();

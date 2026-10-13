@@ -257,7 +257,7 @@ export function Footer() {
             <div className="flex items-center">
               <Link
                 to="/cookie-policy"
-                className="text-slate-400 hover:text-electric-purple transition-colors text-base md:text-lg"
+                className="inline-flex min-h-11 items-center text-slate-400 hover:text-electric-purple transition-colors text-base md:text-lg"
               >
                 Cookie Policy
               </Link>

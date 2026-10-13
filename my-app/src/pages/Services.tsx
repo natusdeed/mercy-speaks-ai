@@ -94,7 +94,7 @@ const flagshipOutcomes = [
 
 export default function ServicesPage() {
   const hubDescription =
-    "Explore AI phone receptionists, conversion websites, chatbots, and automation—one hub for Mercy Speaks Digital services that capture leads and book work.";
+    "Explore conversion websites, website care, and automation from Mercy Speaks Digital. AI phone receptionists and chatbots are offered as a limited pilot.";
 
   const directoryItems = serviceLinks.map(({ to, label }) => ({ name: label, path: to }));
 
@@ -107,7 +107,7 @@ export default function ServicesPage() {
     serviceSchema({
       name: "AI receptionist & lead capture systems",
       description:
-        "AI receptionist with qualification, booking, and reporting—paired with websites and automation. AI receptionist services are currently in pilot testing.",
+        "Conversion websites and website care, with an AI receptionist for qualification, booking, and reporting currently in pilot testing.",
       path: NAV_PATHS.services,
       serviceType: "AI receptionist",
     }),
