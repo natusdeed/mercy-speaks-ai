@@ -150,7 +150,7 @@ export const LOGO_PATH = "/favicon-512x512.png";
  */
 export const BUSINESS = {
   name: "Mercy Speaks Digital",
-  legalName: "Mercy Speaks LLC",
+  legalName: "Mercy Speaks Digital",
   email: "don@mercyspeaksdigital.com",
   phoneDisplay: "(832) 981-3123",
   /** E.164 for tel: and schema */

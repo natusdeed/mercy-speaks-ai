@@ -99,8 +99,9 @@ export default function Home() {
     <PageShell className="min-h-screen w-full bg-slate-950">
       <SeoHead
         path="/"
-        title="AI Receptionists & Websites | Mercy Speaks Digital"
-        description="Premium websites, AI phone receptionists (in pilot testing), and automation that capture leads and book appointments. Houston-based, serving businesses nationwide."
+        title="Conversion Websites for Growing Businesses | Mercy Speaks Digital"
+        description="Mercy Speaks Digital builds fast, modern conversion websites that make it easy for visitors to call or request a quote, plus optional website care plans."
+        ogImageAlt="Mercy Speaks Digital — conversion websites for growing businesses."
       />
       <JsonLd data={[websiteSchema(), faqPageSchema(HOME_V3_FAQS.map((f) => ({ ...f })))]} />
       <main className="w-full">

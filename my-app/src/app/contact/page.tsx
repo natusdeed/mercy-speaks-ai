@@ -119,7 +119,7 @@ export default function ContactPage() {
                     href={telHref()}
                     className="text-base sm:text-lg md:text-xl text-slate-300 hover:text-neon-cyan transition-colors"
                   >
-                    (703) 332-5956
+                    (832) 981-3123
                   </a>
                 </div>
                 <div className="card">
@@ -181,7 +181,7 @@ export default function ContactPage() {
                           </a>{" "}
                           or call{" "}
                           <a href={telHref()} className="underline font-medium">
-                            (703) 332-5956
+                            (832) 981-3123
                           </a>
                           .</>)}
                         </p>

@@ -10,20 +10,6 @@ const CONTEXT = "https://schema.org";
 
 export const ORGANIZATION_ID = `${absoluteUrl("/")}#organization`;
 
-function postalAddress() {
-  const a: Record<string, string> = {
-    "@type": "PostalAddress",
-    addressLocality: BUSINESS.address.addressLocality,
-    addressRegion: BUSINESS.address.addressRegion,
-    postalCode: BUSINESS.address.postalCode,
-    addressCountry: BUSINESS.address.addressCountry,
-  };
-  if (BUSINESS.address.streetAddress) {
-    a.streetAddress = BUSINESS.address.streetAddress;
-  }
-  return a;
-}
-
 function areaServedNodes() {
   return BUSINESS.areaServed.map((name) =>
     name === "United States"
@@ -51,14 +37,13 @@ export function organizationSchema() {
     "@type": ["Organization", "ProfessionalService"],
     "@id": ORGANIZATION_ID,
     name: BUSINESS.name,
-    legalName: BUSINESS.legalName,
+    legalName: BUSINESS.name,
     description: BRAND_TAGLINE,
     url: absoluteUrl("/"),
     logo: logoUrl,
     image: logoUrl,
     email: BUSINESS.email,
     telephone: BUSINESS.telephone,
-    address: postalAddress(),
     areaServed: areaServedNodes(),
     openingHours: BUSINESS.openingHours,
     openingHoursSpecification: {
@@ -153,7 +138,7 @@ export function contactPageSchema() {
 
 /**
  * Local geo landing pages — LocalBusiness + ProfessionalService with city-level areaServed.
- * Address / NAP still come from BUSINESS (Richmond, TX 77407).
+ * Name / phone / email come from BUSINESS. No PostalAddress is published (mailing address is footer-only).
  */
 export function localBusinessSchema(input: {
   path: string;
@@ -166,14 +151,13 @@ export function localBusinessSchema(input: {
     "@type": ["LocalBusiness", "ProfessionalService"],
     "@id": `${absoluteUrl(input.path)}#localbusiness`,
     name: BUSINESS.name,
-    legalName: BUSINESS.legalName,
+    legalName: BUSINESS.name,
     description: input.description,
     url: absoluteUrl(input.path),
     logo: logoUrl,
     image: logoUrl,
     email: BUSINESS.email,
     telephone: BUSINESS.telephone,
-    address: postalAddress(),
     areaServed: input.areaServedCities.map((name) => ({
       "@type": "City",
       name,
