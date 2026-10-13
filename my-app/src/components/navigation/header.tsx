@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -22,15 +22,30 @@ export function Header() {
   const pathname = useLocation().pathname;
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+
   useEffect(() => {
     setMobileOpen(false);
   }, [pathname]);
+
+  // Escape closes the mobile menu and returns focus to the menu button.
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMobileOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [mobileOpen]);
 
   return (
     <header className="fixed left-0 right-0 top-0 z-50 border-b border-slate-800 bg-slate-950/95 backdrop-blur">
       <nav aria-label="Main" className="mx-auto w-full max-w-5xl px-5 sm:px-8">
         <div className="flex h-16 items-center justify-between gap-4">
-          <Link to="/" className={cn("inline-flex min-h-11 shrink-0 items-center rounded text-base font-semibold tracking-tight text-white sm:text-lg", focus)}>
+          <Link to="/" className={cn("inline-flex min-h-11 min-w-0 items-center rounded text-base font-semibold tracking-tight text-white sm:text-lg", focus)}>
             Mercy Speaks Digital
           </Link>
 
@@ -67,8 +82,9 @@ export function Header() {
           </div>
 
           <button
+            ref={menuButtonRef}
             type="button"
-            className={cn("inline-flex h-11 w-11 items-center justify-center rounded-lg text-slate-200 md:hidden", focus)}
+            className={cn("inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-slate-200 md:hidden", focus)}
             aria-expanded={mobileOpen}
             aria-controls="mobile-menu"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}

@@ -30,7 +30,7 @@ Neither option magically “sounds like your best employee on their best day” 
 
 | Factor | AI receptionist | Human answering service |
 |--------|-----------------|-------------------------|
-| **Cost shape** | Software/retainer + setup; varies by vendor and scope | Monthly minimums + per-minute/call; hybrid AI+human often ~$95–$300/mo and up |
+| **Cost shape** | Software/retainer + setup; varies by vendor and scope | Monthly minimums + per-minute/call |
 | **Availability** | Always on—nights, weekends, holidays | Shift-based; after-hours tiers cost more |
 | **Consistency** | Same script, same questions, same CRM fields every time | Varies by agent, fatigue, and call volume |
 | **Complex / emotional calls** | Weak alone; needs clear handoff rules | Stronger when trained; still uneven across agents |
@@ -42,7 +42,7 @@ Neither option magically “sounds like your best employee on their best day” 
 
 Answering services sell **labor minutes**. Busy seasons, storms, and marketing campaigns push your bill up—or push callers into longer holds. AI sell **system capacity**: a published call band, integrations, and monitoring.
 
-Done-for-you AI pricing is usually a monthly retainer plus setup—a different cost curve than “$1.25 per minute after 100 minutes,” and easier to compare against the cost of missing jobs. AI receptionist services are currently in pilot testing.
+Done-for-you AI pricing is usually a monthly retainer plus setup, which is easier to compare against the cost of missing jobs. AI receptionist services are currently in pilot testing.
 
 If your current answering invoice already sits in the mid-hundreds monthly *and* you still lose after-hours bookings because agents only take messages, the ROI question is not “AI vs. free”—it is “AI vs. message-taking that does not book.”
 
@@ -135,7 +135,7 @@ When you want to hear the AI path live, use the demo on our [AI receptionist pag
 
 ### Is an AI receptionist better than a human answering service?
 
-It is better for round-the-clock availability, consistent intake, and automation into calendars and CRM. Humans are better for empathy and complex or regulated conversations. Many businesses should use AI for volume and humans for escalations.
+It is better for consistent intake and automation into calendars and CRM. Humans are better for empathy and complex or regulated conversations. Many businesses should use AI for volume and humans for escalations.
 
 ### Can an AI receptionist transfer to a real person?
 

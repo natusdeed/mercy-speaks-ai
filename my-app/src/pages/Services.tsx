@@ -222,7 +222,7 @@ export default function ServicesPage() {
                 AI receptionist (pilot) + missed revenue visibility
               </h2>
               <p className="text-slate-400 mb-6 text-base sm:text-lg">
-                Answer and qualify calls around the clock, book onto your calendar, and see missed-call patterns in one
+                Answer and qualify calls, book onto your calendar, and see missed-call patterns in one
                 place—paired with follow-up workflows when you need them.
               </p>
               <ul className="space-y-3 text-sm sm:text-base text-slate-300 mb-8">

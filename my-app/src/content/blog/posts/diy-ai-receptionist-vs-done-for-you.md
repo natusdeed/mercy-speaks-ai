@@ -12,7 +12,7 @@ ctaDescription: "Book a no-pressure demo. If DIY is the better call for you, we 
 useLiveDemoCta: true
 ---
 
-**DIY AI receptionist tools** are the right call when you have time, enjoy configuring software, and can own testing and fixes yourself—often at roughly **$50–$100/month** in software fees. **Done-for-you setup** (a monthly retainer plus setup) is the better fit when you need call flows, calendar/CRM wiring, missed-call text-back, and monitoring handled for you. The honest deciding factor is total cost of ownership: subscription price plus *your* hours and the cost of downtime when something breaks.
+**DIY AI receptionist tools** are the right call when you have time, enjoy configuring software, and can own testing and fixes yourself. **Done-for-you setup** (a monthly retainer plus setup) is the better fit when you need call flows, calendar/CRM wiring, missed-call text-back, and monitoring handled for you. The honest deciding factor is total cost of ownership: subscription price plus *your* hours and the cost of downtime when something breaks.
 
 ## Two paths that get marketed as the same product
 
@@ -43,7 +43,7 @@ Missed-call [text-back](/services/missed-call-text-back), scheduling, and lead c
 
 | Dimension | DIY tools (e.g. Goodcall, My AI Front Desk) | Done-for-you (Mercy Speaks) |
 |-----------|---------------------------------------------|-----------------------------|
-| **Cash cost** | Often ~$50–$100/mo software (varies by vendor/tier) | Monthly retainer + one-time setup (varies by scope) |
+| **Cash cost** | Software subscription (varies by vendor/tier) | Monthly retainer + one-time setup (varies by scope) |
 | **Time to useful** | Fast login; quality depends on your configuration hours | Longer calendar time, less of *your* nights spent prompting |
 | **Prompt / flow skill** | You (or a staffer) must learn good conversation design | Included in setup |
 | **Integrations** | You wire calendars, CRMs, webhooks; debug yourself | Scoped and tested during onboarding |
@@ -96,10 +96,9 @@ Compare twelve months honestly.
 
 **DIY illustrative TCO**
 
-- Software: ~$50–$100 × 12 = **$600–$1,200**
-- Your time: even 3 hours/month at a conservative $75/hour opportunity cost = **$2,700**
+- Software: the monthly subscription × 12
+- Your time: setup, testing, and fixes, valued at your hourly opportunity cost
 - One painful outage week (lost jobs): highly variable—often larger than the software bill
-- **Directional total:** often **$3,500+** in year one before counting mistakes
 
 **Done-for-you TCO**
 

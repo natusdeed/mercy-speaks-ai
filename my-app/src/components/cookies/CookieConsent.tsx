@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const CONSENT_STORAGE_KEY = "msd_cookie_consent";
 const CONSENT_VERSION = "1.0";
@@ -87,8 +87,8 @@ function ToggleRow({
       }}
     >
       <div>
-        <div style={{ color: "#e2e8f0", fontWeight: 700, fontSize: "14px", marginBottom: "4px" }}>{label}</div>
-        <div style={{ color: "#94a3b8", fontSize: "13px", lineHeight: 1.5 }}>{description}</div>
+        <div style={{ color: "#e2e8f0", fontWeight: 700, fontSize: "0.875rem", marginBottom: "4px" }}>{label}</div>
+        <div style={{ color: "#94a3b8", fontSize: "0.8125rem", lineHeight: 1.5 }}>{description}</div>
       </div>
 
       <button
@@ -137,6 +137,48 @@ export default function CookieConsent() {
     functional: false,
   });
 
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const returnFocusRef = useRef<HTMLElement | null>(null);
+
+  // Keyboard support for the preferences dialog: move focus in, keep Tab inside, Escape closes.
+  useEffect(() => {
+    if (!showModal) return;
+    const dialog = dialogRef.current;
+    const focusables = () =>
+      Array.from(
+        dialog?.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        ) ?? []
+      ).filter((el) => !el.hasAttribute("disabled"));
+    focusables()[0]?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setShowModal(false);
+        return;
+      }
+      if (e.key !== "Tab") return;
+      const els = focusables();
+      if (els.length === 0) return;
+      const first = els[0];
+      const last = els[els.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      const target = returnFocusRef.current;
+      if (target && document.contains(target)) target.focus();
+      else document.getElementById("main-content")?.focus();
+    };
+  }, [showModal]);
+
   useEffect(() => {
     const existing = getCookieConsent();
     if (!existing) {
@@ -164,8 +206,14 @@ export default function CookieConsent() {
     window.localStorage.setItem(CONSENT_STORAGE_KEY, JSON.stringify(consent));
     dispatchConsentEvents(consent);
     setPreferences(values);
+    const focusWasInBanner = !!(document.activeElement as HTMLElement | null)?.closest?.(
+      'aside[aria-label="Cookie preferences"]'
+    );
     setShowModal(false);
     setShowBanner(false);
+    if (focusWasInBanner) document.getElementById("main-content")?.focus();
+    // Banner is gone after saving, so the dialog's return target no longer exists.
+    returnFocusRef.current = null;
   };
 
   const handleAcceptAll = () => {
@@ -193,6 +241,7 @@ export default function CookieConsent() {
         functional: existing.functional,
       });
     }
+    returnFocusRef.current = document.activeElement as HTMLElement | null;
     setShowModal(true);
   };
 
@@ -220,8 +269,8 @@ export default function CookieConsent() {
             flexWrap: "wrap",
           }}
         >
-          <div style={{ color: "#94a3b8", fontSize: "13px", lineHeight: 1.6, maxWidth: "600px" }}>
-            <div style={{ color: "#e2e8f0", fontWeight: 700, fontSize: "14px", marginBottom: "4px" }}>
+          <div style={{ color: "#94a3b8", fontSize: "0.8125rem", lineHeight: 1.6, maxWidth: "600px" }}>
+            <div style={{ color: "#e2e8f0", fontWeight: 700, fontSize: "0.875rem", marginBottom: "4px" }}>
               Cookie Preferences
             </div>
             We use cookies to keep this site secure, understand traffic, improve performance, and support marketing.
@@ -240,8 +289,10 @@ export default function CookieConsent() {
                 border: "none",
                 borderRadius: "6px",
                 cursor: "pointer",
-                fontSize: "14px",
+                fontSize: "0.875rem",
                 minHeight: "44px",
+                maxWidth: "100%",
+                whiteSpace: "normal",
               }}
             >
               ACCEPT ALL
@@ -256,8 +307,10 @@ export default function CookieConsent() {
                 padding: "10px 20px",
                 borderRadius: "6px",
                 cursor: "pointer",
-                fontSize: "14px",
+                fontSize: "0.875rem",
                 minHeight: "44px",
+                maxWidth: "100%",
+                whiteSpace: "normal",
               }}
             >
               MANAGE PREFERENCES
@@ -272,8 +325,10 @@ export default function CookieConsent() {
                 padding: "10px 20px",
                 borderRadius: "6px",
                 cursor: "pointer",
-                fontSize: "14px",
+                fontSize: "0.875rem",
                 minHeight: "44px",
+                maxWidth: "100%",
+                whiteSpace: "normal",
               }}
             >
               REJECT NON-ESSENTIAL
@@ -284,6 +339,7 @@ export default function CookieConsent() {
 
       {showModal ? (
         <div
+          ref={dialogRef}
           role="dialog"
           aria-modal="true"
           aria-label="Cookie preferences"
@@ -310,10 +366,10 @@ export default function CookieConsent() {
             }}
             onClick={(event) => event.stopPropagation()}
           >
-            <h2 style={{ color: "#e2e8f0", fontWeight: 700, fontSize: "22px", margin: "0 0 8px" }}>
+            <h2 style={{ color: "#e2e8f0", fontWeight: 700, fontSize: "1.375rem", margin: "0 0 8px" }}>
               Manage Cookie Preferences
             </h2>
-            <p style={{ color: "#94a3b8", fontSize: "13px", lineHeight: 1.6, margin: "0 0 14px" }}>
+            <p style={{ color: "#94a3b8", fontSize: "0.8125rem", lineHeight: 1.6, margin: "0 0 14px" }}>
               Choose which optional cookies you want to allow. Necessary cookies remain enabled to keep the site
               secure and functional.
             </p>
@@ -372,7 +428,7 @@ export default function CookieConsent() {
                   padding: "10px 20px",
                   borderRadius: "6px",
                   cursor: "pointer",
-                  fontSize: "14px",
+                  fontSize: "0.875rem",
                 minHeight: "44px",
                 }}
               >
@@ -389,7 +445,7 @@ export default function CookieConsent() {
                   border: "none",
                   borderRadius: "6px",
                   cursor: "pointer",
-                  fontSize: "14px",
+                  fontSize: "0.875rem",
                 minHeight: "44px",
                 }}
               >

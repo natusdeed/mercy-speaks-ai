@@ -66,7 +66,7 @@ export default function ContactPage() {
       />
       <main className="w-full">
         <section className={`${section} pt-12 md:pt-20`} aria-labelledby="page-heading">
-          <div className={`${inner} grid gap-14 lg:grid-cols-[3fr_2fr] lg:gap-20`}>
+          <div className={`${inner} grid grid-cols-[minmax(0,1fr)] gap-14 lg:grid-cols-[3fr_2fr] lg:gap-20`}>
             <div>
               <h1 id="page-heading" className={h1}>
                 Get a Website Quote
@@ -77,7 +77,7 @@ export default function ContactPage() {
               <div className="mt-10 rounded-xl border border-slate-800 p-5 sm:p-8">
                 {isSubmitted ? (
                   <div className="py-8 text-center">
-                    <p role="status" className="mx-auto mb-6 max-w-xl text-lg font-medium leading-relaxed text-white sm:text-xl">
+                    <p role="status" tabIndex={-1} ref={(el) => el?.focus()} className="mx-auto mb-6 max-w-xl text-lg font-medium leading-relaxed text-white outline-none sm:text-xl">
                       {"Thanks — your request has been received. We'll review the details and follow up using the contact information you provided."}
                     </p>
                     <Button variant="outline" size="lg" onClick={() => setIsSubmitted(false)}>

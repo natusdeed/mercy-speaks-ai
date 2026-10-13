@@ -554,6 +554,11 @@ section {
   * {
     @apply outline-ring/50;
   }
+  /* Visible keyboard focus everywhere (violet-300 on the dark background); components with their own ring utilities still override. */
+  :focus-visible {
+    outline: 2px solid #c4b5fd;
+    outline-offset: 2px;
+  }
   body {
     @apply bg-slate-950 text-foreground;
   }

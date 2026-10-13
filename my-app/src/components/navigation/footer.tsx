@@ -183,12 +183,12 @@ export function Footer() {
                         className="text-slate-300 hover:text-electric-purple transition-colors text-base md:text-lg flex min-h-11 items-center gap-3 rounded-lg py-1.5 -mx-2 px-2 group"
                       >
                         <Icon className="w-4 h-4 text-slate-500 group-hover:text-electric-purple transition-colors" />
-                        <span>{contact.value}</span>
+                        <span className="[overflow-wrap:anywhere]">{contact.value}</span>
                       </a>
                     ) : (
                       <div className="text-slate-300 text-base md:text-lg flex items-center gap-3">
                         <Icon className="w-4 h-4 text-slate-500" />
-                        <span>{contact.value}</span>
+                        <span className="[overflow-wrap:anywhere]">{contact.value}</span>
                       </div>
                     )}
                   </li>
@@ -214,7 +214,7 @@ export function Footer() {
               {socialLinks.length === 0 ? (
                 <p className="text-sm text-slate-500">Social profiles coming soon.</p>
               ) : (
-                socialLinks.map((social, index) => {
+                socialLinks.map((social) => {
                   const Icon = social.icon;
                   return (
                     <motion.a
@@ -222,10 +222,6 @@ export function Footer() {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      initial={{ opacity: 0, scale: 0 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: index * 0.1 }}
                       whileHover={{ scale: 1.15 }}
                       whileTap={{ scale: 0.95 }}
                       className={`w-12 h-12 rounded-lg border-2 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center transition-all duration-300 hover:bg-slate-800/70 ${social.color}`}

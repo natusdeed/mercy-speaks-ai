@@ -14,7 +14,7 @@ const LINKS = [
 ] as const;
 
 const linkCls =
-  "inline-flex min-h-11 min-w-11 items-center text-slate-300 underline-offset-4 hover:text-slate-50 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-300 rounded";
+  "inline-flex min-h-11 min-w-11 items-center [overflow-wrap:anywhere] text-slate-300 underline-offset-4 hover:text-slate-50 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-300 rounded";
 
 export function HomeFooterV3() {
   return (

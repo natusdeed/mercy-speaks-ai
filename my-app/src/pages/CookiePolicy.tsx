@@ -115,7 +115,7 @@ export default function CookiePolicy() {
                     Mercy Speaks Digital LLC operates{" "}
                     <a
                       href="https://mercyspeaksdigital.com"
-                      className="text-neon-cyan hover:underline"
+                      className="text-neon-cyan underline underline-offset-2"
                       target="_blank"
                       rel="noreferrer"
                     >

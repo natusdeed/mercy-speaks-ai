@@ -150,7 +150,7 @@ export default function AiEmployeeSystemPage() {
               {...fadeUp}
               className="text-slate-400 text-base md:text-lg leading-relaxed max-w-3xl mx-auto mb-10"
             >
-              An AI receptionist answers and qualifies around the clock. Specialized agents handle lead intake,
+              An AI receptionist answers and qualifies calls. Specialized agents handle lead intake,
               scheduling intent, follow-up drafts, and human handoffs—then feed your dashboard and marketing with the
               same conversation truth your crew would trust on a job site.
             </motion.p>

@@ -5,6 +5,7 @@ import { Footer } from '@/components/navigation/footer';
 import { HomeFooterV3 } from '@/components/home-v3/home-footer';
 import { ClientErrorHandler } from '@/components/debug/ClientErrorHandler';
 import CookieConsent from './components/cookies/CookieConsent';
+import { MotionConfig } from 'framer-motion';
 import { JsonLd } from '@/components/seo/json-ld';
 import { organizationSchema } from '@/lib/schema';
 
@@ -109,8 +110,7 @@ function PublicChrome() {
 
 function App() {
   return (
-    <>
-      <CookieConsent />
+    <MotionConfig reducedMotion="user">
       <ClientErrorHandler />
       <Routes>
         <Route
@@ -179,7 +179,9 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
-    </>
+      {/* Rendered after page content so the skip link is the first Tab stop; position is fixed, so it looks the same. */}
+      <CookieConsent />
+    </MotionConfig>
   );
 }
 
