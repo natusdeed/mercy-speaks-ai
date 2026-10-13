@@ -297,7 +297,7 @@ export default function BookDemoPage() {
                                 ? "border-red-500"
                                 : "border-slate-700 focus:border-neon-cyan"
                             } text-slate-50 focus:outline-none focus:ring-2 focus:ring-neon-cyan/50 transition-colors`}
-                            placeholder="(703) 332-5956"
+                            placeholder="(832) 981-3123"
                           />
                           {errors.phone && (
                             <p className="mt-1 text-sm text-red-400">{errors.phone}</p>

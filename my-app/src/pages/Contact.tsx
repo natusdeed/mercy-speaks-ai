@@ -130,7 +130,7 @@ export default function ContactPage() {
                     href={telHref()}
                     className="text-xl md:text-2xl text-slate-300 hover:text-neon-cyan transition-colors"
                   >
-                    (703) 332-5956
+                    (832) 981-3123
                   </a>
                 </div>
 
@@ -252,7 +252,7 @@ export default function ContactPage() {
                               value={formData.phone}
                               onChange={handleChange}
                               className="w-full h-12 md:h-14 px-5 py-4 rounded-lg bg-slate-900/50 border border-slate-700 focus:border-neon-cyan text-lg md:text-xl text-slate-50 focus:outline-none focus:ring-2 focus:ring-neon-cyan/50 transition-colors"
-                              placeholder="(703) 332-5956"
+                              placeholder="(832) 981-3123"
                             />
                           </div>
                           <div>
