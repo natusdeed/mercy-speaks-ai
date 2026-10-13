@@ -73,7 +73,7 @@ export function buildLeadBody(p: LeadPayload): { text: string; html: string } {
   return { text, html };
 }
 
-function logEvent(event: string, extra: Record<string, unknown> = {}) {
+export function logEvent(event: string, extra: Record<string, unknown> = {}) {
   const line = JSON.stringify({ event, ts: new Date().toISOString(), ...extra });
   if (event.endsWith("failed")) console.error("[lead]", line);
   else console.log("[lead]", line);

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { logEvent } from "../../../lib/save-lead";
 
 const leadSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -9,13 +10,13 @@ const leadSchema = z.object({
 });
 
 export async function POST(req: Request) {
-  console.log("[API] /api/lead POST received");
+  logEvent("submission_received", { source: "lead" });
 
   let json: unknown;
   try {
     json = await req.json();
-  } catch (error) {
-    console.error("[API] /api/lead invalid JSON payload", error);
+  } catch {
+    logEvent("validation_failed", { source: "lead", category: "invalid_json" });
     return Response.json(
       { ok: false, error: "Invalid JSON payload." },
       { status: 400 }
@@ -28,7 +29,11 @@ export async function POST(req: Request) {
     const flattened = parsed.error.flatten();
     const fieldErrors = flattened.fieldErrors;
 
-    console.warn("[API] /api/lead validation failed", fieldErrors);
+    logEvent("validation_failed", {
+      source: "lead",
+      category: "invalid_fields",
+      fields: Object.keys(fieldErrors),
+    });
 
     const message =
       fieldErrors.name?.[0] ||
@@ -47,15 +52,9 @@ export async function POST(req: Request) {
     );
   }
 
-  const { name, email, phone, businessType, message } = parsed.data;
+  const { message } = parsed.data;
 
-  console.log("[API] /api/lead validated lead", {
-    name,
-    email,
-    phone,
-    businessType,
-    hasMessage: !!message,
-  });
+  logEvent("submission_validated", { source: "lead", hasMessage: !!message });
 
   try {
     // TODO: Integrate with CRM, email, or database.
@@ -63,7 +62,10 @@ export async function POST(req: Request) {
 
     return Response.json({ ok: true });
   } catch (error) {
-    console.error("[API] /api/lead internal error", error);
+    logEvent("submission_failed", {
+      source: "lead",
+      category: error instanceof Error ? error.name : "unknown",
+    });
     return Response.json(
       {
         ok: false,

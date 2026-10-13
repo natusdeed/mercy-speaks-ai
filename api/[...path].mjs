@@ -14,6 +14,7 @@ var save_lead_exports = {};
 __export(save_lead_exports, {
   buildLeadBody: () => buildLeadBody,
   buildLeadSubject: () => buildLeadSubject,
+  logEvent: () => logEvent,
   safeReplyTo: () => safeReplyTo,
   saveLead: () => saveLead
 });
