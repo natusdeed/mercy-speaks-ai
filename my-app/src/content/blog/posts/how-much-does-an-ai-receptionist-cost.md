@@ -64,13 +64,9 @@ Setup typically covers discovery, script/call-flow design, phone routing, calend
 
 Timeline depends on your phone setup and how complex the flows are. After a strategy call we give you a written onboarding sequence with milestones—many teams move quickly once requirements are locked. [Book a demo](/book-demo) if you want that mapped for your number before you commit.
 
-## Cost vs. a $35k+/year front-desk hire
+## AI alongside your front desk
 
-A full-time front-desk hire in many U.S. markets commonly lands **$35,000+ per year** in wages alone—before payroll taxes, benefits, training, PTO coverage, and the reality that one person cannot answer every after-hours or overflow ring.
-
-Compare that to a done-for-you AI receptionist retainer plus one-time setup, and weigh it against your own call volume and the jobs you miss today.
-
-That does **not** mean AI replaces every human role. Complex empathy, clinical judgment, and on-site hospitality still belong to people. What AI is good at is catching the volume of routine rings—availability, booking, lead capture, after-hours intake—so your team spends paid hours on work that actually needs a human.
+AI does **not** replace every human role. Complex empathy, clinical judgment, and on-site hospitality still belong to people. What AI is good at is catching the volume of routine rings—availability, booking, lead capture, after-hours intake—so your team spends paid hours on work that actually needs a human.
 
 A honest middle path many owners use: keep a lean front desk (or owner-operator) for walk-ins and hard conversations, and let AI cover nights, weekends, and overflow. Missed-call [text-back](/services/missed-call-text-back) adds a second safety net when a call still slips through.
 
@@ -100,7 +96,7 @@ Monthly covers ongoing answering, messaging, and support. Setup pays for the one
 
 ### Is an AI receptionist cheaper than hiring a receptionist?
 
-Usually yes on cash cost. A $35k+/year hire is wages alone; AI retainers (plus setup) can cover routine call handling outside office hours. Humans still win for complex, emotional, or highly regulated conversations—many businesses use both.
+It depends on your call volume and what you need covered. AI can handle routine call handling outside office hours; humans still win for complex, emotional, or highly regulated conversations—many businesses use both.
 
 ### What happens if I go over my call volume?
 
