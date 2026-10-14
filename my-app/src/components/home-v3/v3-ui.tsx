@@ -25,7 +25,7 @@ export const smallPrint = "text-sm leading-relaxed text-slate-400";
 export const card = "rounded-xl border border-slate-800 p-6";
 
 export function RecommendedBadge() {
-  return <span className="ml-2 align-middle text-sm font-medium text-violet-300">Recommended</span>;
+  return <span className="ml-2 inline-block align-middle text-sm font-medium text-violet-300">Recommended</span>;
 }
 
 /** Plain divided list — no icons, no neon dots. */
