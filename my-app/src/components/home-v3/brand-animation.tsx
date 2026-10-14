@@ -5,8 +5,8 @@ import { useEffect, useRef, useState } from "react";
  * Browsers without VP9-alpha support (Safari / all iOS browsers) and reduced-motion
  * users get the still image (WebP with PNG fallback) and no video controls.
  */
-const POSTER_WEBP = "/brand/logo-alpha-still.webp";
-const POSTER_PNG = "/brand/logo-alpha-still.png";
+const POSTER_WEBP = "/brand/logo-alpha-first.webp";
+const POSTER_PNG = "/brand/logo-alpha-first.png";
 const VIDEO_WEBM = "/brand/logo-alpha.webm";
 
 /** VP9 alpha is decoded by Chromium and Firefox; WebKit plays VP9 but drops alpha. */
