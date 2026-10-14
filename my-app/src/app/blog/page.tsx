@@ -19,7 +19,7 @@ import {
 
 const SEO_TITLE = "Blog & Resources";
 const SEO_DESCRIPTION =
-  "Practical guides on AI receptionists, missed-call recovery, websites, and automation that help small businesses capture more leads.";
+  "Practical guides on websites, missed-call recovery, and automation that help small businesses capture more leads, plus AI receptionists, which we offer as a limited pilot.";
 
 export default function BlogIndexPage() {
   const posts = getPublishedBlogPosts();
@@ -111,7 +111,7 @@ export default function BlogIndexPage() {
                       <span className="text-slate-400 leading-relaxed flex-1 text-sm md:text-base">
                         {post.description}
                       </span>
-                      <span className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-500">
+                      <span className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-400">
                         <time dateTime={post.publishedAt}>{formatBlogDate(post.publishedAt)}</time>
                         <span className="inline-flex items-center gap-1" aria-hidden>
                           <Clock className="w-3.5 h-3.5" />

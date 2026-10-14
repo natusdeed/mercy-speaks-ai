@@ -115,7 +115,7 @@ export default function CookiePolicy() {
                     Mercy Speaks Digital LLC operates{" "}
                     <a
                       href="https://mercyspeaksdigital.com"
-                      className="text-neon-cyan hover:underline"
+                      className="text-neon-cyan underline underline-offset-2"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -162,7 +162,7 @@ export default function CookiePolicy() {
                           {category.points.map((point) => (
                             <li key={point} className="flex gap-2">
                               <span className="text-slate-500">-</span>
-                              <span>{point}</span>
+                              <span className="min-w-0">{point}</span>
                             </li>
                           ))}
                         </ul>
@@ -215,7 +215,7 @@ export default function CookiePolicy() {
                   <p>Mercy Speaks Digital LLC</p>
                   <p>Houston, Texas</p>
                   <p>
-                    <Link to="/contact" className="inline-flex items-center gap-2 text-neon-cyan hover:underline">
+                    <Link to="/contact" className="inline-flex items-center gap-2 text-neon-cyan hover:underline [overflow-wrap:anywhere]">
                       <Mail className="w-4 h-4" />
                       mercyspeaksdigital.com/contact
                     </Link>

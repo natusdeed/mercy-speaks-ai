@@ -1,9 +1,11 @@
 import { lazy, Suspense } from 'react';
-import { Navigate, Routes, Route, Outlet } from 'react-router-dom';
+import { Navigate, Routes, Route, Outlet, useLocation } from 'react-router-dom';
 import { Header } from '@/components/navigation/header';
 import { Footer } from '@/components/navigation/footer';
+import { HomeFooterV3 } from '@/components/home-v3/home-footer';
 import { ClientErrorHandler } from '@/components/debug/ClientErrorHandler';
 import CookieConsent from './components/cookies/CookieConsent';
+import { MotionConfig } from 'framer-motion';
 import { JsonLd } from '@/components/seo/json-ld';
 import { organizationSchema } from '@/lib/schema';
 
@@ -12,7 +14,11 @@ import { organizationSchema } from '@/lib/schema';
  * Route-level chunks still come from `manualChunks` + dynamic import() inside pages where safe.
  */
 import Home from './app/page';
-import About from './pages/About';
+import About from './app/v3/about';
+import WebsitesPage from './app/v3/websites';
+import WebsiteCarePage from './app/v3/website-care';
+import AiPilotPage from './app/v3/ai-pilot';
+import { PrivacyPage, TermsPage } from './app/v3/legal-pending';
 import Contact from './app/contact/page';
 import Portfolio from './app/portfolio/page';
 import Pricing from './app/pricing/page';
@@ -72,7 +78,11 @@ function DevDemoRouteFallback() {
   );
 }
 
+const V3_FOOTER_PATHS = new Set(["/", "/websites", "/website-care", "/ai-pilot", "/about", "/contact", "/privacy", "/terms", "/book-demo"]);
+
 function PublicChrome() {
+  // Project #001 V3 pages use the CEO-locked V3 footer; other pages keep the shared footer.
+  const isHome = V3_FOOTER_PATHS.has(useLocation().pathname.replace(/\/$/, "") || "/");
   return (
     <>
       {/* Site-wide Organization / ProfessionalService — one config, every public page */}
@@ -92,7 +102,7 @@ function PublicChrome() {
         <div id="main-content" tabIndex={-1} className="flex-1 public-main w-full outline-none">
           <Outlet />
         </div>
-        <Footer />
+        {isHome ? <HomeFooterV3 /> : <Footer />}
       </div>
     </>
   );
@@ -100,8 +110,7 @@ function PublicChrome() {
 
 function App() {
   return (
-    <>
-      <CookieConsent />
+    <MotionConfig reducedMotion="user">
       <ClientErrorHandler />
       <Routes>
         <Route
@@ -129,6 +138,11 @@ function App() {
         <Route element={<PublicChrome />}>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/websites" element={<WebsitesPage />} />
+          <Route path="/website-care" element={<WebsiteCarePage />} />
+          <Route path="/ai-pilot" element={<AiPilotPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/pricing" element={<Pricing />} />
@@ -165,7 +179,9 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
-    </>
+      {/* Rendered after page content so the skip link is the first Tab stop; position is fixed, so it looks the same. */}
+      <CookieConsent />
+    </MotionConfig>
   );
 }
 

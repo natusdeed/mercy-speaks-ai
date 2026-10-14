@@ -164,7 +164,7 @@ function LiveDemoStickyBar({
       role="region"
       aria-label="Call the AI demo"
     >
-      <div className="flex items-center gap-2 px-3 py-2 max-w-lg mx-auto">
+      <div className="flex flex-wrap items-center gap-2 px-3 py-2 max-w-lg mx-auto">
         {hasPhone && tel ? (
           <a
             href={tel}
@@ -173,7 +173,7 @@ function LiveDemoStickyBar({
             onClick={() =>
               trackEvent("live_demo_call_click", { location: `${location}-sticky` })
             }
-            className="flex-1 inline-flex items-center justify-center gap-2 min-h-11 rounded-xl bg-[#6D28D9] hover:bg-[#5B21B6] text-white text-sm font-semibold transition-colors"
+            className="grow basis-32 inline-flex items-center justify-center gap-2 min-h-11 rounded-xl bg-[#6D28D9] hover:bg-[#5B21B6] text-white text-sm font-semibold transition-colors"
           >
             <Phone className="w-4 h-4 shrink-0" aria-hidden />
             Call the AI demo
@@ -186,7 +186,7 @@ function LiveDemoStickyBar({
             onClick={() =>
               trackEvent("live_demo_sample_scroll", { location: `${location}-sticky` })
             }
-            className="flex-1 inline-flex items-center justify-center gap-2 min-h-11 rounded-xl bg-[#6D28D9] hover:bg-[#5B21B6] text-white text-sm font-semibold transition-colors"
+            className="grow basis-32 inline-flex items-center justify-center gap-2 min-h-11 rounded-xl bg-[#6D28D9] hover:bg-[#5B21B6] text-white text-sm font-semibold transition-colors"
           >
             <Play className="w-4 h-4 shrink-0" aria-hidden />
             Hear a sample
@@ -199,7 +199,7 @@ function LiveDemoStickyBar({
           onClick={() =>
             trackEvent("live_demo_book_click", { location: `${location}-sticky` })
           }
-          className="flex-1 inline-flex items-center justify-center gap-2 min-h-11 rounded-xl border border-slate-500/60 bg-transparent text-slate-200 text-sm font-semibold hover:bg-slate-800/50 transition-colors"
+          className="grow basis-32 inline-flex items-center justify-center gap-2 min-h-11 rounded-xl border border-slate-500/60 bg-transparent text-slate-200 text-sm font-semibold hover:bg-slate-800/50 transition-colors"
         >
           <Calendar className="w-4 h-4 shrink-0" aria-hidden />
           Book demo

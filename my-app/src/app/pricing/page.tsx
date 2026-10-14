@@ -51,23 +51,6 @@ const TRUST_NOTES = [
     { icon: RotateCcw, text: "Flexible plans—terms reviewed before you start" },
 ];
 
-const SOCIAL_AND_REPUTATION_PRICING = [
-  {
-    title: "Social Media Management",
-    items: [
-      "Starter: $397/mo — 12 posts, Facebook + Instagram, content calendar, basic report",
-      "Growth: $697/mo — 20 posts, all platforms, Stories/Reels, review automation, strategy call",
-      "Onboarding fee: $197 one-time",
-    ],
-  },
-  {
-    title: "Reputation Management",
-    items: [
-      "Standalone: $197/mo — review automation, monitoring, alerts, monthly report",
-      "Bundled: Included in SMM Growth at $697/mo",
-    ],
-  },
-] as const;
 
 export default function PricingPage() {
   const description =
@@ -122,21 +105,12 @@ export default function PricingPage() {
               >
                 Social media and reputation plans
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {SOCIAL_AND_REPUTATION_PRICING.map((entry) => (
-                  <div key={entry.title} className="rounded-2xl bg-slate-900/20 p-6">
-                    <h3 className="text-lg font-semibold text-slate-50 mb-3">{entry.title}</h3>
-                    <ul className="space-y-2.5">
-                      {entry.items.map((item) => (
-                        <li key={item} className="flex items-start gap-2 text-slate-300 text-sm leading-snug">
-                          <CheckCircle2 className="w-4 h-4 text-neon-cyan shrink-0 mt-0.5" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
+              <Link
+                to="/contact"
+                className="inline-flex min-h-11 items-center text-neon-cyan underline underline-offset-2 hover:text-slate-50"
+              >
+                Contact us about this service
+              </Link>
             </motion.div>
           </div>
         </section>
@@ -175,7 +149,7 @@ export default function PricingPage() {
         <section className="section pt-0" aria-labelledby="website-pricing-title">
           <div className="section-inner max-w-5xl mx-auto">
             <div className="rounded-2xl border border-slate-800/60 bg-slate-900/10 backdrop-blur-md p-6 md:p-8 mb-6 md:mb-8">
-              <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">
+              <p className="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-3">
                 Website Development
               </p>
               <h2
@@ -207,7 +181,7 @@ export default function PricingPage() {
                       Most Popular
                     </div>
                   )}
-                  <div className={`flex flex-col flex-1 p-7 ${tier.popular ? "pt-12" : ""}`}>
+                  <div className={`flex flex-col flex-1 ${tier.popular ? "p-7 pt-12" : "p-0"}`}>
                     <h3 className="text-xl font-bold text-slate-50 mb-2">{tier.name}</h3>
                     <p className="text-slate-400 text-sm leading-relaxed mb-5">{tier.audience}</p>
                     <div className="mb-6">
@@ -225,7 +199,7 @@ export default function PricingPage() {
                           className="flex items-start gap-2 text-slate-300 text-sm leading-snug"
                         >
                           <CheckCircle2 className="w-4 h-4 text-neon-cyan shrink-0 mt-0.5" />
-                          {item}
+                          <span className="min-w-0">{item}</span>
                         </li>
                       ))}
                     </ul>

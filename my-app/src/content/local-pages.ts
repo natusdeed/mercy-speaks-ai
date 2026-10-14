@@ -48,9 +48,9 @@ export const LOCAL_PAGES: Record<"houston" | "richmond-tx", LocalPageConfig> = {
     path: "/houston",
     navLabel: "Houston, TX",
     breadcrumbLabel: "Houston",
-    seoTitle: "Houston Web Design & AI Receptionists | Mercy Speaks Digital",
+    seoTitle: "Houston Web Design & Website Care | Mercy Speaks Digital",
     seoDescription:
-      "Houston-metro web design and AI receptionists from Fort Bend. Sites, missed-call text-back, and booking automation for local service businesses.",
+      "Houston-metro conversion websites and website care from Fort Bend for local service businesses. AI receptionists and missed-call text-back are offered as a limited pilot.",
     h1: "Web Design & AI Receptionists in Houston, TX",
     lead:
       "Houston small businesses win on speed to answer and clarity online—not on who has the flashiest billboard on I-10. We build the websites and AI phone systems that turn metro searchers into booked jobs.",
@@ -165,9 +165,9 @@ export const LOCAL_PAGES: Record<"houston" | "richmond-tx", LocalPageConfig> = {
     path: "/richmond-tx",
     navLabel: "Richmond, TX",
     breadcrumbLabel: "Richmond, TX",
-    seoTitle: "Website Design & AI in Richmond, TX | Mercy Speaks Digital",
+    seoTitle: "Website Design & Care in Richmond, TX | Mercy Speaks Digital",
     seoDescription:
-      "Website design and AI receptionists based in Richmond, TX 77407. Fort Bend web design and booking automation for Richmond, Rosenberg, and Sugar Land.",
+      "Conversion website design and website care based in Richmond, TX, for Richmond, Rosenberg, and Sugar Land. AI receptionists are offered as a limited pilot.",
     h1: "Website Design & AI Automation in Richmond, TX 77407",
     lead:
       "We are a Fort Bend shop—based in Richmond 77407—building websites and AI phone systems for businesses that answer to neighbors, not national call centers.",

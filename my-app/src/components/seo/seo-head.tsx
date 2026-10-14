@@ -27,6 +27,8 @@ export type SeoHeadProps = {
    * Defaults to the mapped `/og/*.png` for known paths, else `/og-default.png`.
    */
   ogImagePath?: string;
+  /** Optional per-page og:image:alt / twitter:image:alt (defaults to OG_IMAGE_ALT). */
+  ogImageAlt?: string;
 };
 
 const DEFAULT_DESCRIPTION = BRAND_TAGLINE;
@@ -43,6 +45,7 @@ export function SeoHead({
   robots,
   ogType = "website",
   ogImagePath,
+  ogImageAlt = OG_IMAGE_ALT,
 }: SeoHeadProps) {
   const canonical = absoluteUrl(canonicalPath ?? path);
   const resolvedPath = resolveOgImagePath(path, ogImagePath);
@@ -66,7 +69,7 @@ export function SeoHead({
       <meta property="og:site_name" content={BUSINESS.name} />
       <meta property="og:locale" content="en_US" />
       <meta property="og:image" content={ogImage} />
-      <meta property="og:image:alt" content={OG_IMAGE_ALT} />
+      <meta property="og:image:alt" content={ogImageAlt} />
       <meta property="og:image:width" content={String(OG_IMAGE_WIDTH)} />
       <meta property="og:image:height" content={String(OG_IMAGE_HEIGHT)} />
 
@@ -74,7 +77,7 @@ export function SeoHead({
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage} />
-      <meta name="twitter:image:alt" content={OG_IMAGE_ALT} />
+      <meta name="twitter:image:alt" content={ogImageAlt} />
 
       <link rel="canonical" href={canonical} />
       <meta name="theme-color" content="#020617" />

@@ -94,7 +94,7 @@ const flagshipOutcomes = [
 
 export default function ServicesPage() {
   const hubDescription =
-    "Explore AI phone receptionists, conversion websites, chatbots, and automation—one hub for Mercy Speaks Digital services that capture leads and book work.";
+    "Explore conversion websites, website care, and automation from Mercy Speaks Digital. AI phone receptionists and chatbots are offered as a limited pilot.";
 
   const directoryItems = serviceLinks.map(({ to, label }) => ({ name: label, path: to }));
 
@@ -107,7 +107,7 @@ export default function ServicesPage() {
     serviceSchema({
       name: "AI receptionist & lead capture systems",
       description:
-        "AI receptionist with qualification, booking, and reporting—paired with websites and automation. AI receptionist services are currently in pilot testing.",
+        "Conversion websites and website care, with an AI receptionist for qualification, booking, and reporting currently in pilot testing.",
       path: NAV_PATHS.services,
       serviceType: "AI receptionist",
     }),
@@ -148,16 +148,16 @@ export default function ServicesPage() {
             <motion.p
               {...fadeUp}
               transition={{ delay: 0.12 }}
-              className="mt-4 text-sm sm:text-base text-slate-500 px-1 leading-relaxed max-w-2xl"
+              className="mt-4 text-sm sm:text-base text-slate-400 px-1 leading-relaxed max-w-2xl"
             >
               In plain terms: we build or upgrade your website, then connect phone and web experiences so new leads get
               answered, qualified, and booked—even when your team is busy. Pick a service page below for specifics, or
               start from the{" "}
-              <Link to={NAV_PATHS.aiReceptionist} className="text-neon-cyan hover:underline">
+              <Link to={NAV_PATHS.aiReceptionist} className="text-neon-cyan underline underline-offset-2">
                 AI receptionist
               </Link>{" "}
               or{" "}
-              <Link to={NAV_PATHS.websiteDesign} className="text-neon-cyan hover:underline">
+              <Link to={NAV_PATHS.websiteDesign} className="text-neon-cyan underline underline-offset-2">
                 website design
               </Link>{" "}
               overview.
@@ -178,7 +178,7 @@ export default function ServicesPage() {
                     className="flex items-start gap-3 rounded-xl border border-slate-800/60 bg-slate-900/25 px-4 py-3.5 text-slate-200 hover:border-neon-cyan/35 hover:text-neon-cyan transition-colors min-h-[52px]"
                   >
                     <Icon className="w-5 h-5 text-electric-purple shrink-0" aria-hidden />
-                    <span className="flex-1">
+                    <span className="flex-1 min-w-0 [overflow-wrap:anywhere]">
                       <span className="block font-medium">{label}</span>
                       {description ? (
                         <span className="block text-xs text-slate-400 mt-1">{description}</span>
@@ -189,13 +189,13 @@ export default function ServicesPage() {
                 </li>
               ))}
             </ul>
-            <p className="mt-6 text-sm text-slate-500">
+            <p className="mt-6 text-sm text-slate-400">
               Ready to compare packages?{" "}
-              <Link to={NAV_PATHS.pricing} className="text-neon-cyan hover:underline">
+              <Link to={NAV_PATHS.pricing} className="text-neon-cyan underline underline-offset-2">
                 View pricing
               </Link>{" "}
               or{" "}
-              <Link to="/contact" className="text-neon-cyan hover:underline">
+              <Link to="/contact" className="text-neon-cyan underline underline-offset-2">
                 contact us
               </Link>
               .
@@ -222,7 +222,7 @@ export default function ServicesPage() {
                 AI receptionist (pilot) + missed revenue visibility
               </h2>
               <p className="text-slate-400 mb-6 text-base sm:text-lg">
-                Answer and qualify calls around the clock, book onto your calendar, and see missed-call patterns in one
+                Answer and qualify calls, book onto your calendar, and see missed-call patterns in one
                 place—paired with follow-up workflows when you need them.
               </p>
               <ul className="space-y-3 text-sm sm:text-base text-slate-300 mb-8">

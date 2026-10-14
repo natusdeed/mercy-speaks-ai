@@ -1,19 +1,11 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { PageShell } from "@/components/ui/page-shell";
 import { LeadForm, type LeadFormData } from "@/components/forms/lead-form";
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Send,
-  Clock,
-  MessageSquare,
-  CheckCircle2,
-} from "lucide-react";
+import { Send } from "lucide-react";
+import { body, h1, inner, section, textLink } from "@/components/home-v3/v3-ui";
 import { SeoHead } from "@/components/seo/seo-head";
 import { JsonLd } from "@/components/seo/json-ld";
 import { BRAND_TAGLINE, telHref } from "@/lib/site-config";
@@ -55,8 +47,8 @@ export default function ContactPage() {
     <PageShell className="min-h-screen bg-slate-950">
       <SeoHead
         path="/contact"
-        title="Contact Mercy Speaks Digital | Websites & AI Automation"
-        description="Contact Mercy Speaks Digital for websites, AI receptionists, and automation. Email, call, or send a message—we reply to real business inquiries promptly."
+        title="Get a Website Quote | Mercy Speaks Digital"
+        description="Tell us about your business and we'll send a written quote, valid for 30 calendar days."
       />
       <JsonLd
         data={[
@@ -72,136 +64,88 @@ export default function ContactPage() {
           ]),
         ]}
       />
-      <main className="pb-16">
-        <section className="section">
-          <div className="section-inner">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-8 md:mb-10"
-            >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-cyan/20 mb-4">
-                <MessageSquare className="w-4 h-4 text-neon-cyan" />
-                <span className="text-sm text-neon-cyan font-medium">Get in Touch</span>
-              </div>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-slate-50 mb-3 md:mb-4 title-3d">
-                Let&apos;s{" "}
-                <span className="text-neon-cyan">Talk</span>
+      <main className="w-full">
+        <section className={`${section} pt-12 md:pt-20`} aria-labelledby="page-heading">
+          <div className={`${inner} grid grid-cols-[minmax(0,1fr)] gap-14 lg:grid-cols-[3fr_2fr] lg:gap-20`}>
+            <div>
+              <h1 id="page-heading" className={h1}>
+                Get a Website Quote
               </h1>
-              <p className="text-lg sm:text-xl leading-relaxed text-slate-300 max-w-3xl mx-auto px-1">
-                Questions about a website build, AI receptionist, or automation roadmap? Send a note—we reply to real
-                business inquiries, fast.
+              <p className={`${body} mt-6 max-w-xl mx-0`}>
+                Tell us about your business and we&apos;ll send a written quote, valid for 30 calendar days.
               </p>
-            </motion.div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 lg:gap-6 items-start">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="space-y-3 sm:space-y-4 order-2 lg:order-1"
-              >
-                <h2 className="sr-only">Contact details</h2>
-                <div className="card">
-                  <MapPin className="w-7 h-7 sm:w-8 sm:h-8 text-electric-purple mb-4" />
-                  <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-50 mb-2">Location</h3>
-                  <p className="text-base sm:text-lg md:text-xl text-slate-300">
-                    Richmond, Texas 77407
-                    <br />
-                    Houston Metro Area
-                  </p>
-                </div>
-                <div className="card">
-                  <Phone className="w-7 h-7 sm:w-8 sm:h-8 text-neon-cyan mb-4" />
-                  <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-50 mb-2">Phone</h3>
-                  <a
-                    href={telHref()}
-                    className="text-base sm:text-lg md:text-xl text-slate-300 hover:text-neon-cyan transition-colors"
-                  >
-                    (832) 981-3123
-                  </a>
-                </div>
-                <div className="card">
-                  <Mail className="w-7 h-7 sm:w-8 sm:h-8 text-electric-purple mb-4" />
-                  <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-50 mb-2">Email</h3>
-                  <a
-                    href="mailto:don@mercyspeaksdigital.com"
-                    className="text-base sm:text-lg md:text-xl text-slate-300 hover:text-neon-cyan transition-colors break-all"
-                  >
-                    don@mercyspeaksdigital.com
-                  </a>
-                </div>
-                <div className="card">
-                  <Clock className="w-7 h-7 sm:w-8 sm:h-8 text-neon-cyan mb-4" />
-                  <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-50 mb-2">Business Hours</h3>
-                  <p className="text-base sm:text-lg md:text-xl text-slate-300">
-                    Monday - Friday: 9:00 AM - 6:00 PM CST
-                    <br />
-                    Saturday - Sunday: By Appointment
-                  </p>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="lg:col-span-2 order-1 lg:order-2"
-              >
-                <div className="card">
-                  {isSubmitted ? (
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      className="text-center py-10 sm:py-12"
-                    >
-                      <CheckCircle2 className="w-14 h-14 sm:w-16 sm:h-16 text-neon-cyan mx-auto mb-4" />
-                      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-50 mb-2">Message Sent!</h2>
-                      <p className="text-base sm:text-lg md:text-xl leading-relaxed text-slate-300 mb-6">
-                        We&apos;ll get back to you within 24 hours.
+              <div className="mt-10 rounded-xl border border-slate-800 p-5 sm:p-8">
+                {isSubmitted ? (
+                  <div className="py-8 text-center">
+                    <p role="status" tabIndex={-1} ref={(el) => el?.focus()} className="mx-auto mb-6 max-w-xl text-lg font-medium leading-relaxed text-white outline-none sm:text-xl">
+                      {"Thanks — your request has been received. We'll review the details and follow up using the contact information you provided."}
+                    </p>
+                    <Button variant="outline" size="lg" onClick={() => setIsSubmitted(false)}>
+                      Send Another Message
+                    </Button>
+                  </div>
+                ) : (
+                  <>
+                    <h2 className="mb-6 text-xl font-semibold text-white">Send Us a Message</h2>
+                    {submitError && (
+                      <p className="mb-4 rounded-lg border border-amber-500/30 bg-amber-500/10 p-3 text-sm text-amber-200" role="alert">
+                        {submitError}
+                        {submitError === RETRY_MESSAGE && (<>{" "}
+                        <a href={`mailto:${CONTACT_FALLBACK_EMAIL}`} className="underline font-medium">
+                          {CONTACT_FALLBACK_EMAIL}
+                        </a>{" "}
+                        or call{" "}
+                        <a href={telHref()} className="underline font-medium">
+                          (832) 981-3123
+                        </a>
+                        .</>)}
                       </p>
-                      <Button
-                        variant="outline"
-                        size="lg"
-                        onClick={() => setIsSubmitted(false)}
-                      >
-                        Send Another Message
-                      </Button>
-                    </motion.div>
-                  ) : (
-                    <>
-                      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-50 mb-4 sm:mb-6">Send Us a Message</h2>
-                      {submitError && (
-                        <p className="mb-4 p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-sm" role="alert">
-                          {submitError}
-                          {submitError === RETRY_MESSAGE && (<>{" "}
-                          <a href={`mailto:${CONTACT_FALLBACK_EMAIL}`} className="underline font-medium">
-                            {CONTACT_FALLBACK_EMAIL}
-                          </a>{" "}
-                          or call{" "}
-                          <a href={telHref()} className="underline font-medium">
-                            (832) 981-3123
-                          </a>
-                          .</>)}
-                        </p>
-                      )}
-                      <div aria-hidden="true" style={{ position: "absolute", left: "-10000px", width: 1, height: 1, overflow: "hidden" }}>
-                        <label htmlFor="contact-website">Leave this field empty</label>
-                        <input ref={honeypotRef} id="contact-website" name="website" type="text" tabIndex={-1} autoComplete="off" defaultValue="" />
-                      </div>
-                      <LeadForm
-                        submitLabel="Send Message"
-                        submittingLabel="Sending..."
-                        submitIcon={<Send className="w-5 h-5" />}
-                        onSubmit={handleSubmit}
-                        placeholders={{ message: "Tell us about your business and how we can help..." }}
-                      />
-                    </>
-                  )}
-                </div>
-              </motion.div>
+                    )}
+                    <div aria-hidden="true" style={{ position: "absolute", left: "-10000px", width: 1, height: 1, overflow: "hidden" }}>
+                      <label htmlFor="contact-website">Leave this field empty</label>
+                      <input ref={honeypotRef} id="contact-website" name="website" type="text" tabIndex={-1} autoComplete="off" defaultValue="" />
+                    </div>
+                    <LeadForm
+                      submitLabel="Get a Website Quote"
+                      submittingLabel="Sending..."
+                      submitIcon={<Send className="w-5 h-5" />}
+                      onSubmit={handleSubmit}
+                      placeholders={{ message: "Tell us about your business and how we can help..." }}
+                    />
+                  </>
+                )}
+              </div>
             </div>
+
+            <aside aria-labelledby="reach-heading" className="lg:pt-2">
+              <h2 id="reach-heading" className="text-lg font-semibold text-white">
+                Other ways to reach us
+              </h2>
+              <dl className="mt-6 divide-y divide-slate-800 border-y border-slate-800">
+                <div className="py-4">
+                  <dt className="text-sm text-slate-400">Phone</dt>
+                  <dd className="mt-1">
+                    <a href={telHref()} className={textLink}>
+                      (832) 981-3123
+                    </a>
+                  </dd>
+                </div>
+                <div className="py-4">
+                  <dt className="text-sm text-slate-400">Email</dt>
+                  <dd className="mt-1">
+                    <a href="mailto:don@mercyspeaksdigital.com" className={`${textLink} break-all`}>
+                      don@mercyspeaksdigital.com
+                    </a>
+                  </dd>
+                </div>
+                <div className="py-4">
+                  <dt className="text-sm text-slate-400">Mailing address</dt>
+                  <dd className="mt-1 text-base leading-relaxed text-slate-200">
+                    Mercy Speaks Digital, 5554 S Peek Road, PMB #2144, Katy, TX 77450
+                  </dd>
+                </div>
+              </dl>
+            </aside>
           </div>
         </section>
       </main>

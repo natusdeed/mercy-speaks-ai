@@ -63,7 +63,7 @@ export function defaultOgImageUrl(): string {
 
 /** Core brand line — reuse in metadata, schema, summaries, footer where appropriate */
 export const BRAND_TAGLINE =
-  "Premium websites, AI receptionists, and automation that capture leads, speed up follow-up, and improve booking—without extra headcount.";
+  "Conversion websites for growing businesses, with optional website care plans. AI communication tools are offered as a limited pilot.";
 
 /**
  * Marketing content switches. Keep demo media null until real assets are ready —
@@ -150,7 +150,7 @@ export const LOGO_PATH = "/favicon-512x512.png";
  */
 export const BUSINESS = {
   name: "Mercy Speaks Digital",
-  legalName: "Mercy Speaks LLC",
+  legalName: "Mercy Speaks Digital",
   email: "don@mercyspeaksdigital.com",
   phoneDisplay: "(832) 981-3123",
   /** E.164 for tel: and schema */

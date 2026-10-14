@@ -96,7 +96,7 @@ export default function ResultsPage() {
         <section className="section" aria-labelledby="results-title">
           <div className="section-inner max-w-4xl mx-auto text-center">
             <motion.div {...fadeUp}>
-              <span className="inline-block text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">
+              <span className="inline-block text-xs font-semibold text-slate-400 uppercase tracking-widest mb-3">
                 Proof first
               </span>
               <h1

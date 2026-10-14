@@ -183,7 +183,7 @@ export function IndustryPage({ config }: IndustryPageProps) {
                 >
                   <div className="flex items-start gap-3 mb-2">
                     <CheckCircle2 className="w-5 h-5 text-neon-cyan shrink-0 mt-0.5" aria-hidden />
-                    <h3 className="text-lg font-bold text-slate-50">{item.title}</h3>
+                    <h3 className="min-w-0 text-lg font-bold text-slate-50">{item.title}</h3>
                   </div>
                   <p className="text-slate-400 leading-relaxed pl-8">{item.description}</p>
                 </motion.article>
@@ -243,7 +243,7 @@ export function IndustryPage({ config }: IndustryPageProps) {
                   >
                     {index + 1}
                   </span>
-                  <div>
+                  <div className="min-w-0">
                     <h3 className="text-xl font-bold text-slate-50 mb-2">{step.title}</h3>
                     <p className="text-slate-400 leading-relaxed">{step.description}</p>
                   </div>

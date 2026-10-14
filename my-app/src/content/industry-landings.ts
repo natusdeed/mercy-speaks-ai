@@ -36,9 +36,9 @@ export const INDUSTRY_LANDING_CONFIG: Record<IndustrySlug, IndustryLandingConfig
   roofing: {
     slug: "roofing",
     path: "/roofing",
-    seoTitle: "AI Receptionist for Roofing | Mercy Speaks Digital",
+    seoTitle: "Roofing Websites & AI Receptionist Pilot | Mercy Speaks Digital",
     seoDescription:
-      "Capture storm and emergency roofing leads—AI answers calls, qualifies damage reports, and books inspections while your crews stay on the roof.",
+      "Conversion websites and website care for roofing companies, plus an AI receptionist pilot that answers storm and emergency calls and books inspections.",
     eyebrow: "Roofing contractors",
     headline: "Stop losing storm and emergency jobs to voicemail",
     lead:

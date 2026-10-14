@@ -128,10 +128,10 @@ export function BlogPostPage({ post }: BlogPostPageProps) {
                   </div>
                   <div>
                     <p className="text-sm font-medium text-slate-200">{BLOG_AUTHOR}</p>
-                    <p className="text-xs text-slate-500">AI automation &amp; web systems</p>
+                    <p className="text-xs text-slate-400">AI automation &amp; web systems</p>
                   </div>
                 </div>
-                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-500 sm:ml-auto">
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-400 sm:ml-auto">
                   <span>
                     Published{" "}
                     <time dateTime={post.publishedAt}>{formatBlogDate(post.publishedAt)}</time>
@@ -205,7 +205,7 @@ export function BlogPostPage({ post }: BlogPostPageProps) {
                       <span className="text-sm font-semibold text-slate-100 group-hover:text-neon-cyan transition-colors line-clamp-2">
                         {item.title}
                       </span>
-                      <span className="mt-2 block text-xs text-slate-500">
+                      <span className="mt-2 block text-xs text-slate-400">
                         {formatBlogDate(item.publishedAt)} · {item.readingTimeMinutes} min
                       </span>
                     </Link>

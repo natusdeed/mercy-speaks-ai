@@ -12,7 +12,7 @@ export default function ServiceAIPhoneReceptionist() {
   return (
     <ServiceMarketingPage
       path={NAV_PATHS.aiReceptionist}
-      seoTitle="AI Phone Receptionist | Mercy Speaks Digital"
+      seoTitle="AI Phone Receptionist (Pilot) | Mercy Speaks Digital"
       seoDescription="An AI receptionist that answers calls, qualifies leads, and books appointments. AI receptionist services are currently in pilot testing."
       icon={Phone}
       h1="AI phone receptionist"

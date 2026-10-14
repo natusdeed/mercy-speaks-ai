@@ -25,8 +25,8 @@ export const BUSINESS_TYPES = [
 ] as const;
 
 const inputBase =
-  "w-full min-h-11 px-4 rounded-xl border bg-slate-900/60 border-slate-600/80 text-slate-50 placeholder:text-slate-500 focus:outline-none transition-all duration-200 text-base touch-manipulation";
-const inputFocus = "focus:border-neon-cyan focus:ring-2 focus:ring-neon-cyan/20 focus:ring-offset-0 focus:ring-offset-transparent";
+  "w-full min-h-12 px-4 rounded-lg border bg-transparent border-slate-700 text-white placeholder:text-slate-400 focus:outline-none transition-colors duration-150 text-base touch-manipulation";
+const inputFocus = "focus:border-slate-300 focus:ring-2 focus:ring-violet-300/30 focus:ring-offset-0 focus:ring-offset-transparent";
 const inputError = "border-amber-500/70 focus:border-amber-500 focus:ring-amber-500/20";
 
 export interface LeadFormProps {
@@ -96,6 +96,11 @@ export function LeadForm({
           if (err.path[0]) fieldErrors[err.path[0] as keyof LeadFormData] = err.message;
         });
         setErrors(fieldErrors);
+        // Move keyboard / screen-reader focus to the first invalid field (its error is tied via aria-describedby).
+        const firstInvalid = (["name", "email", "phone", "businessType", "message"] as const).find(
+          (f) => fieldErrors[f]
+        );
+        if (firstInvalid) document.getElementById(`lead-${firstInvalid}`)?.focus();
       }
     } finally {
       setIsSubmitting(false);
@@ -118,11 +123,12 @@ export function LeadForm({
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
         <div className="space-y-1.5">
           <label htmlFor="lead-name" className="block text-sm font-medium text-slate-300">
-            Name <span className="text-amber-400">*</span>
+            Name <span className="text-amber-400" aria-hidden="true">*</span>
           </label>
           <input
             type="text"
             id="lead-name"
+            aria-required="true"
             name="name"
             value={formData.name}
             onChange={handleChange}
@@ -141,11 +147,12 @@ export function LeadForm({
         </div>
         <div className="space-y-1.5">
           <label htmlFor="lead-email" className="block text-sm font-medium text-slate-300">
-            Email <span className="text-amber-400">*</span>
+            Email <span className="text-amber-400" aria-hidden="true">*</span>
           </label>
           <input
             type="email"
             id="lead-email"
+            aria-required="true"
             name="email"
             value={formData.email}
             onChange={handleChange}
@@ -167,11 +174,12 @@ export function LeadForm({
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
         <div className="space-y-1.5">
           <label htmlFor="lead-phone" className="block text-sm font-medium text-slate-300">
-            Phone <span className="text-amber-400">*</span>
+            Phone <span className="text-amber-400" aria-hidden="true">*</span>
           </label>
           <input
             type="tel"
             id="lead-phone"
+            aria-required="true"
             name="phone"
             value={formData.phone}
             onChange={handleChange}
@@ -190,10 +198,11 @@ export function LeadForm({
         </div>
         <div className="space-y-1.5">
           <label htmlFor="lead-businessType" className="block text-sm font-medium text-slate-300">
-            Business Type <span className="text-amber-400">*</span>
+            Business Type <span className="text-amber-400" aria-hidden="true">*</span>
           </label>
           <select
             id="lead-businessType"
+            aria-required="true"
             name="businessType"
             value={formData.businessType}
             onChange={handleChange}
@@ -225,7 +234,7 @@ export function LeadForm({
 
       <div className="space-y-1.5">
         <label htmlFor="lead-message" className="block text-sm font-medium text-slate-300">
-          Message <span className="text-slate-500 font-normal">(optional)</span>
+          Message <span className="text-slate-400 font-normal">(optional)</span>
         </label>
         <textarea
           id="lead-message"
@@ -251,7 +260,7 @@ export function LeadForm({
           variant="primary"
           size="lg"
           disabled={isSubmitting}
-          className="w-full"
+          className="w-full rounded-lg bg-white text-slate-950 shadow-none hover:bg-slate-200 hover:shadow-none active:bg-slate-300 focus-visible:ring-violet-300"
         >
           {isSubmitting ? (
             submittingLabel
@@ -263,8 +272,8 @@ export function LeadForm({
             submitLabel
           )}
         </Button>
-        <p className="text-center text-sm text-slate-500">
-          We respond within 2 business hours. No spam.
+        <p className="text-center text-sm text-slate-400">
+          No spam.
         </p>
       </div>
     </form>

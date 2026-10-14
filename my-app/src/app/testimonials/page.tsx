@@ -20,7 +20,7 @@ const fadeUp = {
 
 export default function TestimonialsPage() {
   const description =
-    "Read client testimonials and verified feedback from Houston-area businesses using Mercy Speaks Digital websites, AI receptionists, and automation.";
+    "Read client testimonials and verified feedback from Houston-area businesses using Mercy Speaks Digital websites and automation.";
 
   return (
     <PageShell className="min-h-screen bg-slate-950">
@@ -38,7 +38,7 @@ export default function TestimonialsPage() {
         <section className="section" aria-labelledby="testimonials-page-title">
           <div className="section-inner max-w-4xl mx-auto text-center">
             <motion.div {...fadeUp}>
-              <span className="inline-block text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">
+              <span className="inline-block text-xs font-semibold text-slate-400 uppercase tracking-widest mb-3">
                 Social proof
               </span>
               <h1
@@ -63,7 +63,7 @@ export default function TestimonialsPage() {
         <section className="section pt-0" aria-label="Google reviews">
           <div className="section-inner max-w-3xl mx-auto">
             <div className="rounded-2xl border border-dashed border-slate-700/80 bg-slate-900/40 min-h-[120px] flex items-center justify-center px-6 py-10">
-              <p className="text-sm text-slate-500 text-center">
+              <p className="text-sm text-slate-400 text-center">
                 Google reviews will appear here once the Business Profile widget is embedded.
               </p>
             </div>
@@ -90,9 +90,9 @@ export default function TestimonialsPage() {
                   <ArrowRight className="w-5 h-5" aria-hidden />
                 </BookingLink>
               </Button>
-              <p className="mt-6 text-sm text-slate-500">
+              <p className="mt-6 text-sm text-slate-400">
                 Prefer to browse proof first?{" "}
-                <Link to="/results" className="text-neon-cyan underline-offset-4 hover:underline">
+                <Link to="/results" className="text-neon-cyan underline underline-offset-4">
                   See results &amp; case studies
                 </Link>
               </p>

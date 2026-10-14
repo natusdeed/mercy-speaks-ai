@@ -35,7 +35,7 @@ export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
                   {item.name}
                 </Link>
               ) : (
-                <span className="text-slate-300 truncate max-w-[14rem] sm:max-w-none" aria-current={isLast ? "page" : undefined}>
+                <span className="text-slate-300 [overflow-wrap:anywhere]" aria-current={isLast ? "page" : undefined}>
                   {item.name}
                 </span>
               )}

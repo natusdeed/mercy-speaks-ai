@@ -114,12 +114,12 @@ const showDevCommandCenter = viteEnv?.DEV === true;
 
 export default function AiEmployeeSystemPage() {
   const description =
-    "Mercy AI Staff and Revora AI Employee: an AI team for lead capture, bookings, follow-up, handoffs, missed-revenue visibility, and marketing support.";
+    "Mercy AI Staff and Revora AI Employee, offered as a limited pilot: AI tools for lead capture, bookings, follow-up, handoffs, missed-revenue visibility, and marketing support.";
   const path = "/ai-employee-system";
 
   return (
     <PageShell className="min-h-screen bg-slate-950">
-      <SeoHead path={path} title="AI Employee System" description={description} />
+      <SeoHead path={path} title="AI Employee System (Pilot)" description={description} />
       <JsonLd
         data={[
           webPageSchema({ name: "AI Employee System", description, path }),
@@ -150,7 +150,7 @@ export default function AiEmployeeSystemPage() {
               {...fadeUp}
               className="text-slate-400 text-base md:text-lg leading-relaxed max-w-3xl mx-auto mb-10"
             >
-              An AI receptionist answers and qualifies around the clock. Specialized agents handle lead intake,
+              An AI receptionist answers and qualifies calls. Specialized agents handle lead intake,
               scheduling intent, follow-up drafts, and human handoffs—then feed your dashboard and marketing with the
               same conversation truth your crew would trust on a job site.
             </motion.p>

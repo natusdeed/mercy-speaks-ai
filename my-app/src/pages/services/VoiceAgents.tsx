@@ -11,8 +11,8 @@ export default function ServiceVoiceAgents() {
   return (
     <ServiceMarketingPage
       path={NAV_PATHS.voiceAgents}
-      seoTitle="Custom AI Voice Agents | Mercy Speaks Digital"
-      seoDescription="Custom voice agents for multi-step qualification, dispatch triage, reminders, and light outbound — with scripts, guardrails, and human handoffs you approve."
+      seoTitle="Custom AI Voice Agents (Pilot) | Mercy Speaks Digital"
+      seoDescription="Custom voice agents for multi-step qualification, dispatch triage, reminders, and light outbound, with scripts, guardrails, and human handoffs you approve. Offered as a limited pilot."
       icon={Bot}
       h1="Voice agents"
       intro="Advanced, custom telephony for teams that need more than a front-desk answer-and-book flow—qualification trees, dispatch triage, reminders, and light outbound with compliance framing."

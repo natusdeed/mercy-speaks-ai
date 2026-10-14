@@ -114,7 +114,7 @@ export function Footer() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="lg:col-span-1"
           >
-            <h3 className="text-lg font-semibold text-slate-50 mb-4">Explore</h3>
+            <h2 className="text-lg font-semibold text-slate-50 mb-4">Explore</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {exploreLinkColumns.map((columnLinks, columnIndex) => (
                 <div
@@ -147,7 +147,7 @@ export function Footer() {
             transition={{ duration: 0.6, delay: 0.15 }}
             className="lg:col-span-1"
           >
-            <h3 className="text-lg font-semibold text-slate-50 mb-4">Areas</h3>
+            <h2 className="text-lg font-semibold text-slate-50 mb-4">Areas</h2>
             <ul className="space-y-2 rounded-xl border border-slate-800/70 bg-slate-900/40 p-3 backdrop-blur-sm">
               {AREA_LINKS.map((link) => (
                 <li key={link.href}>
@@ -171,7 +171,7 @@ export function Footer() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="lg:col-span-1"
           >
-            <h3 className="text-lg font-semibold text-slate-50 mb-4">Contact</h3>
+            <h2 className="text-lg font-semibold text-slate-50 mb-4">Contact</h2>
             <ul className="space-y-3">
               {contactInfo.map((contact) => {
                 const Icon = contact.icon;
@@ -183,12 +183,12 @@ export function Footer() {
                         className="text-slate-300 hover:text-electric-purple transition-colors text-base md:text-lg flex min-h-11 items-center gap-3 rounded-lg py-1.5 -mx-2 px-2 group"
                       >
                         <Icon className="w-4 h-4 text-slate-500 group-hover:text-electric-purple transition-colors" />
-                        <span>{contact.value}</span>
+                        <span className="[overflow-wrap:anywhere]">{contact.value}</span>
                       </a>
                     ) : (
                       <div className="text-slate-300 text-base md:text-lg flex items-center gap-3">
                         <Icon className="w-4 h-4 text-slate-500" />
-                        <span>{contact.value}</span>
+                        <span className="[overflow-wrap:anywhere]">{contact.value}</span>
                       </div>
                     )}
                   </li>
@@ -207,14 +207,14 @@ export function Footer() {
           className="border-t border-slate-800/30 pt-8 mt-8"
         >
           <div className="flex flex-col items-center gap-4 mb-8">
-            <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider">
+            <h2 className="text-sm font-semibold text-slate-400 uppercase tracking-wider">
               Follow Us
-            </h3>
+            </h2>
             <div className="flex items-center justify-center gap-4 flex-wrap">
               {socialLinks.length === 0 ? (
                 <p className="text-sm text-slate-500">Social profiles coming soon.</p>
               ) : (
-                socialLinks.map((social, index) => {
+                socialLinks.map((social) => {
                   const Icon = social.icon;
                   return (
                     <motion.a
@@ -222,10 +222,6 @@ export function Footer() {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      initial={{ opacity: 0, scale: 0 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: index * 0.1 }}
                       whileHover={{ scale: 1.15 }}
                       whileTap={{ scale: 0.95 }}
                       className={`w-12 h-12 rounded-lg border-2 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center transition-all duration-300 hover:bg-slate-800/70 ${social.color}`}
@@ -257,7 +253,7 @@ export function Footer() {
             <div className="flex items-center">
               <Link
                 to="/cookie-policy"
-                className="text-slate-400 hover:text-electric-purple transition-colors text-base md:text-lg"
+                className="inline-flex min-h-11 items-center text-slate-400 hover:text-electric-purple transition-colors text-base md:text-lg"
               >
                 Cookie Policy
               </Link>

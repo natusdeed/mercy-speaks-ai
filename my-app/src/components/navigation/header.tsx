@@ -1,460 +1,125 @@
 import { Link, useLocation } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Menu, Phone, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { BookingLink } from "@/components/cta/booking-link";
-import { getAllIndustryPages } from "@/content/industry-pages";
-import { NAV_PATHS } from "@/lib/site-config";
 
-/** Always in the DOM (crawlable <a> via Link) — do not conditionally mount. */
-const industryLinks = [
-  { name: "All industries", href: NAV_PATHS.industries },
-  ...getAllIndustryPages().map((ind) => ({
-    name: ind.navLabel,
-    href: ind.path,
-  })),
-] as const;
-
-const navLinksBeforeIndustries = [
-  { name: "Home", href: "/" },
-] as const;
-
-const serviceLinks = [
-  { name: "AI Phone Receptionist", href: "/services/ai-phone-receptionist" },
-  { name: "Missed-Call Text Back", href: "/services/missed-call-text-back" },
-  { name: "Website Design & Development", href: "/services/website-design" },
-  { name: "Website Chat That Books", href: "/services/website-chatbot" },
-  { name: "Workflow Automation", href: "/services/workflow-automation" },
-  { name: "Appointment Automation", href: "/services/appointment-automation" },
-  { name: "Reviews & Follow-up", href: "/services/review-generation" },
-  { name: "Social Media Management", href: "/services/social-media-management" },
-  { name: "Reputation Management", href: "/services/review-generation" },
-  { name: "Voice Agents", href: "/services/voice-agents" },
-  { name: "Knowledge & RAG Data", href: "/services/rag-data" },
-] as const;
-
-const navLinksAfterIndustries = [
-  { name: "Websites", href: "/services/website-design" },
-  { name: "Pricing", href: "/pricing" },
-  { name: "Results", href: "/results" },
-  { name: "Testimonials", href: "/testimonials" },
+/**
+ * Site header — Project #001 V3 ("premium, quiet, conversion-focused").
+ * Navigation follows the locked V3 sitemap: Websites, Website Care, AI Pilot, About + one CTA.
+ * Legacy pages remain routable (and linked from the legacy footer); they are no longer in primary nav.
+ */
+const NAV = [
+  { name: "Websites", href: "/websites" },
+  { name: "Website Care", href: "/website-care" },
+  { name: "AI Pilot", href: "/ai-pilot" },
   { name: "About", href: "/about" },
-  { name: "Contact", href: "/contact" },
 ] as const;
 
-function isIndustryPath(pathname: string): boolean {
-  return (
-    pathname === NAV_PATHS.industries ||
-    pathname.startsWith("/industries/") ||
-    pathname === "/roofing"
-  );
-}
-
-function isActivePath(href: string, pathname: string): boolean {
-  if (href === "/") return pathname === "/";
-  if (href === "/services/website-design")
-    return pathname === "/services/website-design" || pathname.startsWith("/services/website-design/");
-  if (href === "/services") return pathname === "/services" || pathname.startsWith("/services/");
-  return pathname === href;
-}
+const focus =
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950";
 
 export function Header() {
   const pathname = useLocation().pathname;
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobileIndustriesOpen, setMobileIndustriesOpen] = useState(false);
-  const [desktopIndustriesOpen, setDesktopIndustriesOpen] = useState(false);
-  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
-  const [desktopServicesOpen, setDesktopServicesOpen] = useState(false);
-  const industriesWrapRef = useRef<HTMLDivElement>(null);
-  const servicesWrapRef = useRef<HTMLDivElement>(null);
+
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     setMobileOpen(false);
-    setMobileIndustriesOpen(false);
-    setMobileServicesOpen(false);
-    setDesktopIndustriesOpen(false);
-    setDesktopServicesOpen(false);
   }, [pathname]);
 
+  // Escape closes the mobile menu and returns focus to the menu button.
   useEffect(() => {
-    if (!desktopIndustriesOpen) return;
-    function handlePointerDown(e: MouseEvent) {
-      if (industriesWrapRef.current?.contains(e.target as Node)) return;
-      setDesktopIndustriesOpen(false);
-    }
-    document.addEventListener("mousedown", handlePointerDown);
-    return () => document.removeEventListener("mousedown", handlePointerDown);
-  }, [desktopIndustriesOpen]);
-
-  useEffect(() => {
-    if (!desktopServicesOpen) return;
-    function handlePointerDown(e: MouseEvent) {
-      if (servicesWrapRef.current?.contains(e.target as Node)) return;
-      setDesktopServicesOpen(false);
-    }
-    document.addEventListener("mousedown", handlePointerDown);
-    return () => document.removeEventListener("mousedown", handlePointerDown);
-  }, [desktopServicesOpen]);
-
-  useEffect(() => {
-    if (!mobileOpen) {
-      setMobileIndustriesOpen(false);
-      setMobileServicesOpen(false);
-    }
+    if (!mobileOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMobileOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
   }, [mobileOpen]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-xl border-b border-slate-800/25">
-      <nav className="section-inner py-4 px-4 sm:px-6">
-        <div className="flex items-center justify-between">
-          <Link
-            to="/"
-            className="shrink-0 text-xl md:text-2xl font-bold text-slate-50 hover:text-electric-purple transition-colors"
-          >
+    <header className="fixed left-0 right-0 top-0 z-50 border-b border-slate-800 bg-slate-950/95 backdrop-blur">
+      <nav aria-label="Main" className="mx-auto w-full max-w-5xl px-5 sm:px-8">
+        <div className="flex h-16 items-center justify-between gap-4">
+          <Link to="/" className={cn("inline-flex min-h-11 min-w-0 items-center rounded text-base font-semibold tracking-tight text-white sm:text-lg", focus)}>
             Mercy Speaks Digital
           </Link>
 
-          {/* Desktop nav */}
-          <div className="hidden md:flex flex-1 items-center justify-center gap-2 lg:gap-3 xl:gap-4 min-w-0">
-            {navLinksBeforeIndustries.map((link) => {
-              const active = isActivePath(link.href, pathname);
-              return (
-                <Link
-                  key={link.href}
-                  to={link.href}
-                  className={cn(
-                    "text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
-                    active ? "text-electric-purple" : "text-slate-300 hover:text-slate-50"
-                  )}
-                >
-                  {link.name}
-                </Link>
-              );
-            })}
-
-            <div className="relative shrink-0" ref={servicesWrapRef}>
-              <button
-                type="button"
-                onClick={() => setDesktopServicesOpen((o) => !o)}
-                className={cn(
-                  "flex items-center gap-1 text-xs xl:text-sm font-medium transition-colors whitespace-nowrap rounded-lg px-1 py-1",
-                  pathname.startsWith("/services/")
-                    ? "text-electric-purple"
-                    : "text-slate-300 hover:text-slate-50"
-                )}
-                aria-expanded={desktopServicesOpen}
-                aria-haspopup="menu"
-                aria-controls="services-desktop-menu"
-                id="services-desktop-button"
-              >
-                Services
-                <ChevronDown
-                  className={cn(
-                    "w-4 h-4 shrink-0 transition-transform duration-200",
-                    desktopServicesOpen && "rotate-180"
-                  )}
-                  aria-hidden
-                />
-              </button>
-              {desktopServicesOpen ? (
-                <div
-                  id="services-desktop-menu"
-                  role="menu"
-                  aria-labelledby="services-desktop-button"
-                  className="absolute left-0 top-full z-50 mt-2 min-w-72 rounded-xl border border-slate-800/60 bg-slate-900/98 py-2 shadow-xl backdrop-blur-xl"
-                >
-                  {serviceLinks.map((link) => {
-                    const active = pathname === link.href;
-                    return (
-                      <Link
-                        key={`${link.name}-${link.href}`}
-                        role="menuitem"
-                        to={link.href}
-                        onClick={() => setDesktopServicesOpen(false)}
-                        className={cn(
-                          "block px-4 py-2.5 text-sm font-medium transition-colors",
-                          active
-                            ? "bg-electric-purple/15 text-electric-purple"
-                            : "text-slate-300 hover:bg-slate-800/80 hover:text-slate-50"
-                        )}
-                      >
-                        {link.name}
-                      </Link>
-                    );
-                  })}
-                </div>
-              ) : null}
-            </div>
-
-            <div className="relative shrink-0" ref={industriesWrapRef}>
-              <button
-                type="button"
-                onClick={() => setDesktopIndustriesOpen((o) => !o)}
-                className={cn(
-                  "flex items-center gap-1 text-xs xl:text-sm font-medium transition-colors whitespace-nowrap rounded-lg px-1 py-1",
-                  isIndustryPath(pathname)
-                    ? "text-electric-purple"
-                    : "text-slate-300 hover:text-slate-50"
-                )}
-                aria-expanded={desktopIndustriesOpen}
-                aria-haspopup="menu"
-                aria-controls="industries-desktop-menu"
-                id="industries-desktop-button"
-              >
-                Industries
-                <ChevronDown
-                  className={cn(
-                    "w-4 h-4 shrink-0 transition-transform duration-200",
-                    desktopIndustriesOpen && "rotate-180"
-                  )}
-                  aria-hidden
-                />
-              </button>
-              {/* Always mounted so prerender HTML contains crawlable industry <a> links */}
-              <div
-                id="industries-desktop-menu"
-                role="menu"
-                aria-labelledby="industries-desktop-button"
-                hidden={!desktopIndustriesOpen}
-                className="absolute left-0 top-full z-50 mt-2 min-w-50 rounded-xl border border-slate-800/60 bg-slate-900/98 py-2 shadow-xl backdrop-blur-xl"
-              >
-                {industryLinks.map((link) => {
-                  const active = pathname === link.href;
-                  return (
+          <div className="hidden items-center gap-8 md:flex">
+            <ul className="flex items-center gap-7">
+              {NAV.map((l) => {
+                const active = pathname === l.href;
+                return (
+                  <li key={l.href}>
                     <Link
-                      key={link.href}
-                      role="menuitem"
-                      to={link.href}
-                      tabIndex={desktopIndustriesOpen ? 0 : -1}
-                      onClick={() => setDesktopIndustriesOpen(false)}
+                      to={l.href}
+                      aria-current={active ? "page" : undefined}
                       className={cn(
-                        "block px-4 py-2.5 text-sm font-medium transition-colors",
-                        active
-                          ? "bg-electric-purple/15 text-electric-purple"
-                          : "text-slate-300 hover:bg-slate-800/80 hover:text-slate-50"
+                        "inline-flex min-h-11 min-w-11 items-center justify-center rounded text-sm transition-colors",
+                        active ? "text-white" : "text-slate-300 hover:text-white",
+                        focus
                       )}
                     >
-                      {link.name}
+                      {l.name}
                     </Link>
-                  );
-                })}
-              </div>
-            </div>
-
-            {navLinksAfterIndustries.map((link) => {
-              const active = isActivePath(link.href, pathname);
-              return (
-                <Link
-                  key={link.href}
-                  to={link.href}
-                  className={cn(
-                    "text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
-                    active ? "text-electric-purple" : "text-slate-300 hover:text-slate-50"
-                  )}
-                >
-                  {link.name}
-                </Link>
-              );
-            })}
-            <Button variant="primary" size="default" asChild className="shrink-0 ml-2">
-              <BookingLink kind="generalStrategyCall" className="flex items-center gap-2">
-                <Phone className="w-4 h-4" />
-                Book Demo
-              </BookingLink>
-            </Button>
-          </div>
-
-          {/* Mobile: hamburger + Book Demo */}
-          <div className="flex md:hidden items-center gap-2">
-            <Button variant="primary" size="default" asChild>
-              <BookingLink kind="generalStrategyCall" className="flex items-center gap-1.5">
-                <Phone className="w-4 h-4" />
-                Book Demo
-              </BookingLink>
-            </Button>
-            <button
-              type="button"
-              onClick={() => setMobileOpen((o) => !o)}
-              className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-lg text-slate-400 hover:text-slate-50 hover:bg-slate-800 transition-colors"
-              aria-label={mobileOpen ? "Close menu" : "Open menu"}
-              aria-expanded={mobileOpen}
+                  </li>
+                );
+              })}
+            </ul>
+            <Link
+              to="/contact"
+              className={cn(
+                "inline-flex min-h-11 items-center rounded-lg border border-slate-600 px-4 text-sm font-medium text-white transition-colors hover:border-slate-400",
+                focus
+              )}
             >
-              {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
+              Get a Website Quote
+            </Link>
           </div>
+
+          <button
+            ref={menuButtonRef}
+            type="button"
+            className={cn("inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-slate-200 md:hidden", focus)}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-menu"
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            onClick={() => setMobileOpen((v) => !v)}
+          >
+            {mobileOpen ? <X className="h-5 w-5" aria-hidden /> : <Menu className="h-5 w-5" aria-hidden />}
+          </button>
         </div>
 
-        {/* Mobile menu — premium layout; Industries uses accordion (no hover) */}
         {mobileOpen && (
-          <div className="md:hidden mt-4 pt-4 pb-2 border-t border-slate-800/50 bg-slate-900/50 -mx-4 px-4 sm:-mx-6 sm:px-6 rounded-b-xl backdrop-blur-md">
-            <div className="flex flex-col gap-0.5">
-              {navLinksBeforeIndustries.map((link) => {
-                const active = isActivePath(link.href, pathname);
-                return (
+          <div id="mobile-menu" className="border-t border-slate-800 pb-6 pt-2 md:hidden">
+            <ul className="divide-y divide-slate-800">
+              {NAV.map((l) => (
+                <li key={l.href}>
                   <Link
-                    key={link.href}
-                    to={link.href}
+                    to={l.href}
+                    aria-current={pathname === l.href ? "page" : undefined}
                     onClick={() => setMobileOpen(false)}
-                    className={cn(
-                      "px-4 py-3.5 rounded-lg text-base font-medium transition-colors",
-                      active
-                        ? "text-electric-purple bg-electric-purple/15 border border-electric-purple/30"
-                        : "text-slate-300 hover:bg-slate-800/80 hover:text-slate-50"
-                    )}
+                    className={cn("flex min-h-12 items-center text-base text-slate-200", focus)}
                   >
-                    {link.name}
+                    {l.name}
                   </Link>
-                );
-              })}
-
-              <div className="rounded-lg border border-slate-800/60 bg-slate-950/40 overflow-hidden">
-                <button
-                  type="button"
-                  onClick={() => setMobileServicesOpen((o) => !o)}
-                  className={cn(
-                    "flex w-full items-center justify-between px-4 py-3.5 text-base font-medium transition-colors",
-                    pathname.startsWith("/services/")
-                      ? "text-electric-purple bg-electric-purple/10"
-                      : "text-slate-300 hover:bg-slate-800/80"
-                  )}
-                  aria-expanded={mobileServicesOpen}
-                >
-                  Services
-                  <ChevronDown
-                    className={cn(
-                      "w-5 h-5 shrink-0 transition-transform duration-200",
-                      mobileServicesOpen && "rotate-180"
-                    )}
-                    aria-hidden
-                  />
-                </button>
-                {mobileServicesOpen ? (
-                  <div
-                    className="border-t border-slate-800/60 px-2 py-2 space-y-0.5"
-                    role="group"
-                    aria-label="Service pages"
-                  >
-                    <Link
-                      to="/services"
-                      onClick={() => {
-                        setMobileOpen(false);
-                        setMobileServicesOpen(false);
-                      }}
-                      className={cn(
-                        "block rounded-lg px-4 py-3 text-base font-medium transition-colors",
-                        pathname === "/services"
-                          ? "text-electric-purple bg-electric-purple/15 border border-electric-purple/30"
-                          : "text-slate-300 hover:bg-slate-800/80 hover:text-slate-50"
-                      )}
-                    >
-                      All Services
-                    </Link>
-                    {serviceLinks.map((link) => {
-                      const active = pathname === link.href;
-                      return (
-                        <Link
-                          key={`${link.name}-${link.href}`}
-                          to={link.href}
-                          onClick={() => {
-                            setMobileOpen(false);
-                            setMobileServicesOpen(false);
-                          }}
-                          className={cn(
-                            "block rounded-lg px-4 py-3 text-base font-medium transition-colors",
-                            active
-                              ? "text-electric-purple bg-electric-purple/15 border border-electric-purple/30"
-                              : "text-slate-300 hover:bg-slate-800/80 hover:text-slate-50"
-                          )}
-                        >
-                          {link.name}
-                        </Link>
-                      );
-                    })}
-                  </div>
-                ) : null}
-              </div>
-
-              <div className="rounded-lg border border-slate-800/60 bg-slate-950/40 overflow-hidden">
-                <button
-                  type="button"
-                  onClick={() => setMobileIndustriesOpen((o) => !o)}
-                  className={cn(
-                    "flex w-full items-center justify-between px-4 py-3.5 text-base font-medium transition-colors",
-                    isIndustryPath(pathname)
-                      ? "text-electric-purple bg-electric-purple/10"
-                      : "text-slate-300 hover:bg-slate-800/80"
-                  )}
-                  aria-expanded={mobileIndustriesOpen}
-                >
-                  Industries
-                  <ChevronDown
-                    className={cn(
-                      "w-5 h-5 shrink-0 transition-transform duration-200",
-                      mobileIndustriesOpen && "rotate-180"
-                    )}
-                    aria-hidden
-                  />
-                </button>
-                {/* Always mounted for crawlable industry links in prerendered HTML */}
-                <div
-                  className="border-t border-slate-800/60 px-2 py-2 space-y-0.5"
-                  role="group"
-                  aria-label="Industry pages"
-                  hidden={!mobileIndustriesOpen}
-                >
-                  {industryLinks.map((link) => {
-                    const active = pathname === link.href;
-                    return (
-                      <Link
-                        key={link.href}
-                        to={link.href}
-                        tabIndex={mobileIndustriesOpen ? 0 : -1}
-                        onClick={() => {
-                          setMobileOpen(false);
-                          setMobileIndustriesOpen(false);
-                        }}
-                        className={cn(
-                          "block rounded-lg px-4 py-3 text-base font-medium transition-colors",
-                          active
-                            ? "text-electric-purple bg-electric-purple/15 border border-electric-purple/30"
-                            : "text-slate-300 hover:bg-slate-800/80 hover:text-slate-50"
-                        )}
-                      >
-                        {link.name}
-                      </Link>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {navLinksAfterIndustries.map((link) => {
-                const active = isActivePath(link.href, pathname);
-                return (
-                  <Link
-                    key={link.href}
-                    to={link.href}
-                    onClick={() => setMobileOpen(false)}
-                    className={cn(
-                      "px-4 py-3.5 rounded-lg text-base font-medium transition-colors",
-                      active
-                        ? "text-electric-purple bg-electric-purple/15 border border-electric-purple/30"
-                        : "text-slate-300 hover:bg-slate-800/80 hover:text-slate-50"
-                    )}
-                  >
-                    {link.name}
-                  </Link>
-                );
-              })}
-            </div>
-            <div className="pt-4 mt-2 border-t border-slate-800/50">
-              <Button variant="primary" size="default" asChild className="w-full">
-                <BookingLink kind="generalStrategyCall" onClick={() => setMobileOpen(false)} className="flex items-center justify-center gap-2">
-                  <Phone className="w-4 h-4" />
-                  Book Demo
-                </BookingLink>
-              </Button>
-            </div>
+                </li>
+              ))}
+            </ul>
+            <Link
+              to="/contact"
+              onClick={() => setMobileOpen(false)}
+              className={cn(
+                "mt-4 inline-flex min-h-12 w-full items-center justify-center rounded-lg bg-white px-6 text-base font-semibold text-slate-950",
+                focus
+              )}
+            >
+              Get a Website Quote
+            </Link>
           </div>
         )}
       </nav>

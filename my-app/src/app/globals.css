@@ -85,11 +85,11 @@
   --sidebar-ring: oklch(0.704 0.04 256.788);
 
   /* Public layout: padding below fixed header (see App.tsx #public-layout) */
-  --header-offset: 5.75rem;
+  --header-offset: 4rem;
 }
 @media (min-width: 768px) {
   :root {
-    --header-offset: 7rem;
+    --header-offset: 4rem;
   }
 }
 
@@ -117,10 +117,13 @@
   --font-mono: var(--font-geist-mono);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* In @layer base so Tailwind spacing utilities (p-*, m-*) can override the reset. */
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 }
 
 html {
@@ -189,9 +192,12 @@ section {
 }
 
 /* Ensure max-w containers are centered */
-[class*="max-w"] {
-  margin-left: auto;
-  margin-right: auto;
+/* Zero-specificity + base layer: still centers by default, but margin utilities (e.g. mx-0) win. */
+@layer base {
+  :where([class*="max-w"]) {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 /* Premium design system: standardized vertical spacing (~40–50% reduced), fewer borders. */
@@ -548,6 +554,11 @@ section {
   * {
     @apply outline-ring/50;
   }
+  /* Visible keyboard focus everywhere (violet-300 on the dark background); components with their own ring utilities still override. */
+  :focus-visible {
+    outline: 2px solid #c4b5fd;
+    outline-offset: 2px;
+  }
   body {
     @apply bg-slate-950 text-foreground;
   }
@@ -828,4 +839,13 @@ section {
 
 .blog-prose tbody tr:last-child td {
   border-bottom: 0;
+}
+
+/* Text-resize resilience (WCAG 1.4.4 / 1.4.10): long words wrap instead of overflowing
+   at 200% text or 400% zoom. No effect at default sizes where words already fit. */
+h1, h2, h3, h4, h5, h6, p, li, dt, dd, th, td, label, figcaption, blockquote, summary {
+  overflow-wrap: break-word;
+}
+a.whitespace-nowrap, button.whitespace-nowrap {
+  white-space: normal;
 }
