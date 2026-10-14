@@ -126,18 +126,17 @@ const portfolioItems: PortfolioItem[] = [
     featured: true,
   },
   {
-    id: "mercy-speaks-digital",
-    title: "Mercy Speaks Digital",
-    url: "https://www.mercyspeaksdigital.com",
+    id: "rccg-shiloh-mega-parish",
+    title: "RCCG Shiloh Mega Parish",
+    url: "https://www.rccgshilohmega.org/",
     category: "Websites",
-    industryTag: "AI Automation Agency",
+    industryTag: "Client work",
     description:
-      "Agency website with clear service positioning, premium layout, and conversion-led inquiry paths—built to communicate AI ROI without noise.",
-    outcome: "Premium redesign for stronger online presence and clearer service presentation.",
-    stack: ["Next.js", "Tailwind"],
-    thumbnail: "/portfolio/mercyspeaks-ai-home.png",
-    liveUrl: "https://www.mercyspeaksdigital.com",
-    ctaLabel: "View Site",
+      "Church website in Sugar Land with service times, ministries, and a guest-friendly mobile experience.",
+    stack: [],
+    thumbnail: "/portfolio/rccg-shiloh-church.png",
+    liveUrl: "https://www.rccgshilohmega.org/",
+    ctaLabel: "Visit the live site",
   },
 ];
 
