@@ -50,7 +50,10 @@ export function BrandAnimation() {
   const onEnded = () => {
     const v = ref.current;
     setPlaying(false);
-    if (v) v.load(); // return to poster
+    if (!v) return;
+    v.pause();
+    v.currentTime = 0;
+    v.load(); // reset to start and redisplay the poster still
   };
 
   return (
