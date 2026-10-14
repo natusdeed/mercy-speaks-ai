@@ -79,7 +79,7 @@ export const ADDONS = [
 ] as const;
 
 export const PACKAGE_INCLUDES =
-  "Every package includes mobile-first design checked on phones and desktops, tap-to-call to your existing number, a contact form, a Google Map embed or link, basic on-page SEO (page titles, meta descriptions, local business schema), a private preview before launch, launch to your domain, 14 days of defect fixes, and a handoff. Included content is limited to what you supply or approve.";
+  "Every package includes mobile-first design checked on phones and desktops, tap-to-call to your existing number, a contact form, a Google Map embed or link, basic search setup (page titles, page descriptions, and your business details marked up for search engines), a private preview before launch, launch to your domain, 14 days of defect fixes, and a handoff. Included content is limited to what you supply or approve.";
 
 export const PACKAGE_TIER_NOTES =
   "Business ($1,997) may include service-specific pages within the 10-page limit, a quote form, analytics setup when you provide or approve the account and access, and a review or testimonial section only when real, verified, permissioned content is supplied. Premium (from $3,500) may include custom features based on the approved project scope.";
@@ -87,7 +87,7 @@ export const PACKAGE_TIER_NOTES =
 export const PAYMENT_TERMS = "50% to begin, 50% before launch. Quotes are valid for 30 calendar days.";
 
 export const TIMELINE =
-  "10–15 business days of active Mercy Speaks production time after the initial payment and all required starting assets are received. The delivery clock pauses while Mercy Speaks is waiting for client content, assets, credentials/access, feedback, revisions, or approvals.";
+  "10–15 business days of active Mercy Speaks production time after the 50% payment and all required assets and access are received. The delivery clock pauses while Mercy Speaks is waiting for client content, assets, credentials/access, feedback, revisions, or approvals.";
 
 export const HOSTING =
   "Hosting and domain are not included. You own both accounts, give us delegated access, and pay any third-party costs.";

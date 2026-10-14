@@ -44,8 +44,7 @@ export default function NotFound() {
                 Page not found
               </h1>
               <p className="mx-auto mb-10 max-w-xl text-lg leading-relaxed text-slate-300">
-                This URL is not on our site. Use the links below to get back on track, or book a
-                demo and we will show you how AI receptionists and automation capture more leads.
+                This URL is not on our site. Use the links below to get back on track, or get a website quote.
               </p>
 
               <nav
@@ -66,7 +65,7 @@ export default function NotFound() {
 
               <Button variant="primary" size="lg" asChild className="px-8 py-4 text-lg font-bold">
                 <BookingLink>
-                  Book Demo
+                  Book a Website Consultation
                   <ArrowRight className="ml-2 h-5 w-5" aria-hidden />
                 </BookingLink>
               </Button>

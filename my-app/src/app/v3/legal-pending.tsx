@@ -19,7 +19,12 @@ const LAST_UPDATED = "October 13, 2026";
 function LegalPage({ path, heading, children }: { path: "/privacy" | "/terms"; heading: string; children: ReactNode }) {
   return (
     <PageShell className="min-h-screen w-full bg-slate-950">
-      <SeoHead path={path} title={`${heading} | Mercy Speaks Digital`} noindex />
+      <SeoHead
+        path={path}
+        title={`${heading} | Mercy Speaks Digital`}
+        description={path === "/privacy" ? "How Mercy Speaks Digital collects, uses and protects the information you share through this website." : "The terms that apply when you use the Mercy Speaks Digital website and request our services."}
+        noindex
+      />
       <main className={`${section} pt-12 md:pt-20`}>
         <article className={`${inner} max-w-3xl`}>
           <h1 className={h1}>{heading}</h1>

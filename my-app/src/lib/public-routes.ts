@@ -50,8 +50,7 @@ export const PUBLIC_ROUTES: readonly PublicRouteDef[] = [
   // Privacy / Terms: substantive drafts pending Donatus's review — noindex, omit from sitemap until approved
   { path: "/privacy", sitemap: false, prerender: true },
   { path: "/terms", sitemap: false, prerender: true },
-  // Widget embed frame — technical, excluded from sitemap (/widget/install withdrawn 2026-10-13)
-  { path: "/widget/frame", sitemap: false, prerender: true },
+  // /widget/frame and /widget/install: widget parked — unrouted (files kept), not prerendered.
   // Redirect aliases (/solutions, /hvac, /plumbing, /portfolio, /testimonials, old AI service URLs) are handled by
   // vercel.json permanent redirects and are not prerendered. Withdrawn pages are not routed (404).
 ] as const;

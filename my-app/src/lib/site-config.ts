@@ -31,7 +31,7 @@ export const OG_IMAGE_WIDTH = 1200;
 export const OG_IMAGE_HEIGHT = 630;
 /** Complete sentence for og:image:alt — keep ≤100 characters. */
 export const OG_IMAGE_ALT =
-  "Mercy Speaks Digital — AI receptionists, websites, and automation for small businesses.";
+  "Mercy Speaks Digital — conversion websites and website care for growing businesses.";
 
 /** Route path → `/og/{slug}.png`. Unlisted paths fall back to {@link DEFAULT_OG_IMAGE_PATH}. */
 export const OG_IMAGE_BY_PATH: Record<string, string> = {
@@ -165,11 +165,7 @@ export const BUSINESS = {
   },
   /** Schema.org areaServed (strings; ProfessionalService / LocalBusiness) */
   areaServed: ["Houston Metro Area", "United States"] as const,
-  /** Schema.org openingHours — weekdays 9am–6pm Central (CST/CDT) */
-  openingHours: "Mo-Fr 09:00-18:00",
-  openingHoursTimezone: "America/Chicago",
   logoPath: LOGO_PATH,
-  sameAs: SOCIAL_LINKS.map((l) => l.href),
 } as const;
 
 export const NAV_PATHS = {

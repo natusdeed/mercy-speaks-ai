@@ -24,7 +24,6 @@ import BookDemo from './app/book-demo/page';
 import Services from './pages/Services';
 import Results from './app/results/page';
 import ServiceWebsiteDesign from './app/services/website-design/page';
-import WidgetFramePage from './app/widget/frame/page';
 import RoofingPage from './app/roofing/page';
 import IndustriesIndexPage from './app/industries/page';
 import IndustrySlugPage from './app/industries/[slug]/page';
@@ -147,10 +146,9 @@ function App() {
           {/*
             Withdrawn 2026-10-13 (not routed → 404): /services/social-media-management, /services/review-generation,
             /services/reputation-management, /services/website-chatbot, /services/workflow-automation,
-            /services/rag-data, /ai-employee-system, /widget/install (developer embed notes; widget parked), /blog and /blog/* (AI-first posts unpublished via draft: true).
+            /services/rag-data, /ai-employee-system, /widget/install and /widget/frame (widget parked; unrouted 2026-10-14), /blog and /blog/* (AI-first posts unpublished via draft: true).
             Page files are kept in the repo.
           */}
-          <Route path="/widget/frame" element={<WidgetFramePage />} />
           <Route path="/cookie-policy" element={<CookiePolicy />} />
           {/* Catch-all: client nav + prerender source for dist/404.html — never in sitemap */}
           <Route path="*" element={<NotFound />} />

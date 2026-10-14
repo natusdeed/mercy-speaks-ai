@@ -21,9 +21,7 @@ function areaServedNodes() {
 /** Topics we work on—factual, not keyword stuffing; helps answer engines summarize the business. */
 const KNOWS_ABOUT = [
   "Website design and development",
-  "AI phone receptionist systems",
-  "Business workflow automation",
-  "Lead capture and booking automation",
+  "AI receptionist (pilot)",
 ] as const;
 
 /**
@@ -45,14 +43,6 @@ export function organizationSchema() {
     email: BUSINESS.email,
     telephone: BUSINESS.telephone,
     areaServed: areaServedNodes(),
-    openingHours: BUSINESS.openingHours,
-    openingHoursSpecification: {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      opens: "09:00",
-      closes: "18:00",
-    },
-    sameAs: [...BUSINESS.sameAs],
     knowsAbout: [...KNOWS_ABOUT],
   };
 }
@@ -162,14 +152,6 @@ export function localBusinessSchema(input: {
       "@type": "City",
       name,
     })),
-    openingHours: BUSINESS.openingHours,
-    openingHoursSpecification: {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      opens: "09:00",
-      closes: "18:00",
-    },
-    sameAs: [...BUSINESS.sameAs],
     parentOrganization: { "@id": ORGANIZATION_ID },
     knowsAbout: [...KNOWS_ABOUT],
   };
