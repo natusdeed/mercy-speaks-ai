@@ -207,7 +207,7 @@ export default function WebsiteDesignPage() {
                 </p>
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-electric-purple/15 border border-electric-purple/20 mb-5">
                   <Globe className="w-4 h-4 text-electric-purple" />
-                  <span className="text-xs sm:text-sm text-electric-purple font-semibold tracking-wide">
+                  <span className="text-xs sm:text-sm text-violet-400 font-semibold tracking-wide">
                     Website Development
                   </span>
                 </div>
@@ -269,7 +269,7 @@ export default function WebsiteDesignPage() {
                   <div className="absolute -bottom-24 -left-24 h-56 w-56 bg-neon-cyan/10 blur-3xl rounded-full" />
 
                   <div className="relative">
-                    <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">
+                    <p className="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-3">
                       Built for trust + conversion
                     </p>
                     <h2 className="text-lg sm:text-xl font-bold text-slate-50 mb-3">
@@ -299,7 +299,7 @@ export default function WebsiteDesignPage() {
                       ))}
                     </div>
 
-                    <p className="mt-5 text-xs text-slate-500">
+                    <p className="mt-5 text-xs text-slate-400">
                       Clean build • Premium design • No clutter • Designed to convert
                     </p>
                   </div>
