@@ -294,7 +294,7 @@ export default function WebsiteDesignPage() {
                           <span className="p-2 rounded-xl bg-neon-cyan/10">
                             <Icon className="w-4 h-4 text-neon-cyan" />
                           </span>
-                          <span className="text-sm text-slate-200">{label}</span>
+                          <span className="min-w-0 text-sm text-slate-200 [overflow-wrap:anywhere]">{label}</span>
                         </div>
                       ))}
                     </div>
@@ -392,7 +392,7 @@ export default function WebsiteDesignPage() {
           <div className="section-inner max-w-6xl mx-auto">
             <motion.div {...fadeUpInView} className="card-premium rounded-2xl">
               <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8">
-                <div className="max-w-2xl">
+                <div className="w-full lg:w-auto max-w-2xl min-w-0 [overflow-wrap:anywhere]">
                   <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">
                     What’s included
                   </p>
@@ -409,7 +409,7 @@ export default function WebsiteDesignPage() {
                   {included.map((item) => (
                     <div key={item} className="flex items-start gap-3 rounded-2xl bg-slate-900/20 border border-slate-800/60 p-4">
                       <CheckCircle2 className="w-5 h-5 text-neon-cyan shrink-0 mt-0.5" />
-                      <span className="text-sm text-slate-200 leading-relaxed">{item}</span>
+                      <span className="min-w-0 text-sm text-slate-200 leading-relaxed [overflow-wrap:anywhere]">{item}</span>
                     </div>
                   ))}
                 </div>

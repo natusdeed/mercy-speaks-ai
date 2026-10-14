@@ -840,3 +840,12 @@ section {
 .blog-prose tbody tr:last-child td {
   border-bottom: 0;
 }
+
+/* Text-resize resilience (WCAG 1.4.4 / 1.4.10): long words wrap instead of overflowing
+   at 200% text or 400% zoom. No effect at default sizes where words already fit. */
+h1, h2, h3, h4, h5, h6, p, li, dt, dd, th, td, label, figcaption, blockquote, summary {
+  overflow-wrap: break-word;
+}
+a.whitespace-nowrap, button.whitespace-nowrap {
+  white-space: normal;
+}

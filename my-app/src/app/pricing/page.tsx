@@ -199,7 +199,7 @@ export default function PricingPage() {
                           className="flex items-start gap-2 text-slate-300 text-sm leading-snug"
                         >
                           <CheckCircle2 className="w-4 h-4 text-neon-cyan shrink-0 mt-0.5" />
-                          {item}
+                          <span className="min-w-0">{item}</span>
                         </li>
                       ))}
                     </ul>

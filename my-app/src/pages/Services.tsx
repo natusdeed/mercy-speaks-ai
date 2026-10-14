@@ -178,7 +178,7 @@ export default function ServicesPage() {
                     className="flex items-start gap-3 rounded-xl border border-slate-800/60 bg-slate-900/25 px-4 py-3.5 text-slate-200 hover:border-neon-cyan/35 hover:text-neon-cyan transition-colors min-h-[52px]"
                   >
                     <Icon className="w-5 h-5 text-electric-purple shrink-0" aria-hidden />
-                    <span className="flex-1">
+                    <span className="flex-1 min-w-0 [overflow-wrap:anywhere]">
                       <span className="block font-medium">{label}</span>
                       {description ? (
                         <span className="block text-xs text-slate-400 mt-1">{description}</span>
