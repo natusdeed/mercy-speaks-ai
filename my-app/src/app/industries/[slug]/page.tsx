@@ -1,22 +1,13 @@
 import { Navigate, useParams } from "react-router-dom";
-import { IndustryPage } from "@/components/industry/industry-page";
-import { getIndustryPage } from "@/content/industry-pages";
+import { MarketPageView } from "@/components/market/market-page";
+import { getIndustryMarketPage } from "@/content/market-pages";
 import NotFound from "@/pages/NotFound";
 
-/**
- * /industries/:slug — looks up config; unknown slugs render NotFound.
- */
+/** /industries/:slug — unknown slugs render NotFound. */
 export default function IndustrySlugPage() {
   const { slug } = useParams<{ slug: string }>();
-  const config = slug ? getIndustryPage(slug) : undefined;
-
-  if (!slug) {
-    return <Navigate to="/industries" replace />;
-  }
-
-  if (!config) {
-    return <NotFound />;
-  }
-
-  return <IndustryPage config={config} />;
+  if (!slug) return <Navigate to="/industries" replace />;
+  const page = getIndustryMarketPage(slug);
+  if (!page) return <NotFound />;
+  return <MarketPageView page={page} />;
 }

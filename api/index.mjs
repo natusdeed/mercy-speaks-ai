@@ -12,6 +12,7 @@ var __export = (target, all) => {
 // my-app/src/lib/save-lead.ts
 var save_lead_exports = {};
 __export(save_lead_exports, {
+  INTEREST_LABELS: () => INTEREST_LABELS,
   buildLeadBody: () => buildLeadBody,
   buildLeadSubject: () => buildLeadSubject,
   logEvent: () => logEvent,
@@ -31,8 +32,8 @@ function cleanHeaderText(v, max) {
   const s = v.replace(/[\u0000-\u001F\u007F-\u009F]/g, " ").replace(/\s+/g, " ").trim();
   return s.length > max ? s.slice(0, max - 1).trimEnd() + "\u2026" : s;
 }
-function buildLeadSubject(name, businessName) {
-  const base = "New Website Lead";
+function buildLeadSubject(name, businessName, interest) {
+  const base = interest ? INTEREST_SUBJECTS[interest] : "New Website Lead";
   const label = cleanHeaderText(businessName, 200) || cleanHeaderText(name, 200);
   if (!label) return base;
   const prefix = `${base} \u2014 `;
@@ -44,6 +45,7 @@ function escapeHtml(s) {
 function buildLeadBody(p) {
   const rows = [
     ["Source", p.source],
+    ...p.interest ? [["Interested in", INTEREST_LABELS[p.interest]]] : [],
     ["Name", p.name],
     ...p.businessName ? [["Business", p.businessName]] : [],
     ["Email", p.email],
@@ -64,7 +66,7 @@ function logEvent(event, extra = {}) {
 }
 async function saveLead(payload) {
   const { source } = payload;
-  logEvent("submission_received", { source });
+  logEvent("submission_received", { source, interest: payload.interest ?? null });
   const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.EMAIL_FROM ?? "onboarding@resend.dev";
   if (apiKey) {
@@ -72,7 +74,7 @@ async function saveLead(payload) {
       const { Resend } = await import("resend");
       const resend = new Resend(apiKey);
       const to = process.env.LEAD_NOTIFICATION_EMAIL ?? "don@mercyspeaksdigital.com";
-      const subject = buildLeadSubject(payload.name, payload.businessName);
+      const subject = buildLeadSubject(payload.name, payload.businessName, payload.interest);
       const { text, html } = buildLeadBody(payload);
       const replyTo = safeReplyTo(payload.email);
       const { data, error } = await resend.emails.send({
@@ -98,11 +100,21 @@ async function saveLead(payload) {
   logEvent("delivery_failed", { source, category: "not_configured" });
   return { ok: true, delivered: false };
 }
-var SAFE_EMAIL_RE;
+var SAFE_EMAIL_RE, INTEREST_LABELS, INTEREST_SUBJECTS;
 var init_save_lead = __esm({
   "my-app/src/lib/save-lead.ts"() {
     "use strict";
     SAFE_EMAIL_RE = /^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)+$/;
+    INTEREST_LABELS = {
+      website: "Website quote",
+      care: "Website Care",
+      "ai-pilot": "AI Pilot information"
+    };
+    INTEREST_SUBJECTS = {
+      website: "New Website Lead",
+      care: "New Website Care Inquiry",
+      "ai-pilot": "New AI Pilot Inquiry"
+    };
   }
 });
 
@@ -134,7 +146,7 @@ var SOCIAL_LINKS = [
 var LOGO_PATH = "/favicon-512x512.png";
 var BUSINESS = {
   name: "Mercy Speaks Digital",
-  legalName: "Mercy Speaks LLC",
+  legalName: "Mercy Speaks Digital",
   email: "don@mercyspeaksdigital.com",
   phoneDisplay: "(832) 981-3123",
   /** E.164 for tel: and schema */
@@ -605,6 +617,8 @@ async function POST(request) {
   const phone = str(body.phone);
   const businessType = str(body.businessType);
   const message = str(body.message) || void 0;
+  const rawInterest = str(body.interest);
+  const interest = rawInterest === "care" || rawInterest === "ai-pilot" ? rawInterest : "website";
   if (!name || !email || !phone || !businessType) {
     return bad("Name, email, phone, and business type are required.");
   }
@@ -618,7 +632,7 @@ async function POST(request) {
     return bad("Please enter a valid phone number.");
   }
   try {
-    const result = await saveLead({ source: "contact", name, email, phone, businessType, message });
+    const result = await saveLead({ source: "contact", interest, name, email, phone, businessType, message });
     if (!result.ok || !result.delivered) {
       console.error("[api/contact]", JSON.stringify({ event: "lead_not_delivered", ts: (/* @__PURE__ */ new Date()).toISOString(), category: result.ok ? "not_configured" : "delivery_failed" }));
       return bad(GENERIC_FAILURE, 503);

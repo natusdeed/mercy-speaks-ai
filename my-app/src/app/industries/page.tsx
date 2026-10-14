@@ -1,117 +1,59 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import { PageShell } from "@/components/ui/page-shell";
 import { SeoHead } from "@/components/seo/seo-head";
 import { JsonLd } from "@/components/seo/json-ld";
-import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
-import { Button } from "@/components/ui/button";
-import { BookingLink } from "@/components/cta/booking-link";
-import { NAV_PATHS } from "@/lib/site-config";
-import {
-  breadcrumbSchema,
-  itemListSchema,
-  webPageSchema,
-} from "@/lib/schema";
-import { getAllIndustryPages } from "@/content/industry-pages";
+import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
+import { divided, h2, inner, PageHero, primaryBtn, section } from "@/components/home-v3/v3-ui";
+import { INDUSTRY_MARKET_PAGES, INDUSTRY_SLUGS, LOCATION_PAGES, ROOFING_PAGE } from "@/content/market-pages";
 
-const SEO_TITLE = "Industries | Mercy Speaks Digital";
-const SEO_DESCRIPTION =
-  "Conversion websites and website care for HVAC, plumbing, dental, law firms, churches, and auto repair, with AI receptionist and missed-call workflows offered as a limited pilot.";
+const DESCRIPTION = "Conversion websites for service businesses, churches and professional practices.";
 
 export default function IndustriesIndexPage() {
-  const industries = getAllIndustryPages();
-
+  const industries = [...INDUSTRY_SLUGS.map((s) => INDUSTRY_MARKET_PAGES[s]), ROOFING_PAGE];
+  const locations = Object.values(LOCATION_PAGES);
+  const rowCls =
+    "flex min-h-14 flex-col justify-center gap-1 py-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-300 rounded sm:flex-row sm:items-center sm:justify-between sm:gap-8";
   return (
-    <PageShell className="min-h-screen bg-slate-950">
-      <SeoHead path={NAV_PATHS.industries} title={SEO_TITLE} description={SEO_DESCRIPTION} />
+    <PageShell className="min-h-screen w-full bg-slate-950">
+      <SeoHead path="/industries" title="Industries We Serve | Mercy Speaks Digital" description={DESCRIPTION} />
       <JsonLd
         data={[
-          webPageSchema({
-            name: SEO_TITLE,
-            description: SEO_DESCRIPTION,
-            path: NAV_PATHS.industries,
-          }),
+          webPageSchema({ name: "Industries we serve", description: DESCRIPTION, path: "/industries" }),
           breadcrumbSchema([
             { name: "Home", path: "/" },
-            { name: "Industries", path: NAV_PATHS.industries },
+            { name: "Industries", path: "/industries" },
           ]),
-          itemListSchema({
-            name: "Industries we serve",
-            items: industries.map((ind) => ({
-              name: ind.navLabel,
-              path: ind.path,
-            })),
-          }),
         ]}
       />
-
-      <main>
-        <section className="section pt-6 pb-0" aria-label="Breadcrumb">
-          <div className="section-inner max-w-4xl mx-auto">
-            <Breadcrumbs items={[{ name: "Industries" }]} className="mb-2" />
-          </div>
-        </section>
-
-        <section className="section pt-8 md:pt-12" aria-labelledby="industries-index-title">
-          <div className="section-inner max-w-4xl mx-auto text-center mb-12">
-            <motion.h1
-              id="industries-index-title"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45 }}
-              className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-50 tracking-tight mb-6"
-            >
-              AI receptionist systems by industry
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: 0.05 }}
-              className="text-lg text-slate-400 leading-relaxed max-w-2xl mx-auto"
-            >
-              Missed calls look different in every trade and practice. Pick your vertical for
-              industry-specific intake, automations, and pricing guidance.
-            </motion.p>
-          </div>
-
-          <div className="section-inner max-w-5xl mx-auto">
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
-              {industries.map((ind, index) => (
-                <motion.li
-                  key={ind.slug}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.4, delay: index * 0.04 }}
-                >
-                  <Link
-                    to={ind.path}
-                    className="group flex flex-col h-full rounded-2xl border border-slate-800/60 bg-slate-900/40 backdrop-blur-md p-6 hover:border-neon-cyan/40 transition-colors"
-                  >
-                    <span className="text-xl font-bold text-slate-50 group-hover:text-neon-cyan transition-colors mb-2">
-                      {ind.navLabel}
-                    </span>
-                    <span className="text-slate-400 leading-relaxed flex-1 text-sm md:text-base">
-                      {ind.indexBlurb}
-                    </span>
-                    <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-electric-purple">
-                      View {ind.navLabel} page
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-                    </span>
-                  </Link>
-                </motion.li>
-              ))}
-            </ul>
-
-            <div className="mt-12 text-center">
-              <Button variant="primary" size="lg" asChild>
-                <BookingLink kind="aiReceptionistDemo" className="inline-flex items-center gap-2">
-                  Book a demo
-                  <ArrowRight className="w-5 h-5" />
-                </BookingLink>
-              </Button>
+      <main className="w-full">
+        <PageHero title="Industries we serve" intro={DESCRIPTION} />
+        {[
+          { id: "ind-heading", title: "Industries", items: industries },
+          { id: "loc-heading", title: "Locations", items: locations },
+        ].map((g) => (
+          <section key={g.id} className={`${section} ${divided}`} aria-labelledby={g.id}>
+            <div className={inner}>
+              <h2 id={g.id} className={`${h2} mb-8`}>
+                {g.title}
+              </h2>
+              <ul className="divide-y divide-slate-800 border-y border-slate-800">
+                {g.items.map((p) => (
+                  <li key={p.path}>
+                    <Link to={p.path} className={rowCls}>
+                      <span className="text-lg font-semibold text-white underline decoration-slate-600 underline-offset-4">{p.h1}</span>
+                      <span className="text-base text-slate-400 sm:max-w-md sm:text-right">{p.indexBlurb}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
+          </section>
+        ))}
+        <section className={`${section} ${divided}`}>
+          <div className={inner}>
+            <Link to="/contact" className={primaryBtn}>
+              Get a Website Quote
+            </Link>
           </div>
         </section>
       </main>

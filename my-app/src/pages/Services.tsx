@@ -4,14 +4,13 @@ import { SeoHead } from "@/components/seo/seo-head";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
 import { NAV_PATHS } from "@/lib/site-config";
-import { body, divided, h2, inner, PageHero, PILOT_CAPABILITIES, primaryBtn, QuietList, section, textLink } from "@/components/home-v3/v3-ui";
+import { body, divided, h2, inner, PageHero, primaryBtn, section, textLink } from "@/components/home-v3/v3-ui";
+import { ServiceSummaries } from "@/components/home-v3/service-summaries";
+import { SelectedWork } from "@/components/home-v3/selected-work";
 
-/**
- * /services — aligned to the locked hierarchy: Conversion Websites → Website Care → AI Receptionist (pilot).
- * Prices shown are the locked package/care prices only. No AI pricing, no withdrawn services.
- */
+/** /services — hub for the three public services (website-first). Copy and prices from content/offers.ts. */
 const DESCRIPTION =
-  "Conversion websites first, ongoing website care, and an AI receptionist offered as a limited pilot.";
+  "Conversion websites, website care and optimization, and an AI receptionist offered as a limited pilot.";
 
 export default function ServicesPage() {
   return (
@@ -27,70 +26,32 @@ export default function ServicesPage() {
         ]}
       />
       <main className="w-full">
-        <PageHero title="Services" intro={DESCRIPTION} />
-
-        <section className={`${section} ${divided}`} aria-labelledby="svc-websites">
-          <div className={`${inner} grid gap-6 md:grid-cols-[1fr_2fr] md:gap-16`}>
-            <h2 id="svc-websites" className={h2}>
-              Conversion Websites
-            </h2>
-            <div>
-              <p className={body}>
-                Fast, modern websites that make it easy for the people who find you to call, request a quote, or request
-                an appointment. Packages: Starter $997, Business $1,997, Premium from $3,500.
-              </p>
-              <div className="mt-4">
-                <Link to="/websites" className={textLink}>
-                  See website packages
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className={`${section} ${divided}`} aria-labelledby="svc-care">
-          <div className={`${inner} grid gap-6 md:grid-cols-[1fr_2fr] md:gap-16`}>
-            <h2 id="svc-care" className={h2}>
-              Website Care
-            </h2>
-            <div>
-              <p className={body}>Ongoing care for your website: Care $79 a month, Care Plus $149 a month.</p>
-              <div className="mt-4">
-                <Link to="/website-care" className={textLink}>
-                  See Website Care plans
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className={`${section} ${divided}`} aria-labelledby="svc-ai">
-          <div className={`${inner} grid gap-6 md:grid-cols-[1fr_2fr] md:gap-16`}>
-            <h2 id="svc-ai" className={h2}>
-              AI Receptionist — Pilot
-            </h2>
-            <div>
-              <p className={body}>
-                A limited, invitation-only pilot, separate from our website packages. No published pricing. In the pilot,
-                the AI receptionist:
-              </p>
-              <div className="mt-6">
-                <QuietList items={[...PILOT_CAPABILITIES]} />
-              </div>
-              <div className="mt-4">
-                <Link to="/ai-pilot" className={textLink}>
-                  Learn about the AI Receptionist pilot
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className={`${section} ${divided}`}>
-          <div className={inner}>
+        <PageHero title="Services" intro={DESCRIPTION}>
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-8">
             <Link to="/contact" className={primaryBtn}>
               Get a Website Quote
             </Link>
+            <Link to="/pricing" className={textLink}>
+              See all prices
+            </Link>
+          </div>
+        </PageHero>
+        <ServiceSummaries title="Our services" />
+        <SelectedWork variant="compact" headingId="services-work-heading" />
+        <section className={`${section} ${divided}`} aria-labelledby="services-cta-heading">
+          <div className={inner}>
+            <h2 id="services-cta-heading" className={h2}>
+              Not sure where to start?
+            </h2>
+            <p className={`${body} mt-4 max-w-2xl mx-0`}>
+              Most businesses start with a website. Tell us what you need and choose the service you're interested in on
+              the form.
+            </p>
+            <div className="mt-8">
+              <Link to="/contact" className={primaryBtn}>
+                Get a Website Quote
+              </Link>
+            </div>
           </div>
         </section>
       </main>

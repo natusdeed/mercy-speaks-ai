@@ -1,67 +1,21 @@
 import { Link } from "react-router-dom";
 import { SelectedWork } from "@/components/home-v3/selected-work";
+import { ServiceSummaries } from "@/components/home-v3/service-summaries";
 import { PageShell } from "@/components/ui/page-shell";
 import { SeoHead } from "@/components/seo/seo-head";
 import { JsonLd } from "@/components/seo/json-ld";
 import { faqPageSchema, websiteSchema } from "@/lib/schema";
-import { body, divided, eyebrow, FaqList, h1, h2, inner, narrow, PILOT_CAPABILITIES, PriceColumns, primaryBtn, section, secondaryBtn, smallPrint, textLink } from "@/components/home-v3/v3-ui";
+import { body, divided, FaqList, h1, h2, inner, narrow, primaryBtn, section, secondaryBtn, smallPrint } from "@/components/home-v3/v3-ui";
+import { AFTER_LAUNCH, DELIVERY_STEPS, OWNERSHIP, PAYMENT_TERMS, TIMELINE } from "@/content/offers";
+import { VERIFIED_WORK } from "@/content/verified-work";
 
 /**
- * Homepage V3 (Project #001, CEO-locked copy 2026-10-13).
- * Copy source: /workspace/mercy-speaks/project-001/homepage-copy-v3.md — do not edit copy here without CEO approval.
- * Static markup only (no Framer Motion / no demo widgets) to keep first paint light (QA P1: homepage LCP/TBT).
- * Design: premium, quiet, conversion-focused (CEO principle) — see v3-ui.tsx.
+ * Homepage (customer-experience correction, 2026-10-13). Order per CEO brief:
+ * hero → three services → selected work → [recorded pilot demo: omitted until an approved recording exists]
+ * → delivery process → FAQ → final inquiry. All offers/prices/terms come from content/offers.ts.
  */
-
-const PACKAGES = [
-  {
-    name: "Starter",
-    price: "$997",
-    details: "Up to 5 pages, 2 revision rounds. Best for new or simple businesses that need a professional site.",
-    recommended: false,
-  },
-  {
-    name: "Business",
-    price: "$1,997",
-    details: "Up to 10 pages, 2 revision rounds. Best for service businesses that need a page for each service.",
-    recommended: true,
-  },
-  {
-    name: "Premium",
-    price: "from $3,500",
-    details: "Pages based on your approved scope, 3 revision rounds. Best for multi-location or custom needs.",
-    recommended: false,
-  },
-] as const;
-
-const STEPS = [
-  { title: "Quote", body: "tell us about your business; we send a written quote, valid 30 calendar days." },
-  { title: "Kickoff", body: "you pay 50% and send the required assets, content, and access." },
-  { title: "Build", body: "10–15 business days of active Mercy Speaks production time." },
-  { title: "Launch", body: "you pay the final 50%; we launch on hosting and a domain you own, with delegated access for us." },
-  { title: "Support", body: "14 calendar days of bug fixes for defects in delivered work, then an optional care plan." },
-] as const;
-
-const CARE_PLANS = [
-  {
-    name: "Care",
-    price: "$79/month",
-    details:
-      "Routine updates, backups and security monitoring where applicable, and up to 30 minutes of minor content edits each month.",
-  },
-  {
-    name: "Care Plus",
-    price: "$149/month",
-    details: "Everything in Care, plus up to 90 minutes of edits or maintenance each month and priority handling.",
-  },
-] as const;
-
 export const HOME_V3_FAQS = [
-  {
-    question: "How long does a website take?",
-    answer:
-      "10–15 business days of active Mercy Speaks production time after the initial payment and all required starting assets are received. The delivery clock pauses while Mercy Speaks is waiting for client content, assets, credentials/access, feedback, revisions, or approvals.",
-  },
+  { question: "How long does a website take?", answer: TIMELINE },
   {
     question: "What's included?",
     answer:
@@ -69,22 +23,22 @@ export const HOME_V3_FAQS = [
   },
   {
     question: "Do I own my website?",
-    answer:
-      "Yes. You own your hosting and domain accounts and give us delegated access. Once your project is paid in full, you own the final website deliverables we created specifically for your approved project. Mercy Speaks Digital keeps ownership of its pre-existing tools, frameworks, reusable code and components, templates, processes, methods, and know-how. Third-party software, plugins, fonts, images, licensed assets, and services stay subject to their own licenses and ownership terms.",
+    answer: `Yes. You own your hosting and domain accounts and give us delegated access. ${OWNERSHIP}`,
   },
-  {
-    question: "How does payment work?",
-    answer: "50% to begin and 50% before launch. Quotes are valid for 30 calendar days.",
-  },
-  {
-    question: "What happens after launch?",
-    answer: "14 calendar days of bug fixes for defects in delivered work, then an optional care plan.",
-  },
+  { question: "How does payment work?", answer: "50% to begin and 50% before launch. Quotes are valid for 30 calendar days." },
+  { question: "What happens after launch?", answer: AFTER_LAUNCH },
   {
     question: "Can you build my site in Spanish?",
     answer: "Yes. A Spanish-language version is available for +40%, subject to scope and page count.",
   },
+  {
+    question: "Is the AI Receptionist part of a website package?",
+    answer:
+      "No. The AI Receptionist is a limited pilot offered separately, by invitation. It answers during the hours you configure and captures messages and service requests for your team to review. It does not confirm appointments.",
+  },
 ] as const;
+
+const hero = VERIFIED_WORK[0];
 
 export default function Home() {
   return (
@@ -92,178 +46,106 @@ export default function Home() {
       <SeoHead
         path="/"
         title="Conversion Websites for Growing Businesses | Mercy Speaks Digital"
-        description="Mercy Speaks Digital builds fast, modern conversion websites that make it easy for visitors to call or request a quote, plus optional website care plans."
+        description="Mercy Speaks Digital builds conversion websites that explain your business clearly and make it easy for visitors to call or request a quote, plus website care plans."
         ogImageAlt="Mercy Speaks Digital — conversion websites for growing businesses."
       />
       <JsonLd data={[websiteSchema(), faqPageSchema(HOME_V3_FAQS.map((f) => ({ ...f })))]} />
       <main className="w-full">
-        {/* 1. Hero — the one primary CTA in the first view */}
-        <section className={`${section} pt-12 md:pt-24`} aria-labelledby="hero-heading">
-          <div className={inner}>
-            <h1 id="hero-heading" className={`${h1} max-w-3xl mx-0`}>
-              The digital front door for growing businesses.
-            </h1>
-            <p className={`${body} mt-6 max-w-2xl mx-0`}>
-              Mercy Speaks Digital builds fast, modern conversion websites that make it easy for the people who find you
-              to call, request a quote, or request an appointment. We keep your site up to date with optional care plans.
-            </p>
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Link to="/contact" className={primaryBtn}>
-                Get a Website Quote
-              </Link>
-              <a href="#packages" className={secondaryBtn}>
-                See Website Packages
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* 2. The problem */}
-        <section className={`${section} ${divided}`} aria-labelledby="problem-heading">
-          <div className={`${inner} grid gap-10 md:grid-cols-2 md:gap-16`}>
-            <div>
-              <h2 id="problem-heading" className={h2}>
-                Your website should make it easy to choose you.
-              </h2>
-            </div>
-            <div className="space-y-5">
-              <p className={body}>
-                Most visitors decide fast, usually on a phone. If your services are hard to find, your phone number is
-                buried, or the page loads slowly, they move on before they reach out.
+        {/* 1. Hero — one primary website-quote action + a real project visual */}
+        <section className={`${section} pt-10 md:pt-20`} aria-labelledby="hero-heading">
+          <div className={`${inner} grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-14`}>
+            <div className="min-w-0">
+              <p className="mb-4 text-sm font-medium tracking-wide text-violet-300">Mercy Speaks Digital · Websites for growing businesses</p>
+              <h1 id="hero-heading" className={`${h1} max-w-3xl mx-0`}>
+                The digital front door for growing businesses.
+              </h1>
+              <p className={`${body} mt-6 max-w-xl mx-0`}>
+                We build conversion websites that explain your business clearly and make it easy for visitors to call or
+                request a quote, then keep them up to date with optional care plans.
               </p>
-              <p className={body}>
-                We build websites with one job: help visitors understand what you do and contact you without friction.
-              </p>
-              <ul className="space-y-2 pt-2 text-base text-slate-200 md:text-lg">
-                {[
-                  "Clear services and pricing information you approve",
-                  "Tap-to-call and quote-request forms placed where people look",
-                  "Mobile-first design built to load quickly",
-                ].map((item) => (
-                  <li key={item} className="border-l border-slate-700 pl-4">
-                    {item}
-                  </li>
-                ))}
-              </ul>
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <Link to="/contact" className={primaryBtn}>
+                  Get a Website Quote
+                </Link>
+                <Link to="/results" className={secondaryBtn}>
+                  See our work
+                </Link>
+              </div>
+              <p className={`${smallPrint} mt-6`}>Website packages from $997. Written quote before any work begins.</p>
             </div>
+            <figure className="min-w-0">
+              <img
+                src={hero.image}
+                alt={`Homepage of ${hero.title}, a website built by Mercy Speaks Digital`}
+                width={hero.width}
+                height={hero.height}
+                fetchPriority="high"
+                decoding="async"
+                className="block h-auto w-full rounded-xl border border-slate-700"
+              />
+              <figcaption className="mt-3 text-sm text-slate-400">
+                {hero.title} · {hero.label}
+              </figcaption>
+            </figure>
           </div>
         </section>
 
-        {/* 3. Website packages — prices are the visual idea; no extra primary button here */}
-        <section id="packages" className={`${section} ${divided} scroll-mt-24`} aria-labelledby="packages-heading">
-          <div className={inner}>
-            <h2 id="packages-heading" className={`${h2} mb-10`}>
-              Website packages
-            </h2>
-            <PriceColumns items={PACKAGES} />
-            <p className={`${smallPrint} mt-6`}>
-              50% to begin, 50% before launch. Hosting and domain not included. Add-ons and full terms on the Websites
-              page.
-            </p>
-            <div className="mt-6 flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-8">
-              <Link to="/contact" className={textLink}>
-                Get a Website Quote
-              </Link>
-              <Link to="/websites" className={textLink}>
-                Compare full package details
-              </Link>
-            </div>
-          </div>
-        </section>
+        {/* 2. Three service summaries, websites first */}
+        <ServiceSummaries title="How we help" />
 
-        {/* 3b. Selected website work — existing, labeled portfolio items only */}
-        <SelectedWork />
+        {/* 3. Selected website work (shared verified source) */}
+        <SelectedWork
+          title="Selected website work"
+          intro="Real projects, each labeled as client work or a demo build."
+        />
 
-        {/* 4. How it works — numbered list, not a card grid */}
+        {/* 4. Recorded AI pilot demonstration: intentionally not rendered. No approved recording exists yet. */}
+
+        {/* 5. Short delivery process */}
         <section className={`${section} ${divided}`} aria-labelledby="how-heading">
           <div className={inner}>
             <h2 id="how-heading" className={`${h2} mb-10`}>
-              How it works
+              How a website project works
             </h2>
             <ol className="divide-y divide-slate-800 border-y border-slate-800">
-              {STEPS.map((s, i) => (
+              {DELIVERY_STEPS.map((s, i) => (
                 <li key={s.title} className="grid gap-1 py-5 sm:grid-cols-[4rem_10rem_1fr] sm:gap-4">
-                  <span className="text-sm tabular-nums text-slate-400">0{i + 1}</span>
+                  <span className="text-sm tabular-nums text-slate-400" aria-hidden>
+                    0{i + 1}
+                  </span>
                   <h3 className="text-base font-semibold text-white md:text-lg">{s.title}</h3>
                   <p className="text-base leading-relaxed text-slate-300">{s.body}</p>
                 </li>
               ))}
             </ol>
             <p className={`${smallPrint} mt-6 max-w-3xl mx-0`}>
-              10–15 business days of active Mercy Speaks production time after the initial payment and all required
-              starting assets are received. The delivery clock pauses while Mercy Speaks is waiting for client content,
-              assets, credentials/access, feedback, revisions, or approvals.
+              {TIMELINE} {PAYMENT_TERMS}
             </p>
           </div>
         </section>
 
-        {/* 5. Website Care & Optimization */}
-        <section className={`${section} ${divided}`} aria-labelledby="care-heading">
-          <div className={inner}>
-            <p className={eyebrow}>Website Care &amp; Optimization</p>
-            <h2 id="care-heading" className={`${h2} mb-10`}>
-              Keep your site up to date after launch
-            </h2>
-            <PriceColumns items={CARE_PLANS} cols={2} />
-            <p className={`${smallPrint} mt-6`}>
-              3-month minimum, then 30 days' written notice to cancel. Unused time does not roll over. Out-of-scope work
-              requires approval and is $95/hour.
-            </p>
-            <div className="mt-4">
-              <Link to="/website-care" className={textLink}>
-                Learn about Website Care
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* 6. AI pilot — deliberately small and plain */}
-        <section className={`${section} ${divided} py-12 md:py-16`} aria-labelledby="ai-pilot-heading">
-          <div className={`${inner} grid gap-4 md:grid-cols-[1fr_2fr] md:gap-16`}>
-            <h2 id="ai-pilot-heading" className="text-lg font-semibold text-white">
-              AI Receptionist — Pilot
-            </h2>
-            <div>
-              <p className="text-base leading-relaxed text-slate-400">
-                A limited, invitation-only pilot, separate from our website packages. In the pilot, the AI receptionist:
-              </p>
-              <ul className="mt-3 list-disc space-y-1 pl-5 text-base leading-relaxed text-slate-400">
-                {PILOT_CAPABILITIES.map((c) => (
-                  <li key={c}>{c}</li>
-                ))}
-              </ul>
-              <div className="mt-2">
-                <Link to="/ai-pilot" className={textLink}>
-                  Learn about the AI Receptionist pilot
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 7. FAQ */}
+        {/* 6. FAQ */}
         <section className={`${section} ${divided}`} aria-labelledby="faq-heading">
           <div className={narrow}>
             <h2 id="faq-heading" className={`${h2} mb-8`}>
-              FAQ
+              Common questions
             </h2>
             <FaqList faqs={HOME_V3_FAQS} />
           </div>
         </section>
 
-        {/* 8. Final CTA */}
+        {/* 7. Final inquiry */}
         <section className={`${section} ${divided}`} aria-labelledby="final-cta-heading">
-          <div className={inner}>
-            <h2 id="final-cta-heading" className={`${h2} max-w-2xl mx-0`}>
-              Ready for a website that makes it easy to choose you?
-            </h2>
-            <p className={`${body} mt-4`}>Tell us about your business and we'll send a written quote.</p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <div className={`${inner} grid gap-8 md:grid-cols-[2fr_1fr] md:items-end`}>
+            <div>
+              <h2 id="final-cta-heading" className={`${h2} max-w-2xl mx-0`}>
+                Ready for a website that makes it easy to choose you?
+              </h2>
+              <p className={`${body} mt-4`}>Tell us about your business and we'll send a written quote.</p>
+            </div>
+            <div className="md:text-right">
               <Link to="/contact" className={primaryBtn}>
                 Get a Website Quote
-              </Link>
-              <Link to="/websites" className={secondaryBtn}>
-                See Website Packages
               </Link>
             </div>
           </div>

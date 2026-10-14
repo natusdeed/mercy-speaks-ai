@@ -44,6 +44,9 @@ export async function POST(request: Request) {
   const phone = str(body.phone);
   const businessType = str(body.businessType);
   const message = str(body.message) || undefined;
+  // Service interest from the contact form choice; unknown values fall back to a website quote.
+  const rawInterest = str(body.interest);
+  const interest = rawInterest === "care" || rawInterest === "ai-pilot" ? rawInterest : "website";
 
   if (!name || !email || !phone || !businessType) {
     return bad("Name, email, phone, and business type are required.");
@@ -65,7 +68,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const result = await saveLead({ source: "contact", name, email, phone, businessType, message });
+    const result = await saveLead({ source: "contact", interest, name, email, phone, businessType, message });
     if (!result.ok || !result.delivered) {
       console.error("[api/contact]", JSON.stringify({ event: "lead_not_delivered", ts: new Date().toISOString(), category: result.ok ? "not_configured" : "delivery_failed" }));
       return bad(GENERIC_FAILURE, 503);

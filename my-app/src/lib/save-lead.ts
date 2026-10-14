@@ -4,6 +4,8 @@
  */
 export type LeadPayload = {
   source: "book-demo" | "contact" | "chat";
+  /** Contact-form service interest. */
+  interest?: "website" | "care" | "ai-pilot";
   name: string;
   email: string;
   phone: string;
@@ -33,8 +35,20 @@ function cleanHeaderText(v: unknown, max: number): string {
   return s.length > max ? s.slice(0, max - 1).trimEnd() + "…" : s;
 }
 
-export function buildLeadSubject(name?: string, businessName?: string): string {
-  const base = "New Website Lead";
+export const INTEREST_LABELS = {
+  website: "Website quote",
+  care: "Website Care",
+  "ai-pilot": "AI Pilot information",
+} as const;
+
+const INTEREST_SUBJECTS = {
+  website: "New Website Lead",
+  care: "New Website Care Inquiry",
+  "ai-pilot": "New AI Pilot Inquiry",
+} as const;
+
+export function buildLeadSubject(name?: string, businessName?: string, interest?: LeadPayload["interest"]): string {
+  const base = interest ? INTEREST_SUBJECTS[interest] : "New Website Lead";
   const label = cleanHeaderText(businessName, 200) || cleanHeaderText(name, 200);
   if (!label) return base;
   const prefix = `${base} — `;
@@ -53,6 +67,7 @@ function escapeHtml(s: string): string {
 export function buildLeadBody(p: LeadPayload): { text: string; html: string } {
   const rows: Array<[string, string]> = [
     ["Source", p.source],
+    ...(p.interest ? ([["Interested in", INTEREST_LABELS[p.interest]]] as Array<[string, string]>) : []),
     ["Name", p.name],
     ...(p.businessName ? ([["Business", p.businessName]] as Array<[string, string]>) : []),
     ["Email", p.email],
@@ -81,7 +96,7 @@ export function logEvent(event: string, extra: Record<string, unknown> = {}) {
 
 export async function saveLead(payload: LeadPayload): Promise<{ ok: boolean; error?: string; delivered: boolean }> {
   const { source } = payload;
-  logEvent("submission_received", { source });
+  logEvent("submission_received", { source, interest: payload.interest ?? null });
 
   const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.EMAIL_FROM ?? "onboarding@resend.dev";
@@ -91,7 +106,7 @@ export async function saveLead(payload: LeadPayload): Promise<{ ok: boolean; err
       const { Resend } = await import("resend");
       const resend = new Resend(apiKey);
       const to = process.env.LEAD_NOTIFICATION_EMAIL ?? "don@mercyspeaksdigital.com";
-      const subject = buildLeadSubject(payload.name, payload.businessName);
+      const subject = buildLeadSubject(payload.name, payload.businessName, payload.interest);
       const { text, html } = buildLeadBody(payload);
       const replyTo = safeReplyTo(payload.email);
 

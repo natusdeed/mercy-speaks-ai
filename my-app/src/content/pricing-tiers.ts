@@ -9,7 +9,7 @@
  * You can also call warnPricingConfigPlaceholders() from Node scripts.
  */
 
-import { BOOKING_LINKS } from "@/lib/site-config";
+import { WEBSITE_PACKAGES } from "@/content/offers";
 
 /** Sentinel — replace with a real USD number before publishing overage rates in the UI. */
 export const NEEDS_REAL_RATES = "NEEDS_REAL_RATES" as const;
@@ -61,7 +61,7 @@ export type BillingTerms = {
 
 /** Honest UI copy when a NEEDS_REAL_* sentinel is still in config. */
 export const OVERAGE_PENDING_UI =
-  "Published overage rates coming soon — ask on your call" as const;
+  "Overage rates are not published" as const;
 
 export const TERMS_PENDING_UI =
   "Confirmed in writing before you start — ask on your strategy call" as const;
@@ -72,56 +72,18 @@ export const TERMS_PENDING_UI =
  */
 export const AI_RECEPTIONIST_TIERS: AiReceptionistTier[] = [];
 
-export const WEBSITE_TIERS: WebsiteTier[] = [
-  {
-    name: "Starter Website",
-    price: 997,
-    priceCurrency: "USD",
-    priceLabel: "Starting at $997",
-    audience: "Perfect for new or local businesses that need a clean, trustworthy website fast.",
-    included: [
-      "Premium 1–3 page site (home + core pages)",
-      "Mobile-first design + fast performance",
-      "Conversion-ready contact/quote flow",
-      "Basic on-page SEO + analytics setup",
-    ],
-    cta: "Get a Website Quote",
-    href: BOOKING_LINKS.websiteQuote,
-    popular: false,
-  },
-  {
-    name: "Business Website",
-    price: 1997,
-    priceCurrency: "USD",
-    priceLabel: "Starting at $1,997",
-    audience: "For established companies that need stronger messaging, structure, and lead capture.",
-    included: [
-      "Premium 5–8 page website",
-      "Service pages built for conversion",
-      "SEO-ready structure + technical cleanup",
-      "Integrations (forms, email, booking, CRM-ready)",
-    ],
-    cta: "Book Website Call",
-    href: BOOKING_LINKS.websiteQuote,
-    popular: true,
-  },
-  {
-    name: "Premium / Custom Website",
-    price: null,
-    priceCurrency: "USD",
-    priceLabel: "Custom quote",
-    audience: "For high-growth brands that need custom UI, advanced sections, and tailored strategy.",
-    included: [
-      "Custom UX + design system direction",
-      "Advanced sections (case studies, portals, calculators)",
-      "Performance + SEO optimization",
-      "Ongoing iteration and launch support",
-    ],
-    cta: "Request Custom Quote",
-    href: BOOKING_LINKS.websiteQuote,
-    popular: false,
-  },
-];
+/** Derived from the single offers source (content/offers.ts) — never restate prices here. */
+export const WEBSITE_TIERS: WebsiteTier[] = WEBSITE_PACKAGES.map((p) => ({
+  name: `${p.name} Website`,
+  price: p.priceUsd,
+  priceCurrency: "USD" as const,
+  priceLabel: p.price,
+  audience: p.details,
+  included: [p.pages, p.revisions],
+  cta: "Get a Website Quote",
+  href: "/contact",
+  popular: !!p.recommended,
+}));
 
 /**
  * Per-plan overage — keep planName/includedVolume aligned with AI_RECEPTIONIST_TIERS.

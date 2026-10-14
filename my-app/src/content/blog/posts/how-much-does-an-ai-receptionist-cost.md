@@ -2,6 +2,7 @@
 title: "How Much Does an AI Receptionist Cost in 2026?"
 metaTitle: "AI Receptionist Cost in 2026 | Mercy Speaks Digital"
 description: "AI receptionist pricing in 2026: DIY tools, hybrid services, and done-for-you agencies (a retainer plus setup). See what drives cost."
+draft: true
 publishedAt: "2026-07-11"
 tags:
   - AI receptionist

@@ -35,6 +35,9 @@ export interface LeadFormProps {
   submitIcon?: React.ReactNode;
   onSubmit: (data: LeadFormData) => Promise<void>;
   placeholders?: Partial<{ name: string; email: string; phone: string; message: string }>;
+  /** Optional content rendered at the top of the form (e.g. the service-interest choice). */
+  children?: React.ReactNode;
+  messageLabel?: string;
 }
 
 export function LeadForm({
@@ -43,6 +46,8 @@ export function LeadForm({
   submitIcon,
   onSubmit,
   placeholders = {},
+  children,
+  messageLabel = "Message",
 }: LeadFormProps) {
   const [formData, setFormData] = useState<LeadFormData>({
     name: "",
@@ -120,6 +125,7 @@ export function LeadForm({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5 w-full max-w-full" noValidate>
+      {children}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
         <div className="space-y-1.5">
           <label htmlFor="lead-name" className="block text-sm font-medium text-slate-300">
@@ -234,7 +240,7 @@ export function LeadForm({
 
       <div className="space-y-1.5">
         <label htmlFor="lead-message" className="block text-sm font-medium text-slate-300">
-          Message <span className="text-slate-400 font-normal">(optional)</span>
+          {messageLabel} <span className="text-slate-400 font-normal">(optional)</span>
         </label>
         <textarea
           id="lead-message"

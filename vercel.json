@@ -5,11 +5,6 @@
   "framework": null,
   "redirects": [
     {
-      "source": "/services/reputation-management",
-      "destination": "/services/review-generation",
-      "permanent": true
-    },
-    {
       "source": "/solutions",
       "destination": "/services",
       "permanent": true
@@ -22,6 +17,36 @@
     {
       "source": "/plumbing",
       "destination": "/industries/plumbing",
+      "permanent": true
+    },
+    {
+      "source": "/portfolio",
+      "destination": "/results",
+      "permanent": true
+    },
+    {
+      "source": "/testimonials",
+      "destination": "/results",
+      "permanent": true
+    },
+    {
+      "source": "/services/ai-phone-receptionist",
+      "destination": "/ai-pilot",
+      "permanent": true
+    },
+    {
+      "source": "/services/voice-agents",
+      "destination": "/ai-pilot",
+      "permanent": true
+    },
+    {
+      "source": "/services/missed-call-text-back",
+      "destination": "/ai-pilot",
+      "permanent": true
+    },
+    {
+      "source": "/services/appointment-automation",
+      "destination": "/ai-pilot",
       "permanent": true
     }
   ],
@@ -88,10 +113,25 @@
     }
   ],
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/index?__path=$1" },
-    { "source": "/dashboard", "destination": "/index.html" },
-    { "source": "/dashboard/:path*", "destination": "/index.html" },
-    { "source": "/admin", "destination": "/index.html" },
-    { "source": "/admin/:path*", "destination": "/index.html" }
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/index?__path=$1"
+    },
+    {
+      "source": "/dashboard",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/dashboard/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/admin",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/admin/:path*",
+      "destination": "/index.html"
+    }
   ]
 }

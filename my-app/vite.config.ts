@@ -153,7 +153,7 @@ export default defineConfig(async (): Promise<UserConfig> => {
         const rateHits = [...src.matchAll(/overagePerCallUsd:\s*NEEDS_REAL_RATES/g)];
         if (rateHits.length > 0) {
           console.warn(
-            `[pricing-tiers] NEEDS_REAL_RATES: ${rateHits.length} overage rate(s) still placeholders. UI shows “Published overage rates coming soon — ask on your call” until you set numbers in PLAN_OVERAGE_ROWS.`,
+            `[pricing-tiers] NEEDS_REAL_RATES: ${rateHits.length} overage rate(s) still placeholders. UI shows the not-published note until you set numbers in PLAN_OVERAGE_ROWS.`,
           );
         }
         const termHits = [...src.matchAll(/:\s*NEEDS_REAL_TERMS/g)];

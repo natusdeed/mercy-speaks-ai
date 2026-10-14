@@ -273,8 +273,8 @@ export default function CookieConsent() {
             <div style={{ color: "#e2e8f0", fontWeight: 700, fontSize: "0.875rem", marginBottom: "4px" }}>
               Cookie Preferences
             </div>
-            We use cookies to keep this site secure, understand traffic, improve performance, and support marketing.
-            You can accept all cookies, reject non-essential cookies, or manage your preferences.
+            This site uses only what it needs to work and does not load analytics or advertising trackers. Your
+            choice is saved in your browser. You can accept, reject optional categories, or manage your preferences.
           </div>
 
           <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
@@ -377,14 +377,14 @@ export default function CookieConsent() {
             <div>
               <ToggleRow
                 label="Necessary Cookies"
-                description="Required for session management, security, and your consent preference."
+                description="Required for the site to work and to remember this cookie choice."
                 checked
                 disabled
                 onToggle={() => {}}
               />
               <ToggleRow
                 label="Analytics Cookies"
-                description="Helps us understand page performance and visitor behavior."
+                description="Not currently used on this site. Nothing is loaded if you allow it."
                 checked={preferences.analytics}
                 onToggle={() =>
                   setPreferences((prev) => ({
@@ -395,7 +395,7 @@ export default function CookieConsent() {
               />
               <ToggleRow
                 label="Marketing Cookies"
-                description="Used for ad conversion tracking and marketing campaign performance."
+                description="Not currently used on this site. Nothing is loaded if you allow it."
                 checked={preferences.marketing}
                 onToggle={() =>
                   setPreferences((prev) => ({
@@ -406,7 +406,7 @@ export default function CookieConsent() {
               />
               <ToggleRow
                 label="Functional Cookies"
-                description="Stores chatbot context and user experience preferences."
+                description="Not currently used on this site. Nothing is loaded if you allow it."
                 checked={preferences.functional}
                 onToggle={() =>
                   setPreferences((prev) => ({

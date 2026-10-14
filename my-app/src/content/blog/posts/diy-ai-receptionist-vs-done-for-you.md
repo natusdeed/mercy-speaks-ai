@@ -2,6 +2,7 @@
 title: "DIY AI Receptionist Tools vs. Done-for-You Setup: An Honest Comparison"
 metaTitle: "DIY vs Done-for-You AI Setup | Mercy Speaks Digital"
 description: "Honest DIY vs done-for-you AI receptionist comparison: Goodcall, My AI Front Desk, and agency setup—time, skill, integrations, monitoring, TCO."
+draft: true
 publishedAt: "2026-07-11"
 tags:
   - AI receptionist

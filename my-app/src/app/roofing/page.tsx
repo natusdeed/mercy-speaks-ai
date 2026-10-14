@@ -1,6 +1,6 @@
-import { IndustryLandingPage } from "@/components/industry/industry-landing-page";
-import { INDUSTRY_LANDING_CONFIG } from "@/content/industry-landings";
+import { MarketPageView } from "@/components/market/market-page";
+import { ROOFING_PAGE } from "@/content/market-pages";
 
 export default function RoofingPage() {
-  return <IndustryLandingPage config={INDUSTRY_LANDING_CONFIG.roofing} />;
+  return <MarketPageView page={ROOFING_PAGE} />;
 }

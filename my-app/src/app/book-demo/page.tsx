@@ -1,128 +1,57 @@
-"use client";
-
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import { PageShell } from "@/components/ui/page-shell";
-import {
-  Calendar,
-  CheckCircle2,
-  ClipboardList,
-  ExternalLink,
-} from "lucide-react";
 import { CalInlineEmbed } from "@/components/booking/cal-inline-embed";
-import { CAL_COM_EMBED, telHref } from "@/lib/site-config";
-import { STRATEGY_CALL_PREPARE_ITEMS } from "@/content/home-faqs";
+import { BUSINESS, CAL_COM_EMBED, telHref } from "@/lib/site-config";
 import { SeoHead } from "@/components/seo/seo-head";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
+import { body, h1, inlineLink, inner, section, textLink } from "@/components/home-v3/v3-ui";
+
+/**
+ * /book-demo — website consultation scheduler (wording per project-001/booking-wording-proposal.md).
+ * The Cal.com event itself (slug/title) is unchanged; only on-site wording is aligned to its actual purpose.
+ */
+const DESCRIPTION =
+  "Book a short website consultation. We'll talk through your business, your goals for the site, and which package fits.";
 
 export default function BookDemoPage() {
-  const description =
-    "Book a call about a conversion website or a website care plan. AI communication tools are offered as a limited pilot.";
-
   return (
-    <PageShell className="min-h-screen bg-slate-950">
-      <SeoHead path="/book-demo" title="Book a Call" description={description} />
+    <PageShell className="min-h-screen w-full bg-slate-950">
+      <SeoHead path="/book-demo" title="Book a Website Consultation | Mercy Speaks Digital" description={DESCRIPTION} />
       <JsonLd
         data={[
-          webPageSchema({ name: "Book a Call", description, path: "/book-demo" }),
+          webPageSchema({ name: "Book a website consultation", description: DESCRIPTION, path: "/book-demo" }),
           breadcrumbSchema([
             { name: "Home", path: "/" },
-            { name: "Book a call", path: "/book-demo" },
+            { name: "Book a website consultation", path: "/book-demo" },
           ]),
         ]}
       />
-      <main className="pb-16" aria-label="Book a call">
-        <section className="section">
-          <div className="section-inner max-w-5xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-8 md:mb-10"
-            >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-electric-purple/20 mb-4">
-                <Calendar className="w-4 h-4 text-electric-purple" />
-                <span className="text-sm text-violet-300 font-medium">Book a Call</span>
-              </div>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-50 mb-3 md:mb-4 title-3d">
-                Pick a time that{" "}
-                <span className="text-neon-cyan">works for you</span>
-              </h1>
-              <p className="text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto px-1">
-                Schedule a call about a conversion website or a website care plan. AI communication
-                tools are available as a limited pilot.
-              </p>
-            </motion.div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
-              <motion.aside
-                initial={{ opacity: 0, x: -12 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="lg:col-span-4 order-2 lg:order-1"
-                aria-labelledby="prepare-heading"
-              >
-                <div className="rounded-2xl border border-slate-800/70 bg-slate-900/40 p-6 backdrop-blur-md">
-                  <div className="flex items-center gap-2 mb-4">
-                    <ClipboardList className="w-5 h-5 text-neon-cyan" />
-                    <h2 id="prepare-heading" className="text-lg font-semibold text-slate-50">What to prepare</h2>
-                  </div>
-                  <p className="text-sm text-slate-400 mb-4 leading-relaxed">
-                    A little context helps us recommend a realistic website and automation setup
-                    without over-building.
-                  </p>
-                  <ul className="space-y-3">
-                    {STRATEGY_CALL_PREPARE_ITEMS.map((item) => (
-                      <li key={item} className="flex items-start gap-3 text-slate-200 text-sm">
-                        <CheckCircle2 className="w-4 h-4 text-neon-cyan shrink-0 mt-0.5" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="mt-6 text-xs text-slate-400 leading-relaxed">
-                    Prefer email first?{" "}
-                    <Link to="/contact" className="text-neon-cyan underline underline-offset-2">
-                      Contact us
-                    </Link>
-                    .
-                  </p>
-                </div>
-              </motion.aside>
-
-              <motion.div
-                initial={{ opacity: 0, x: 12 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.15 }}
-                className="lg:col-span-8 order-1 lg:order-2"
-              >
-                <div className="rounded-2xl border border-slate-800/70 bg-slate-900/40 p-3 sm:p-4 backdrop-blur-md overflow-hidden">
-                  <CalInlineEmbed />
-                </div>
-                <p className="mt-4 text-center text-sm text-slate-400">
-                  Scheduler not loading?{" "}
-                  <a
-                    href={CAL_COM_EMBED.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex min-h-11 items-center gap-1 text-neon-cyan underline underline-offset-2"
-                  >
-                    Open the booking page
-                    <ExternalLink className="w-3.5 h-3.5" aria-hidden />
-                  </a>
-                </p>
-                <p className="mt-2 text-center text-sm text-slate-400">
-                  Prefer not to use the scheduler? Call{" "}
-                  <a href={telHref()} className="inline-flex min-h-11 items-center text-neon-cyan underline underline-offset-2">
-                    (832) 981-3123
-                  </a>{" "}
-                  or use the{" "}
-                  <Link to="/contact" className="inline-flex min-h-11 items-center text-neon-cyan underline underline-offset-2">
-                    contact form
-                  </Link>
-                  .
-                </p>
-              </motion.div>
+      <main className="w-full">
+        <section className={`${section} pt-12 md:pt-20`} aria-labelledby="page-heading">
+          <div className={inner}>
+            <h1 id="page-heading" className={`${h1} max-w-3xl`}>
+              Book a website consultation
+            </h1>
+            <p className={`${body} mt-6 max-w-2xl`}>
+              Pick a time that works for you. We'll talk through your business, your goals for the site, and which
+              package fits. Prefer writing?{" "}
+              <Link to="/contact" className={inlineLink}>
+                Request a website quote
+              </Link>{" "}
+              instead.
+            </p>
+            <div className="mt-10 overflow-hidden rounded-xl border border-slate-800 p-3 sm:p-4">
+              <CalInlineEmbed />
+            </div>
+            <div className="mt-4 flex flex-col gap-1 text-sm text-slate-400 sm:flex-row sm:items-center sm:gap-8">
+              <a href={CAL_COM_EMBED.url} target="_blank" rel="noopener noreferrer" className={textLink}>
+                Scheduler not loading? Open the booking page
+                <span className="sr-only"> (opens in a new tab)</span>
+              </a>
+              <a href={telHref()} className={textLink}>
+                Or call {BUSINESS.phoneDisplay}
+              </a>
             </div>
           </div>
         </section>

@@ -1,7 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { Navigate, Routes, Route, Outlet, useLocation } from 'react-router-dom';
 import { Header } from '@/components/navigation/header';
-import { Footer } from '@/components/navigation/footer';
 import { HomeFooterV3 } from '@/components/home-v3/home-footer';
 import { ClientErrorHandler } from '@/components/debug/ClientErrorHandler';
 import CookieConsent from './components/cookies/CookieConsent';
@@ -20,30 +19,15 @@ import WebsiteCarePage from './app/v3/website-care';
 import AiPilotPage from './app/v3/ai-pilot';
 import { PrivacyPage, TermsPage } from './app/v3/legal-pending';
 import Contact from './app/contact/page';
-import Portfolio from './app/portfolio/page';
 import Pricing from './app/pricing/page';
 import BookDemo from './app/book-demo/page';
 import Services from './pages/Services';
 import Results from './app/results/page';
-import TestimonialsPage from './app/testimonials/page';
-import AiEmployeeSystemPage from './app/ai-employee-system/page';
-import ServiceAIPhoneReceptionist from './pages/services/AIPhoneReceptionist';
-import ServiceAppointmentAutomation from './pages/services/AppointmentAutomation';
-import ServiceRAGData from './pages/services/RAGData';
-import ServiceReviewGeneration from './pages/services/ReviewGeneration';
-import ServiceSocialMediaManagement from './pages/services/SocialMediaManagement';
-import ServiceVoiceAgents from './pages/services/VoiceAgents';
-import ServiceWebsiteChatbot from './pages/services/WebsiteChatbot';
 import ServiceWebsiteDesign from './app/services/website-design/page';
-import ServiceWorkflowAutomation from './pages/services/WorkflowAutomation';
-import ServiceMissedCallTextBack from './pages/services/MissedCallTextBack';
 import WidgetFramePage from './app/widget/frame/page';
-import WidgetInstallPage from './app/widget/install/page';
 import RoofingPage from './app/roofing/page';
 import IndustriesIndexPage from './app/industries/page';
 import IndustrySlugPage from './app/industries/[slug]/page';
-import BlogIndexPage from './app/blog/page';
-import BlogSlugPage from './app/blog/[slug]/page';
 import HoustonPage from './app/houston/page';
 import RichmondTxPage from './app/richmond-tx/page';
 import CookiePolicy from './pages/CookiePolicy';
@@ -78,11 +62,7 @@ function DevDemoRouteFallback() {
   );
 }
 
-const V3_FOOTER_PATHS = new Set(["/", "/websites", "/website-care", "/ai-pilot", "/about", "/contact", "/privacy", "/terms", "/book-demo", "/results", "/services", "/services/ai-phone-receptionist"]);
-
 function PublicChrome() {
-  // Project #001 V3 pages use the CEO-locked V3 footer; other pages keep the shared footer.
-  const isHome = V3_FOOTER_PATHS.has(useLocation().pathname.replace(/\/$/, "") || "/");
   return (
     <>
       {/* Site-wide Organization / ProfessionalService — one config, every public page */}
@@ -102,7 +82,7 @@ function PublicChrome() {
         <div id="main-content" tabIndex={-1} className="flex-1 public-main w-full outline-none">
           <Outlet />
         </div>
-        {isHome ? <HomeFooterV3 /> : <Footer />}
+        <HomeFooterV3 />
       </div>
     </>
   );
@@ -144,36 +124,33 @@ function App() {
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/terms" element={<TermsPage />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/book-demo" element={<BookDemo />} />
-          <Route path="/ai-employee-system" element={<AiEmployeeSystemPage />} />
           <Route path="/services" element={<Services />} />
           <Route path="/solutions" element={<Navigate to="/services" replace />} />
           <Route path="/industries" element={<IndustriesIndexPage />} />
           <Route path="/industries/:slug" element={<IndustrySlugPage />} />
-          <Route path="/blog" element={<BlogIndexPage />} />
-          <Route path="/blog/:slug" element={<BlogSlugPage />} />
           <Route path="/roofing" element={<RoofingPage />} />
           <Route path="/hvac" element={<Navigate to="/industries/hvac" replace />} />
           <Route path="/plumbing" element={<Navigate to="/industries/plumbing" replace />} />
           <Route path="/houston" element={<HoustonPage />} />
           <Route path="/richmond-tx" element={<RichmondTxPage />} />
           <Route path="/results" element={<Results />} />
-          <Route path="/testimonials" element={<TestimonialsPage />} />
-          <Route path="/services/ai-phone-receptionist" element={<ServiceAIPhoneReceptionist />} />
-          <Route path="/services/missed-call-text-back" element={<ServiceMissedCallTextBack />} />
-          <Route path="/services/appointment-automation" element={<ServiceAppointmentAutomation />} />
-          <Route path="/services/rag-data" element={<ServiceRAGData />} />
-          <Route path="/services/review-generation" element={<ServiceReviewGeneration />} />
-          <Route path="/services/reputation-management" element={<ServiceReviewGeneration />} />
-          <Route path="/services/social-media-management" element={<ServiceSocialMediaManagement />} />
-          <Route path="/services/voice-agents" element={<ServiceVoiceAgents />} />
-          <Route path="/services/website-chatbot" element={<ServiceWebsiteChatbot />} />
+          {/* Genuine duplicates → permanent redirects (also in vercel.json). */}
+          <Route path="/portfolio" element={<Navigate to="/results" replace />} />
+          <Route path="/testimonials" element={<Navigate to="/results" replace />} />
+          <Route path="/services/ai-phone-receptionist" element={<Navigate to="/ai-pilot" replace />} />
+          <Route path="/services/voice-agents" element={<Navigate to="/ai-pilot" replace />} />
+          <Route path="/services/missed-call-text-back" element={<Navigate to="/ai-pilot" replace />} />
+          <Route path="/services/appointment-automation" element={<Navigate to="/ai-pilot" replace />} />
           <Route path="/services/website-design" element={<ServiceWebsiteDesign />} />
-          <Route path="/services/workflow-automation" element={<ServiceWorkflowAutomation />} />
+          {/*
+            Withdrawn 2026-10-13 (not routed → 404): /services/social-media-management, /services/review-generation,
+            /services/reputation-management, /services/website-chatbot, /services/workflow-automation,
+            /services/rag-data, /ai-employee-system, /widget/install (developer embed notes; widget parked), /blog and /blog/* (AI-first posts unpublished via draft: true).
+            Page files are kept in the repo.
+          */}
           <Route path="/widget/frame" element={<WidgetFramePage />} />
-          <Route path="/widget/install" element={<WidgetInstallPage />} />
           <Route path="/cookie-policy" element={<CookiePolicy />} />
           {/* Catch-all: client nav + prerender source for dist/404.html — never in sitemap */}
           <Route path="*" element={<NotFound />} />

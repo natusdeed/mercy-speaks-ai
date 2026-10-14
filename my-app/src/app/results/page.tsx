@@ -25,7 +25,7 @@ export default function ResultsPage() {
       <main className="w-full">
         <PageHero
           title="Our Work"
-          intro="Website projects we have built. Each is labeled as client work or a demo build. We don't publish invented testimonials or unverified results."
+          intro="Website projects we have built, each labeled as client work or a demo build. For each one: the need, what we built, and the features you can see on the live site."
         />
         <SelectedWork headingId="results-work-heading" title="Website projects" />
         <section className={`${section} ${divided}`} aria-labelledby="results-cta-heading">
@@ -33,7 +33,7 @@ export default function ResultsPage() {
             <h2 id="results-cta-heading" className={h2}>
               Want a website like these?
             </h2>
-            <p className={`${body} mx-0 mt-4 max-w-2xl`}>Tell us about your business and we&apos;ll send a quote.</p>
+            <p className={`${body} mx-0 mt-4 max-w-2xl`}>Tell us about your business and we&apos;ll send a written quote.</p>
             <div className="mt-8">
               <Link to="/contact" className={primaryBtn}>
                 Get a Website Quote

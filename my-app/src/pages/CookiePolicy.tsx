@@ -1,231 +1,79 @@
-import { motion } from "framer-motion";
-import { ShieldCheck, BarChart3, Megaphone, SlidersHorizontal, Cookie, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 import { SeoHead } from "@/components/seo/seo-head";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
+import { PageShell } from "@/components/ui/page-shell";
+import { h1, inlineLink, inner, section } from "@/components/home-v3/v3-ui";
+import { BUSINESS } from "@/lib/site-config";
 
-const cookieCategories = [
-  {
-    title: "Necessary (always active)",
-    icon: ShieldCheck,
-    accent: "text-neon-cyan",
-    border: "border-neon-cyan/30",
-    points: [
-      "Session management",
-      "Security tokens",
-      "Cookie consent preference storage",
-      "Cannot be disabled",
-    ],
-  },
-  {
-    title: "Analytics (requires consent)",
-    icon: BarChart3,
-    accent: "text-electric-purple",
-    border: "border-electric-purple/30",
-    points: [
-      "Google Analytics tracks page views, session duration, and traffic sources",
-      "Helps us understand how visitors use our site",
-      "Data is anonymized",
-    ],
-  },
-  {
-    title: "Marketing (requires consent)",
-    icon: Megaphone,
-    accent: "text-neon-cyan",
-    border: "border-neon-cyan/30",
-    points: [
-      "Meta Pixel (Facebook/Instagram ads)",
-      "Google Ads conversion tracking",
-      "Used to measure ad performance and support retargeting",
-    ],
-  },
-  {
-    title: "Functional (requires consent)",
-    icon: SlidersHorizontal,
-    accent: "text-electric-purple",
-    border: "border-electric-purple/30",
-    points: [
-      "Chatbot session context",
-      "User interface preferences",
-      "Language and region settings",
-    ],
-  },
-];
-
-const thirdParties = [
-  "Google Analytics (Google LLC)",
-  "Meta Pixel (Meta Platforms Inc)",
-  "Twilio (communications infrastructure)",
-  "Vercel (hosting and performance)",
-];
+/**
+ * /cookie-policy — rewritten 2026-10-13 to match the tools ACTUALLY enabled in the code:
+ * no analytics, no ad pixels; consent choice in localStorage (msd_cookie_consent); Google Fonts; Cal.com embed on
+ * /book-demo only; Vercel hosting. INTERNAL: needs Donatus's review alongside /privacy and /terms.
+ */
+const DESCRIPTION = "Which cookies and similar technology the Mercy Speaks Digital website uses, and how to control them.";
 
 export default function CookiePolicy() {
   return (
-    <div className="min-h-screen bg-slate-950">
-      <SeoHead
-        title="Cookie Policy | Mercy Speaks Digital"
-        description="Cookie policy for Mercy Speaks Digital—cookie categories, third-party providers, retention details, and how visitors can control preferences on this site."
-        path="/cookie-policy"
-      />
+    <PageShell className="min-h-screen w-full bg-slate-950">
+      <SeoHead title="Cookie Policy | Mercy Speaks Digital" description={DESCRIPTION} path="/cookie-policy" />
       <JsonLd
         data={[
-          webPageSchema({
-            name: "Cookie Policy",
-            description:
-              "Cookie policy for Mercy Speaks Digital LLC, including what cookies we use and how visitors can control them.",
-            path: "/cookie-policy",
-          }),
+          webPageSchema({ name: "Cookie Policy", description: DESCRIPTION, path: "/cookie-policy" }),
           breadcrumbSchema([
             { name: "Home", path: "/" },
             { name: "Cookie Policy", path: "/cookie-policy" },
           ]),
         ]}
       />
-
-      <main className="pb-16">
-        <section className="py-16 md:py-24 px-6 lg:px-12">
-          <div className="max-w-5xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-center mb-12"
-            >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-cyan/20 border border-neon-cyan/30 mb-6">
-                <Cookie className="w-4 h-4 text-neon-cyan" />
-                <span className="text-sm text-neon-cyan font-medium">Legal</span>
-              </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-50 mb-4 title-3d">
-                Cookie{" "}
-                <span className="bg-linear-to-r from-neon-cyan to-electric-purple bg-clip-text text-transparent">
-                  Policy
-                </span>
-              </h1>
-              <p className="text-slate-400 text-base md:text-lg max-w-3xl mx-auto">
-                Mercy Speaks Digital LLC - Houston, Texas
-              </p>
-            </motion.div>
-
-            <div className="space-y-8">
-              <section className="glass rounded-2xl p-6 md:p-8 border border-slate-800/50">
-                <h2 className="text-2xl md:text-3xl font-semibold text-slate-50 mb-4">1. Introduction</h2>
-                <div className="space-y-3 text-slate-300 leading-relaxed">
-                  <p>
-                    Mercy Speaks Digital LLC operates{" "}
-                    <a
-                      href="https://mercyspeaksdigital.com"
-                      className="text-neon-cyan underline underline-offset-2"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      mercyspeaksdigital.com
-                    </a>
-                    .
-                  </p>
-                  <p>
-                    This Cookie Policy explains what cookies are, what cookies we use, and how you can control
-                    cookie preferences while using our website.
-                  </p>
-                  <p>
-                    <span className="font-semibold text-slate-200">Effective date:</span> April 2026.
-                  </p>
-                </div>
-              </section>
-
-              <section className="glass rounded-2xl p-6 md:p-8 border border-slate-800/50">
-                <h2 className="text-2xl md:text-3xl font-semibold text-slate-50 mb-4">2. What Are Cookies</h2>
-                <p className="text-slate-300 leading-relaxed">
-                  Cookies are small text files stored on your device when you visit a website. They help websites
-                  remember your actions and preferences (such as login state, settings, and analytics choices) to
-                  improve performance, security, and your overall browsing experience.
-                </p>
-              </section>
-
-              <section className="glass rounded-2xl p-6 md:p-8 border border-slate-800/50">
-                <h2 className="text-2xl md:text-3xl font-semibold text-slate-50 mb-6">
-                  3. Categories of Cookies We Use
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  {cookieCategories.map((category) => {
-                    const Icon = category.icon;
-                    return (
-                      <article
-                        key={category.title}
-                        className={`rounded-xl border ${category.border} bg-slate-900/40 p-5`}
-                      >
-                        <div className="flex items-start gap-3 mb-3">
-                          <Icon className={`w-5 h-5 mt-0.5 ${category.accent}`} />
-                          <h3 className="text-lg font-semibold text-slate-100">{category.title}</h3>
-                        </div>
-                        <ul className="space-y-2 text-slate-300 text-sm leading-relaxed">
-                          {category.points.map((point) => (
-                            <li key={point} className="flex gap-2">
-                              <span className="text-slate-500">-</span>
-                              <span className="min-w-0">{point}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </article>
-                    );
-                  })}
-                </div>
-              </section>
-
-              <section className="glass rounded-2xl p-6 md:p-8 border border-slate-800/50">
-                <h2 className="text-2xl md:text-3xl font-semibold text-slate-50 mb-4">4. How We Use Cookies</h2>
-                <ul className="space-y-2 text-slate-300 leading-relaxed">
-                  <li>- Improve site performance</li>
-                  <li>- Understand visitor behavior</li>
-                  <li>- Measure marketing campaign effectiveness</li>
-                  <li>- Personalize your browsing experience</li>
-                </ul>
-              </section>
-
-              <section className="glass rounded-2xl p-6 md:p-8 border border-slate-800/50">
-                <h2 className="text-2xl md:text-3xl font-semibold text-slate-50 mb-4">5. Third Party Cookies</h2>
-                <ul className="space-y-2 text-slate-300 leading-relaxed">
-                  {thirdParties.map((provider) => (
-                    <li key={provider}>- {provider}</li>
-                  ))}
-                </ul>
-              </section>
-
-              <section className="glass rounded-2xl p-6 md:p-8 border border-slate-800/50">
-                <h2 className="text-2xl md:text-3xl font-semibold text-slate-50 mb-4">6. Your Cookie Choices</h2>
-                <div className="space-y-3 text-slate-300 leading-relaxed">
-                  <p>
-                    You can manage cookie preferences through our consent banner. Necessary cookies remain active,
-                    while optional categories (analytics, marketing, and functional) are enabled only with consent.
-                  </p>
-                  <p>
-                    You can also clear or block cookies through your browser settings at any time. Blocking some
-                    cookies may impact parts of the website experience.
-                  </p>
-                  <p>
-                    To update your choices later, use the cookie preferences link in the banner located at the bottom
-                    of the page.
-                  </p>
-                </div>
-              </section>
-
-              <section className="glass rounded-2xl p-6 md:p-8 border border-slate-800/50">
-                <h2 className="text-2xl md:text-3xl font-semibold text-slate-50 mb-4">7. Contact Us</h2>
-                <div className="space-y-2 text-slate-300 leading-relaxed">
-                  <p>Mercy Speaks Digital LLC</p>
-                  <p>Houston, Texas</p>
-                  <p>
-                    <Link to="/contact" className="inline-flex items-center gap-2 text-neon-cyan hover:underline [overflow-wrap:anywhere]">
-                      <Mail className="w-4 h-4" />
-                      mercyspeaksdigital.com/contact
-                    </Link>
-                  </p>
-                </div>
-              </section>
-            </div>
+      <main className={`${section} pt-12 md:pt-20`}>
+        <article className={`${inner} max-w-3xl`}>
+          <h1 className={h1}>Cookie Policy</h1>
+          <p className="mt-4 text-sm text-slate-400">Last updated October 13, 2026</p>
+          <div className="mt-10 space-y-5 text-base leading-relaxed text-slate-300 [&_h2]:mt-10 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-white [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-6">
+            <p>
+              This website keeps tracking to a minimum. We do not load analytics tools, advertising pixels or
+              retargeting scripts.
+            </p>
+            <h2>What this site stores</h2>
+            <ul>
+              <li>
+                Your cookie choice. When you choose an option in the cookie banner, your browser saves that choice
+                (in local storage) so the banner doesn't appear again on every page.
+              </li>
+            </ul>
+            <h2>Third-party services</h2>
+            <ul>
+              <li>Vercel hosts the site and serves every page.</li>
+              <li>Google Fonts supplies the typeface, so your browser requests font files from Google.</li>
+              <li>
+                Cal.com runs the scheduler on our{" "}
+                <Link to="/book-demo" className={inlineLink}>
+                  booking page
+                </Link>
+                . It loads only on that page and may set its own cookies under Cal.com's policies.
+              </li>
+            </ul>
+            <h2>Your choices</h2>
+            <p>
+              You can clear this site's stored data in your browser settings at any time, which also resets your cookie
+              choice. Most browsers also let you block cookies from specific sites.
+            </p>
+            <h2>Questions</h2>
+            <p>
+              Email{" "}
+              <a href={`mailto:${BUSINESS.email}`} className={inlineLink}>
+                {BUSINESS.email}
+              </a>
+              . See also our{" "}
+              <Link to="/privacy" className={inlineLink}>
+                Privacy
+              </Link>{" "}
+              page.
+            </p>
           </div>
-        </section>
+        </article>
       </main>
-    </div>
+    </PageShell>
   );
 }

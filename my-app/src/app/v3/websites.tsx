@@ -4,28 +4,11 @@ import { PageShell } from "@/components/ui/page-shell";
 import { SeoHead } from "@/components/seo/seo-head";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, faqPageSchema } from "@/lib/schema";
+import { ADDONS, AFTER_LAUNCH, DELIVERY_STEPS, HOSTING, OWNERSHIP, PACKAGE_INCLUDES, PACKAGE_TIER_NOTES, PAYMENT_TERMS, TIMELINE, WEBSITE_PACKAGES } from "@/content/offers";
 import { body, divided, FaqList, h2, inlineLink, inner, narrow, PageHero, PriceColumns, primaryBtn, QuietList, section } from "@/components/home-v3/v3-ui";
 
-/** /websites — copy: project-001/pages-copy-v3.md (CEO-locked). Do not edit copy. */
-const PACKAGES = [
-  { name: "Starter", price: "$997", details: "Up to 5 pages, 2 revision rounds. Best for new or simple businesses that need a professional site.", recommended: false },
-  { name: "Business", price: "$1,997", details: "Up to 10 pages, 2 revision rounds. Best for service businesses that need a page for each service.", recommended: true },
-  { name: "Premium", price: "from $3,500", details: "Pages based on your approved scope, 3 revision rounds. Best for multi-location or custom needs.", recommended: false },
-] as const;
-
-const ADDONS = [
-  "Extra page: $150",
-  "Logo design: $250 when separately scoped",
-  "Copywriting: $100 per page",
-  "Extra revision round: $150",
-  "Spanish-language version: +40%, subject to scope and page count",
-];
-
-const TIMELINE =
-  "10–15 business days of active Mercy Speaks production time after the initial payment and all required starting assets are received. The delivery clock pauses while Mercy Speaks is waiting for client content, assets, credentials/access, feedback, revisions, or approvals.";
-
-const OWNERSHIP =
-  "Once your project is paid in full, you own the final website deliverables we created specifically for your approved project. Mercy Speaks Digital keeps ownership of its pre-existing tools, frameworks, reusable code and components, templates, processes, methods, and know-how. Third-party software, plugins, fonts, images, licensed assets, and services stay subject to their own licenses and ownership terms.";
+/** /websites — copy: project-001/pages-copy-v3.md (CEO-locked). Prices/terms from content/offers.ts. */
+const PACKAGES = WEBSITE_PACKAGES;
 
 const FAQS = [
   { question: "How long does a website take?", answer: TIMELINE },
@@ -59,7 +42,7 @@ export default function WebsitesPage() {
       <SeoHead
         path="/websites"
         title="Conversion websites for growing businesses | Mercy Speaks Digital"
-        description="Fast, modern websites that make it easy for the people who find you to call, request a quote, or request an appointment."
+        description="New websites and redesigns that explain your business clearly and make it easy for visitors to call or request a quote. Packages from $997."
       />
       <JsonLd
         data={[
@@ -73,7 +56,7 @@ export default function WebsitesPage() {
       <main className="w-full">
         <PageHero
           title="Conversion websites for growing businesses"
-          intro="Fast, modern websites that make it easy for the people who find you to call, request a quote, or request an appointment."
+          intro="New websites and redesigns that explain your business clearly and make it easy for visitors to call or request a quote."
         >
           <Link to="/contact" className={primaryBtn}>
             Get a Website Quote
@@ -87,51 +70,48 @@ export default function WebsitesPage() {
             </h2>
             <PriceColumns items={PACKAGES} />
             <div className="mt-10 max-w-3xl mx-0 space-y-5">
-              <p className={body}>
-                Every package includes mobile-first design checked on phones and desktops, tap-to-call to your existing
-                number, a contact form, a Google Map embed or link, basic on-page SEO (page titles, meta descriptions,
-                local business schema), a private preview before launch, launch to your domain, 14 days of defect fixes,
-                and a handoff. Included content is limited to what you supply or approve.
-              </p>
-              <p className={body}>
-                Business ($1,997) may include service-specific pages within the 10-page limit, a quote form, analytics
-                setup when you provide or approve the account and access, and a review or testimonial section only when
-                real, verified, permissioned content is supplied. Premium (from $3,500) may include custom features based
-                on the approved project scope.
-              </p>
+              <p className={body}>{PACKAGE_INCLUDES}</p>
+              <p className={body}>{PACKAGE_TIER_NOTES}</p>
             </div>
           </div>
         </section>
 
-        <SelectedWork headingId="websites-work-heading" />
+        <SelectedWork headingId="websites-work-heading" variant="compact" />
         <section className={`${section} ${divided}`}>
           <div className={`${inner} grid gap-14 md:grid-cols-[1fr_2fr] md:gap-x-16`}>
             <h2 className={h2}>Add-ons</h2>
             <QuietList items={ADDONS} />
 
             <h2 className={h2}>Payment</h2>
-            <p className={body}>50% to begin, 50% before launch. Quotes are valid for 30 calendar days.</p>
+            <p className={body}>{PAYMENT_TERMS}</p>
 
             <h2 className={h2}>Timeline</h2>
             <p className={body}>{TIMELINE}</p>
 
             <h2 className={h2}>Hosting, domain, and ownership</h2>
             <div className="space-y-5">
-              <p className={body}>
-                Hosting and domain are not included. You own both accounts, give us delegated access, and pay any
-                third-party costs.
-              </p>
+<p className={body}>{HOSTING}</p>
               <p className={body}>{OWNERSHIP}</p>
             </div>
 
             <h2 className={h2}>After launch</h2>
             <p className={body}>
-              14 calendar days of bug fixes for defects in delivered work, then an optional care plan (see{" "}
+              {AFTER_LAUNCH}{" "}
               <Link to="/website-care" className={inlineLink}>
-                /website-care
+                See Website Care plans
               </Link>
-              ).
+              .
             </p>
+
+            <h2 className={h2}>How it works</h2>
+            <ol className="divide-y divide-slate-800 border-y border-slate-800">
+              {DELIVERY_STEPS.map((s) => (
+                <li key={s.title} className="py-4">
+                  <h3 className="text-base font-semibold text-white">{s.title}</h3>
+                  <p className="mt-1 text-base leading-relaxed text-slate-300">{s.body}</p>
+                </li>
+              ))}
+            </ol>
           </div>
         </section>
 
@@ -144,11 +124,17 @@ export default function WebsitesPage() {
           </div>
         </section>
 
-        <section className={`${section} ${divided}`}>
+        <section className={`${section} ${divided}`} aria-labelledby="websites-cta-heading">
           <div className={inner}>
-            <Link to="/contact" className={primaryBtn}>
-              Get a Website Quote
-            </Link>
+            <h2 id="websites-cta-heading" className={h2}>
+              Tell us about your business
+            </h2>
+            <p className={`${body} mt-4 max-w-2xl mx-0`}>We'll recommend a package and send a written quote.</p>
+            <div className="mt-8">
+              <Link to="/contact" className={primaryBtn}>
+                Get a Website Quote
+              </Link>
+            </div>
           </div>
         </section>
       </main>

@@ -1,25 +1,18 @@
 # Mercy Speaks Digital
 
-> Mercy Speaks Digital is a U.S. digital agency based in Richmond, TX (Houston metro), serving businesses nationwide. We build conversion-focused websites and e-commerce storefronts, offer AI phone receptionists (currently in pilot testing), and set up automation (missed-call text-back, review generation, CRM follow-up) so small businesses stop missing leads.
+> Mercy Speaks Digital builds conversion websites for growing businesses: new websites and redesigns that explain your business clearly and make it easy for visitors to call or request a quote. We also offer Website Care & Optimization plans, and an AI Receptionist offered only as a limited pilot.
 
-Key facts: AI receptionist services are currently in pilot testing. AI receptionist pricing is not published. Websites from $997 (Starter), $1,997 (Business), custom for Premium. Contact: don@mercyspeaksdigital.com · (832) 981-3123.
+Key facts: Website packages: Starter $997 (up to 5 pages, 2 revision rounds), Business $1,997 (up to 10 pages, 2 revision rounds, recommended), Premium from $3,500 (pages by approved scope, 3 revision rounds). Website Care: $79/month (Care) and $149/month (Care Plus). The AI Receptionist pilot is limited and by invitation; it answers during configured hours and captures messages and service requests for the business's team to review. It does not confirm appointments. Contact: don@mercyspeaksdigital.com · (832) 981-3123.
 
 ## Services
 
-- [AI Phone Receptionist](https://www.mercyspeaksdigital.com/services/ai-phone-receptionist): call answering, lead qualification, appointment booking (pilot testing)
-- [Website Design & Development](https://www.mercyspeaksdigital.com/services/website-design): premium business websites and redesigns
-- [Voice Agents](https://www.mercyspeaksdigital.com/services/voice-agents): custom call flows, routing, reminders
-- [Website Chatbot](https://www.mercyspeaksdigital.com/services/website-chatbot): on-site chat that books appointments
-- [Workflow Automation](https://www.mercyspeaksdigital.com/services/workflow-automation): CRM, lead routing, follow-up
-- [Review Generation](https://www.mercyspeaksdigital.com/services/review-generation): automated review requests and monitoring
-- [Social Media Management](https://www.mercyspeaksdigital.com/services/social-media-management)
-
-## Pricing
-
-- [Plans and pricing](https://www.mercyspeaksdigital.com/pricing)
+- [Conversion Websites](https://www.mercyspeaksdigital.com/websites)
+- [Website Care & Optimization](https://www.mercyspeaksdigital.com/website-care)
+- [AI Receptionist — Pilot](https://www.mercyspeaksdigital.com/ai-pilot)
+- [Pricing](https://www.mercyspeaksdigital.com/pricing)
 
 ## Company
 
+- [Our Work](https://www.mercyspeaksdigital.com/results)
 - [About](https://www.mercyspeaksdigital.com/about)
-- [Results](https://www.mercyspeaksdigital.com/results)
 - [Contact](https://www.mercyspeaksdigital.com/contact)

@@ -17,7 +17,7 @@ export const GENERATED_BLOG_POSTS: BlogPost[] = [
       "answering service",
       "comparison"
     ],
-    "draft": false,
+    "draft": true,
     "readingTimeMinutes": 8,
     "ctaTitle": "Hear an AI receptionist on a real call flow",
     "ctaDescription": "Play the live demo, then book a short call if you want to compare AI vs. your current answering setup side by side.",
@@ -97,7 +97,7 @@ export const GENERATED_BLOG_POSTS: BlogPost[] = [
       "DIY",
       "done-for-you"
     ],
-    "draft": false,
+    "draft": true,
     "readingTimeMinutes": 8,
     "ctaTitle": "Not sure which path fits?",
     "ctaDescription": "Book a no-pressure demo. If DIY is the better call for you, we will say so. If done-for-you will save you weeks, we will show the install plan.",
@@ -177,7 +177,7 @@ export const GENERATED_BLOG_POSTS: BlogPost[] = [
       "pricing",
       "small business"
     ],
-    "draft": false,
+    "draft": true,
     "readingTimeMinutes": 6,
     "ctaTitle": "Want a clear quote for your call volume?",
     "ctaDescription": "Book a short demo. We’ll map your phone flow, estimate monthly call load, and show which Mercy plan fits—without pressure.",
@@ -245,7 +245,7 @@ export const GENERATED_BLOG_POSTS: BlogPost[] = [
       "lead recovery",
       "SMS automation"
     ],
-    "draft": false,
+    "draft": true,
     "readingTimeMinutes": 7,
     "ctaTitle": "Stop losing callers who hang up",
     "ctaDescription": "Missed-call text-back is included on every Mercy plan. Book a demo to see the first-text flow on your number.",

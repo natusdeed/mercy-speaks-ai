@@ -2,51 +2,135 @@ import { Link } from "react-router-dom";
 import { PageShell } from "@/components/ui/page-shell";
 import { SeoHead } from "@/components/seo/seo-head";
 import { JsonLd } from "@/components/seo/json-ld";
-import { breadcrumbSchema } from "@/lib/schema";
-import { body, divided, h2, inner, PageHero, PILOT_CAPABILITIES, QuietList, section, secondaryBtn } from "@/components/home-v3/v3-ui";
+import { breadcrumbSchema, faqPageSchema } from "@/lib/schema";
+import { body, divided, FaqList, h2, inner, PageHero, primaryBtn, QuietList, section, smallPrint, textLink } from "@/components/home-v3/v3-ui";
+import { PILOT_CAPABILITIES, PILOT_LIMITS, SERVICES } from "@/content/offers";
 
-/** /ai-pilot — copy: project-001/pages-copy-v3.md (CEO-locked). PILOT only: no pricing, no widget, no demo number. */
+/**
+ * /ai-pilot — customer-language rewrite (2026-10-13 correction). PILOT only:
+ * no pricing, no widget, no demo number, no 24/7, no confirmed bookings, transfers described as attempts.
+ * Recorded demonstration: the player + script live in components/ai-pilot/ and content/ai-pilot-demo.ts but are
+ * deliberately NOT rendered here until an approved recording exists (see AI_PILOT_RECORDING in that file).
+ */
+const STEPS = [
+  { title: "A customer calls", body: "During the hours you configure, the AI receptionist answers with your business name and greeting." },
+  { title: "It listens and asks", body: "It asks what the caller needs and collects their name, callback number and a short description." },
+  { title: "It captures the request", body: "It records a message or a service request. If the caller asks for a person and you've set up transfers, it attempts one." },
+  { title: "Your team follows up", body: "Your team reviews each message and request, then calls the customer back to confirm details and any appointment." },
+] as const;
+
+const FAQS = [
+  {
+    question: "Does it book appointments?",
+    answer:
+      "No. It captures appointment and service requests for your team to review. Your team confirms any appointment directly with the customer.",
+  },
+  {
+    question: "Can it transfer a caller to my team?",
+    answer:
+      "It can attempt a transfer to a number you choose. Transfers depend on someone being available to answer, so if one doesn't connect, it takes a message instead.",
+  },
+  {
+    question: "When does it answer?",
+    answer: "Only during the hours you configure for the pilot. Outside those hours your phone works as it does today.",
+  },
+  {
+    question: "Is it part of a website package?",
+    answer: "No. The pilot is separate from our website packages and care plans, with scope and terms agreed in writing.",
+  },
+  {
+    question: "Who can join?",
+    answer:
+      "The pilot is open to a small number of businesses by invitation. Tell us about your business and how calls reach you today, and we'll let you know whether the pilot is a fit.",
+  },
+] as const;
+
 export default function AiPilotPage() {
   return (
     <PageShell className="min-h-screen w-full bg-slate-950">
       <SeoHead
         path="/ai-pilot"
         title="AI Receptionist — Pilot | Mercy Speaks Digital"
-        description="We're testing AI communication tools separately from our website services. The pilot has limited availability and is not part of our website packages."
+        description="A limited pilot: AI-assisted answering during configured hours, message capture and service requests for your team to review."
       />
       <JsonLd
-        data={breadcrumbSchema([
-          { name: "Home", path: "/" },
-          { name: "AI Receptionist — Pilot", path: "/ai-pilot" },
-        ])}
+        data={[
+          faqPageSchema(FAQS.map((f) => ({ ...f }))),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "AI Receptionist — Pilot", path: "/ai-pilot" },
+          ]),
+        ]}
       />
       <main className="w-full">
-        <PageHero
-          title="AI Receptionist — Pilot"
-          intro="We're testing AI communication tools separately from our website services. The pilot has limited availability and is not part of our website packages."
-        />
+        <PageHero title="AI Receptionist — Pilot" intro={`${SERVICES[2].summary} Offered as a limited pilot, by invitation.`}>
+          <Link to="/contact?interest=ai-pilot" className={primaryBtn}>
+            Request pilot information
+          </Link>
+        </PageHero>
+
+        <section className={`${section} ${divided}`} aria-labelledby="pilot-how-heading">
+          <div className={inner}>
+            <h2 id="pilot-how-heading" className={`${h2} mb-10`}>
+              How a pilot call works
+            </h2>
+            <ol className="grid grid-cols-1 divide-y divide-slate-800 border-y border-slate-800 md:grid-cols-4 md:divide-x md:divide-y-0">
+              {STEPS.map((s, i) => (
+                <li key={s.title} className="py-6 md:px-6 md:first:pl-0 md:last:pr-0">
+                  <span className="text-sm tabular-nums text-violet-300" aria-hidden>
+                    0{i + 1}
+                  </span>
+                  <h3 className="mt-2 text-base font-semibold text-white md:text-lg">{s.title}</h3>
+                  <p className="mt-2 text-base leading-relaxed text-slate-300">{s.body}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
         <section className={`${section} ${divided}`}>
           <div className={`${inner} grid gap-10 md:grid-cols-[1fr_2fr] md:gap-x-16 md:gap-y-14`}>
-            <h2 className={h2}>What the pilot is</h2>
+            <h2 className={h2}>What it does</h2>
+            <QuietList items={PILOT_CAPABILITIES} />
+
+            <h2 className={h2}>Good to know</h2>
+            <QuietList items={PILOT_LIMITS} />
+
+            <h2 className={h2}>HVAC Call Recovery</h2>
             <p className={body}>
-              A limited test of an AI receptionist for business phone lines. The pilot is open to a small number of
-              businesses by invitation, with scope and terms set individually. Any call it transfers is flagged as an
-              unverified handoff.
+              For HVAC companies, we're running HVAC Call Recovery as a limited pilot. It applies the same approach to
+              after-hours and busy-season calls: the AI receptionist answers during the hours you set and captures each
+              caller's details and service request so your team can follow up.
             </p>
-            <h2 className={h2}>What it can do</h2>
-            <QuietList items={[...PILOT_CAPABILITIES]} />
-            <h2 className={h2}>What it is not</h2>
-            <div>
-              <QuietList
-                items={["Not included in any website package or care plan", "Not a finished product", "No published pricing"]}
-              />
-              <div className="mt-10">
-                {/* Pilot CTA is intentionally secondary-styled: the site's primary action is a website quote. */}
-                <Link to="/contact?interest=ai-pilot" className={secondaryBtn}>
-                  Request Pilot Information
-                </Link>
-              </div>
+          </div>
+        </section>
+
+        <section className={`${section} ${divided}`} aria-labelledby="pilot-faq-heading">
+          <div className={inner}>
+            <h2 id="pilot-faq-heading" className={`${h2} mb-8`}>
+              Questions about the pilot
+            </h2>
+            <FaqList faqs={FAQS} />
+          </div>
+        </section>
+
+        <section className={`${section} ${divided}`} aria-labelledby="pilot-cta-heading">
+          <div className={inner}>
+            <h2 id="pilot-cta-heading" className={h2}>
+              Interested in the pilot?
+            </h2>
+            <p className={`${body} mt-4 max-w-2xl mx-0`}>
+              Tell us about your business and how calls reach you today. We'll explain how the pilot would work for you.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-8">
+              <Link to="/contact?interest=ai-pilot" className={primaryBtn}>
+                Request pilot information
+              </Link>
+              <Link to="/websites" className={textLink}>
+                Looking for a website instead?
+              </Link>
             </div>
+            <p className={`${smallPrint} mt-6`}>Pilot availability is limited and not every business will be a fit.</p>
           </div>
         </section>
       </main>

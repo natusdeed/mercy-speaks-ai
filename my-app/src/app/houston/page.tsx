@@ -1,6 +1,6 @@
-import { LocalLandingPage } from "@/components/local/local-landing-page";
-import { LOCAL_PAGES } from "@/content/local-pages";
+import { MarketPageView } from "@/components/market/market-page";
+import { LOCATION_PAGES } from "@/content/market-pages";
 
 export default function HoustonPage() {
-  return <LocalLandingPage config={LOCAL_PAGES.houston} />;
+  return <MarketPageView page={LOCATION_PAGES.houston} />;
 }

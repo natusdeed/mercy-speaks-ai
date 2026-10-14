@@ -26,21 +26,16 @@ export type PublicRouteDef = {
  */
 export const PUBLIC_ROUTES: readonly PublicRouteDef[] = [
   { path: "/", sitemap: true, prerender: true },
+  { path: "/websites", sitemap: true, prerender: true },
+  { path: "/website-care", sitemap: true, prerender: true },
+  { path: "/ai-pilot", sitemap: true, prerender: true },
+  { path: "/results", sitemap: true, prerender: true },
+  { path: "/about", sitemap: true, prerender: true },
+  { path: "/contact", sitemap: true, prerender: true },
+  { path: "/pricing", sitemap: true, prerender: true },
   { path: "/services", sitemap: true, prerender: true },
   { path: "/services/website-design", sitemap: true, prerender: true },
-  { path: "/services/ai-phone-receptionist", sitemap: true, prerender: true },
-  { path: "/services/missed-call-text-back", sitemap: true, prerender: true },
-  { path: "/services/workflow-automation", sitemap: true, prerender: true },
-  { path: "/services/appointment-automation", sitemap: true, prerender: true },
-  { path: "/services/website-chatbot", sitemap: true, prerender: true },
-  { path: "/services/review-generation", sitemap: true, prerender: true },
-  { path: "/services/voice-agents", sitemap: true, prerender: true },
-  { path: "/services/social-media-management", sitemap: true, prerender: true },
-  { path: "/services/rag-data", sitemap: true, prerender: true },
-  // Legacy alias — permanent redirect in my-app/vercel.json; prerender only
-  { path: "/services/reputation-management", sitemap: false, prerender: true },
-  // Legacy hub — permanent redirect /solutions → /services; omit from sitemap
-  { path: "/solutions", sitemap: false, prerender: true },
+  { path: "/book-demo", sitemap: true, prerender: true },
   { path: "/industries", sitemap: true, prerender: true },
   { path: "/industries/hvac", sitemap: true, prerender: true },
   { path: "/industries/plumbing", sitemap: true, prerender: true },
@@ -48,34 +43,17 @@ export const PUBLIC_ROUTES: readonly PublicRouteDef[] = [
   { path: "/industries/legal", sitemap: true, prerender: true },
   { path: "/industries/churches", sitemap: true, prerender: true },
   { path: "/industries/auto-repair", sitemap: true, prerender: true },
-  // Legacy industry URL — still live; new HVAC/plumbing live under /industries/*
   { path: "/roofing", sitemap: true, prerender: true },
-  // Legacy aliases — permanent redirects in my-app/vercel.json; prerender only
-  { path: "/hvac", sitemap: false, prerender: true },
-  { path: "/plumbing", sitemap: false, prerender: true },
   { path: "/houston", sitemap: true, prerender: true },
   { path: "/richmond-tx", sitemap: true, prerender: true },
-  { path: "/pricing", sitemap: true, prerender: true },
-  { path: "/results", sitemap: true, prerender: true },
-  { path: "/testimonials", sitemap: true, prerender: true },
-  { path: "/about", sitemap: true, prerender: true },
-  // Project #001 V3 pages
-  { path: "/websites", sitemap: true, prerender: true },
-  { path: "/website-care", sitemap: true, prerender: true },
-  { path: "/ai-pilot", sitemap: true, prerender: true },
-  // Legal pages: heading-only placeholders pending counsel (noindex) — omit from sitemap
+  { path: "/cookie-policy", sitemap: true, prerender: true },
+  // Privacy / Terms: substantive drafts pending Donatus's review — noindex, omit from sitemap until approved
   { path: "/privacy", sitemap: false, prerender: true },
   { path: "/terms", sitemap: false, prerender: true },
-  { path: "/blog", sitemap: true, prerender: true },
-  { path: "/contact", sitemap: true, prerender: true },
-  { path: "/book-demo", sitemap: true, prerender: true },
-  { path: "/ai-employee-system", sitemap: true, prerender: true },
-  { path: "/cookie-policy", sitemap: true, prerender: true },
-  // Client navigate → /results; canonical points at /results — omit from sitemap
-  { path: "/portfolio", sitemap: false, prerender: true },
-  // Widget surfaces — excluded from sitemap (/widget/*)
+  // Widget embed frame — technical, excluded from sitemap (/widget/install withdrawn 2026-10-13)
   { path: "/widget/frame", sitemap: false, prerender: true },
-  { path: "/widget/install", sitemap: false, prerender: true },
+  // Redirect aliases (/solutions, /hvac, /plumbing, /portfolio, /testimonials, old AI service URLs) are handled by
+  // vercel.json permanent redirects and are not prerendered. Withdrawn pages are not routed (404).
 ] as const;
 
 export function getSitemapPaths(): string[] {

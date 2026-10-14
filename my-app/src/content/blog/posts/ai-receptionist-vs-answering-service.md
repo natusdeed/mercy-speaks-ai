@@ -2,6 +2,7 @@
 title: "AI Receptionist vs. Human Answering Service: Which Should Your Business Use?"
 metaTitle: "AI vs Answering Service | Mercy Speaks Digital"
 description: "Compare AI receptionists vs human answering services on cost, availability, consistency, complex calls, and scale—plus when hybrid handoff wins."
+draft: true
 publishedAt: "2026-07-11"
 tags:
   - AI receptionist

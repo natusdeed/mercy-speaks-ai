@@ -2,6 +2,7 @@
 title: "What Is Missed-Call Text Back (and How Much Revenue Are You Losing Without It)?"
 metaTitle: "What Is Missed-Call Text Back? | Mercy Speaks Digital"
 description: "Missed-call text-back texts callers within seconds when you don’t answer. How it works, industry scripts, TCPA notes, and what’s included."
+draft: true
 publishedAt: "2026-07-11"
 tags:
   - missed-call text-back
