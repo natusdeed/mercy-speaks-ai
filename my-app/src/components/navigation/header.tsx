@@ -5,15 +5,28 @@ import { cn } from "@/lib/utils";
 
 /**
  * Site header — Project #001 V3 ("premium, quiet, conversion-focused").
- * Navigation follows the locked V3 sitemap: Websites, Website Care, AI Pilot, About + one CTA.
+ * Primary nav (4 links): Websites, Website Care, AI Services (Pilot), Our Work + one CTA. About lives in the footer.
  * Legacy pages remain routable (and linked from the legacy footer); they are no longer in primary nav.
  */
 const NAV = [
   { name: "Websites", href: "/websites" },
   { name: "Website Care", href: "/website-care" },
-  { name: "AI Pilot", href: "/ai-pilot" },
-  { name: "About", href: "/about" },
+  { name: "AI Services", href: "/ai-pilot", pilot: true },
+  { name: "Our Work", href: "/results" },
 ] as const;
+
+/** Visible "Pilot" badge; screen readers hear "AI Services (Pilot)". */
+function NavLabel({ name, pilot }: { name: string; pilot?: boolean }) {
+  if (!pilot) return <>{name}</>;
+  return (
+    <>
+      {name}
+      <span className="ml-1.5 rounded border border-slate-600 px-1.5 py-px text-[11px] font-medium uppercase tracking-wide text-slate-300">
+        <span className="sr-only"> (</span>Pilot<span className="sr-only">)</span>
+      </span>
+    </>
+  );
+}
 
 const focus =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950";
@@ -64,7 +77,7 @@ export function Header() {
                         focus
                       )}
                     >
-                      {l.name}
+                      <NavLabel name={l.name} pilot={"pilot" in l && l.pilot} />
                     </Link>
                   </li>
                 );
@@ -105,7 +118,7 @@ export function Header() {
                     onClick={() => setMobileOpen(false)}
                     className={cn("flex min-h-12 items-center text-base text-slate-200", focus)}
                   >
-                    {l.name}
+                    <NavLabel name={l.name} pilot={"pilot" in l && l.pilot} />
                   </Link>
                 </li>
               ))}

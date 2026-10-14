@@ -5,7 +5,8 @@ import { BUSINESS, telHref } from "@/lib/site-config";
 const LINKS = [
   { name: "Websites", href: "/websites" },
   { name: "Website Care", href: "/website-care" },
-  { name: "AI Pilot", href: "/ai-pilot" },
+  { name: "AI Services (Pilot)", href: "/ai-pilot" },
+  { name: "Our Work", href: "/results" },
   { name: "About", href: "/about" },
   { name: "Contact", href: "/contact" },
   { name: "Blog", href: "/blog" },
