@@ -117,8 +117,6 @@ export default function ContactPage() {
                   <MapPin className="w-8 h-8 text-electric-purple mb-4" />
                   <h3 className="text-xl md:text-2xl font-semibold text-slate-50 mb-2">Location</h3>
                   <p className="text-lg md:text-xl text-slate-300">
-                    Richmond, Texas 77407
-                    <br />
                     Houston Metro Area
                   </p>
                 </div>

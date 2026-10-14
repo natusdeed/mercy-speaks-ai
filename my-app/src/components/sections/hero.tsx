@@ -82,7 +82,7 @@ export function Hero() {
         </motion.div>
 
         <p className="mt-6 text-sm text-slate-500">
-          Based in the Houston metro (Richmond, TX) • Serving businesses across the U.S.
+          Serving the Houston metro • businesses across the U.S.
         </p>
       </div>
     </section>

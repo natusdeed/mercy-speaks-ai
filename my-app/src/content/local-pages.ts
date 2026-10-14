@@ -56,7 +56,7 @@ export const LOCAL_PAGES: Record<"houston" | "richmond-tx", LocalPageConfig> = {
       "Houston small businesses win on speed to answer and clarity online—not on who has the flashiest billboard on I-10. We build the websites and AI phone systems that turn metro searchers into booked jobs.",
     contextParagraphs: [
       "The Houston market is dense with service businesses that live and die by the phone: HVAC and plumbing trucks racing summer heat, roofers after Gulf storms, auto shops along the feeder roads, and dental and medical corridors from the Medical Center out through the suburbs. When those lines go to voicemail during a lunch rush or after 6 p.m., the next Google listing gets the work.",
-      "Mercy Speaks Digital is based in Richmond in Fort Bend County—not a downtown agency floor. We work across the metro every week: Sugar Land and Missouri City, Katy and the Energy Corridor, Richmond and Rosenberg, The Woodlands and Pearland. That means kickoffs and demos can happen in person when it helps, and remote when your calendar is already packed.",
+      "Mercy Speaks Digital is not a downtown agency floor. We work across the metro every week: Sugar Land and Missouri City, Katy and the Energy Corridor, Richmond and Rosenberg, The Woodlands and Pearland. That means kickoffs and demos can happen in person when it helps, and remote when your calendar is already packed.",
       "If you already have a site that looks fine on a laptop but buries your service area, phone number, or booking path on mobile, we rebuild for how Houston customers actually search. If your phones overflow when the weather turns or the waiting room fills, we install an AI receptionist with missed-call text-back so after-hours rings still become appointments.",
     ],
     areaServedCities: [
@@ -134,7 +134,7 @@ export const LOCAL_PAGES: Record<"houston" | "richmond-tx", LocalPageConfig> = {
         id: "houston-in-person",
         question: "Do you meet in person?",
         answer:
-          "Yes, when it helps. We are based in Richmond (Fort Bend County) and can meet across the Houston metro—Sugar Land, Katy, The Woodlands, Pearland, and nearby. Many kickoffs and demos also run on video if that is easier for your team.",
+          "Yes, when it helps. We can meet across the Houston metro—Sugar Land, Katy, The Woodlands, Pearland, and nearby. Many kickoffs and demos also run on video if that is easier for your team.",
       },
       {
         id: "houston-only",
@@ -167,13 +167,13 @@ export const LOCAL_PAGES: Record<"houston" | "richmond-tx", LocalPageConfig> = {
     breadcrumbLabel: "Richmond, TX",
     seoTitle: "Website Design & Care in Richmond, TX | Mercy Speaks Digital",
     seoDescription:
-      "Conversion website design and website care based in Richmond, TX, for Richmond, Rosenberg, and Sugar Land. AI receptionists are offered as a limited pilot.",
-    h1: "Website Design & AI Automation in Richmond, TX 77407",
+      "Conversion website design and website care for Richmond, Rosenberg, and Sugar Land. AI receptionists are offered as a limited pilot.",
+    h1: "Website Design & AI Automation in Richmond, TX",
     lead:
-      "We are a Fort Bend shop—based in Richmond 77407—building websites and AI phone systems for businesses that answer to neighbors, not national call centers.",
+      "We build websites and AI phone systems for businesses that answer to neighbors, not national call centers.",
     contextParagraphs: [
       "Richmond and Rosenberg sit at the center of Fort Bend growth: new neighborhoods, busy FM corridors, and owners who still pick up the phone when a tech is on a job. That is when a clear site and after-hours AI receptionist matter—so a homeowner in Greatwood is not stuck on voicemail.",
-      "From 77407 we meet across Fort Bend and into Sugar Land or Katy when a whiteboard beats another Zoom. Our Sugar Land build for RCCG Shiloh Mega Parish shows the quality we ship from this zip.",
+      "We meet across Fort Bend and into Sugar Land or Katy when a whiteboard beats another Zoom. Our Sugar Land build for RCCG Shiloh Mega Parish shows the quality we ship.",
     ],
     areaServedCities: [
       "Richmond",
@@ -239,7 +239,7 @@ export const LOCAL_PAGES: Record<"houston" | "richmond-tx", LocalPageConfig> = {
         id: "richmond-in-person",
         question: "Do you meet in person in Richmond?",
         answer:
-          "Yes. We are based in Richmond 77407 and can meet in Fort Bend or nearby Sugar Land / Katy. Video demos work when that is faster.",
+          "Yes. We can meet in Fort Bend or nearby Sugar Land / Katy. Video demos work when that is faster.",
       },
       {
         id: "richmond-only-houston",
@@ -254,9 +254,9 @@ export const LOCAL_PAGES: Record<"houston" | "richmond-tx", LocalPageConfig> = {
           "Kickoffs can be local, and your site or AI scripts can name real service areas (Richmond, Rosenberg, Sugar Land, nearby ZIPs) without generic filler.",
       },
     ],
-    ctaTitle: "Talk with a Richmond-based team",
+    ctaTitle: "Talk with a team serving Richmond",
     ctaDescription:
-      "Book a short demo for website design or AI automation—built from 77407 for Fort Bend businesses first.",
+      "Book a short demo for website design or AI automationfor Fort Bend businesses.",
   },
 };
 

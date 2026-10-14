@@ -157,10 +157,8 @@ export const BUSINESS = {
   telephone: "+18329813123",
   /** NAP: aligned with contact page */
   address: {
-    streetAddress: undefined as string | undefined,
     addressLocality: "Richmond",
     addressRegion: "TX",
-    postalCode: "77407",
     addressCountry: "US",
   },
   /** Schema.org areaServed (strings; ProfessionalService / LocalBusiness) */

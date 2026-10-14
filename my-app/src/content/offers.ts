@@ -148,6 +148,5 @@ export const PILOT_LIMITS = [
   "Pilot hours are agreed with each business during setup.",
   "Your team reviews every message and request and follows up with the caller.",
   "It does not confirm appointments or give emergency instructions.",
-  "Transfers are attempted, not guaranteed.",
   "The pilot is separate from our website packages and care plans. Scope and terms are agreed in writing with each pilot business.",
 ] as const;

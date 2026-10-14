@@ -16,7 +16,7 @@ export function EntitySummaryStrip() {
         <p className="text-slate-300 text-base sm:text-lg leading-relaxed max-w-3xl mx-auto">
           <span className="font-semibold text-slate-100">{BUSINESS.name}</span> is a U.S.-based digital agency. We build
           conversion-ready websites and storefronts, install AI phone receptionists, and automate follow-up so inbound
-          leads move to a booked outcome. Based in the Houston metro (Richmond, TX); serving businesses nationwide.
+          leads move to a booked outcome. Serving the Houston metro and businesses nationwide.
         </p>
       </div>
     </section>

@@ -47,7 +47,8 @@ export function Footer() {
     navigationLinks.slice(5),
   ];
 
-  const socialLinks = SOCIAL_LINKS.map((link) => {
+  // Hidden until the CEO confirms social profiles; SOCIAL_LINKS constant kept.
+  const socialLinks = ([] as typeof SOCIAL_LINKS).map((link) => {
     const meta = SOCIAL_ICONS[link.name] ?? {
       icon: ArrowRight,
       color: "text-slate-300 border-slate-600",
@@ -75,7 +76,7 @@ export function Footer() {
     {
       icon: MapPin,
       label: "Location",
-      value: `${BUSINESS.address.addressLocality}, ${BUSINESS.address.addressRegion} · Houston metro`,
+      value: "Houston metro",
       href: null,
     },
   ];
