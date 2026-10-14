@@ -261,78 +261,59 @@ export default function CookieConsent() {
             zIndex: 9999,
             background: "#020617",
             borderTop: "1px solid #1e293b",
-            padding: "20px",
+            padding: "8px 12px",
             display: "flex",
-            justifyContent: "space-between",
+            justifyContent: "center",
             alignItems: "center",
-            gap: "20px",
+            gap: "8px 12px",
             flexWrap: "wrap",
           }}
         >
-          <div style={{ color: "#94a3b8", fontSize: "0.8125rem", lineHeight: 1.6, maxWidth: "600px" }}>
-            <div style={{ color: "#e2e8f0", fontWeight: 700, fontSize: "0.875rem", marginBottom: "4px" }}>
-              Cookie Preferences
-            </div>
-            This site uses only what it needs to work and does not load analytics or advertising trackers. Your
-            choice is saved in your browser. You can accept, reject optional categories, or manage your preferences.
-          </div>
-
-          <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-            <button
-              type="button"
-              onClick={handleAcceptAll}
-              style={{
-                background: "#ffffff",
-                color: "#0a0a0f",
-                fontWeight: 600,
-                padding: "10px 24px",
-                border: "none",
-                borderRadius: "6px",
-                cursor: "pointer",
-                fontSize: "0.875rem",
-                minHeight: "44px",
-                maxWidth: "100%",
-                whiteSpace: "normal",
-              }}
-            >
-              ACCEPT ALL
-            </button>
+          <p style={{ color: "#cbd5e1", fontSize: "0.8125rem", lineHeight: 1.4, margin: 0 }}>
+            No analytics or ad trackers.{" "}
             <button
               type="button"
               onClick={handleOpenManagePreferences}
               style={{
-                background: "transparent",
-                border: "1px solid #334155",
+                background: "none",
+                border: "none",
+                padding: "0 2px",
                 color: "#e2e8f0",
-                padding: "10px 20px",
-                borderRadius: "6px",
+                textDecoration: "underline",
+                textUnderlineOffset: "3px",
                 cursor: "pointer",
-                fontSize: "0.875rem",
+                fontSize: "inherit",
                 minHeight: "44px",
-                maxWidth: "100%",
-                whiteSpace: "normal",
               }}
             >
-              MANAGE PREFERENCES
+              Manage
             </button>
-            <button
-              type="button"
-              onClick={handleRejectNonEssential}
-              style={{
-                background: "transparent",
-                border: "1px solid #334155",
-                color: "#e2e8f0",
-                padding: "10px 20px",
-                borderRadius: "6px",
-                cursor: "pointer",
-                fontSize: "0.875rem",
-                minHeight: "44px",
-                maxWidth: "100%",
-                whiteSpace: "normal",
-              }}
-            >
-              REJECT NON-ESSENTIAL
-            </button>
+          </p>
+          <div style={{ display: "flex", gap: "8px" }}>
+            {[
+              { label: "Accept", onClick: handleAcceptAll },
+              { label: "Reject", onClick: handleRejectNonEssential },
+            ].map((b) => (
+              <button
+                key={b.label}
+                type="button"
+                onClick={b.onClick}
+                style={{
+                  background: "transparent",
+                  border: "1px solid #64748b",
+                  color: "#f1f5f9",
+                  fontWeight: 600,
+                  padding: "8px 18px",
+                  borderRadius: "6px",
+                  cursor: "pointer",
+                  fontSize: "0.875rem",
+                  minHeight: "44px",
+                  minWidth: "88px",
+                }}
+              >
+                {b.label}
+              </button>
+            ))}
           </div>
         </aside>
       ) : null}

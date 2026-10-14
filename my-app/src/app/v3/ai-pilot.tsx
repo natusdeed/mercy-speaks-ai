@@ -31,10 +31,6 @@ const FAQS = [
       "It can attempt to transfer to a number you choose. If no one answers, the caller can leave a message.",
   },
   {
-    question: "When does it answer?",
-    answer: "Pilot hours are agreed with each business during setup.",
-  },
-  {
     question: "Is it part of a website package?",
     answer: "No. The pilot is separate from our website packages and care plans, with scope and terms agreed in writing.",
   },
@@ -98,7 +94,7 @@ export default function AiPilotPage() {
 
             <h2 className={h2}>HVAC Call Recovery</h2>
             <p className={body}>
-              HVAC Call Recovery is in early pilot. It's designed to answer calls you route to it during agreed hours and capture each caller's details and service request for your team to follow up.
+              HVAC Call Recovery is in early pilot. It's designed to answer calls you route to it and capture each caller's details and service request for your team to follow up.
             </p>
           </div>
         </section>

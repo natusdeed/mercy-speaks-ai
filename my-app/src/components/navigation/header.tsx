@@ -10,9 +10,9 @@ import { cn } from "@/lib/utils";
  * All targets are at least 44px tall.
  */
 export const SERVICE_LINKS = [
-  { name: "Conversion Websites", href: "/websites" },
+  { name: "Websites", href: "/websites" },
   { name: "Website Care & Optimization", href: "/website-care" },
-  { name: "AI Receptionist — Pilot", href: "/ai-pilot" },
+  { name: "AI Receptionist – Pilot", href: "/ai-pilot" },
 ] as const;
 
 const SERVICE_PATHS = new Set<string>([...SERVICE_LINKS.map((l) => l.href), "/services", "/services/website-design", "/pricing"]);
@@ -21,15 +21,7 @@ const focus =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950";
 
 function ServiceLabel({ name }: { name: string }) {
-  if (!name.endsWith("— Pilot")) return <>{name}</>;
-  return (
-    <>
-      AI Receptionist
-      <span className="ml-2 rounded border border-slate-600 px-1.5 py-px text-[11px] font-medium uppercase tracking-wide text-slate-300">
-        <span className="sr-only"> — </span>Pilot
-      </span>
-    </>
-  );
+  return <>{name}</>;
 }
 
 export function Header() {

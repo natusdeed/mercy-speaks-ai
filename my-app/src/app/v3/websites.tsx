@@ -58,7 +58,7 @@ export default function WebsitesPage() {
           title="Conversion websites for growing businesses"
           intro="New websites and redesigns that explain your business clearly and make it easy for visitors to call or request a quote."
         >
-          <Link to="/contact" className={primaryBtn}>
+          <Link to="/contact?interest=website" className={primaryBtn}>
             Get a Website Quote
           </Link>
         </PageHero>
@@ -131,7 +131,7 @@ export default function WebsitesPage() {
             </h2>
             <p className={`${body} mt-4 max-w-2xl mx-0`}>We'll recommend a package and send a written quote.</p>
             <div className="mt-8">
-              <Link to="/contact" className={primaryBtn}>
+              <Link to="/contact?interest=website" className={primaryBtn}>
                 Get a Website Quote
               </Link>
             </div>

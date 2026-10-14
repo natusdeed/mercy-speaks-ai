@@ -5,7 +5,7 @@ import { PageShell } from "@/components/ui/page-shell";
 import { SeoHead } from "@/components/seo/seo-head";
 import { JsonLd } from "@/components/seo/json-ld";
 import { faqPageSchema, websiteSchema } from "@/lib/schema";
-import { body, divided, FaqList, h1, h2, inner, narrow, primaryBtn, section, secondaryBtn, smallPrint } from "@/components/home-v3/v3-ui";
+import { body, divided, FaqList, h1, h2, inner, narrow, primaryBtn, section, secondaryBtn, smallPrint, textLink } from "@/components/home-v3/v3-ui";
 import { AFTER_LAUNCH, DELIVERY_STEPS, OWNERSHIP, PAYMENT_TERMS, TIMELINE } from "@/content/offers";
 import { VERIFIED_WORK } from "@/content/verified-work";
 
@@ -144,7 +144,7 @@ export default function Home() {
               <p className={`${body} mt-4`}>Tell us about your business and we'll send a written quote.</p>
             </div>
             <div className="md:text-right">
-              <Link to="/contact" className={primaryBtn}>
+              <Link to="/contact" className={textLink}>
                 Get a Website Quote
               </Link>
             </div>
