@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { SelectedWork } from "@/components/home-v3/selected-work";
 import { PageShell } from "@/components/ui/page-shell";
 import { SeoHead } from "@/components/seo/seo-head";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -169,6 +170,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* 3b. Selected website work — existing, labeled portfolio items only */}
+        <SelectedWork />
 
         {/* 4. How it works — numbered list, not a card grid */}
         <section className={`${section} ${divided}`} aria-labelledby="how-heading">

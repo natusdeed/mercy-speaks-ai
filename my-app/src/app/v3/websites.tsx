@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { SelectedWork } from "@/components/home-v3/selected-work";
 import { PageShell } from "@/components/ui/page-shell";
 import { SeoHead } from "@/components/seo/seo-head";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -102,6 +103,7 @@ export default function WebsitesPage() {
           </div>
         </section>
 
+        <SelectedWork headingId="websites-work-heading" />
         <section className={`${section} ${divided}`}>
           <div className={`${inner} grid gap-14 md:grid-cols-[1fr_2fr] md:gap-x-16`}>
             <h2 className={h2}>Add-ons</h2>
