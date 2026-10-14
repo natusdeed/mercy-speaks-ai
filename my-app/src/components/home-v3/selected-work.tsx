@@ -1,65 +1,21 @@
 import { h2, inner, section, divided, smallPrint } from "@/components/home-v3/v3-ui";
-import { DAVITA_AUTO_LOGISTICS_URL } from "@/lib/site-config";
 
-/**
- * Selected Website Work — reuses only existing, verified repo material:
- * screenshots in /public/portfolio, descriptions from /results and content/local-pages.ts.
- * Labels follow existing evidence: "Client work" only where the repo states we built the live client site;
- * Davita is marked "Demo build" in /results. No results, metrics, or testimonials are claimed.
- */
-type WorkItem = {
-  title: string;
-  label: "Client work" | "Our own website" | "Demo build";
-  description: string;
-  href: string;
-  linkText: string;
-  image: string;
-  width: number;
-  height: number;
-};
+import { VERIFIED_WORK as WORK } from "@/content/verified-work";
 
-const WORK: WorkItem[] = [
-  {
-    title: "RCCG Shiloh Mega Parish",
-    label: "Client work",
-    description: "Church website in Sugar Land with service times, ministries, and a guest-friendly mobile experience.",
-    href: "https://www.rccgshilohmega.org/",
-    linkText: "Visit the live site",
-    image: "/portfolio/rccg-shiloh-church-960.webp",
-    width: 960,
-    height: 442,
-  },
-  {
-    title: "PRIME Global Logistics",
-    label: "Client work",
-    description:
-      "Marketing site for solar supply and Africa logistics with product categories, gallery, FAQs, and a quote flow.",
-    href: "https://primeglogistics.com/",
-    linkText: "Visit the live site",
-    image: "/portfolio/primeglobal-logistics-960.webp",
-    width: 960,
-    height: 414,
-  },
-  {
-    title: "Davita Auto Logistics",
-    label: "Demo build",
-    description: "Demo build for a clean-energy logistics brand: solar supply, auto transport, and quote flows.",
-    href: DAVITA_AUTO_LOGISTICS_URL,
-    linkText: "View the demo build",
-    image: "/portfolio/davita-auto-logistics-960.webp",
-    width: 960,
-    height: 432,
-  },
-];
-
-export function SelectedWork({ headingId = "work-heading" }: { headingId?: string }) {
+export function SelectedWork({
+  headingId = "work-heading",
+  title = "Selected Website Work",
+}: {
+  headingId?: string;
+  title?: string;
+}) {
   return (
     <section className={`${section} ${divided}`} aria-labelledby={headingId}>
       <div className={inner}>
         <h2 id={headingId} className={`${h2} mb-10`}>
-          Selected Website Work
+          {title}
         </h2>
-        <ul className="grid gap-12 md:grid-cols-3 md:gap-8">
+        <ul className="grid gap-12 md:grid-cols-2 md:gap-8">
           {WORK.map((w) => (
             <li key={w.title} className="min-w-0">
               <img
