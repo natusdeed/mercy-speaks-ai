@@ -33,7 +33,7 @@ export default function ResultsPage() {
             <h2 id="results-cta-heading" className={h2}>
               Want a website like these?
             </h2>
-            <p className={`${body} mt-4 max-w-2xl`}>Tell us about your business and we&apos;ll send a quote.</p>
+            <p className={`${body} mx-0 mt-4 max-w-2xl`}>Tell us about your business and we&apos;ll send a quote.</p>
             <div className="mt-8">
               <Link to="/contact" className={primaryBtn}>
                 Get a Website Quote
