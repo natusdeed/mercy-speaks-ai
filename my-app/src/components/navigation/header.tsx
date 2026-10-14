@@ -170,7 +170,7 @@ export function Header() {
         <div id="mobile-menu" hidden={!mobileOpen} className="max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-slate-800 pb-6 pt-2 md:hidden">
           <ul className="divide-y divide-slate-800">
             <li>
-              <Link to="/" aria-current={pathname === "/" ? "page" : undefined} className={cn("flex min-h-12 items-center text-base text-slate-200", focus)}>
+              <Link onClick={() => setMobileOpen(false)} to="/" aria-current={pathname === "/" ? "page" : undefined} className={cn("flex min-h-12 items-center text-base text-slate-200", focus)}>
                 Home
               </Link>
             </li>
@@ -181,7 +181,7 @@ export function Header() {
               <ul aria-labelledby="mobile-services-label" className="pl-4">
                 {SERVICE_LINKS.map((l) => (
                   <li key={l.href}>
-                    <Link
+                    <Link onClick={() => setMobileOpen(false)}
                       to={l.href}
                       aria-current={pathname === l.href ? "page" : undefined}
                       className={cn("flex min-h-12 items-center text-base text-slate-200", focus)}
@@ -193,17 +193,17 @@ export function Header() {
               </ul>
             </li>
             <li>
-              <Link to="/results" aria-current={pathname === "/results" ? "page" : undefined} className={cn("flex min-h-12 items-center text-base text-slate-200", focus)}>
+              <Link onClick={() => setMobileOpen(false)} to="/results" aria-current={pathname === "/results" ? "page" : undefined} className={cn("flex min-h-12 items-center text-base text-slate-200", focus)}>
                 Our Work
               </Link>
             </li>
             <li>
-              <Link to="/about" aria-current={pathname === "/about" ? "page" : undefined} className={cn("flex min-h-12 items-center text-base text-slate-200", focus)}>
+              <Link onClick={() => setMobileOpen(false)} to="/about" aria-current={pathname === "/about" ? "page" : undefined} className={cn("flex min-h-12 items-center text-base text-slate-200", focus)}>
                 About
               </Link>
             </li>
           </ul>
-          <Link
+          <Link onClick={() => setMobileOpen(false)}
             to="/contact"
             className={cn(
               "mt-4 inline-flex min-h-12 w-full items-center justify-center rounded-lg bg-white px-6 text-base font-semibold text-slate-950",

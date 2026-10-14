@@ -81,7 +81,7 @@ export default function PricingPage() {
               Website Care &amp; Optimization
             </h2>
             <PriceColumns items={CARE_PLANS} cols={2} />
-            <div className="mt-8 max-w-3xl">
+            <div className="mt-8 max-w-3xl mx-0">
               <QuietList items={CARE_RULES} />
             </div>
           </div>
