@@ -110,21 +110,6 @@ const trustChips = ["Mobile-first", "SEO-ready", "Built for conversion", "Fast +
 
 const portfolioItems: PortfolioItem[] = [
   {
-    id: "primeglobal",
-    title: "PRIME Global Logistics",
-    url: "https://primeglogistics.com/",
-    category: "Websites",
-    industryTag: "Logistics / Solar Supply",
-    description:
-      "Premium marketing site with product categories, gallery, FAQs, and a conversion-ready quote flow—built to look established and make the next step obvious.",
-    outcome: "Professional business website launch for stronger online presence and easier quote requests.",
-    stack: ["Next.js", "Tailwind", "Vercel"],
-    thumbnail: "/portfolio/primeglobal-logistics.png",
-    liveUrl: "https://primeglogistics.com/",
-    ctaLabel: "View Live Site",
-    featured: true,
-  },
-  {
     id: "davita-auto-logistics",
     title: "Davita Auto Logistics",
     url: DAVITA_AUTO_LOGISTICS_URL,
