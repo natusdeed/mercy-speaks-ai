@@ -24,7 +24,7 @@ const TIMELINE =
   "10–15 business days of active Mercy Speaks production time after the initial payment and all required starting assets are received. The delivery clock pauses while Mercy Speaks is waiting for client content, assets, credentials/access, feedback, revisions, or approvals.";
 
 const OWNERSHIP =
-  "After full payment, the client owns the final client-specific website deliverables created for the approved project, excluding Mercy Speaks Digital's pre-existing tools, frameworks, reusable code/components, templates, processes, methods, and know-how. Third-party software, plugins, fonts, images, licensed assets, and services remain subject to their respective licenses and ownership terms. [DRAFT — PENDING LEGAL REVIEW]";
+  "Once your project is paid in full, you own the final website deliverables we created specifically for your approved project. Mercy Speaks Digital keeps ownership of its pre-existing tools, frameworks, reusable code and components, templates, processes, methods, and know-how. Third-party software, plugins, fonts, images, licensed assets, and services stay subject to their own licenses and ownership terms.";
 
 const FAQS = [
   { question: "How long does a website take?", answer: TIMELINE },
