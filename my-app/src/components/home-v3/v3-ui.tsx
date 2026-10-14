@@ -104,3 +104,11 @@ export function PageHero({ title, intro, children }: { title: string; intro: Rea
 }
 
 export const MAILING_ADDRESS = "Mercy Speaks Digital, 5554 S Peek Road, PMB #2144, Katy, TX 77450";
+
+/** AI Receptionist pilot — supported functions (shared by /ai-pilot and the homepage pilot section). */
+export const PILOT_CAPABILITIES = [
+  "Answers your business line during the hours you configure",
+  "Takes messages for your team",
+  "Captures service requests and booking requests for your team to confirm (it does not book appointments itself)",
+  "Hands callers off to a person on your team when needed",
+] as const;

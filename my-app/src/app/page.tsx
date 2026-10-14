@@ -3,7 +3,7 @@ import { PageShell } from "@/components/ui/page-shell";
 import { SeoHead } from "@/components/seo/seo-head";
 import { JsonLd } from "@/components/seo/json-ld";
 import { faqPageSchema, websiteSchema } from "@/lib/schema";
-import { body, divided, eyebrow, FaqList, h1, h2, inner, narrow, PriceColumns, primaryBtn, section, secondaryBtn, smallPrint, textLink } from "@/components/home-v3/v3-ui";
+import { body, divided, eyebrow, FaqList, h1, h2, inner, narrow, PILOT_CAPABILITIES, PriceColumns, primaryBtn, section, secondaryBtn, smallPrint, textLink } from "@/components/home-v3/v3-ui";
 
 /**
  * Homepage V3 (Project #001, CEO-locked copy 2026-10-13).
@@ -217,16 +217,20 @@ export default function Home() {
         <section className={`${section} ${divided} py-12 md:py-16`} aria-labelledby="ai-pilot-heading">
           <div className={`${inner} grid gap-4 md:grid-cols-[1fr_2fr] md:gap-16`}>
             <h2 id="ai-pilot-heading" className="text-lg font-semibold text-white">
-              AI communication tools: limited pilot
+              AI Receptionist — Pilot
             </h2>
             <div>
               <p className="text-base leading-relaxed text-slate-400">
-                We're testing AI communication tools separately from our website services. The pilot has limited
-                availability and is not part of our website packages.
+                A limited, invitation-only pilot, separate from our website packages. In the pilot, the AI receptionist:
               </p>
+              <ul className="mt-3 list-disc space-y-1 pl-5 text-base leading-relaxed text-slate-400">
+                {PILOT_CAPABILITIES.map((c) => (
+                  <li key={c}>{c}</li>
+                ))}
+              </ul>
               <div className="mt-2">
                 <Link to="/ai-pilot" className={textLink}>
-                  Learn about the AI pilot
+                  Learn about the AI Receptionist pilot
                 </Link>
               </div>
             </div>
