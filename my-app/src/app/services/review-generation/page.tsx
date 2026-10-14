@@ -184,7 +184,7 @@ export default function ReviewGenerationPage() {
                 },
                 {
                   title: "Automated Request Sent",
-                  body: "Within minutes, your customer receives a personalized SMS and/or email asking for a Google review. Timing and message are customized to your brand.",
+                  body: "Your customer then receives a personalized SMS and/or email asking for a Google review. Timing and message are customized to your brand.",
                 },
                 {
                   title: "Customer Leaves Review",
