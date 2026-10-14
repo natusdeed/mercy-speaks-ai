@@ -9,7 +9,7 @@ tags:
   - lead recovery
   - SMS automation
 ctaTitle: "Stop losing callers who hang up"
-ctaDescription: "Missed-call text-back is included on every Mercy plan. Book a demo to see the first-text flow on your number."
+ctaDescription: "Missed-call text-back is scoped individually as part of our AI Receptionist pilot. Ask us whether it fits your business."
 useLiveDemoCta: true
 ---
 

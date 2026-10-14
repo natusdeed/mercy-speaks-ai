@@ -130,7 +130,7 @@ export const SERVICES = [
     name: "AI Receptionist — Pilot",
     href: "/ai-pilot",
     summary:
-      "AI-assisted answering during configured hours, message capture and service requests for your team to review.",
+      "AI-assisted answering for the calls you send to it, with messages and service requests passed to your team to review.",
     priceNote: "Limited pilot, by invitation",
     cta: "How the pilot works",
   },
@@ -138,16 +138,16 @@ export const SERVICES = [
 
 /** What the AI receptionist does in the pilot — customer language, no guarantees. */
 export const PILOT_CAPABILITIES = [
-  "Answers your business line during the hours you configure",
+  "Answers calls you route to it",
   "Takes messages for your team",
   "Captures service requests and appointment requests for your team to review and confirm. It does not confirm appointments itself.",
-  "Can attempt to transfer a caller to a person on your team when you set that up. If the transfer doesn't connect, it takes a message instead.",
+  "It can attempt to transfer to a number you choose. If no one answers, the caller can leave a message.",
 ] as const;
 
 export const PILOT_LIMITS = [
-  "It works only during the hours you configure.",
+  "Pilot hours are agreed with each business during setup.",
   "Your team reviews every message and request and follows up with the caller.",
-  "It does not confirm appointments, quote prices, or give emergency instructions.",
+  "It does not confirm appointments or give emergency instructions.",
   "Transfers are attempted, not guaranteed.",
   "The pilot is separate from our website packages and care plans. Scope and terms are agreed in writing with each pilot business.",
 ] as const;

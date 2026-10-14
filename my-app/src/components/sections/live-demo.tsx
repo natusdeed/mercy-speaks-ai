@@ -91,9 +91,7 @@ function SampleCallPlayer({
           Read the full transcript
         </a>
       ) : !audioUrl ? (
-        <p className="text-sm text-slate-400 text-center max-w-sm">
-          Sample audio is coming soon. Book a demo to hear the AI live on a guided call.
-        </p>
+        null
       ) : null}
     </div>
   );
@@ -251,7 +249,7 @@ export function LiveDemo({ location = "unknown" }: LiveDemoProps) {
               id={titleId}
               className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-50 tracking-tight leading-tight px-1"
             >
-              Don&apos;t take our word for it — call our AI right now.
+              Hear how the pilot handles a call.
             </h2>
 
             {hasPhone && tel && display ? (

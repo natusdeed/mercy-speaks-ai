@@ -34,7 +34,7 @@ export const HOME_V3_FAQS = [
   {
     question: "Is the AI Receptionist part of a website package?",
     answer:
-      "No. The AI Receptionist is a limited pilot offered separately, by invitation. It answers during the hours you configure and captures messages and service requests for your team to review. It does not confirm appointments.",
+      "No. The AI Receptionist is a limited pilot offered separately, by invitation. It answers calls you route to it and captures messages and service requests for your team to review. It does not confirm appointments.",
   },
 ] as const;
 

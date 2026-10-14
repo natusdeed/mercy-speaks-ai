@@ -18,7 +18,7 @@ export type MarketPage = {
 };
 
 const pilotHvac =
-  "For HVAC companies we're also running HVAC Call Recovery as a limited pilot: AI-assisted answering during the hours you set, capturing each caller's details and service request for your team to review. It's separate from website packages.";
+  "HVAC Call Recovery is in early pilot. It's designed to answer calls you route to it during agreed hours and capture each caller's details and service request for your team to follow up. It's an early pilot, not yet deployed for HVAC clients, and separate from website packages.";
 
 export const INDUSTRY_SLUGS = ["hvac", "plumbing", "dental", "legal", "churches", "auto-repair"] as const;
 export type IndustrySlug = (typeof INDUSTRY_SLUGS)[number];

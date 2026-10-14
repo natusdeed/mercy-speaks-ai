@@ -10,7 +10,7 @@ const INSTALLS = [
   {
     icon: Phone,
     title: "AI Receptionist",
-    description: "Phone answering that qualifies leads, books appointments, and takes messages. AI receptionist services are currently in pilot testing.",
+    description: "Phone answering for calls you route to it that takes messages and captures service requests for your team to confirm. AI receptionist services are currently in pilot testing.",
     href: NAV_PATHS.aiReceptionist,
     color: "neon-cyan",
     useBookingLink: false,

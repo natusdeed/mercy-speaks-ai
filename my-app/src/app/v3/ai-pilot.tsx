@@ -13,7 +13,7 @@ import { PILOT_CAPABILITIES, PILOT_LIMITS, SERVICES } from "@/content/offers";
  * deliberately NOT rendered here until an approved recording exists (see AI_PILOT_RECORDING in that file).
  */
 const STEPS = [
-  { title: "A customer calls", body: "During the hours you configure, the AI receptionist answers with your business name and greeting." },
+  { title: "A customer calls", body: "When a call reaches it, the AI receptionist answers with your business name and greeting." },
   { title: "It listens and asks", body: "It asks what the caller needs and collects their name, callback number and a short description." },
   { title: "It captures the request", body: "It records a message or a service request. If the caller asks for a person and you've set up transfers, it attempts one." },
   { title: "Your team follows up", body: "Your team reviews each message and request, then calls the customer back to confirm details and any appointment." },
@@ -28,11 +28,11 @@ const FAQS = [
   {
     question: "Can it transfer a caller to my team?",
     answer:
-      "It can attempt a transfer to a number you choose. Transfers depend on someone being available to answer, so if one doesn't connect, it takes a message instead.",
+      "It can attempt to transfer to a number you choose. If no one answers, the caller can leave a message.",
   },
   {
     question: "When does it answer?",
-    answer: "Only during the hours you configure for the pilot. Outside those hours your phone works as it does today.",
+    answer: "Pilot hours are agreed with each business during setup.",
   },
   {
     question: "Is it part of a website package?",
@@ -51,7 +51,7 @@ export default function AiPilotPage() {
       <SeoHead
         path="/ai-pilot"
         title="AI Receptionist — Pilot | Mercy Speaks Digital"
-        description="A limited pilot: AI-assisted answering during configured hours, message capture and service requests for your team to review."
+        description="A limited pilot: AI-assisted answering for the calls you send to it, with messages and service requests passed to your team to review."
       />
       <JsonLd
         data={[
@@ -98,9 +98,7 @@ export default function AiPilotPage() {
 
             <h2 className={h2}>HVAC Call Recovery</h2>
             <p className={body}>
-              For HVAC companies, we're running HVAC Call Recovery as a limited pilot. It applies the same approach to
-              after-hours and busy-season calls: the AI receptionist answers during the hours you set and captures each
-              caller's details and service request so your team can follow up.
+              HVAC Call Recovery is in early pilot. It's designed to answer calls you route to it during agreed hours and capture each caller's details and service request for your team to follow up.
             </p>
           </div>
         </section>

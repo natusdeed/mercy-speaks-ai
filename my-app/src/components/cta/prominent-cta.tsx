@@ -77,7 +77,7 @@ export function ProminentCTA() {
                 </motion.div>
                 
                 <h3 className="text-2xl md:text-3xl font-bold text-slate-50 mb-3">
-                  Call Our AI Right Now
+                  Ask About the AI Pilot
                 </h3>
                 <p className="text-slate-400 mb-6 max-w-sm">
                   Experience our AI receptionist in real-time. The same technology we'll install for your business.

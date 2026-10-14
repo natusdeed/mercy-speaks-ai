@@ -22,7 +22,7 @@ const STEPS = [
     number: "3",
     icon: BarChart3,
     title: "Start booking + reporting",
-    description: "Your AI answers calls and books appointments. You get a dashboard for calls, leads, and missed revenue.",
+    description: "The AI answers calls you route to it, takes messages and captures service requests for your team to review.",
   },
 ];
 
